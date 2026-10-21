@@ -1,0 +1,35 @@
+# OS / editör
+.DS_Store
+.vscode/
+.idea/
+
+# Bağımlılıklar ve build
+node_modules/
+.pnpm-store/
+dist/
+build/
+.next/
+.expo/
+.turbo/
+*.tsbuildinfo
+ios/build/
+android/app/build/
+
+# Ortam ve sırlar
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.p12
+*.mobileprovision
+*.jks
+*.keystore
+
+# Supabase yerel
+supabase/.temp/
+supabase/.branches/
+
+# Telifli ve kişisel test verisi — asla commit edilmez
+data-private/
+.gstack/
