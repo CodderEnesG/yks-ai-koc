@@ -19,7 +19,7 @@ YKS AI Koç, öğrencinin kendi kitaplarına göre sayfa ve test düzeyinde gün
   - **DECISION TO TEST:** kaynağın bilerek teste bıraktığı karar.
   - **NOT DEFINED:** tanımı olmayan tasarım.
   - **ERTELENDİ:** bilerek kapsam dışına bırakılan.
-- Görev kimlikleri (T01-T30) kalıcıdır. Kaldırılan görev silinmez, "kaldırıldı" diye işaretlenir; yeni görev sıradaki numarayı alır.
+- Görev kimlikleri (T01-T39) kalıcıdır. Kaldırılan görev silinmez, "kaldırıldı" diye işaretlenir; yeni görev sıradaki numarayı alır.
 
 ## Değişmez ürün kuralları
 
@@ -33,6 +33,7 @@ Bunlar hiçbir kalite, hız veya maliyet gerekçesiyle gevşetilmez:
 - **LLM'e kişisel veri ayıklanmadan gitmez** (ad, e-posta, telefon, okul, şehir).
 - **Veli onayı gelmeden 18 yaş altı kullanıcının verisi sunucuya gitmez.**
 - **Sohbet içeriği hiçbir zaman veliye gösterilmez.**
+- **YouTube API Hizmetleri politikalarına uyulur.** Video indirilmez, arka planda oynatılmaz, oynatıcı değiştirilmez. API verisi (başlık, süre) en fazla 30 gün önbellekte tutulur. Video izleme ücretli duvarın arkasına konmaz. API verisinden türetilmiş veri seti üretilmez (rapor 2.8).
 - **Sert ton davranışa yöneliktir, kişiye değil.** Güvenli modda sertlik kapanır.
 - PDR veya klinik bir danışmanın yazılı onayı olmadan herkese açık yayın yapılmaz.
 

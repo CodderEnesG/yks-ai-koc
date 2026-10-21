@@ -1,6 +1,6 @@
 # YKS AI Koç
 
-Öğrencinin elindeki kitaplara göre her gün sayfa ve test düzeyinde plan çıkaran, planı akşamları takip eden, aksayan bir şey olursa nedenini sorup planı yeniden kuran ve haftalık özeti veliye gönderen mobil AI koç.
+Öğrencinin elindeki kitaplara ve izlediği YouTube ders listelerine göre her gün sayfa, test ve video düzeyinde plan çıkaran, planı akşamları takip eden, aksayan bir şey olursa nedenini sorup planı yeniden kuran ve haftalık özeti veliye gönderen mobil AI koç.
 
 YKS AI Koç (çalışma adı) YKS'ye hazırlanan 11. ve 12. sınıf öğrencileri ile mezunlar içindir. Uygulamayı öğrenci kullanır, ödemeyi çoğunlukla veli yapar. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor. Planı kural motoru hesaplar; AI konuşur, yorumlar ve içindekiler sayfasını okur.
 
@@ -18,7 +18,7 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
 ## Belgeler
 
 - [PROJECT-STATE](docs/PROJECT-STATE.md): güncel aşama, kararlar, açık sorular ve yol haritası. Değişiklik günlüğü değildir.
-- [REPORT-2026-10-21-final-teknik-ve-is-modeli](docs/REPORT-2026-10-21-final-teknik-ve-is-modeli.md): başlangıç kararı. İçinde stack, veri modeli, plan motoru, AI ve güvenlik katmanı, KVKK ve veli onayı, ödeme, 30 görevlik inşa planı, birim ekonomisi, senaryolar ve bütçe var.
+- [REPORT-2026-10-21-final-teknik-ve-is-modeli](docs/REPORT-2026-10-21-final-teknik-ve-is-modeli.md): başlangıç kararı. İçinde stack, veri modeli, plan motoru, YouTube oynatma listeleri, AI ve güvenlik katmanı, KVKK ve veli onayı, ödeme, 39 görevlik inşa planı, birim ekonomisi, senaryolar ve bütçe var.
 - Tarihli kaynak belgeler (o güne ait kayıt, kanonik değil) — `docs/sources/`:
   - [2026-10-15-urun-ve-is-modeli-v1.pdf](docs/sources/2026-10-15-urun-ve-is-modeli-v1.pdf): ürün döngüleri, MVP kapsamı, mimari taslağı, paketler.
   - [2026-10-08-kaynak-kitap-verisi-fizibilitesi.md](docs/sources/2026-10-08-kaynak-kitap-verisi-fizibilitesi.md): veri, hukuk ve maliyet araştırması (koşullu GO).

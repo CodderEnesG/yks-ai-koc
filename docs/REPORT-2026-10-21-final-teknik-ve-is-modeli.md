@@ -1,6 +1,8 @@
 # YKS AI Koç — Final Teknik ve İş Modeli Raporu
 
-**Tarih:** 21 Ekim 2026 · **Durum:** Final v1 (başlangıç kararı) · **Kurucular:** Enes Güngör, mhmmcoding
+**Tarih:** 21 Ekim 2026 · **Durum:** Final v1.1 (başlangıç kararı) · **Kurucular:** Enes Güngör, mhmmcoding
+
+**v1.1 (21 Ekim 2026):** Muhammed Tuncay'ın önerisiyle YouTube oynatma listesinden plan eklendi (Bölüm 2.8). Hesap silme süresi YouTube politikası gereği 7 güne indi.
 
 **Dayanak belgeler:** [Ürün ve iş modeli tasarımı v1 (15 Ekim 2026)](sources/2026-10-15-urun-ve-is-modeli-v1.pdf) · [Kaynak kitap verisi fizibilitesi (8 Ekim 2026)](sources/2026-10-08-kaynak-kitap-verisi-fizibilitesi.md) · [Fizibilite özeti](sources/2026-10-08-kaynak-kitap-verisi-ozet.md)
 
@@ -17,13 +19,14 @@
 | Kısıt (owner kararı, 21 Ekim) | Önceki varsayım | Bu raporun karşılığı |
 |---|---|---|
 | MVP yılbaşından önce çıkacak | Ocak-Şubat 2027 lansmanı | Altı haftalık kapı ayrı bir aşama olmaktan çıkıyor; dört ölçüm Ekim-Aralık sprintlerinin içinde yapılıyor. App Store gönderimi 14 Aralık. |
-| 2 kurucu, yarı zamanlı, task bazlı | 2-3 tam zamanlı mühendis | ≈250 saatlik görev listesi (Bölüm 2.16), haftada kişi başı 15-20 saat. Tek kod tabanı (Expo). Takvim kayarsa hangi işin kesileceği önceden sıralı. |
+| 2 kurucu, yarı zamanlı, task bazlı | 2-3 tam zamanlı mühendis | ≈267 saatlik görev listesi (Bölüm 2.16), haftada kişi başı 15-20 saat. Tek kod tabanı (Expo). Takvim kayarsa hangi işin kesileceği önceden sıralı. |
 | Lansmana kadar en fazla 5-10 bin TL nakit | ≈110 bin TL kitap alımı + öğretmen + avukat | Kitap satın alınmıyor. Öğrenci kendi kitabını tanımlıyor; MEB'in ücretsiz kitapları katalog tabanı oluyor; katalog kullanıcı gönderimleriyle büyüyor. Aralık'a kadar nakit gideri **≈6.500 TL**. |
 | Ödeme: veli web'den + uygulama içi de var | Veli öder | Hedef aynı. Sıralama: Şubat'ta şirketsiz uygulama içi satın alma (GVK 20/B istisnası), web üzerinden veli ödemesi şirket kurulunca. |
 | iOS öncelikli | Belirtilmemiş | Expo + React Native ile önce iOS yayınlanıyor. Android aynı koddan çıkıyor ve Google'ın 14 günlük kapalı test şartından sonra, Ocak 2027'de açılıyor. |
 | Veli onayı MVP'de | MVP'de | Veli onaylamadan uygulama "onay bekleniyor" modunda çalışır: plan yalnız cihazda yapılır; sohbet ve sunucuya veri gönderimi kapalıdır. |
 | Serbest AI sohbeti MVP'de | MVP'de dar sohbet | Güvenlik katmanı MVP'nin **en kritik parçası** oluyor. PDR veya klinik bir danışman kriz protokolünü onaylamadan herkese açık yayın yapılmıyor (Bölüm 2.10). |
 | İlk kullanıcılar: kendi çevremiz, koç/dershane tanıdıklar | 300-500 kişilik topluluk anketi | Kapalı beta 15-30 öğrenciyle yapılıyor. Kapsama anketi hedefi 100-150 yanıt. |
+| YouTube oynatma listesinden plan (Muhammed, 21 Ekim): MVP'de hafif sürüm, tam özellik planda; kitapla birlikte mi ayrı mı ilerleyeceğini öğrenci seçer | Yoktu | Öğrenci liste linkini yapıştırır, videolar süreleriyle günlük göreve dönüşür (≈16 saat). Uygulama içi oynatıcı, izleme takibi ve video↔kitap eşlemesi Ocak'ta. YouTube politikası gereği önbellek 30 günde bir yenilenir ve video izleme hiçbir zaman ücretli duvarın arkasına konmaz (Bölüm 2.8). |
 
 **Rakamlarla:**
 
@@ -43,11 +46,11 @@
 
 ### 1.1 Tek cümle ve dört döngü
 
-**YKS AI Koç**, öğrencinin elindeki kitapları tanıyan ve her gün sayfa ya da test düzeyinde plan çıkaran bir uygulama. Akşamları planın ne kadar yapıldığını takip ediyor, aksayan bir şey olursa nedenini sorup planı yeniden kuruyor ve haftalık özeti veliye gönderiyor. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor.
+**YKS AI Koç**, öğrencinin elindeki kitapları ve izlediği YouTube ders listelerini tanıyan, her gün sayfa, test ve video düzeyinde plan çıkaran bir uygulama. Akşamları planın ne kadar yapıldığını takip ediyor, aksayan bir şey olursa nedenini sorup planı yeniden kuruyor ve haftalık özeti veliye gönderiyor. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor.
 
 | Döngü | Sıklık | MVP'de |
 |---|---|---|
-| Kurulum | Bir kez | Alan, hedef, sınav tarihi ve günlük süre girilir; kitaplar eklenir; 18 yaş altıysa veli onayı istenir; ilk plan oluşur. |
+| Kurulum | Bir kez | Alan, hedef, sınav tarihi ve günlük süre girilir; kitaplar ve YouTube oynatma listeleri eklenir; 18 yaş altıysa veli onayı istenir; ilk plan oluşur. |
 | Günlük | Her gün | Sabah görev listesi, akşam check-in, aksayan görev için tek dokunuşla "ne oldu?", yeniden planlama, AI koçla sohbet. |
 | Haftalık | Pazar | Seri ve ilerleme özeti, veli raporu. Deneme analizi Ocak'ta eklenecek. |
 | Sezon | Yılda bir | Yeni baskıların kataloğa girmesi, 2028 Maarif taksonomisi, sınav sonucu verisi (2027 sonrası). |
@@ -57,6 +60,7 @@
 | Modül | MVP (20 Aralık) | Ocak 2027 | Şubat 2027 ve sonrası |
 |---|---|---|---|
 | Kitap kütüphanesi | Barkodla arama; MEB ücretsiz kitapları hazır gelir; özel kitap manuel ya da içindekiler fotoğrafıyla eklenir | Kitle kaynaklı katalog terfisi; en çok eklenen 50 kitabın editör doğrulaması | ≈250 kitaplık çekirdek katalog, 2028 Maarif sürümü |
+| YouTube oynatma listesi | Link yapıştırılır; videolar süre ve sırayla göreve dönüşür; "YouTube'da aç" ile izlenir, check-in elle yapılır; listenin kitapla birlikte mi ayrı mı ilerleyeceğini öğrenci seçer | Uygulama içi oynatıcı, izleme ilerlemesinin takibi, liste↔kitap bölüm eşlemesi ("önce video, sonra soru"), önerilen listeler | Otomatik eşleme önerisi (YouTube politika incelemesinden sonra) |
 | Plan motoru | Sayfa ve test düzeyinde günlük görev; her check-in'de ve uygulama açılışında yeniden hesap | Kapasiteyi gerçek tamamlamalardan öğrenme | Konu önceliğini deneme sonuçlarıyla ağırlıklandırma |
 | Günlük check-in | Tek dokunuşla işaretleme, isteğe bağlı doğru/yanlış girişi, tek dokunuşla neden seçimi | — | İsteğe bağlı son sayfa fotoğrafı |
 | Proaktif takip | Yerel bildirimler (sabah, 20:00, 21:30), nedene göre otomatik kaydırma | Sunucudan gelen akıllı push | — |
@@ -82,6 +86,7 @@ Bu kurallar hız, maliyet veya kalite gerekçesiyle gevşetilmez:
 6. **LLM'e kişisel veri ayıklanmadan gitmez.** Ad, soyad, telefon, e-posta, okul adı ve konum bilgisi istekten önce maskelenir.
 7. **Veli onayı gelmeden 18 yaş altı kullanıcının verisi sunucuya gitmez** (Bölüm 2.11).
 8. **Sert ton davranışa yöneliktir, kişiye değil.** Duygusal sıkıntı sinyalinde sertlik otomatik olarak kapanır.
+9. **YouTube kurallarına uyulur.** Video indirilmez, arka planda oynatılmaz, oynatıcı değiştirilmez ya da üstü örtülmez. API'den gelen başlık ve süreler en geç 30 günde bir yenilenir. Video izleme hiçbir zaman ücretli duvarın arkasına konmaz.
 
 ### 1.4 MVP'de bilerek olmayanlar
 
@@ -110,6 +115,7 @@ Konu anlatımı ve soru çözümü (koç, öğretmen değildir), soru bankası i
 | Tekrar | **ts-fsrs** (Ocak) | Açık kaynak FSRS'in TypeScript sürümü | — |
 | Bildirim | **expo-notifications ile yerel zamanlanmış bildirimler** | Sunucu ve maliyet gerektirmez. Uygulama hiç açılmasa da 7 günlük bildirim önceden kuruludur. | Expo Push (Ocak) |
 | Barkod | expo-camera barkod tarama | Hazır modül | — |
+| Video | **YouTube Data API v3** (API anahtarı, ücretsiz günlük kota); Ocak'ta **react-native-youtube-iframe** ile resmi gömülü oynatıcı | Liste başlığı, video süresi, gömülebilirlik ve "çocuklara özel" durumu resmi API'den gelir; kazıma gerekmez | YouTube uygulamasına derin link (MVP'nin yolu) |
 | E-posta | Resend, ücretsiz katman | Veli onayı ve rapor e-postası | Supabase SMTP |
 | Veliye WhatsApp | **wa.me paylaşım linki** (MVP) | Maliyetsiz; şirket ve Meta doğrulaması gerektirmez | WhatsApp Cloud API (şirket sonrası) |
 | Ödeme | RevenueCat + StoreKit (Şubat); iyzico abonelik (şirket sonrası) | Bölüm 2.13 | PayTR |
@@ -133,6 +139,7 @@ Konu anlatımı ve soru çözümü (koç, öğretmen değildir), soru bankası i
                          |  - plan-engine (cihazda)    |
                          |  - yerel bildirimler        |
                          |  - onay öncesi: yalnız yerel|
+                         |  - "YouTube'da aç" linki    |
                          +-------------+---------------+
                                        | HTTPS (Supabase JS, RLS)
                                        v
@@ -141,13 +148,15 @@ Konu anlatımı ve soru çözümü (koç, öğretmen değildir), soru bankası i
 | - veli onayı         |   | Postgres + RLS            |   | - chat (akış)        |
 | - veli haftalık rapor|   | Auth (e-posta OTP)        |   | - risk sınıflandırma |
 | - kürasyon paneli    |   | Storage (geçici görsel)   |   | - toc-extract        |
-| - (sonra) web ödeme  |   | pg_cron (Pazar raporu)    |   | - weekly-report      |
+| - (sonra) web ödeme  |   | pg_cron (rapor, yenileme) |   | - youtube-import     |
+|                      |   |                           |   | - weekly-report      |
 +----------------------+   +---------------------------+   +----------+-----------+
                                                                       | PII ayıklı
                                                                       v
                                                           +-----------------------+
-                                                          | Claude API            |
-                                                          | Haiku 5.5 / Sonnet 5.5|
+                                                          | Dış API'ler           |
+                                                          | - Claude Haiku/Sonnet |
+                                                          | - YouTube Data API v3 |
                                                           +-----------------------+
    Veli <-- e-posta (Resend) / wa.me paylaşım linki --- apps/web rapor sayfası
 ```
@@ -162,13 +171,13 @@ yks-ai-koc/
   packages/
     plan-engine/       saf TS: planlama + yeniden planlama + property testleri
     catalog/           eser/baskı/birim şemaları, içindekiler doğrulama kuralları
-    ai/                istem şablonları, yapılandırılmış çıktı şemaları, PII ayıklayıcı
-    safety/            kelime listeleri, risk eşikleri, güvenli yanıt metinleri, eval seti
+    ai/                istem şablonları, çıktı şemaları, PII ayıklayıcı
+    safety/            kelime listeleri, risk eşikleri, sabit yanıtlar, eval seti
   supabase/
     migrations/        şema + RLS politikaları
-    functions/         chat, classify, toc-extract, weekly-report
+    functions/         chat, classify, toc-extract, youtube-import, weekly-report
   docs/                bu belgeler
-  data-private/        (gitignore) içindekiler test fotoğrafları — telifli, asla commit edilmez
+  data-private/        (gitignore) telifli test fotoğrafları, commit edilmez
 ```
 
 Paket yöneticisi pnpm workspace (idea_factory ile aynı düzen).
@@ -184,6 +193,8 @@ Paket yöneticisi pnpm workspace (idea_factory ile aynı düzen).
 | `unit` (birim) | id, edition_id, sıra, sayfa_baş, sayfa_son, test_sayısı, topic_id, tahmini_dk | Ham başlık metni paylaşılan katalogda tutulmaz |
 | `topic` (konu) | id, taksonomi_sürümü, ders, üst_id, ad, meb_kodu, sınav_ağırlığı | MEB 2026 kazanım PDF'inden v1; Maarif için ayrı sürüm |
 | `toc_submission` | id, user_id, isbn, çıkarım_json, doğrulama_sonucu, durum, oluşturma | Görsel saklanmaz; yalnız çıkarılan olgular |
+| `yt_playlist` (önbellek) | youtube_playlist_id, başlık, kanal_adı, video_sayısı, **çekilme_zamanı** | YouTube API verisi: en geç 30 günde bir yenilenir ya da silinir (politika III.E.4) |
+| `yt_video` (önbellek) | playlist_id, sıra, video_id, başlık, süre_sn, gömülebilir, çocuklara_özel, gizlilik, **çekilme_zamanı** | Aynı 30 gün kuralı; plan görevleri yalnız `video_id` tutar, başlık ve süre ekranda önbellekten okunur |
 
 **Kullanıcı tarafı (her satır RLS ile yalnız sahibine açık):**
 
@@ -192,8 +203,8 @@ Paket yöneticisi pnpm workspace (idea_factory ile aynı düzen).
 | `profile` | user_id, doğum_ayı/yılı, sınıf, alan (SAY/EA/SÖZ/DİL), hedef, sınav_tarihi, gün_bazlı_dk[7], onay_durumu |
 | `guardian` | id, öğrenci_id, e-posta/telefon, doğrulanma_zamanı |
 | `consent` | id, kişi_id, tür (aydınlatma / yurt dışı aktarım + AI sohbet / veli raporu), metin_sürümü, veren (öğrenci/veli), zaman, ip_hash, geri_çekilme |
-| `library_item` | id, user_id, edition_id **veya** özel_baskı (json: birimler), sıra, öncelik, durum |
-| `plan_task` | id, user_id, tarih, unit_id + aralık (sayfa a-b / test x-y), tahmini_dk, durum (planlandı / tamam / yarım / atlandı), neden |
+| `library_item` | id, user_id, kaynak_türü (kitap / oynatma listesi), edition_id **veya** özel_baskı (json: birimler) **veya** yt_playlist_id, sıra, öncelik, durum, izleme_hızı ve not_payı (video), bağlı_kaynak_id ve bölüm eşlemesi (Ocak) |
+| `plan_task` | id, user_id, tarih, unit_id + aralık (sayfa a-b / test x-y) **veya** video_id, tahmini_dk, durum (planlandı / tamam / yarım / atlandı), neden |
 | `checkin` | id, user_id, tarih, tamamlananlar, doğru/yanlış, neden, not |
 | `mock_exam` (Ocak) | id, user_id, tarih, tür, ders ve konu bazında netler |
 | `review_state` (Ocak) | user_id, unit_id/topic_id, FSRS stability, difficulty, due, last_review |
@@ -225,6 +236,13 @@ yeniden planlama: yalnız bugünden sonrası değişir; geçmiş görevler deği
 
 **Öncelik skoru:** `w1·sınav_ağırlığı + w2·zayıflık + w3·kitap_içi_sıra + w4·gecikme`. MVP'de zayıflık ve sınav ağırlığı kaba değerlerle girilir; Ocak'tan sonra deneme netlerinden beslenir.
 
+**Kaynak türleri:** Plan motoru üç birim türüyle çalışır: sayfa aralığı, test aralığı ve **video**. Bir video görevinin süresi `video_süresi / izleme_hızı × (1 + not_payı)` formülüyle hesaplanır. Varsayılan hız 1×, not payı %25; öğrenci 1,25×, 1,5× ya da 2× seçebilir. Oynatma listesi de kitap gibi bir kaynak sayılır ve kendi sırasıyla round-robin'e girer. Kitapla liste arasındaki ilişkiyi **öğrenci seçer** (owner kararı):
+
+- **Bağımsız (varsayılan, MVP):** Liste ve kitap kendi sıralarıyla paralel ilerler.
+- **Bağlı (Ocak):** Öğrenci listeyi bir kitaba bağlar ve bölüm düzeyinde eşler ("video 30-45 ↔ kitapta Bölüm 5"). Motor eşlenmiş çiftlerde önce videoyu, sonra aynı bölümün sayfa ya da testini planlar. Eşlenmemiş kısımlar bağımsız ilerler.
+
+Video görevinden sonra "konu zor geldi" seçilirse sıradaki soru görevi ikiye bölünür ve aynı videonun tekrar izlenmesi önerilir.
+
 **Neden kuralları (check-in'deki tek dokunuşluk seçim):**
 
 | Neden | Plan tepkisi | Koç tepkisi |
@@ -243,12 +261,13 @@ yeniden planlama: yalnız bugünden sonrası değişir; geçmiş görevler deği
 - Aynı girdi her zaman aynı çıktıyı verir.
 - Hedef bitiş tarihinden sonra görev oluşmaz.
 - Talep kapasiteyi aşarsa uyarı üretilir ve "çekirdek" listesi kapasiteye sığar.
+- Video görevleri liste sırasını korur. Bağlı çiftlerde video, eşlendiği sayfa ya da test görevinden önce veya aynı gün gelir.
 
 ### 2.7 Tekrar motoru (Ocak)
 
 `ts-fsrs` kullanılır; kart yerine **birim veya konu** düzeyinde çalışır. Check-in'deki doğru/yanlış oranı FSRS puanına çevrilir: %85 ve üzeri "kolay", %60-85 "iyi", %40-60 "zor", %40'ın altı "tekrar". Tekrar görevleri günlük kapasitenin en fazla %20'sini kullanır. FSRS'in bilgi kartı yerine konu düzeyinde kullanımı bir uyarlamadır; ilk sezon verisiyle doğrulanmalı (fizibilite notu).
 
-### 2.8 Kitap ekleme ve içindekiler hattı
+### 2.8 Kaynak ekleme: kitap, içindekiler hattı ve YouTube oynatma listeleri
 
 ```text
 barkod okut ─> katalogda var mı? ─evet─> konu-sayfa haritası hazır gelir
@@ -269,6 +288,46 @@ barkod okut ─> katalogda var mı? ─evet─> konu-sayfa haritası hazır geli
 
 **Hızlı ekle** modu, fizibilitenin tahminine göre konu eşlemesi olmadan ilk gün algılanan değerin ≈%60-70'ini koruyor. Kitap satın almadan başlamayı mümkün kılan da bu mod.
 
+#### YouTube oynatma listeleri
+
+Öğrencilerin yaygın alışkanlıklarından biri, kaynak kitabı bir YouTube ders listesiyle birlikte kullanmak. Bu kaynak türü kitaptan çok daha kolay ekleniyor: video başlıkları, sıraları ve süreleri YouTube Data API'den yapılandırılmış veri olarak geliyor, içindekiler fotoğrafına ya da OCR'a gerek kalmıyor.
+
+```text
+öğrenci liste linkini yapıştırır ya da YouTube'da "Paylaş" ile uygulamaya gönderir
+  -> Edge Function youtube-import:
+       playlistItems.list (sayfa başına 50 video) + videos.list (süre,
+       gömülebilirlik, "çocuklara özel" durumu, gizlilik)
+  -> önbellek: yt_playlist / yt_video (en fazla 30 gün; pg_cron 25. günde yeniler)
+  -> özel ya da silinmiş videolar plandan çıkar; gömülemeyenler işaretlenir
+  -> öğrenci: izleme hızı, not payı, "kitaba bağla / bağımsız" seçimi
+  -> plan motoru: video görevleri (başlık, süre, kanal, "YouTube'da aç")
+```
+
+**MVP (hafif sürüm, ≈16 saat):** Link ekleme, video görevleri, YouTube uygulamasına ya da web'e derin link ve check-in'de elle "izledim" işareti. Uygulama içi oynatıcı olmadığı için izleme verisi toplanmıyor; politika riski en düşük yol bu.
+
+**Ocak (tam sürüm, ≈32 saat):**
+
+- Uygulama içi resmi gömülü oynatıcı (react-native-youtube-iframe): otomatik oynatma kapalı, arka planda oynatma yok, oynatıcının üstünde katman yok, YouTube markası görünür.
+- Oynatıcı olaylarından öğrencinin kendi ilerlemesi: %90'ı izlenen video için "görev tamamlandı" önerisi gösterilir. "Çocuklara özel" işaretli videolarda takip kapalı (III.E.4.j). İzleme ilerlemesi kişisel veri; aydınlatma metnine eklenir.
+- Liste↔kitap bağlama ve bölüm eşlemesiyle "önce video, sonra soru" planı.
+- Önerilen listeler: aynı listeyi ekleyen öğrenci sayısına göre sıralanır. Bu sayı YouTube API verisi değil, kendi kullanım verimiz.
+- Video başlıklarından kitap bölümüne **otomatik eşleme önerisi** (LLM + öğrenci onayı). API verisinden "türetilmiş veri" üretmeyi yasaklayan III.E.4.h maddesi nedeniyle **politika incelemesi olmadan açılmaz** (OPEN QUESTION).
+
+**YouTube API Hizmetleri yükümlülükleri ([Developer Policies](https://developers.google.com/youtube/terms/developer-policies)):**
+
+| Madde | Yükümlülük | Tasarımdaki karşılığı |
+|---|---|---|
+| III.E.4.c-e | API verisi en fazla 30 gün saklanır, sonra silinir ya da yenilenir; güncel tutulur | `çekilme_zamanı` alanı ve pg_cron yenilemesi; plan görevleri yalnız `video_id` tutar |
+| III.E.4.h | API verisinden yeni ya da türetilmiş veri veya metrik üretilmez | Süre yalnız görev hesabında kullanılır, ayrı bir veri seti olarak saklanmaz. Otomatik eşleme inceleme bitene kadar kapalı. Kanal ya da video için "başarı skoru" üretilmez. |
+| III.E.4.g | Kullanıcı silme talebinde API verisi 7 gün içinde silinir | Hesap silme süresi tüm veriler için 7 güne indi (Bölüm 2.11) |
+| III.E.4.j | "Çocuklara özel" videolarda takip kapatılır | `çocuklara_özel` alanı; bu videolarda ilerleme takibi yapılmaz |
+| III.I.4-9 | Oynatıcı değiştirilmez, reklam ve linkler engellenmez, arka planda oynatılmaz | Resmi IFrame oynatıcı, varsayılan ayarlar |
+| III.F.2 | YouTube içeriğin kaynağı olarak açıkça gösterilir | Video görev kartında YouTube logosu ve kanal adı |
+| III.F.3.a | Gömülü oynatıcıda izlemek için ücret alınmaz | Oynatıcı ve "YouTube'da aç" ücretsiz katmanda da her zaman açık. Premium izlemeyi değil, planlama, koç ve rapor özelliklerini satar. |
+| III.A.1-2 | YouTube Hizmet Şartları'na link; gizlilik politikasında YouTube API Hizmetleri ve Google Gizlilik Politikası | Aydınlatma metni ve kullanım şartlarına eklenir (T07, T34) |
+
+**Kota:** Ücretsiz günlük kota 10.000 birim. Liste ve video sorguları çağrı başına 1 birim tutuyor; 100 videoluk bir liste ≈4 birim. Popüler listeler ortak önbellekten okunacağı için kota MVP ve Sezon 1'e fazlasıyla yetiyor. Maliyet 0 TL. *(Birim maliyetleri Google'ın kota hesaplayıcısından teyit edilmeli.)*
+
 ### 2.9 AI katmanı
 
 | Fonksiyon | Model | Girdi → çıktı | Sınır |
@@ -278,6 +337,7 @@ barkod okut ─> katalogda var mı? ─evet─> konu-sayfa haritası hazır geli
 | Neden yanıtı | Haiku 5.5 | Seçilen neden + görev bilgisi → 1-2 cümle | Ton rehberi |
 | İçindekiler okuma | Haiku 5.5 (görsel) | 1-4 fotoğraf → `{birimler: [{sıra, başlık_ham, sayfa_baş, test_sayısı}]}` | Ham başlık yalnız özel baskıda kalır |
 | Haftalık özet | Haiku 5.5 | Haftanın sayıları → öğrenci ve veli için 3-4 cümle | Sayıları LLM üretmez; yalnız cümleye döker |
+| Liste↔kitap eşleme önerisi (Ocak, politika incelemesinden sonra) | Haiku 5.5, yapılandırılmış çıktı | Video başlıkları + kitap birimleri → önerilen bölüm eşlemesi | Öğrenci onaylamadan uygulanmaz; YouTube politikası III.E.4.h incelemesine bağlı |
 | Anlaşmazlık hakemi | Sonnet 5.5 | Uyuşmayan iki içindekiler çıkarımı → tek sonuç | Nadiren kullanılır |
 
 **Uygulama notları:**
@@ -337,7 +397,8 @@ Serbest sohbet, reşit olmayan kullanıcılar ve sınav stresi bir araya gelince
 | İçindekiler fotoğrafı | İşlem sonrası hemen, en geç 24 saat |
 | Sohbet mesajları | 90 günlük kayan pencere |
 | Güvenlik olay kaydı | İnceleme sonrası 1 yıl (avukat teyidiyle) |
-| Hesap silme | Talepten sonra 30 gün içinde tüm kişisel veri |
+| YouTube önbelleği (başlık, süre) | En fazla 30 gün; sonra yenilenir ya da silinir |
+| Hesap silme | Talepten sonra **7 gün** içinde tüm kişisel veri. YouTube politikası (III.E.4.g) API verisi için 7 gün şart koşuyor; karışıklık olmasın diye tek süre kullanılıyor. |
 | Rıza kayıtları | İspat yükü nedeniyle hesap silinse de sürüm, zaman ve hash tutulur (avukat teyidiyle) |
 
 **Yurt dışına aktarım (KVKK md. 9):** Hem Anthropic (ABD) hem Supabase (AB) yurt dışı. Ana yol standart sözleşme ve imzadan sonra **5 iş günü içinde** Kurum'a bildirim. Bildirim yapılmazsa 2026 ceza aralığı 90.308-1.806.377 TL (fizibilite). Pratikte büyük bulut sağlayıcılarına KVKK standart sözleşmesi imzalatmak zor olabilir; bu, avukata sorulacak 6. soru. Kalan riski azaltmak için LLM'e PII ayıklanmış veri gönderilir ve rızalar ayrı ayrı alınır.
@@ -367,6 +428,7 @@ Owner'ın hedefi: veli web'den öder, uygulama içinde de satın alma seçeneği
 - **20/B kapsamı teyit edilmeli:** Kaynaklar, App Store gelirinin istisnaya girip girmediği konusunda farklı şeyler söylüyor. Mali müşavirden Ocak'ta yazılı teyit alınmalı.
 - **Apple kuralı:** Uygulama içinde web ödeme linki gösterilmez (Türkiye'de harici ödemeye yönlendirme serbest değil). Web'de alınan abonelik uygulamada kullanılabilir; bunun için aynı içerik uygulama içi satın alma olarak da sunulur (çok platformlu hizmet kuralı). Veli linki öğrenci uygulamasında değil, veli raporunda yer alır.
 - **Apple'ın Türkiye kesintileri:** Apple geliri hesaplarken KDV'yi (%20) ve 2020'den beri dijital hizmet vergisini (%7,5) düşüyor. Güncel oran App Store Connect'te kontrol edilmeli.
+- **YouTube kuralı:** Gömülü oynatıcıda izlemek için ücret alınamıyor (III.F.3.a). Video oynatma ve "YouTube'da aç" ücretsiz katmanda da açık kalır; Premium yalnız planlama, koç ve rapor özelliklerini kapsar.
 - **Yetki kaydı:** Hangi kanaldan ödenmiş olursa olsun `entitlement` tablosuna yazılır ve tek kaynak olur (RevenueCat webhook'u + iyzico webhook'u).
 - **Kurucular arası paylaşım:** Bireysel Apple hesabı tek kurucunun adına açılır. Gelir paylaşımı ve fikri mülkiyet bu yüzden yazılı bir kurucu sözleşmesiyle şimdiden netleştirilmeli (Bölüm 7).
 
@@ -383,6 +445,7 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 | LLM (Premium oranı %5) | ≈5$ (betada herkes sohbet eder) | ≈25$ | ≈250$ | ≈2.490$ |
 | E-posta | 0 | 0 | ≈20$ | ≈90$ |
 | Analitik ve hata | 0 | 0 | 0-50$ | 100-300$ |
+| YouTube Data API | 0 | 0 | 0 | 0 (kota artışı gerekirse uyum denetimi) |
 | **Toplam** | **≈5$ ≈ 250 TL/ay** | **≈70$ ≈ 3.500 TL/ay** | **≈315-400$ ≈ 16-20 bin TL/ay** | **≈2.800-3.130$ ≈ 139-155 bin TL/ay** |
 
 *Not: Vercel Hobby planı ticari kullanıma izin vermiyor. Beta sürerken bu bir gri alan; ödeme açılınca Pro'ya geçilmeli. Supabase'in ücretsiz projeleri 7 gün hareketsiz kalırsa duraklıyor; günlük kullanılan bir uygulamada sorun olmaz, ama yedek yok.*
@@ -393,7 +456,7 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 - **A — Mobil ve plan:** Expo uygulaması, plan motoru, kütüphane, check-in, bildirimler, sohbet arayüzü.
 - **B — Backend, AI ve web:** Supabase şeması ve RLS, Edge Functions, güvenlik katmanı, veli onayı ve rapor sayfaları, katalog tohumu.
 
-**Kapasite:** 2 kişi × 15-20 saat/hafta × ≈7,5 hafta (22 Ekim - 13 Aralık) ≈ **225-300 saat**. Görev listesinin toplamı **≈251 saat**. Tahminler AI destekli kodlama varsayıyor; tampon dar, bu yüzden kesme sırası önceden belirlendi.
+**Kapasite:** 2 kişi × 15-20 saat/hafta × ≈7,5 hafta (22 Ekim - 13 Aralık) ≈ **225-300 saat**. Görev listesinin toplamı, YouTube hafif sürümüyle birlikte **≈267 saat**. Tahminler AI destekli kodlama varsayıyor; tampon dar, bu yüzden kesme sırası önceden belirlendi.
 
 | ID | Görev | Akış | Saat | Bağımlılık |
 |---|---|---|---|---|
@@ -406,7 +469,7 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 | T06 | Ton rehberi v1, kriz protokolü taslağı, PDR danışmanı bulma | Ortak | 6 | — |
 | T07 | Aydınlatma ve açık rıza metinleri (şablondan, avukat ön görüşmesine hazır) | Ortak | 4 | — |
 | T08 | Bekleme listesi ve kapsama anketi (Tally), koç ve öğretmen tanıdıklara duyuru | Ortak | 3 | — |
-| **Sprint 1 · 2 - 15 Kasım** | | | **79** | |
+| **Sprint 1 · 2 - 15 Kasım** | | | **92** | |
 | T09 | Kurulum akışı: alan, hedef, sınav tarihi, günlük süre, yaş kapısı | A | 10 | T02 |
 | T10 | Kütüphane: barkod, katalog araması, "hızlı ekle" | A | 14 | T03 |
 | T11 | İçindekiler fotoğrafı akışı (kamera → Edge Function → JSON → onay → görsel silme) | A+B | 12 | T05 |
@@ -415,7 +478,10 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 | T14 | Check-in, neden seçimi, yeniden planlama | A | 10 | T13 |
 | T15 | Yerel bildirimler | A | 5 | T13 |
 | T16 | Auth (e-posta OTP), senkron, onay öncesi yerel mod | B | 8 | T03 |
-| **Sprint 2 · 16 - 29 Kasım** | | | **73** | |
+| T31 | YouTube liste ekleme: link yapıştırma ve paylaş menüsü, Edge Function `youtube-import`, önbellek tabloları | B | 6 | T03 |
+| T32 | Plan motorunda `video` birim türü, izleme hızı ve not payı, property testleri | A | 4 | T04 |
+| T33 | Video görev kartı: başlık, süre, kanal, YouTube logosu, "YouTube'da aç", elle "izledim" | A | 3 | T13, T31 |
+| **Sprint 2 · 16 - 29 Kasım** | | | **76** | |
 | T17 | Sohbet Edge Function: Haiku 5.5, akışlı yanıt, bağlam kurma, PII ayıklama, mesaj sınırı | B | 12 | T16 |
 | T18 | Güvenlik katmanı: kelime listesi, sınıflandırıcı, güvenli mod, yardım ekranı, olay kaydı | B | 14 | T06 |
 | T19 | Güvenlik eval seti (200 mesaj) ve ölçüm | Ortak | 6 | T18 |
@@ -424,6 +490,7 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 | T22 | Haftalık veli raporu (web + e-posta, pg_cron) | B | 8 | T21 |
 | T23 | İlerleme: seri ve kitap bitirme yüzdesi | A | 5 | T14 |
 | T24 | PostHog ve Sentry | B | 4 | — |
+| T34 | YouTube önbelleğinin 30 günlük yenilenmesi (pg_cron), silinen ve özel videoların plandan çıkarılması; YouTube şartları ve gizlilik metinleri | B | 3 | T31 |
 | **Sprint 3 · 30 Kasım - 13 Aralık** | | | **44** | |
 | T25 | TestFlight, 15-30 kişilik kapalı beta (çevre ve koç) | Ortak | 4 | Sprint 2 |
 | T26 | Beta düzeltmeleri | Ortak | 20 | T25 |
@@ -432,9 +499,19 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 | T29 | *(Zaman kalırsa)* Elle deneme neti girişi | A | 6 | — |
 | T30 | App Store gönderimi (**14 Aralık**) + Google kapalı testinin başlatılması | Ortak | 2 | T26-T28 |
 
+**Ocak görevleri — tam video özelliği (≈32 saat):**
+
+| ID | Görev | Akış | Saat | Bağımlılık |
+|---|---|---|---|---|
+| T35 | Uygulama içi gömülü oynatıcı (react-native-youtube-iframe), politikaya uygun ayarlar | A | 8 | T33 |
+| T36 | Oynatıcı olaylarıyla kişisel izleme ilerlemesi; "çocuklara özel" videolarda kapalı | A | 4 | T35 |
+| T37 | Liste↔kitap bağlama, bölüm eşleme arayüzü, plan motorunda "önce video, sonra soru" | A+B | 10 | T32 |
+| T38 | *(Politika incelemesinden sonra)* LLM ile eşleme önerisi + öğrenci onayı | B | 6 | T37 |
+| T39 | Önerilen listeler (ekleyen öğrenci sayısına göre) | B | 4 | T31 |
+
 **Yayın penceresi:** 14-20 Aralık. Apple'ın yıl sonu tatil döneminde (genelde 23-27 Aralık) inceleme yavaşlıyor; bu yüzden 20 Aralık sonrasına kalmamak gerekiyor.
 
-**Takvim kayarsa kesme sırası** (ilk satır ilk kesilir): T29 deneme girişi → T23 ilerleme (yalnız seri kalır) → T11 içindekiler fotoğrafı (yalnız "hızlı ekle" kalır) → T22 veli raporu e-postası (yalnız wa.me linki kalır) → T12 katalog tohumu (yalnız özel kitap kalır). **Kesilmez:** plan motoru, check-in, güvenlik katmanı, veli onayı, sohbet (owner kararı).
+**Takvim kayarsa kesme sırası** (ilk satır ilk kesilir): T29 deneme girişi → T23 ilerleme (yalnız seri kalır) → T11 içindekiler fotoğrafı (yalnız "hızlı ekle" kalır) → T22 veli raporu e-postası (yalnız wa.me linki kalır) → T12 katalog tohumu (yalnız özel kitap kalır). **Kesilmez:** plan motoru, check-in, güvenlik katmanı, veli onayı, sohbet ve YouTube hafif sürümü T31-T34 (owner kararları).
 
 **Herkese açık yayın için "bitti" tanımı:** Property testleri yeşil; güvenlik eval seti eşiği geçiyor; PDR danışmanının yazılı onayı var; aydınlatma ve rıza metinleri yayında; hesap silme çalışıyor; en az 10 beta kullanıcısı 7 gün kullanmış.
 
@@ -456,11 +533,11 @@ Temel olaylar (PostHog): `onboarding_tamam`, `kitap_eklendi{yöntem}`, `plan_olu
 
 | Taraf | Rolü | Ona ne söylüyoruz |
 |---|---|---|
-| Öğrenci (11., 12. sınıf, mezun) | Kullanıcı | "Elindeki kitaplara göre her gün ne yapacağını söyleyen ve seni takip eden koç." |
+| Öğrenci (11., 12. sınıf, mezun) | Kullanıcı | "Elindeki kitaplara ve izlediğin YouTube derslerine göre her gün ne yapacağını söyleyen ve seni takip eden koç." |
 | Veli | Ödeyen | "Çocuğunun gerçekten çalıştığını gör. Haftalık rapor, insan koçun onda biri fiyat." |
 | Koç ve öğretmen (pilot) | Kanal (Faz 3'te müşteri) | "Öğrencinin sayfa aralıklarını elle girmeyi bırak." |
 
-Bugün insan koçluk ayda 3.000-35.000 TL. Ücretsiz ChatGPT plan yapabiliyor ama öğrencinin kitabını bilmiyor, takip etmiyor ve akşam "neden yapmadın?" diye sormuyor.
+Bugün insan koçluk ayda 3.000-35.000 TL. Ücretsiz ChatGPT plan yapabiliyor ama öğrencinin kitabını bilmiyor, takip etmiyor ve akşam "neden yapmadın?" diye sormuyor. Ücretsiz YouTube ders listelerini öğrencinin kendi kitabıyla tek bir programda birleştirmek, ürünü "ücretsiz kaynakla çalışan öğrenciye koç disiplini" olarak konumluyor.
 
 ### 3.2 Pazar büyüklüğü (tahmin)
 
@@ -477,8 +554,8 @@ Baz senaryodaki Sezon 2 hedefi olan 15 bin aktif kullanıcı SAM'in **%1,1'i**; 
 
 | Paket | İçerik | Fiyat (KDV dahil) | Ne zaman |
 |---|---|---|---|
-| Ücretsiz | En fazla 2 kitap, günlük plan, check-in, haftada 5 sohbet mesajı, güvenlik özellikleri her zaman açık | 0 TL | Aralık 2026'dan itibaren (betada sınırsız) |
-| Premium aylık | Sınırsız kitap ve sohbet, veli raporu, deneme analizi, tekrar motoru | **299 TL/ay** (bant: 199-349) | Şubat 2027 |
+| Ücretsiz | En fazla 2 kaynak (kitap ya da oynatma listesi), günlük plan, check-in, haftada 5 sohbet mesajı; güvenlik özellikleri ve video izleme her zaman açık | 0 TL | Aralık 2026'dan itibaren (betada sınırsız) |
+| Premium aylık | Sınırsız kaynak (kitap ve oynatma listesi) ve sohbet, veli raporu, deneme analizi, tekrar motoru | **299 TL/ay** (bant: 199-349) | Şubat 2027 |
 | Sınava kadar paketi (Sezon 1) | Premium, Şubat'tan sınava kadar tek ödeme | **799 TL** | Şubat-Haziran 2027 |
 | Sezon paketi (Sezon 2) | Premium, Eylül-Haziran tek ödeme (≈%40 indirimli) | **1.799 TL** | Eylül 2027 |
 | Koç eklentisi | Ayda 2-4 görüşme, koç AI raporuyla hazırlıklı gelir | İnsan koçluğun belirgin altında | Faz 2 |
@@ -571,7 +648,7 @@ Pazarlama işleri sonraya bırakıldı (owner kararı). Yine de takvim gereği e
 | Yeni AI koçlar | Rota AI (10 Ekim 2026), Koç'a Sor, Mentoras | Konu ve süre bazlı. Rota AI'ın mimarisi bizimkine çok benziyor: kural motoru + AI dil katmanı |
 | Kitap takip denemeleri | Karınca, Kitap Koçum | Barkod ya da tek yayınevi; ölçek yok |
 
-**Hendek motor değil, veri ve davranış:** (1) Her yıl yeni baskıları rakiplerden hızlı yakalayan kitle kaynaklı katalog hattı; (2) 2028 Maarif taksonomisini ilk günden taşımak; (3) "hangi öğrenci hangi kitabı ne hızda bitiriyor" verisi; (4) veli raporunun yarattığı ödeme alışkanlığı. Rota AI aynı motoru zaten kuruyor; bu yüzden hız önemli. **Aralık yayını bu açıdan doğru karar.**
+**Hendek motor değil, veri ve davranış:** (1) Her yıl yeni baskıları rakiplerden hızlı yakalayan kitle kaynaklı katalog hattı; (2) 2028 Maarif taksonomisini ilk günden taşımak; (3) "hangi öğrenci hangi kitabı ne hızda bitiriyor" verisi; (4) veli raporunun yarattığı ödeme alışkanlığı; (5) hangi YouTube listesinin hangi kitapla birlikte kullanıldığı bilgisi (YouTube API verisi değil, kendi kullanım verimiz). Rota AI aynı motoru zaten kuruyor; bu yüzden hız önemli. **Aralık yayını bu açıdan doğru karar.**
 
 ---
 
@@ -580,14 +657,14 @@ Pazarlama işleri sonraya bırakıldı (owner kararı). Yine de takvim gereği e
 | Tarih | Kilometre taşı | Çıktı |
 |---|---|---|
 | 22 Ekim - 1 Kasım | Sprint 0 | Repo, şema, plan motoru çekirdeği, içindekiler testi sonucu, ton rehberi, rıza metni taslakları, Apple hesabı |
-| 2 - 15 Kasım | Sprint 1 | Kurulum, kütüphane, günlük döngü, bildirimler, auth |
+| 2 - 15 Kasım | Sprint 1 | Kurulum, kütüphane, günlük döngü, bildirimler, auth, YouTube liste ekleme |
 | ≈14 Kasım | ÖSYM 2027 takvimi (beklenen) | Sınav tarihi uygulamada güncellenir |
 | Kasım | Avukat ön görüşmesi (ücretsiz), PDR danışmanı | Hukuk ve güvenlik görüşü |
 | 16 - 29 Kasım | Sprint 2 | Sohbet, güvenlik katmanı, veli onayı ve raporu |
 | 30 Kasım - 13 Aralık | Sprint 3, kapalı beta (TestFlight) | Beta düzeltmeleri, App Store hazırlığı |
 | **14 Aralık** | App Store gönderimi, Google kapalı testi başlar | — |
 | **≤20 Aralık** | **MVP App Store'da (ücretsiz)** | — |
-| Ocak 2027 | Android yayını, FSRS, deneme analizi, katalog terfisi, ödeme altyapısı, ücretli avukat görüşü, 20/B teyidi | — |
+| Ocak 2027 | Android yayını, tam video özelliği (T35-T39), FSRS, deneme analizi, katalog terfisi, ödeme altyapısı, ücretli avukat görüşü, 20/B teyidi | — |
 | 1 Şubat 2027 | **Ödeme açılır** (uygulama içi; sınava kadar paketi + aylık) | Sezon 1 ölçümü |
 | ≈19-20 Haziran 2027 | YKS 2027 (tahmini) | Sonuç verisi toplanır |
 | Haziran-Ağustos 2027 | Maarif taksonomisi, şirket + web ödeme, Sezon 2 pazarlaması | — |
@@ -618,6 +695,8 @@ Fizibilitedeki dört kapı testi bu takvime göre yeniden tanımlandı:
 | Veli raporu açılma oranı | ≥%50 |
 | Ücretsizden ücretliye dönüşüm | ≥%5 |
 | Kitap ekleme başarısı (<3 dk) | ≥%80 |
+| Oynatma listesi ekleyen aktif kullanıcı oranı | Betada ölçülür, hedef Ocak'ta belirlenir |
+| Video görevlerinin tamamlanma oranı | ≥%60 |
 | Güvenlik: akut olayların 24 saatte incelenme oranı | %100 |
 | Güvenlik eval'inde akut sınıfta kaçırma | ≤%2 |
 
@@ -639,6 +718,8 @@ Fizibilitedeki dört kapı testi bu takvime göre yeniden tanımlandı:
 | Rakipler (Rota AI) hızlanır | Orta | Orta | Aralık yayını; veri hattı ve Maarif taksonomisi |
 | Telif: öğrencinin soru fotoğrafı göndermesi | Orta | Orta | Sohbet yalnız metin kabul eder; içindekiler görseli işlenip silinir |
 | 20/B istisnasının App Store gelirine uygulanmaması | Orta | Orta | Mali müşavir teyidi Ocak'ta; olmazsa şirket öne çekilir |
+| YouTube API politikası (30 gün saklama, türetilmiş veri yasağı, izleme için ücret yasağı) | Orta | Orta | Önbellek yenileme; kalıcı olarak yalnız `video_id`; otomatik eşleme inceleme sonrasına; izleme ücretsiz; hafif sürüm izleme verisi toplamıyor |
+| Listedeki videolar silinir, gizlenir ya da gömülemez | Orta | Düşük | 30 günlük yenilemede plandan çıkarılır; gömülemeyenlerde "YouTube'da aç" |
 | Bütçenin aşılması | Düşük | Orta | Ücretsiz katmanlar; ücretli plana yalnız gelirle geçiş |
 
 ---
@@ -657,7 +738,8 @@ Fizibilitedeki dört kapı testi bu takvime göre yeniden tanımlandı:
 | 8 | Marka ve App Store adı | "YKS AI Koç" çalışma adı; App Store adı ve alan adı Sprint 0'da | 1 Kasım |
 | 9 | Barındırma bölgesi | Supabase AB (Frankfurt); Türkiye içi barındırma ölçekten sonra değerlendirilir | Karar verildi (öneri) |
 | 10 | Teknoloji: Swift mi Expo mu | Expo (Bölüm 2.2) | 22 Ekim |
-| 11 | Ücretsiz katmanın sınırı | 2 kitap + haftada 5 sohbet mesajı; güvenlik özellikleri her zaman açık | Ocak |
+| 11 | Ücretsiz katmanın sınırı | 2 kaynak (kitap ya da oynatma listesi) + haftada 5 sohbet mesajı; güvenlik özellikleri ve video izleme her zaman açık | Ocak |
+| 12 | Liste↔kitap otomatik eşleme önerisi (T38) | **OPEN QUESTION.** YouTube politikası III.E.4.h'deki "türetilmiş veri" yasağı açısından incelenmeli. O zamana kadar eşlemeyi öğrenci elle yapar | Ocak |
 
 ---
 
@@ -681,6 +763,7 @@ Fizibilitedeki dört kapı testi bu takvime göre yeniden tanımlandı:
 - [ ] Supabase AB projesi, şema v1, RLS (T03)
 - [ ] İçindekiler çıkarım testi ve model kararı (T05)
 - [ ] MEB OGM kitaplarının listesi ve içindekiler kontrolü (T12'ye hazırlık)
+- [ ] YouTube Data API anahtarı (Google Cloud projesi), kota ve politika kontrolü (T31'e hazırlık)
 
 ---
 
@@ -700,7 +783,8 @@ Fizibilitedeki dört kapı testi bu takvime göre yeniden tanımlandı:
 - Apple'ın Türkiye'de dijital hizmet vergisini geliri hesaplarken düşmesi (2020): [9to5Mac](https://9to5mac.com/2020/09/01/app-store-prices-increase-chile-mexico-saudi-arabia-turkey/)
 - iyzico komisyon aralığı (üçüncü taraf, teklif alınmalı): [Ticimax](https://www.ticimax.com/blog/iyzico-komisyon-oranlari)
 - WhatsApp Business Platform fiyatlandırması (Türkiye için utility fiyatı bulunamadı): [Meta for Developers](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing)
+- YouTube API Hizmetleri Geliştirici Politikaları (30 gün saklama, türetilmiş veri, oynatıcı, ücretlendirme ve gizlilik kuralları): [Google for Developers](https://developers.google.com/youtube/terms/developer-policies)
 - 2027 ÖSYM takvimi henüz yayımlanmadı; tahmini tarihler: [Dünya](https://www.dunya.com/gundem/2027-osym-takvimi-yayimlandi-mi-2027-ysk-kpss-msu-dgs-ne-zaman-yapilacak-haberi-844150), [Unikazan](https://unikazan.com/blog/2027-yks-sinav-takvimi-basvuru-sinav-sonuc-tarihleri/)
 - ALO 183 Sosyal Destek Hattı (7/24; aile, kadın, çocuk): [Aile ve Sosyal Hizmetler Bakanlığı](https://www.aile.gov.tr/haberler/alo-183e-gecen-yil-kadina-yonelik-hizmetler-alaninda-43-bin-421-basvuru-yapildi/). Türkiye'de gençlere özel ulusal bir kriz hattı doğrulanamadı; acil durumda 112. Yardım metinleri PDR danışmanıyla doğrulanacak.
 
-**Doğrulanmayan ve tahmin olarak bırakılanlar:** RevenueCat ücretsiz katman eşiği, Vercel ve Resend katman ayrıntıları, mali müşavir ücreti, Türkçe token şişme katsayısı (×1,6), dönüşüm ve elde tutma hedefleri, pazar payı yüzdeleri, Meta reklamlarında kurulum başı maliyet.
+**Doğrulanmayan ve tahmin olarak bırakılanlar:** YouTube Data API'nin çağrı başına kota maliyeti, RevenueCat ücretsiz katman eşiği, Vercel ve Resend katman ayrıntıları, mali müşavir ücreti, Türkçe token şişme katsayısı (×1,6), dönüşüm ve elde tutma hedefleri, pazar payı yüzdeleri, Meta reklamlarında kurulum başı maliyet.
