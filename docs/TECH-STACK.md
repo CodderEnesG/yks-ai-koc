@@ -20,6 +20,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Plan motoru | `packages/plan-engine`: bağımlılık yok | `vitest` ^5.0.5 + `fast-check` ^4.10.2 ile property testleri |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
 | CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` | `.github/workflows/ci.yml` |
+| Geliştirme araçları | `tools/` altındaki script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`); `tools/toc-eval` için poppler (`pdftotext`, `pdftoppm`) | Workspace paketi değil; CI typecheck'ine girmez |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 
 ## Planlanan, henüz kurulmadı

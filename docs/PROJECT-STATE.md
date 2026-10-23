@@ -4,7 +4,9 @@ Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02 iskeleti ve T04 plan motoru çekirdeği tamam (yerelde, push edilmedi).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08.
+**Sprint 0 sürüyor; T02 iskeleti ve T04 plan motoru çekirdeği tamam (yerelde, push edilmedi).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+
+T05 verisi hazır: fotoğraf yerine MEB OGM'nin 32 ücretsiz YKS kitabının (3 Adım, Konu Pekiştirme) içindekiler sayfaları ve PDF metin katmanından çıkarılan doğru cevap: 670 birim, 649'u başlangıç sayfasında bağımsız olarak doğrulandı. PDF'ler `data-private/`'da, araçlar `tools/toc-eval/`'da. Bulgular: kitapların kendi içindekilerinde hata var (onay ekranı gerekli), 3 Adım serisinde ISBN dersleri ayırmıyor (barkod aramasında ders seçimi gerekli), basılı sayfa PDF sayfasından 2 geride. Sınırlama: görüntüler temiz PDF render'ı, telefon fotoğrafı değil; ölçüm iyimser çıkar.
 
 T04: `buildPlan` sayfa ve test birimlerini kapasiteye, kitap sırasına ve 21 günlük tekrar penceresine göre günlere dağıtır; aşırı yükte öncelik skoruna göre çekirdek seçer. Rapor 2.6'daki property'ler (video hariç) ve iki ek property CI'da koşuyor; testlerin bilerek bozulan motoru yakaladığı denendi. Öncelik skoru ağırlıkları varsayılan, rapor tanımlamıyor (**NOT DEFINED**). Neden kuralları T14'te, video birimi T32'de. Ayrıntı `packages/plan-engine/README.md`.
 
@@ -59,6 +61,8 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Başlama | Başlıyoruz |
 | Takvim | MVP olabildiğince hızlı, yılbaşına kalmayacak |
 | Ekip | Enes + mhmmcoding kurucu olarak kendileri inşa ediyor; ikisi de yarı zamanlı, task bazlı. Pazarlama çalışması sonra. |
+| Kurucu sözleşmesi | Tamamlandı (2026-10-23). |
+| İçindekiler test verisi (T05) | Çevreden fotoğraf yok; MEB OGM PDF'lerinin içindekiler sayfaları kullanılır (2026-10-23). |
 | Bütçe | Lansmana kadar olabildiğince az, en fazla 5-10 bin TL |
 | Kitle | Herkes (11., 12. sınıf, mezun); veli onayı MVP'de |
 | Platform | **React Native / Expo SDK 58, iOS + Android** (2026-10-22). Yayın sırası: önce App Store, sonra Play Store. |
@@ -80,7 +84,6 @@ Tam tablo ve önerilerimiz rapor bölüm 7'de. Son tarihi yakın olanlar:
 
 | # | Karar | Son tarih |
 |---|---|---|
-| 1 | Kurucu sözleşmesi (hisse, IP, Apple hesabı kimin adına, gelir paylaşımı) | 1 Kasım |
 | 8 | Marka ve App Store adı, alan adı | 1 Kasım |
 | 5 | Ton rehberi v1 | 1 Kasım (taslak) |
 | 6 | PDR danışmanı | 15 Kasım |

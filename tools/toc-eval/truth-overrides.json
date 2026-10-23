@@ -1,0 +1,16 @@
+{
+  "3adim-ayt-cografya": {
+    "birimler": {
+      "6": {
+        "sayfaBas": 41,
+        "kanit": "içindekilerde 35 yazıyor; PDF s.43 (basılı 41) 'Nüfus Politikaları ve Şehirler - 2', 1. adım ile başlıyor; PDF s.41 (basılı 39) hâlâ 5. birimin 3. adımı (2026-10-23, elle)"
+      }
+    }
+  },
+  "konu-pekistirme-ayt-matematik": {
+    "pdfKaymasi": {
+      "deger": 2,
+      "kanit": "sayfalarda tek başına duran sayılar çok, otomatik ölçüm tutmuyor; PDF s.30'un altında basılı 28 (2026-10-23, elle)"
+    }
+  }
+}

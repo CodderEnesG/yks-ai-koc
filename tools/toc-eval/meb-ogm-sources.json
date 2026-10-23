@@ -1,0 +1,230 @@
+{
+  "kaynak": "https://ogmmateryal.eba.gov.tr (MEB Ortaöğretim Genel Müdürlüğü, ücretsiz)",
+  "alinma": "2026-10-23",
+  "kitaplar": [
+    {
+      "id": "3adim-tyt-biyoloji",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Biyoloji",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/biyoloji/biyoloji.pdf"
+    },
+    {
+      "id": "3adim-tyt-cografya",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Coğrafya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/cografya/cografya.pdf"
+    },
+    {
+      "id": "3adim-tyt-felsefe",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Felsefe",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/felsefe/felsefe.pdf"
+    },
+    {
+      "id": "3adim-tyt-fizik",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Fizik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/fizik/fizik.pdf"
+    },
+    {
+      "id": "3adim-tyt-kimya",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Kimya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/kimya/kimya.pdf"
+    },
+    {
+      "id": "3adim-tyt-matematik",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Matematik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/matematik/matematik.pdf"
+    },
+    {
+      "id": "3adim-tyt-tarih",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Tarih",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/tarih/tarih.pdf"
+    },
+    {
+      "id": "3adim-tyt-turkce",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "TYT",
+      "ders": "Türkçe",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/tyt/turkce/turkce.pdf"
+    },
+    {
+      "id": "3adim-ayt-biyoloji",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Biyoloji",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/biyoloji/biyoloji.pdf"
+    },
+    {
+      "id": "3adim-ayt-cografya",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Coğrafya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/cografya/cografya.pdf"
+    },
+    {
+      "id": "3adim-ayt-felsefe",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Felsefe Grubu",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/felsefe/felsefe.pdf"
+    },
+    {
+      "id": "3adim-ayt-fizik",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Fizik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/fizik/fizik.pdf"
+    },
+    {
+      "id": "3adim-ayt-kimya",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Kimya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/kimya/kimya.pdf"
+    },
+    {
+      "id": "3adim-ayt-matematik",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Matematik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/matematik/matematik.pdf"
+    },
+    {
+      "id": "3adim-ayt-tarih",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Tarih",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/tarih/tarih.pdf"
+    },
+    {
+      "id": "3adim-ayt-edebiyat",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "AYT",
+      "ders": "Türk Dili ve Edebiyatı",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ayt/edebiyat/edebiyat.pdf"
+    },
+    {
+      "id": "3adim-ydt-ingilizce",
+      "seri": "3 Adım Soru Bankası",
+      "sinav": "YDT",
+      "ders": "İngilizce",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/3adim/ydt/ingilizce/ingilizce.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-biyoloji",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Biyoloji",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/biyoloji/biyoloji.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-cografya",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Coğrafya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/cografya/cografya.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-felsefe",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Felsefe",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/felsefe/felsefe.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-fizik",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Fizik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/fizik/fizik.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-kimya",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Kimya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/kimya/kimya.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-matematik",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Matematik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/matematik/matematik.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-tarih",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Tarih",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/tarih/tarih.pdf"
+    },
+    {
+      "id": "konu-pekistirme-tyt-tde",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "TYT",
+      "ders": "Türk Dili ve Edebiyatı",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/tyt/tde/tde.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-biyoloji",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Biyoloji",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/biyoloji/biyoloji.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-cografya",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Coğrafya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/panel/upload/etkilesimli/kitap/konu-pekistirme/ayt/cografya/cografya.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-fizik",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Fizik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/fizik/fizik.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-kimya",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Kimya",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/kimya/kimya.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-matematik",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Matematik",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/matematik/matematik.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-tarih",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Tarih",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/tarih/tarih.pdf"
+    },
+    {
+      "id": "konu-pekistirme-ayt-tde",
+      "seri": "Dört Dörtlük Konu Pekiştirme Testleri",
+      "sinav": "AYT",
+      "ders": "Türk Dili ve Edebiyatı",
+      "pdf": "https://ogm-large-cdn.eba.gov.tr/ogm-materyal/konu-pekistirme/ayt/tde/tde.pdf"
+    }
+  ]
+}
