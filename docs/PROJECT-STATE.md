@@ -4,7 +4,7 @@ Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02 iskeleti kuruldu.** Teknoloji seçimi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03-T08; T04 (plan motoru çekirdeği) T02'nin üstüne kurulur.
+**Sprint 0 sürüyor; T02 iskeleti kuruldu.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03-T08; T04 (plan motoru çekirdeği) T02'nin üstüne kurulur.
 
 T02 spike sonuçları (2026-10-23, yerelde):
 
@@ -38,7 +38,8 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   PROJECT-STATE.md                                   bu dosya
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)
   REPORT-2026-10-21-final-teknik-ve-is-modeli.pdf    raporun paylaşılabilir PDF'i
-  PLAN-2026-10-22-teknoloji-secimi-ve-t02.md         kütüphane seçimleri + T02 planı (TECH-STACK yazılana kadar stack referansı)
+  TECH-STACK.md                                      kütüphaneler, sürümler, kodlama kuralları (yaşayan belge)
+  PLAN-2026-10-22-teknoloji-secimi-ve-t02.md         teknoloji seçiminin araştırması + T02 planı (tarihli kayıt)
   sources/
     2026-10-15-urun-ve-is-modeli-v1.pdf              ürün ve iş modeli tasarımı v1 (kaynak)
     2026-10-08-kaynak-kitap-verisi-fizibilitesi.md   veri, hukuk, maliyet fizibilitesi (kaynak)
@@ -67,7 +68,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 
 ## Güncel teknik kararlar (öneri, kod başlarken teyit edilecek)
 
-Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de; spike'tan sonra `TECH-STACK.md`'ye taşınacak. Mimari rapor 2.2-2.15'te.
+Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [TECH-STACK](TECH-STACK.md)'te. Mimari rapor 2.2-2.15'te.
 
 `ARCHITECTURE.md` henüz yok. Kod başlamadan önce gerekmiyor; rapor bölüm 2 bu işi görüyor. Rapor ile kod ayrışmaya başlayınca yazılacak.
 

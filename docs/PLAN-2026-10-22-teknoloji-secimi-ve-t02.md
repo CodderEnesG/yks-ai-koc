@@ -1,6 +1,6 @@
 # Teknoloji seçimi ve Sprint 0 iskeleti (T02)
 
-Tarih: **2026-10-22**, gözden geçirme **2026-10-23**. Durum: **plan, henüz uygulanmadı.** Spike bitince doğrulanmış seçimler `docs/TECH-STACK.md`'ye taşınır ve bu belge tarihli kayıt olarak kalır.
+Tarih: **2026-10-22**, gözden geçirme **2026-10-23**. Durum: **uygulandı (2026-10-23), tarihli kayıt.** Güncel stack ve kurallar [TECH-STACK](TECH-STACK.md)'te; spike sonuçları PROJECT-STATE'te. Bu belge araştırmanın ve gerekçenin kaydı olarak kalır.
 
 ## Bağlam
 

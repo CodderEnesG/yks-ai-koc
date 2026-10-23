@@ -19,7 +19,8 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
 
 - [PROJECT-STATE](docs/PROJECT-STATE.md): güncel aşama, kararlar, açık sorular ve yol haritası. Değişiklik günlüğü değildir.
 - [REPORT-2026-10-21-final-teknik-ve-is-modeli](docs/REPORT-2026-10-21-final-teknik-ve-is-modeli.md): başlangıç kararı. İçinde stack, veri modeli, plan motoru, YouTube oynatma listeleri, AI ve güvenlik katmanı, KVKK ve veli onayı, ödeme, 39 görevlik inşa planı, birim ekonomisi, senaryolar ve bütçe var.
-- [PLAN-2026-10-22-teknoloji-secimi-ve-t02](docs/PLAN-2026-10-22-teknoloji-secimi-ve-t02.md): kütüphane ve araç seçimleri (Expo SDK 58, Uniwind, expo-sqlite + Drizzle), yeni açık kararlar ve T02 monorepo iskeleti planı. `TECH-STACK.md` yazılana kadar stack referansı.
+- [TECH-STACK](docs/TECH-STACK.md): kullanılan ve planlanan kütüphaneler, sabit sürümler, kodlama kuralları ve elenen seçenekler. Yaşayan belge.
+- [PLAN-2026-10-22-teknoloji-secimi-ve-t02](docs/PLAN-2026-10-22-teknoloji-secimi-ve-t02.md): teknoloji seçiminin araştırması ve T02 planı (tarihli kayıt, uygulandı).
 - Tarihli kaynak belgeler (o güne ait kayıt, kanonik değil) — `docs/sources/`:
   - [2026-10-15-urun-ve-is-modeli-v1.pdf](docs/sources/2026-10-15-urun-ve-is-modeli-v1.pdf): ürün döngüleri, MVP kapsamı, mimari taslağı, paketler.
   - [2026-10-08-kaynak-kitap-verisi-fizibilitesi.md](docs/sources/2026-10-08-kaynak-kitap-verisi-fizibilitesi.md): veri, hukuk ve maliyet araştırması (koşullu GO).
