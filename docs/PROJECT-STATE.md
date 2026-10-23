@@ -4,7 +4,9 @@ Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02 iskeleti kuruldu.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03-T08; T04 (plan motoru çekirdeği) T02'nin üstüne kurulur.
+**Sprint 0 sürüyor; T02 iskeleti ve T04 plan motoru çekirdeği tamam (yerelde, push edilmedi).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08.
+
+T04: `buildPlan` sayfa ve test birimlerini kapasiteye, kitap sırasına ve 21 günlük tekrar penceresine göre günlere dağıtır; aşırı yükte öncelik skoruna göre çekirdek seçer. Rapor 2.6'daki property'ler (video hariç) ve iki ek property CI'da koşuyor; testlerin bilerek bozulan motoru yakaladığı denendi. Öncelik skoru ağırlıkları varsayılan, rapor tanımlamıyor (**NOT DEFINED**). Neden kuralları T14'te, video birimi T32'de. Ayrıntı `packages/plan-engine/README.md`.
 
 T02 spike sonuçları (2026-10-23, yerelde):
 
