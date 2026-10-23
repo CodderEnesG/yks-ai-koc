@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@import 'uniwind';
+
+/*
+ * Yer tutucu tema (shadcn "neutral"). Branding gelince yalnız bu değişkenler değişir;
+ * bileşenler `bg-primary`, `text-foreground` gibi anlamsal sınıfları kullanır.
+ */
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: #ffffff;
+      --color-foreground: #0a0a0a;
+      --color-card: #ffffff;
+      --color-card-foreground: #0a0a0a;
+      --color-popover: #ffffff;
+      --color-popover-foreground: #0a0a0a;
+      --color-primary: #171717;
+      --color-primary-foreground: #fafafa;
+      --color-secondary: #f5f5f5;
+      --color-secondary-foreground: #171717;
+      --color-muted: #f5f5f5;
+      --color-muted-foreground: #737373;
+      --color-accent: #f5f5f5;
+      --color-accent-foreground: #171717;
+      --color-destructive: #e7000b;
+      --color-border: #e5e5e5;
+      --color-input: #e5e5e5;
+      --color-ring: #a1a1a1;
+    }
+
+    @variant dark {
+      --color-background: #0a0a0a;
+      --color-foreground: #fafafa;
+      --color-card: #171717;
+      --color-card-foreground: #fafafa;
+      --color-popover: #171717;
+      --color-popover-foreground: #fafafa;
+      --color-primary: #e5e5e5;
+      --color-primary-foreground: #171717;
+      --color-secondary: #262626;
+      --color-secondary-foreground: #fafafa;
+      --color-muted: #262626;
+      --color-muted-foreground: #a1a1a1;
+      --color-accent: #262626;
+      --color-accent-foreground: #fafafa;
+      --color-destructive: #ff6467;
+      --color-border: #2e2e2e;
+      --color-input: #383838;
+      --color-ring: #737373;
+    }
+  }
+}

@@ -1,10 +1,24 @@
 # YKS AI Koç — Proje Durumu
 
-Son doğrulama: **2026-10-21**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
+Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
 
 ## Güncel aşama
 
-**Başlangıç kararı verildi, kod yok.** [Final rapor](REPORT-2026-10-21-final-teknik-ve-is-modeli.md) yazıldı. Sıradaki iş Sprint 0 (22 Ekim - 1 Kasım): T01-T08.
+**Sprint 0 sürüyor; T02 iskeleti kuruldu.** Teknoloji seçimi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03-T08; T04 (plan motoru çekirdeği) T02'nin üstüne kurulur.
+
+T02 spike sonuçları (2026-10-23, yerelde):
+
+| Kontrol | Sonuç |
+|---|---|
+| pnpm 10.34.7 workspaces, isolated mod, Metro | Çalışıyor; `node-linker=hoisted` gerekmedi |
+| `plan-engine` `.ts` uzantılı import'larla Metro, Next 16 ve Deno'da | Üçünde de derleniyor. Deno'ya import map ile kaynak koddan alınır (bundle yok). Supabase deploy'unun `supabase/` dışını paketlemesi T03'te doğrulanacak |
+| Uniwind 1.13 + RN Reusables (Button, Text), Expo Router native tabs | Android emülatörde ve iOS simülatörde çalışıyor |
+| expo-sqlite + Drizzle 0.45.4: migration, `useLiveQuery`, yeniden başlatmada kalıcılık | Android emülatörde çalışıyor |
+| Android dev build (Gradle 9.4.1, JDK 17) | Başarılı |
+| iOS dev build (Xcode 26.0.1, CocoaPods 1.17, iPhone 15 Pro simülatör) | Başarılı; ekran açılıyor. SQLite yazma/kalıcılık iOS'ta elle denenmedi (aynı JS, Android'de doğrulandı) |
+| typecheck, lint, Prettier, Vitest + fast-check, `deno check` | Yerelde temiz; GitHub Actions ilk koşusu commit'ten sonra |
+
+Bundle ID ve Android paket adı yer tutucu (`dev.placeholder.ykskoc`); branding gelince App Store Connect kaydından **önce** değiştirilir.
 
 Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönderimi 14 Aralık.
 
@@ -13,10 +27,18 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
 ```
 /
   README.md  AGENTS.md  CLAUDE.md  .gitignore
+  package.json  pnpm-workspace.yaml  pnpm-lock.yaml  tsconfig.base.json  .nvmrc  .prettierrc.json
+/.github/workflows/ci.yml                            format, typecheck, lint, test, deno check
+/apps
+  mobile/                                            Expo SDK 58, Expo Router, Uniwind + Reusables, expo-sqlite + Drizzle
+  web/                                               Next.js 16 (veli onayı ve rapor sayfaları; şimdilik yer tutucu)
+/packages
+  plan-engine/                                       saf TS; şimdilik takvim günü yardımcıları + property testleri
 /docs
   PROJECT-STATE.md                                   bu dosya
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)
   REPORT-2026-10-21-final-teknik-ve-is-modeli.pdf    raporun paylaşılabilir PDF'i
+  PLAN-2026-10-22-teknoloji-secimi-ve-t02.md         kütüphane seçimleri + T02 planı (TECH-STACK yazılana kadar stack referansı)
   sources/
     2026-10-15-urun-ve-is-modeli-v1.pdf              ürün ve iş modeli tasarımı v1 (kaynak)
     2026-10-08-kaynak-kitap-verisi-fizibilitesi.md   veri, hukuk, maliyet fizibilitesi (kaynak)
@@ -36,7 +58,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Ekip | Enes + mhmmcoding kurucu olarak kendileri inşa ediyor; ikisi de yarı zamanlı, task bazlı. Pazarlama çalışması sonra. |
 | Bütçe | Lansmana kadar olabildiğince az, en fazla 5-10 bin TL |
 | Kitle | Herkes (11., 12. sınıf, mezun); veli onayı MVP'de |
-| Platform | iOS öncelikli; Swift olabilir, olmazsa React Native ile iki platform. **Öneri: Expo** (rapor 2.2). Kurucular onaylayınca bu satır güncellenecek. |
+| Platform | **React Native / Expo SDK 58, iOS + Android** (2026-10-22). Yayın sırası: önce App Store, sonra Play Store. |
 | AI koç | Serbest sohbet MVP'de |
 | Ödeme | Veli web'den öder + uygulama içi seçenek de var. **Öneri:** Şubat'ta önce uygulama içi (şirketsiz, GVK 20/B), web ödeme şirket kurulunca (rapor 2.13) |
 | İlk kullanıcılar | Kendi çevremiz + koç, dershane, öğretmen tanıdıklar |
@@ -45,7 +67,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 
 ## Güncel teknik kararlar (öneri, kod başlarken teyit edilecek)
 
-Expo + TypeScript (mobil) · Supabase AB/Frankfurt (Postgres, Auth, Edge Functions, RLS) · Next.js (veli onayı ve raporu, kürasyon paneli) · Claude Haiku 5.5 (sohbet, sınıflandırma, içindekiler, özet) + Sonnet 5.5 (hakem) · plan motoru saf TS paketi, cihazda ve sunucuda aynı · yerel bildirimler · YouTube Data API v3 (önbellek ≤30 gün; Ocak'ta resmi gömülü oynatıcı) · ts-fsrs (Ocak) · RevenueCat + StoreKit (Şubat) · PostHog EU + Sentry. Ayrıntılar rapor 2.2-2.15'te.
+Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de; spike'tan sonra `TECH-STACK.md`'ye taşınacak. Mimari rapor 2.2-2.15'te.
 
 `ARCHITECTURE.md` henüz yok. Kod başlamadan önce gerekmiyor; rapor bölüm 2 bu işi görüyor. Rapor ile kod ayrışmaya başlayınca yazılacak.
 
@@ -57,11 +79,13 @@ Tam tablo ve önerilerimiz rapor bölüm 7'de. Son tarihi yakın olanlar:
 |---|---|---|
 | 1 | Kurucu sözleşmesi (hisse, IP, Apple hesabı kimin adına, gelir paylaşımı) | 1 Kasım |
 | 8 | Marka ve App Store adı, alan adı | 1 Kasım |
-| 10 | Swift mi Expo mu (öneri: Expo) | 22 Ekim |
 | 5 | Ton rehberi v1 | 1 Kasım (taslak) |
 | 6 | PDR danışmanı | 15 Kasım |
 | 7 | **OPEN QUESTION:** Akut riskte veliye otomatik bildirim gidecek mi | 29 Kasım |
 | 12 | **OPEN QUESTION:** Liste↔kitap otomatik eşleme önerisi YouTube'un "türetilmiş veri" yasağına (III.E.4.h) takılıyor mu | Ocak |
+| 13 | **OPEN QUESTION:** E-posta sağlayıcı. Supabase'in yerleşik e-postası production'da OTP göndermiyor; özel SMTP yeni veri işleyen demek. Resend (veri ABD), Brevo (AB), AWS SES Frankfurt. Avukat ön görüşmesine bağlı | T16 öncesi (≈5 Kasım) |
+| 14 | **OPEN QUESTION:** Sync kapsamı. Öneri: cihaz asıl kaynak, sunucu kopya (outbox ile gönder + yeni cihazda geri yükle, ≈8-12 saat); tam çift yönlü LWW ≈20-30 saat (T16'da 8 saat ayrılmış) | T16 öncesi (≈5 Kasım) |
+| 15 | Web barındırma. Öneri: Cloudflare Workers Free + AB yerleşimi; 3 MiB sınırı aşılırsa Vercel Pro fra1 (Vercel Hobby ticari kullanıma izin vermiyor) | Sprint 2 |
 
 ## Yol haritası
 
@@ -81,4 +105,4 @@ Takvim kayarsa kesme sırası: T29 → T23 → T11 → T22 (e-posta kısmı) →
 
 ## Bilinen riskler
 
-İki yarı zamanlı kurucuyla Aralık takvimi dar (YouTube hafif sürümüyle ≈267 saat iş, ≈225-300 saat kapasite). Serbest sohbet ve reşit olmayan kullanıcılar birlikte en büyük ürün riski; PDR onayı yayın koşulu. KVKK yurt dışı aktarımı için avukat görüşü bekleniyor. Tam liste rapor bölüm 6'da.
+İki yarı zamanlı kurucuyla Aralık takvimi dar (YouTube hafif sürümüyle ≈267 saat iş, ≈225-300 saat kapasite). Serbest sohbet ve reşit olmayan kullanıcılar birlikte en büyük ürün riski; PDR onayı yayın koşulu. KVKK yurt dışı aktarımı için avukat görüşü bekleniyor. Onay öncesinde 18 yaş altı için PostHog ve Sentry kapalı (değişmez kural); o dönemin D7 ölçümü ve çökme raporu yok, anonim çökme raporu avukata sorulacak. Supabase'te 30 Ekim 2026'dan itibaren tablolar Data API'ye otomatik açılmıyor (her migration'da açık `GRANT`, doğrulanacak); ücretsiz planda yedek yok. Expo SDK 58 ve birçok kütüphane çok yeni; spike takılırsa SDK 57'ye inilir. Tam liste rapor bölüm 6'da.

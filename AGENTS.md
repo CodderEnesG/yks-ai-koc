@@ -48,6 +48,7 @@ Bunlar hiçbir kalite, hız veya maliyet gerekçesiyle gevşetilmez:
 ## Kod başladığında
 
 - Monorepo düzeni ve stack final raporun 2.2-2.4 bölümlerinde. Yeni bir teknoloji eklemeden önce PROJECT-STATE'e kayıt düş.
+- Kütüphane eklemeden önce `docs/TECH-STACK.md`'ye (o yazılana kadar [PLAN-2026-10-22](docs/PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'ye) bak. Expo paketleri `npx expo install` ile kurulur. `@react-navigation/*` import edilmez; Expo Router v56'dan beri `expo-router/react-navigation` kullanılır. Sürümler sabitlenir; TypeScript 6.x'te kalır.
 - `packages/plan-engine` saf ve deterministiktir; property testleri CI'da zorunludur (rapor 2.6).
 - `packages/safety` eval seti, istem veya model her değiştiğinde yeniden koşulur (rapor 2.10).
 - Supabase tablolarında RLS kapalı tablo olmaz.

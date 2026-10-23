@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+docs/
+**/drizzle/
+**/uniwind-types.d.ts
+**/.next/
+**/.expo/
+**/next-env.d.ts
+apps/mobile/ios/
+apps/mobile/android/
+**/expo-env.d.ts
