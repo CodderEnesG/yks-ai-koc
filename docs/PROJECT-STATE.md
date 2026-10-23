@@ -37,13 +37,17 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   mobile/                                            Expo SDK 58, Expo Router, Uniwind + Reusables, expo-sqlite + Drizzle
   web/                                               Next.js 16 (veli onayı ve rapor sayfaları; şimdilik yer tutucu)
 /packages
-  plan-engine/                                       saf TS; şimdilik takvim günü yardımcıları + property testleri
+  plan-engine/                                       saf TS plan motoru çekirdeği (T04) + property testleri
+/tools
+  toc-eval/                                          MEB OGM içindekiler doğru cevap veri seti (T05, T12); PDF'ler data-private'da
 /docs
   PROJECT-STATE.md                                   bu dosya
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)
   REPORT-2026-10-21-final-teknik-ve-is-modeli.pdf    raporun paylaşılabilir PDF'i
   TECH-STACK.md                                      kütüphaneler, sürümler, kodlama kuralları (yaşayan belge)
   PLAN-2026-10-22-teknoloji-secimi-ve-t02.md         teknoloji seçiminin araştırması + T02 planı (tarihli kayıt)
+  reports/
+    2026-10-23-gun-raporu.md                       22-23 Ekim gün raporu (tarihli kayıt)
   sources/
     2026-10-15-urun-ve-is-modeli-v1.pdf              ürün ve iş modeli tasarımı v1 (kaynak)
     2026-10-08-kaynak-kitap-verisi-fizibilitesi.md   veri, hukuk, maliyet fizibilitesi (kaynak)
