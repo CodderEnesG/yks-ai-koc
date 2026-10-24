@@ -1,7 +1,8 @@
-// T05: içindekiler sayfasını okuma doğruluğu. Claude Haiku 5.5 ile Gemini Flash-Lite'ı MEB OGM
-// kitaplarının içindekiler görüntüleri üzerinde karşılaştırır (rapor 2.2, 5).
+// T05: içindekiler sayfasını okuma doğruluğu. Claude Haiku 5.5'i MEB OGM kitaplarının içindekiler
+// görüntüleri üzerinde ölçer (rapor 2.2, 5). Gemini karşılaştırması 2026-10-24'te yapıldı ve bırakıldı
+// (sonuçlar README'de).
 //
-// Kullanım (kök dizinden): node tools/toc-eval/run-eval.ts [--models haiku,haiku-low,gemini]
+// Kullanım (kök dizinden): node tools/toc-eval/run-eval.ts [--models haiku,haiku-low]
 //   [--images clean|photo] [--limit 3]
 // clean: temiz PDF görüntüsü (toc/), photo: telefon fotoğrafı benzeri (toc-photo/, make-photos.ts)
 // Girdi:  data-private/meb-ogm/truth.json ve toc/<id>.png (extract-truth.ts), .env
@@ -10,7 +11,6 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
-import { GoogleGenAI } from '@google/genai';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -90,45 +90,6 @@ function claudeReader(name: string, effort: 'low' | 'medium'): Reader {
   };
 }
 
-function geminiReader(): Reader {
-  const project = process.env.GOOGLE_CLOUD_PROJECT;
-  const location = process.env.GOOGLE_CLOUD_LOCATION ?? 'us-central1';
-  const model = process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
-  if (!project) throw new Error('GOOGLE_CLOUD_PROJECT .env içinde yok');
-  const ai = new GoogleGenAI({ vertexai: true, project, location });
-  return {
-    name: 'gemini',
-    model,
-    async read(image) {
-      const response = await ai.models.generateContent({
-        model,
-        contents: [
-          {
-            role: 'user',
-            parts: [
-              { inlineData: { mimeType: image.mediaType, data: image.data } },
-              { text: PROMPT },
-            ],
-          },
-        ],
-        config: {
-          responseMimeType: 'application/json',
-          responseJsonSchema: z.toJSONSchema(TocSchema),
-        },
-      });
-      const toc = TocSchema.parse(JSON.parse(response.text ?? ''));
-      const meta = response.usageMetadata;
-      return {
-        toc,
-        usage: {
-          input: meta?.promptTokenCount ?? 0,
-          output: (meta?.candidatesTokenCount ?? 0) + (meta?.thoughtsTokenCount ?? 0),
-        },
-      };
-    },
-  };
-}
-
 interface TruthBook {
   id: string;
   birimler: { sira: number; baslik: string; sayfaBas: number }[];
@@ -195,7 +156,7 @@ async function pool<T, R>(items: T[], size: number, fn: (item: T) => Promise<R>)
 
 const { values } = parseArgs({
   options: {
-    models: { type: 'string', default: 'haiku,haiku-low,gemini' },
+    models: { type: 'string', default: 'haiku' },
     limit: { type: 'string' },
     images: { type: 'string', default: 'clean' },
   },
@@ -203,7 +164,6 @@ const { values } = parseArgs({
 const readers = values.models.split(',').map((name) => {
   if (name === 'haiku') return claudeReader('haiku', 'medium');
   if (name === 'haiku-low') return claudeReader('haiku-low', 'low');
-  if (name === 'gemini') return geminiReader();
   throw new Error(`Bilinmeyen model: ${name}`);
 });
 

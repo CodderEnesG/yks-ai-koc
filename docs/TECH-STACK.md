@@ -26,7 +26,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
 | CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` | `.github/workflows/ci.yml` |
-| Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0, `@google/genai` 2.31.0 (Gemini yalnız T05 karşılaştırması için, üretimde yok) | Ayarlar `.env`'de (`.env.example`); Gemini Vertex AI `global` bölgesi + gcloud kimlik bilgisiyle |
+| Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0 | Ayarlar `.env`'de (`.env.example`) |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 
 ## Planlanan, henüz kurulmadı
@@ -102,4 +102,5 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Gifted Chat | Bağımlılık yükü, özelleştirme zor |
 | Turborepo, Nx | İki kişilik ekip için gereksiz |
 | Biome, oxlint | Expo preset'i yok / formatter beta |
+| Gemini (içindekiler okuma) | T05'te Haiku 5.5'ten zayıf çıktı (fotoğraf benzeri görüntüde sayfa %99,0'a %100, başlık %73'e %98,5); tek sağlayıcı kuralı korunur |
 | Detox | Native kurulumu pahalı; Maestro yeterli |

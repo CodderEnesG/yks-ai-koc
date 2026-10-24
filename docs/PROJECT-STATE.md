@@ -71,6 +71,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Ekip | Enes + mhmmcoding kurucu olarak kendileri inşa ediyor; ikisi de yarı zamanlı, task bazlı. Pazarlama çalışması sonra. |
 | Kurucu sözleşmesi | Tamamlandı (2026-10-23). |
 | İçindekiler test verisi (T05) | Çevreden fotoğraf yok; MEB OGM PDF'lerinin içindekiler sayfaları kullanılır (2026-10-23). |
+| İçindekiler okuma modeli (T05) | Claude Haiku 5.5, varsayılan efor. Gemini bırakıldı; tek LLM sağlayıcısı (Anthropic) kuralı geçerli (2026-10-24). |
 | Kurulum: hedef (T09) | Hedef sıralama ya da puan; öğrenci türünü seçer, atlayabilir (2026-10-24). |
 | Kurulum: sınav tarihi (T09) | Sınıfa göre tahmini tarih dolu gelir (12. sınıf ve mezun: Haziran 2027, 11. sınıf: Haziran 2028); öğrenci değiştirebilir. ÖSYM takvimi (≈14 Kasım) açıklanınca tek yerden güncellenir (2026-10-24). |
 | Kurulum: günlük süre (T09) | Hafta içi ve hafta sonu ayrı sorulur; istenirse 7 gün tek tek ayarlanır (2026-10-24). |

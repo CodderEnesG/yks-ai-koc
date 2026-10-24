@@ -5,6 +5,4 @@ packages:
 onlyBuiltDependencies:
   - esbuild
 ignoredBuiltDependencies:
-  - '@google/genai'
-  - protobufjs
   - unrs-resolver

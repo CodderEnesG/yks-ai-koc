@@ -17,7 +17,7 @@ node tools/toc-eval/make-photos.ts     # telefon fotoğrafı benzeri bozulmuş k
 node tools/toc-eval/run-eval.ts --images photo   # modelleri ölç (.env gerekli; ücretli API çağrısı)
 ```
 
-Ölçüm `.env`'den `ANTHROPIC_API_KEY` ile Claude'u, `GOOGLE_CLOUD_PROJECT` + gcloud kimlik bilgisiyle Vertex AI üzerinden Gemini'ı çağırır. Modellerin okumaları `data-private/meb-ogm/eval/<tarih>/`'e yazılır.
+Ölçüm `.env`'deki `ANTHROPIC_API_KEY` ile Claude'u çağırır. Gemini karşılaştırması aşağıdaki tabloda kayıtlı; kodu kaldırıldı (2026-10-24). Modellerin okumaları `data-private/meb-ogm/eval/<tarih>/`'e yazılır.
 
 Çıktılar (`data-private/meb-ogm/`):
 
