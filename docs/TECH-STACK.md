@@ -18,6 +18,12 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Yerel veri | `expo-sqlite` ~58.0.13, `drizzle-orm` **~0.45.4** (1.0 RC değil), `drizzle-kit` (migration üretimi), `babel-plugin-inline-import` (`.sql` gömme) | Migration'lar `apps/mobile/drizzle/`, şema `src/db/schema.ts` |
 | Web | `next` **16.4.3**, React 19.3, Tailwind 4, React Compiler | Veli onayı ve rapor sayfaları (T21, T22) |
 | Plan motoru | `packages/plan-engine`: bağımlılık yok | `vitest` ^5.0.5 + `fast-check` ^4.10.2 ile property testleri |
+| Şema/doğrulama | `zod` ^4.6.7 | Kurulum profili doğrulaması (T09). Hedef: aynı şemalar Edge Function ve LLM JSON şeması (`z.toJSONSchema`) için de kaynak olsun. Formlar küçükken düz state + `safeParse` |
+| İstemci state | `zustand` ^5.0.16 | Kurulum taslağı (kalıcı değil). TanStack Query 5 yalnız Supabase çağrıları gelince (T16) |
+| Kimlik | `expo-crypto` ~58.0.7 (`randomUUID`) | Cihazda üretilen kayıt kimlikleri (sync şeması). Native modül: eklenince dev build yeniden derlendi |
+| Klavye | `react-native-keyboard-controller` 1.22.7 (`KeyboardProvider`, `KeyboardStickyView`) | Kurulum adımlarında "Devam" klavyenin üstüne yapışır (iOS sayı klavyesinde kapatma tuşu yok). RN `KeyboardAvoidingView` native stack içinde işe yaramadı. Sohbette de kullanılacak |
+| Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
+| Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
 | CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` | `.github/workflows/ci.yml` |
 | Geliştirme araçları | `tools/` altındaki script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`); `tools/toc-eval` için poppler (`pdftotext`, `pdftoppm`) | Workspace paketi değil; CI typecheck'ine girmez |
@@ -30,8 +36,6 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Backend | Supabase `eu-central-1` (genel "Europe" değil): Postgres + RLS, Auth (e-posta OTP), Edge Functions (Deno), Storage (geçici görsel), pg_cron. `@supabase/supabase-js` 2.x, oturum `expo-sqlite/localStorage` ile | T03, T16 |
 | Sync | Elle sync; kapsam açık karar #14 (öneri: cihaz asıl kaynak, outbox ile gönder + yeni cihazda geri yükle) | T16 |
 | LLM | `@anthropic-ai/sdk` yalnız Edge Function'da, **tam sürüme sabit** (1.x hızlı değişiyor) | T17, T18 |
-| Şema/doğrulama | Zod 4: uygulama, Edge Function ve LLM JSON şeması (`z.toJSONSchema`) için tek kaynak. Formlar küçükken düz state + `safeParse` | T09 |
-| State | Zustand 5 (istemci), TanStack Query 5 (yalnız Supabase çağrıları) | T09, T16 |
 | Listeler | FlatList (kısa listeler), `@shopify/flash-list` 2 (sohbet) | T13, T17 |
 | Sohbet | Kendi arayüzümüz + `react-native-keyboard-controller`; akış için AI SDK `useChat` + `expo/fetch` ya da elle SSE okuyucu (Türkçe çok baytlı karakter testiyle seçilir) | T17 |
 | Modal | Expo Router `formSheet`; gerekirse `@gorhom/bottom-sheet` 5 | — |
@@ -39,8 +43,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Bildirim | `expo-notifications`; `SCHEDULE_EXACT_ALARM` istenmez | T14 |
 | YouTube | Link yapıştırma + `Linking.openURL`; paylaş menüsünden alma sonra | T31 |
 | İkon/diğer | `lucide-react-native` (+ Reusables `icon` bileşeni), `expo-haptics`, `expo-image` | — |
-| Metinler | Tipli `tr.ts` + `t('key')`; ı/İ için kendi yardımcı + test | T09 |
-| Test (uygulama) | `jest-expo` + React Native Testing Library (az sayıda); Maestro 3-5 akış, yerelde release öncesi | T25 |
+| Test (uygulama) | Bileşen testleri için `jest-expo` + React Native Testing Library (gerekirse); Maestro akışları release öncesi 3-5'e tamamlanır | T25 |
 | Gözlem | PostHog EU (session replay kapalı), Sentry EU (org kurulurken EU seçilir). 18 yaş altında onaydan önce ikisi de kapalı | T27 |
 | E-posta | Açık karar #13 (Resend / Brevo / AWS SES Frankfurt) | T16 öncesi |
 | Web barındırma | Öneri: Cloudflare Workers + AB yerleşimi; olmazsa Vercel Pro fra1 (açık karar #15) | Sprint 2 |
@@ -65,7 +68,13 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 - Göreli import'lar `.ts` uzantısıyla yazılır (`./civil-date.ts`). Deno uzantı ister; Metro ve Next `allowImportingTsExtensions` ile kabul eder, Next'te `transpilePackages` gerekir.
 - Edge Functions'a import map ile alınır: fonksiyonun `deno.json`'unda `"@yks/plan-engine": "../../../packages/plan-engine/src/index.ts"`. Yerelde `deno check` ile doğrulandı; Supabase deploy'unun `supabase/` dışını paketlemesi T03'te doğrulanacak.
 
+**Metro ve uçtan uca testler**
+- Metro'yu `CI=1` ile başlatma: Expo bu modda dosya izlemeyi kapatır ve değişiklikler uygulamaya gelmez (2026-10-24'te yarım saat buna gitti).
+- Maestro akışları `apps/mobile/e2e/`'de. Dev build simülatöre kurulu ve Metro açıkken `maestro test apps/mobile/e2e` ile koşar. `_open-dev-build.yaml` temiz durumla açar ve kendiliğinden açılan Expo geliştirici menüsünü kapatır.
+- Maestro iOS'ta ekran dışındaki öğeyi görünür sayabilir: `scrollUntilVisible`'da `visibilityPercentage: 100` ve `centerElement: true` kullan. Sayı klavyesinde `hideKeyboard` tuşa basar; kullanma.
+
 **Üretilen dosyalar**
+- Expo Router typed routes `.expo/types/router.d.ts`'e Metro (`expo start`) tarafından üretilir ve gitignore'dadır. CI'da bu dosya olmadığı için rota adları denetlenmez (`Href` serbest string olur); yerelde Metro açıkken typecheck rota yazım hatalarını yakalar.
 - `apps/mobile/src/uniwind-types.d.ts` Metro tarafından üretilir ve commit edilir (CI typecheck için).
 - `expo-env.d.ts` gitignore'da; aynı tipler `src/env.d.ts`'ten referanslanır.
 - Drizzle migration'ları `pnpm exec drizzle-kit generate --name <ad>` ile `apps/mobile/drizzle/`'a üretilir ve commit edilir.

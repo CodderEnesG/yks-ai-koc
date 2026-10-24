@@ -4,9 +4,11 @@ Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02 iskeleti ve T04 plan motoru çekirdeği tamam (yerelde, push edilmedi).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+**Sprint 0 sürüyor; T02 iskeleti, T04 plan motoru çekirdeği ve T09 kurulum akışı tamam.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
 
 T05 verisi hazır: fotoğraf yerine MEB OGM'nin 32 ücretsiz YKS kitabının (3 Adım, Konu Pekiştirme) içindekiler sayfaları ve PDF metin katmanından çıkarılan doğru cevap: 670 birim, 649'u başlangıç sayfasında bağımsız olarak doğrulandı. PDF'ler `data-private/`'da, araçlar `tools/toc-eval/`'da. Bulgular: kitapların kendi içindekilerinde hata var (onay ekranı gerekli), 3 Adım serisinde ISBN dersleri ayırmıyor (barkod aramasında ders seçimi gerekli), basılı sayfa PDF sayfasından 2 geride. Sınırlama: görüntüler temiz PDF render'ı, telefon fotoğrafı değil; ölçüm iyimser çıkar.
+
+T09: Kurulum 6 adım (doğum ayı/yılı, sınıf, alan, hedef sıralama/puan, sınav tarihi, hafta içi/sonu süre) ve özet; profil cihazda SQLite'a yazılır, kurulum yapılmamışsa sekmelerden kuruluma yönlendirilir. 18 yaş altı (doğum ayı içinde de reşit olmayan sayılır) özet ekranında veli onayı uyarısı görür ve profil `pending` onay durumuyla kaydedilir; onay akışı T21'de. Kurallar vitest ile, uçtan uca akış iki Maestro testiyle (yetişkin, 18 yaş altı) iOS simülatörde doğrulandı. Android'de henüz denenmedi.
 
 T04: `buildPlan` sayfa ve test birimlerini kapasiteye, kitap sırasına ve 21 günlük tekrar penceresine göre günlere dağıtır; aşırı yükte öncelik skoruna göre çekirdek seçer. Rapor 2.6'daki property'ler (video hariç) ve iki ek property CI'da koşuyor; testlerin bilerek bozulan motoru yakaladığı denendi. Öncelik skoru ağırlıkları varsayılan, rapor tanımlamıyor (**NOT DEFINED**). Neden kuralları T14'te, video birimi T32'de. Ayrıntı `packages/plan-engine/README.md`.
 
@@ -67,6 +69,9 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Ekip | Enes + mhmmcoding kurucu olarak kendileri inşa ediyor; ikisi de yarı zamanlı, task bazlı. Pazarlama çalışması sonra. |
 | Kurucu sözleşmesi | Tamamlandı (2026-10-23). |
 | İçindekiler test verisi (T05) | Çevreden fotoğraf yok; MEB OGM PDF'lerinin içindekiler sayfaları kullanılır (2026-10-23). |
+| Kurulum: hedef (T09) | Hedef sıralama ya da puan; öğrenci türünü seçer, atlayabilir (2026-10-24). |
+| Kurulum: sınav tarihi (T09) | Sınıfa göre tahmini tarih dolu gelir (12. sınıf ve mezun: Haziran 2027, 11. sınıf: Haziran 2028); öğrenci değiştirebilir. ÖSYM takvimi (≈14 Kasım) açıklanınca tek yerden güncellenir (2026-10-24). |
+| Kurulum: günlük süre (T09) | Hafta içi ve hafta sonu ayrı sorulur; istenirse 7 gün tek tek ayarlanır (2026-10-24). |
 | Bütçe | Lansmana kadar olabildiğince az, en fazla 5-10 bin TL |
 | Kitle | Herkes (11., 12. sınıf, mezun); veli onayı MVP'de |
 | Platform | **React Native / Expo SDK 58, iOS + Android** (2026-10-22). Yayın sırası: önce App Store, sonra Play Store. |

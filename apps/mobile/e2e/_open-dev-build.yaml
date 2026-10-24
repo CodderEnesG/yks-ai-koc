@@ -1,0 +1,26 @@
+# Dev build'i temiz durumla açıp yerel Metro'ya bağlar. Diğer akışlar bunu çağırır.
+appId: dev.placeholder.ykskoc
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+- openLink: exp+yks-koc://?__expo_url=http%3A%2F%2F127.0.0.1%3A8081&__expo_disable_fab=1&__expo_disable_onboarding=1
+- runFlow:
+    when:
+      visible: 'Open'
+    commands:
+      - tapOn: 'Open'
+# Temiz kurulumdan sonra Expo geliştirici menüsü bir kez kendiliğinden açılır ve uygulamayı
+# erişilebilirlik ağacından gizler; menü ya da "Başla" gelene kadar beklenir (metin regex).
+- extendedWaitUntil:
+    visible: 'Reload|Başla'
+    timeout: 60000
+- runFlow:
+    when:
+      visible: 'Toggle element inspector'
+    commands:
+      - tapOn: 'Close'
+- extendedWaitUntil:
+    visible:
+      id: start
+    timeout: 10000

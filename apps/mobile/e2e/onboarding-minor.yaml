@@ -1,0 +1,71 @@
+# 18 yaş altı öğrenci: hedefi atlar, sınav tarihini elle girer, günleri ayrı ayarlar.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _open-dev-build.yaml
+- tapOn:
+    id: start
+- tapOn:
+    id: month-11
+- tapOn:
+    id: year-2010
+- tapOn:
+    id: continue
+- tapOn:
+    id: grade-11
+- tapOn:
+    id: continue
+- tapOn:
+    id: field-EA
+- tapOn:
+    id: continue
+# Hedef: geçersiz giriş Devam'ı açmaz, atlanabilir.
+- tapOn:
+    id: target-puan
+- tapOn:
+    id: target-input
+- inputText: '99'
+- assertVisible: '100 ile 560 arasında bir puan gir'
+- tapOn:
+    id: skip
+# Sınav tarihi elle: önce geçmiş tarih reddedilir.
+- tapOn:
+    id: exam-change
+- tapOn:
+    id: exam-day
+- inputText: '1'
+- tapOn:
+    id: exam-month
+- inputText: '1'
+- tapOn:
+    id: exam-year
+- inputText: '2020'
+- assertVisible: 'Geçerli ve ileride bir tarih gir'
+- tapOn:
+    id: exam-year
+- eraseText: 4
+- inputText: '2028'
+- tapOn:
+    id: continue
+# Günleri ayrı ayarla: Pazar'ı sıfıra indir.
+- tapOn:
+    id: per-day
+- scrollUntilVisible:
+    element:
+      id: day-6-minus
+    visibilityPercentage: 100
+    centerElement: true
+- repeat:
+    times: 8
+    commands:
+      - tapOn:
+          id: day-6-minus
+- assertVisible: 'Çalışmıyorum'
+- tapOn:
+    id: continue
+# Özet: veli onayı uyarısı görünür.
+- assertVisible:
+    id: minor-notice
+- tapOn:
+    id: finish
+- assertVisible:
+    id: today-countdown

@@ -42,6 +42,7 @@ pnpm --filter @yks/mobile ios              # dev build, iOS simülatör
 pnpm --filter @yks/mobile android          # dev build, Android emülatör
 pnpm --filter @yks/mobile start            # Metro
 pnpm --filter @yks/web dev                 # http://localhost:3000
+maestro test apps/mobile/e2e               # uçtan uca akışlar (Metro açık, dev build kurulu)
 ```
 
 Expo paketleri `apps/mobile` içinde `pnpm exec expo install <paket>` ile kurulur; böylece SDK 58'in sabitlediği sürüm gelir.

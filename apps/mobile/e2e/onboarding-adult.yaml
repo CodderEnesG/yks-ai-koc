@@ -1,0 +1,53 @@
+# Yetişkin öğrenci: varsayılan sınav tarihi, sıralama hedefi, hafta içi/sonu süre.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _open-dev-build.yaml
+- tapOn:
+    id: start
+# 1. Doğum: 18 yaşını çoktan doldurmuş.
+- tapOn:
+    id: month-3
+- scrollUntilVisible:
+    element:
+      id: year-2000
+    visibilityPercentage: 100
+    centerElement: true
+- tapOn:
+    id: year-2000
+- tapOn:
+    id: continue
+# 2-3. Sınıf ve alan.
+- tapOn:
+    id: grade-mezun
+- tapOn:
+    id: continue
+- tapOn:
+    id: field-SAY
+- tapOn:
+    id: continue
+# 4. Hedef: Türkçe binlik ayırıcıyla sıralama.
+- tapOn:
+    id: target-input
+- inputText: '20.000'
+- tapOn:
+    id: continue
+# 5. Sınav: tahmini tarih dolu gelir.
+- assertVisible:
+    id: exam-estimated
+- tapOn:
+    id: continue
+# 6. Süre: hafta sonunu 30 dk artır.
+- tapOn:
+    id: weekend-plus
+- assertVisible: '4,5 saat'
+- tapOn:
+    id: continue
+# Özet: veli onayı uyarısı yok.
+- assertVisible:
+    id: done-days-left
+- assertNotVisible:
+    id: minor-notice
+- tapOn:
+    id: finish
+- assertVisible:
+    id: today-countdown
