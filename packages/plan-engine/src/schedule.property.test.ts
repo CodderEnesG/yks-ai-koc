@@ -254,6 +254,50 @@ describe('plan motoru property testleri', () => {
     );
   });
 
+  it('neden ayarlarıyla da kapasite sınırı tutar ve her birim bir kez yer alır', () => {
+    const withAdjustments = planInput.chain((input) =>
+      fc
+        .record({
+          capacityFactor: fc.double({ min: 0.5, max: 1, noNaN: true }),
+          dayShift: fc.integer({ min: 0, max: 20 }),
+          hard: fc.boolean(),
+        })
+        .map(({ capacityFactor, dayShift, hard }) => {
+          const firstUnit = input.sources[0]?.units[0]?.id;
+          return {
+            ...input,
+            adjustments: {
+              capacityFactor,
+              dayFactors: { [addDays(input.from, dayShift)]: 0.5 },
+              unitFactors: hard && firstUnit ? { [firstUnit]: 1.3 } : {},
+              warmupDays: [addDays(input.from, dayShift + 1)],
+            },
+          };
+        }),
+    );
+    fc.assert(
+      fc.property(withAdjustments, (input) => {
+        const plan = buildPlan(input);
+        const a = input.adjustments!;
+        for (const day of plan.days) {
+          const factor = a.capacityFactor! * (a.dayFactors![day.date] ?? 1);
+          expect(day.capacitySeconds).toBe(
+            Math.floor(input.weekdayMinutes[weekdayIndex(day.date)]! * 60 * factor),
+          );
+          expect(day.seconds).toBeLessThanOrEqual(Math.floor((day.capacitySeconds * 11) / 10));
+        }
+        const ranges = allRanges(plan);
+        for (const unit of units(input)) {
+          const expected = remainingOf(input, unit);
+          const mine = ranges.filter((r) => r.unitId === unit.id).sort((x, y) => x.first - y.first);
+          const covered = mine.reduce((n, r) => n + r.last - r.first + 1, 0);
+          expect(covered).toBe(Math.max(0, expected.last - expected.first + 1));
+        }
+        expect(buildPlan(JSON.parse(JSON.stringify(input)) as PlanInput)).toEqual(plan);
+      }),
+    );
+  });
+
   it('yeniden planlama geçmişi değiştirmez ve yapılan işi düşer', () => {
     fc.assert(
       fc.property(planInput, fc.integer({ min: 1, max: 30 }), (input, k) => {

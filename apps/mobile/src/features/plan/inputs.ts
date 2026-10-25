@@ -1,5 +1,11 @@
 // Cihazdaki profil ve kütüphaneyi plan motorunun girdisine çevirir (T13). Saf; vitest ile test edilir.
-import type { CivilDate, PlanInput, StudySource, StudyUnit } from '@yks/plan-engine';
+import type {
+  CivilDate,
+  PlanAdjustments,
+  PlanInput,
+  StudySource,
+  StudyUnit,
+} from '@yks/plan-engine';
 
 import type { CustomEdition, ItemKind } from '@/features/library/rules';
 
@@ -77,6 +83,7 @@ export function toPlanInput(args: {
   weekdayMinutes: readonly number[];
   library: readonly LibrarySourceRow[];
   done: readonly DoneRange[];
+  adjustments?: PlanAdjustments;
 }): PlanInput {
   const sources = args.library.map(toStudySource).filter((s) => s.units.length > 0);
   return {
@@ -85,5 +92,16 @@ export function toPlanInput(args: {
     weekdayMinutes: args.weekdayMinutes,
     sources,
     completed: completedCounts(sources, args.done),
+    // Silinen kaynağın birimine ait "konu zor" ayarı motora gitmesin (bilinmeyen birim hatası).
+    ...(args.adjustments && {
+      adjustments: {
+        ...args.adjustments,
+        unitFactors: Object.fromEntries(
+          Object.entries(args.adjustments.unitFactors ?? {}).filter(([id]) =>
+            sources.some((s) => s.units.some((u) => u.id === id)),
+          ),
+        ),
+      },
+    }),
   };
 }

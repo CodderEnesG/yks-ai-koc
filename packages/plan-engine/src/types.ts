@@ -36,6 +36,20 @@ export interface PlanInput {
   sources: readonly StudySource[];
   /** Birim kimliğine göre baştan itibaren tamamlanan sayfa ya da test sayısı. */
   completed?: Readonly<Record<string, number>>;
+  /** Check-in nedenlerinden türetilen ayarlar (rules.ts: deriveAdjustments). */
+  adjustments?: PlanAdjustments;
+}
+
+/** Neden kurallarının plana etkisi (rapor 2.6). Hepsi isteğe bağlı; yoksa etkisiz. */
+export interface PlanAdjustments {
+  /** Tüm günlerin kapasite çarpanı, (0, 1]. "Zaman yetmedi" serileri düşürür. */
+  capacityFactor?: number;
+  /** Belirli günlerin kapasite çarpanı, (0, 1]. Güvenli mod %50. */
+  dayFactors?: Readonly<Record<string, number>>;
+  /** Birim süre çarpanı, [1, 5]. "Konu zor" ×1,3. */
+  unitFactors?: Readonly<Record<string, number>>;
+  /** Bu günlerde en kısa görev başa alınır ("ısınma"). */
+  warmupDays?: readonly string[];
 }
 
 /** Bir birimin ardışık bir aralığı. Süreler tamsayı saniye. */

@@ -37,6 +37,7 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
           <Stack.Screen name="book" />
+          <Stack.Screen name="checkin" />
         </Stack>
         <PortalHost />
       </ThemeProvider>

@@ -1,4 +1,11 @@
-import { buildPlan, type CivilDate, parseCivilDate, type PlanResult } from '@yks/plan-engine';
+import {
+  buildPlan,
+  type CivilDate,
+  deriveAdjustments,
+  parseCivilDate,
+  type PlanResult,
+  type Reason,
+} from '@yks/plan-engine';
 import { and, asc, eq, inArray, isNull } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite/query';
 import { randomUUID } from 'expo-crypto';
@@ -7,6 +14,7 @@ import { db } from '@/db/client';
 import { catalogEdition, libraryItem, planTask, profile } from '@/db/schema';
 import { editionTitle } from '@/features/library/rules';
 
+import { loadReasonEvents } from './checkin';
 import {
   type DoneRange,
   type LibrarySourceRow,
@@ -57,6 +65,7 @@ export function computePlan(today: CivilDate): PlanResult | null {
       weekdayMinutes: p.weekdayMinutes,
       library: loadLibrary(),
       done: loadDone(),
+      adjustments: deriveAdjustments(loadReasonEvents()),
     }),
   );
 }
@@ -113,12 +122,14 @@ export function refreshToday(today: CivilDate, now: Date): void {
 export interface TodayTask {
   id: string;
   libraryItemId: string;
+  unitKey: string;
   title: string;
   kind: 'pages' | 'tests' | 'video';
   first: number;
   last: number;
   estSeconds: number;
   status: 'planned' | 'done' | 'partial' | 'skipped';
+  reason: Reason | null;
 }
 
 /** Bugünün görevleri, kaynak sırasıyla; `undefined` yükleniyor. */
@@ -137,12 +148,14 @@ export function useTodayTasks(today: CivilDate): TodayTask[] | undefined {
   return data.map(({ task, item, edition }) => ({
     id: task.id,
     libraryItemId: task.libraryItemId,
+    unitKey: task.unitKey,
     title: edition ? editionTitle(edition) : (item.customEdition?.title ?? ''),
     kind: task.kind,
     first: task.rangeFirst,
     last: task.rangeLast,
     estSeconds: task.estSeconds,
     status: task.status,
+    reason: task.reason,
   }));
 }
 

@@ -115,6 +115,7 @@ export function buildPlan(input: PlanInput): PlanResult {
 
   const targetEnd = addDays(input.examDate, -REVIEW_DAYS);
   const completed = input.completed ?? {};
+  const adjust = input.adjustments ?? {};
   const sources = [...input.sources].sort(compareSources);
 
   const pending: PendingUnit[] = sources.flatMap((source, sourceRank) =>
@@ -123,14 +124,22 @@ export function buildPlan(input: PlanInput): PlanResult {
       const next = unit.first + Math.min(completed[unit.id] ?? 0, count);
       if (next > unit.last) return [];
       return [
-        { source, sourceRank, unit, unitIndex, next, totalSeconds: Math.round(unit.minutes * 60) },
+        {
+          source,
+          sourceRank,
+          unit,
+          unitIndex,
+          next,
+          totalSeconds: Math.round(unit.minutes * 60 * (adjust.unitFactors?.[unit.id] ?? 1)),
+        },
       ];
     }),
   );
 
   const days: PlanDay[] = [];
   for (let date: CivilDate = input.from; diffDays(targetEnd, date) > 0; date = addDays(date, 1)) {
-    const capacitySeconds = input.weekdayMinutes[weekdayIndex(date)]! * 60;
+    const factor = (adjust.capacityFactor ?? 1) * (adjust.dayFactors?.[date] ?? 1);
+    const capacitySeconds = Math.floor(input.weekdayMinutes[weekdayIndex(date)]! * 60 * factor);
     if (capacitySeconds > 0) days.push({ date, capacitySeconds, seconds: 0, tasks: [] });
   }
 
@@ -177,6 +186,16 @@ export function buildPlan(input: PlanInput): PlanResult {
       take(queues[i]!, day, limitSeconds, quota);
     }
     for (const i of active) take(queues[i]!, day, limitSeconds, Infinity);
+  }
+
+  // Isınma: o günün en kısa görevi başa alınır (diğerlerinin sırası korunur).
+  for (const day of days) {
+    if (!adjust.warmupDays?.includes(day.date) || day.tasks.length < 2) continue;
+    const shortest = day.tasks.reduce(
+      (best, t, i) => (t.seconds < day.tasks[best]!.seconds ? i : best),
+      0,
+    );
+    day.tasks.unshift(...day.tasks.splice(shortest, 1));
   }
 
   const unscheduled = queues.flat().map(toRange);

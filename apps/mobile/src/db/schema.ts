@@ -79,3 +79,13 @@ export const planTask = sqliteTable('plan_task', {
   updatedAt: text('updated_at').notNull(),
   deletedAt: text('deleted_at'),
 });
+
+// Akşam check-in'inin gün özeti (sunucuda checkin). Görev bazlı durum ve neden plan_task'ta.
+export const checkin = sqliteTable('checkin', {
+  id: text('id').primaryKey(),
+  day: text('day').notNull().unique(),
+  correctCount: integer('correct_count'),
+  wrongCount: integer('wrong_count'),
+  createdAt: text('created_at').notNull(),
+  updatedAt: text('updated_at').notNull(),
+});

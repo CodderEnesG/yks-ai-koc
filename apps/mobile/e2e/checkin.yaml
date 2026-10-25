@@ -1,0 +1,55 @@
+# Check-in (T14): yarım kaldı + neden, yapamadım + neden, isteğe bağlı doğru/yanlış.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+# İki kaynak: katalogdan TYT Tarih (sayfa), hızlı ekle ile test kitabı. Check-in başlayınca bugün
+# donduğu için ikisi de check-in'den önce eklenir.
+- tapOn: { id: today-add-book }
+- tapOn: { id: add-search }
+- tapOn: { id: search-input }
+- inputText: '3 adim tyt tarih'
+- tapOn: { id: result-TYT-Tarih }
+- extendedWaitUntil:
+    visible: '19 bölüm · 130 sayfa'
+    timeout: 10000
+- tapOn: { id: continue }
+- tapOn: 'Kütüphane'
+- tapOn: { id: library-add }
+- tapOn: { id: add-quick }
+- tapOn: { id: quick-title }
+- inputText: 'X Yayınları TYT Fizik'
+- tapOn: { id: quick-kind-tests }
+- swipe:
+    start: 50%, 40%
+    end: 50%, 15%
+- tapOn: { id: quick-count }
+- inputText: '40'
+- tapOn: { id: continue }
+- tapOn: 'Bugün'
+- extendedWaitUntil:
+    visible: 'Bugün ≈ .* · 2 kitap'
+    timeout: 10000
+# 1. kitap yarım kaldı: varsayılan noktaya kadar, zaman yetmedi.
+- tapOn: { id: checkin-partial, index: 0 }
+- tapOn: { id: continue }
+- tapOn: { id: reason-zaman_yetmedi }
+- tapOn: { id: continue }
+- assertVisible: 'Yarım: s. 11-.* yapıldı · Zaman yetmedi'
+- assertVisible: 'Kalan kısmı sonraki günlere dağıttık.*'
+# 2. kitap yapılamadı: kötü hissediyorum (yalnız plan etkisi; destek metni PDR onayıyla T18'de).
+- tapOn: { id: checkin-skip }
+- tapOn: { id: reason-kotu_hissediyorum }
+- tapOn: { id: continue }
+- assertVisible: 'Yapılmadı · Kötü hissediyorum'
+- assertVisible: 'Önümüzdeki üç gün yükün yarıya indi.'
+# Hepsi işaretlenince isteğe bağlı doğru/yanlış.
+- scrollUntilVisible:
+    element: { id: counts-correct }
+    visibilityPercentage: 100
+    centerElement: true
+- tapOn: { id: counts-correct }
+- inputText: '20'
+- tapOn: { id: counts-wrong }
+- inputText: '5'
+- tapOn: { id: counts-save }
+- assertVisible: 'Kaydedildi: 20 doğru, 5 yanlış'

@@ -100,3 +100,18 @@ describe('toPlanInput', () => {
     expect(input.sources).toEqual([]);
   });
 });
+
+describe('toPlanInput ayarları', () => {
+  it('silinen kaynağın birim çarpanını süzer', () => {
+    const input = toPlanInput({
+      from: parseCivilDate('2026-11-02'),
+      examDate: parseCivilDate('2027-06-19'),
+      weekdayMinutes: [60, 60, 60, 60, 60, 60, 60],
+      library: [catalogBook],
+      done: [],
+      adjustments: { capacityFactor: 0.85, unitFactors: { 'item-a:u1': 1.3, 'silinen:u9': 1.3 } },
+    });
+    expect(input.adjustments).toEqual({ capacityFactor: 0.85, unitFactors: { 'item-a:u1': 1.3 } });
+    expect(() => buildPlan(input)).not.toThrow();
+  });
+});

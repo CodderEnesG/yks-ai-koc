@@ -11,6 +11,7 @@ const t = (
 ): TaskLike => ({
   id,
   libraryItemId: item,
+  unitKey: `${item}-${first}`,
   title: item,
   kind,
   first,
@@ -44,5 +45,26 @@ describe('groupTasks', () => {
 
   it('boş girdi boş çıktı', () => {
     expect(groupTasks([])).toEqual([]);
+  });
+
+  it('durum: yarım kalan grup karışık, yapılan aralık ve nedenler', () => {
+    const tasks: TaskLike[] = [
+      { ...t('1', 'a', 11, 16), status: 'done' },
+      { ...t('2', 'a', 17, 20), unitKey: 'a-17', status: 'done' },
+      { ...t('3', 'a', 21, 22), unitKey: 'a-17', status: 'skipped', reason: 'zaman_yetmedi' },
+      { ...t('4', 'b', 1, 3, 'tests'), status: 'skipped', reason: 'konu_zor' },
+      { ...t('5', 'c', 1, 5), status: 'done' },
+    ];
+    const [a, b, c] = groupTasks(tasks);
+    expect(a).toMatchObject({
+      status: 'mixed',
+      doneRanges: [{ first: 11, last: 20 }],
+      reasons: ['zaman_yetmedi'],
+    });
+    expect(a!.ranges).toEqual([{ first: 11, last: 22 }]);
+    expect(a!.unitCount).toBe(2); // bölünen birim bir kez sayılır
+    expect(b).toMatchObject({ status: 'skipped', doneRanges: [], reasons: ['konu_zor'] });
+    expect(c!.status).toBe('done');
+    expect(groupTasks([t('6', 'd', 1, 2)])[0]!.status).toBe('planned');
   });
 });

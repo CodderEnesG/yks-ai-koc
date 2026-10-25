@@ -3,3 +3,4 @@ flows:
   - onboarding-*.yaml
   - library-*.yaml
   - today-*.yaml
+  - checkin.yaml

@@ -29,6 +29,13 @@
       "when": 1792924969377,
       "tag": "0003_plan_task",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1792927051735,
+      "tag": "0004_checkin",
+      "breakpoints": true
     }
   ]
 }

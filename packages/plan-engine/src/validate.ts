@@ -58,6 +58,22 @@ export function validatePlanInput(input: PlanInput): void {
     }
   }
 
+  const adjust = input.adjustments ?? {};
+  const inUnitRange = (f: number) => Number.isFinite(f) && f > 0 && f <= 1;
+  if (adjust.capacityFactor !== undefined && !inUnitRange(adjust.capacityFactor)) {
+    throw new PlanInputError(`Kapasite çarpanı (0, 1] olmalı: ${adjust.capacityFactor}`);
+  }
+  for (const [date, f] of Object.entries(adjust.dayFactors ?? {})) {
+    parseCivilDate(date);
+    if (!inUnitRange(f)) throw new PlanInputError(`Gün çarpanı (0, 1] olmalı: ${date}`);
+  }
+  for (const [unitId, f] of Object.entries(adjust.unitFactors ?? {})) {
+    if (!unitIds.has(unitId)) throw new PlanInputError(`Bilinmeyen birim: ${unitId}`);
+    if (!Number.isFinite(f) || f < 1 || f > 5)
+      throw new PlanInputError(`Birim çarpanı [1, 5] olmalı: ${unitId}`);
+  }
+  for (const date of adjust.warmupDays ?? []) parseCivilDate(date);
+
   for (const [unitId, count] of Object.entries(input.completed ?? {})) {
     if (!unitIds.has(unitId)) throw new PlanInputError(`Bilinmeyen birim: ${unitId}`);
     if (!Number.isInteger(count) || count < 0) {

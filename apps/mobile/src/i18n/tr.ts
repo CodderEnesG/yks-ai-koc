@@ -119,6 +119,40 @@ export const tr = {
       'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
   },
+  checkin: {
+    done: 'Yaptım',
+    partial: 'Yarım kaldı',
+    skip: 'Yapamadım',
+    statusDone: '✓ Tamamlandı',
+    statusSkipped: 'Yapılmadı',
+    statusPartial: (done: string) => `Yarım: ${done} yapıldı`,
+    reasonTitle: 'Ne oldu?',
+    reasonSubtitle: 'Planı buna göre ayarlayacağız. Yargı yok.',
+    reasons: {
+      zaman_yetmedi: 'Zaman yetmedi',
+      konu_zor: 'Konu zor geldi',
+      isteksiz: 'İsteksizim',
+      kotu_hissediyorum: 'Kötü hissediyorum',
+    },
+    // Planın ne yaptığını söyleyen olgusal notlar. Koç tonu ve destek metinleri ton rehberi ve PDR
+    // onayıyla gelecek (T06, T18); burada yalnız plan değişikliği anlatılır.
+    effects: {
+      zaman_yetmedi:
+        'Kalan kısmı sonraki günlere dağıttık. Üç gün üst üste olursa günlük yükünü azaltacağız.',
+      konu_zor: 'Bu bölüme daha çok zaman ayırdık.',
+      isteksiz: 'Yarın en kısa görevle başlayacaksın.',
+      kotu_hissediyorum: 'Önümüzdeki üç gün yükün yarıya indi.',
+    },
+    partialTitle: 'Nereye kadar geldin?',
+    partialThrough: (kind: 'pages' | 'tests' | 'video', n: number) =>
+      kind === 'pages' ? `${n}. sayfaya kadar` : `${n}. teste kadar`,
+    save: 'Kaydet',
+    safeMode: 'Hafif mod açık: birkaç gün yükün yarı yarıya.',
+    countsTitle: 'Bugün çözdüğün sorular (isteğe bağlı)',
+    correct: 'Doğru',
+    wrong: 'Yanlış',
+    countsSaved: (c: number, w: number) => `Kaydedildi: ${c} doğru, ${w} yanlış`,
+  },
   library: {
     title: 'Kütüphane',
     empty: 'Henüz kitap eklemedin. Planın eklediğin kitaplara göre kurulur.',

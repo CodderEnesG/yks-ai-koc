@@ -150,6 +150,36 @@ describe('buildPlan', () => {
     expect(plan.warnings).toEqual([{ code: 'unscheduled', seconds: 5400 }]);
   });
 
+  it('ayarlar: kapasite ve gün çarpanı, birim süresi, ısınma', () => {
+    const units = [
+      { id: 'long', kind: 'pages' as const, first: 1, last: 100, minutes: 200 },
+      { id: 'short', kind: 'tests' as const, first: 1, last: 2, minutes: 10 },
+    ];
+    const base = input({ sources: [book('a', 0, [units[0]!]), book('b', 1, [units[1]!])] });
+
+    const halved = buildPlan({ ...base, adjustments: { capacityFactor: 0.5 } });
+    expect(halved.days[0]!.capacitySeconds).toBe(1800);
+
+    const safe = buildPlan({ ...base, adjustments: { dayFactors: { '2026-11-03': 0.5 } } });
+    expect(safe.days.map((d) => d.capacitySeconds).slice(0, 3)).toEqual([3600, 1800, 3600]);
+
+    const hard = buildPlan({ ...base, adjustments: { unitFactors: { long: 1.3 } } });
+    const longSeconds = (p: typeof hard) =>
+      p.days
+        .flatMap((d) => d.tasks)
+        .filter((t) => t.unitId === 'long')
+        .reduce((a, t) => a + t.seconds, 0);
+    expect(longSeconds(hard)).toBe(Math.round(200 * 60 * 1.3));
+
+    const plain = buildPlan(base).days[0]!.tasks.map((t) => t.unitId);
+    const warm = buildPlan({
+      ...base,
+      adjustments: { warmupDays: ['2026-11-02'] },
+    }).days[0]!.tasks.map((t) => t.unitId);
+    expect(plain[0]).toBe('long');
+    expect(warm[0]).toBe('short');
+  });
+
   it('geçersiz girdiyi reddeder', () => {
     const unit = { id: 'u', kind: 'pages' as const, first: 1, last: 10, minutes: 10 };
     const bad: PlanInput[] = [
@@ -161,6 +191,10 @@ describe('buildPlan', () => {
       input({ sources: [book('a', 0, [{ ...unit, examWeight: 2 }])] }),
       input({ sources: [book('a', 0, [unit])], completed: { other: 1 } }),
       input({ examDate: parseCivilDate('2031-01-01') }),
+      input({ adjustments: { capacityFactor: 0 } }),
+      input({ adjustments: { dayFactors: { '2026-11-02': 1.5 } } }),
+      input({ sources: [book('a', 0, [unit])], adjustments: { unitFactors: { u: 0.5 } } }),
+      input({ adjustments: { unitFactors: { yok: 1.3 } } }),
     ];
     for (const value of bad) expect(() => buildPlan(value)).toThrow(PlanInputError);
   });

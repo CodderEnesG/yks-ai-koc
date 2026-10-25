@@ -20,3 +20,6 @@ export type {
   UnitRange,
 } from './types.ts';
 export { MAX_PLAN_DAYS, PlanInputError, validatePlanInput } from './validate.ts';
+export type { PlanAdjustments } from './types.ts';
+export { deriveAdjustments, isSafeMode, SAFE_MODE_DAYS } from './rules.ts';
+export type { Reason, ReasonEvent } from './rules.ts';

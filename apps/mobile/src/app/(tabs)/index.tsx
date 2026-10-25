@@ -1,13 +1,17 @@
-import { diffDays, parseCivilDate, weekdayIndex } from '@yks/plan-engine';
+import { diffDays, isSafeMode, parseCivilDate, weekdayIndex } from '@yks/plan-engine';
 import { router } from 'expo-router';
 import { useEffect, useMemo } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { loadReasonEvents } from '@/features/plan/checkin';
+import { CountsForm } from '@/features/plan/counts-form';
 import { groupTasks } from '@/features/plan/group';
 import { computePlan, refreshToday, useLibraryVersion, useTodayTasks } from '@/features/plan/repo';
+import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
 import { tr } from '@/i18n/tr';
 import { formatCivilDate } from '@/lib/date';
@@ -27,6 +31,12 @@ export default function TodayScreen() {
     if (version !== undefined) refreshToday(today, new Date());
   }, [today, version]);
 
+  // Güvenli mod (kötü hissediyorum sonrası 3 gün) bandı; görevler değişince yeniden okunur.
+  const safeMode = useMemo(
+    () => (tasks ? isSafeMode(loadReasonEvents(), today) : false),
+    [tasks, today],
+  );
+
   if (!profile || !tasks) return null;
 
   const daysLeft = diffDays(parseCivilDate(profile.examDate), today);
@@ -42,7 +52,10 @@ export default function TodayScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1">
-      <ScrollView contentContainerClassName="gap-4 p-6">
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ gap: 16, padding: 24 }}
+        bottomOffset={24}
+        keyboardShouldPersistTaps="handled">
         <View className="gap-1">
           <Text variant="h3">{tr.today.title}</Text>
           <Text variant="muted">
@@ -73,21 +86,19 @@ export default function TodayScreen() {
           </Text>
         ) : null}
 
+        {safeMode ? (
+          <Text testID="safe-mode" className="bg-secondary rounded-xl p-3">
+            {tr.checkin.safeMode}
+          </Text>
+        ) : null}
+
         {groups.map((g) => (
-          <View
-            key={g.libraryItemId + g.kind}
-            testID="today-task"
-            className="border-border gap-1 rounded-xl border p-4">
-            <Text className="font-medium">{g.title}</Text>
-            <View className="flex-row justify-between gap-3">
-              <Text testID="today-task-range" className="flex-1">
-                {tr.today.ranges(g.kind, g.ranges)}
-              </Text>
-              <Text variant="muted">≈ {tr.today.duration(g.estSeconds)}</Text>
-            </View>
-            {g.unitCount > 1 ? <Text variant="muted">{tr.today.units(g.unitCount)}</Text> : null}
-          </View>
+          <TaskCard key={g.libraryItemId + g.kind} group={g} />
         ))}
+
+        {groups.length > 0 && groups.every((g) => g.status !== 'planned') ? (
+          <CountsForm day={today} />
+        ) : null}
 
         {overload ? (
           <Text testID="today-overload" className="text-destructive text-sm">
@@ -105,7 +116,7 @@ export default function TodayScreen() {
             <Text>{tr.today.resetDev}</Text>
           </Button>
         ) : null}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
