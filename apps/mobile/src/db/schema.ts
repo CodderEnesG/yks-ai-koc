@@ -60,3 +60,22 @@ export const libraryItem = sqliteTable('library_item', {
   updatedAt: text('updated_at').notNull(),
   deletedAt: text('deleted_at'),
 });
+
+// Plan motorunun ürettiği günlük görevler (sunucuda plan_task). Cihazda yalnız bugün ve geçmiş günler
+// saklanır; gelecek her açılışta hesaplanır. Geçmiş görevler değişmez (rapor 2.6).
+export const planTask = sqliteTable('plan_task', {
+  id: text('id').primaryKey(),
+  libraryItemId: text('library_item_id').notNull(),
+  day: text('day').notNull(),
+  kind: text('kind', { enum: ['pages', 'tests', 'video'] }).notNull(),
+  /** Katalog birim kimliği ya da özel baskıdaki birim anahtarı. */
+  unitKey: text('unit_key').notNull(),
+  rangeFirst: integer('range_first').notNull(),
+  rangeLast: integer('range_last').notNull(),
+  estSeconds: integer('est_seconds').notNull(),
+  status: text('status', { enum: ['planned', 'done', 'partial', 'skipped'] }).notNull(),
+  reason: text('reason', { enum: ['zaman_yetmedi', 'konu_zor', 'isteksiz', 'kotu_hissediyorum'] }),
+  createdAt: text('created_at').notNull(),
+  updatedAt: text('updated_at').notNull(),
+  deletedAt: text('deleted_at'),
+});

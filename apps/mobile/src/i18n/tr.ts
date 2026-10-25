@@ -1,4 +1,9 @@
 // Uygulama metinleri. MVP yalnız Türkçe; ikinci dil gelirse i18next'e taşınır (TECH-STACK).
+function rangeLabel(kind: 'pages' | 'tests' | 'video', first: number, last: number): string {
+  const span = first === last ? `${first}` : `${first}-${last}`;
+  return kind === 'pages' ? `s. ${span}` : `Test ${span}`;
+}
+
 export const tr = {
   common: {
     continue: 'Devam',
@@ -94,7 +99,24 @@ export const tr = {
   today: {
     title: 'Bugün',
     examCountdown: (days: number) => `Sınava ${days} gün`,
-    planSoon: 'Kitaplarını ekleyince günlük görevlerin burada görünecek.',
+    noBooks: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.',
+    addBook: 'Kitap ekle',
+    restDay: 'Bugün çalışma günün değil. Dinlen.',
+    nothingLeft: 'Planlanacak iş kalmadı.',
+    ranges: (kind: 'pages' | 'tests' | 'video', ranges: { first: number; last: number }[]) =>
+      ranges.map((r) => rangeLabel(kind, r.first, r.last)).join(', '),
+    units: (n: number) => (n > 1 ? `${n} bölüm` : ''),
+    summary: (duration: string, books: number) => `Bugün ≈ ${duration} · ${books} kitap`,
+    duration: (seconds: number) => {
+      const minutes = Math.max(1, Math.round(seconds / 60));
+      const h = Math.floor(minutes / 60);
+      const m = minutes % 60;
+      return h === 0 ? `${m} dk` : m === 0 ? `${h} sa` : `${h} sa ${m} dk`;
+    },
+    overload: (units: number) =>
+      `Sınava kadar her şey sığmıyor: ${units} bölüm "zaman kalırsa" listesinde. Günlük süreni artırabilir ya da kitap çıkarabilirsin.`,
+    unscheduled:
+      'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
   },
   library: {

@@ -2,3 +2,4 @@
 flows:
   - onboarding-*.yaml
   - library-*.yaml
+  - today-*.yaml

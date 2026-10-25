@@ -1,0 +1,25 @@
+# Bugün ekranı (T13): kitap yokken yönlendirme, kitap eklenince plan motorunun görevleri.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- assertVisible: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.'
+- tapOn: { id: today-add-book }
+- tapOn: { id: add-search }
+- tapOn: { id: search-input }
+- inputText: '3 adim tyt tarih'
+- tapOn: { id: result-TYT-Tarih }
+- extendedWaitUntil:
+    visible: '19 bölüm · 130 sayfa'
+    timeout: 10000
+- tapOn: { id: minutes-5 }
+- tapOn: { id: continue }
+- tapOn: 'Bugün'
+# Hafta içi 2 sa, hafta sonu 4 sa: her iki durumda da ilk bölüm (s. 11-16, 30 dk) bugüne girer.
+- extendedWaitUntil:
+    visible: { id: today-task }
+    timeout: 10000
+# Aynı kitabın ardışık bölümleri tek kartta: aralık 11'den başlar.
+- assertVisible: 's. 11-.*'
+- assertVisible: { id: today-total }
+- assertVisible: 'Bugün ≈ .* · 1 kitap'
+- assertNotVisible: { id: today-overload }
