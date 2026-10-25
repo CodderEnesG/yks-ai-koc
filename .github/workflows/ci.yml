@@ -36,3 +36,15 @@ jobs:
       - run: pnpm test
       # Paylaşılan paket Supabase Edge Functions'ta (Deno) da derlenmeli.
       - run: pnpm --filter @yks/plan-engine check:deno
+
+  # Supabase şeması ve RLS testleri (pgTAP). Yalnız veritabanı konteyneri başlatılır.
+  db:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: supabase/setup-cli@v3
+        with:
+          version: latest
+      - run: supabase db start
+      - run: supabase test db
