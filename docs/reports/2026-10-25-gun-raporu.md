@@ -28,34 +28,65 @@ Testler: plan motoru 42, mobil 32 birim testi, 19 pgTAP RLS testi, 5 Maestro uç
 - **Testlerle yakalanan arayüz hataları:** iOS sayı klavyesinde "Devam" klavyenin altında kalıyordu; uzun formlarda alanlar klavyenin arkasında kalıyordu; bölüm sayısı bölünen görevde fazla sayılıyordu; "Yapamadım" düğmesi sığmıyordu. Hepsi düzeltildi.
 - **Benim hatalarım:** Metro'yu `CI=1` ile başlatıp yarım saat eski kodu test ettim. Maestro birden çok simülatör açıkken başka bir projenin simülatörüne gitti. İkisi de TECH-STACK'e not edildi.
 
-## Senden onay ya da karar bekleyenler
+## Genel ilerleme (25 Ekim akşamı)
 
-1. **GitHub push:** 3 commit ve bu rapor yerelde (T15, T32, T23).
-2. **Karar 13, e-posta sağlayıcı ve karar 14, sync kapsamı:** T16 (giriş ve senkron) bunlara bağlı, son tarih ≈5 Kasım. T11 (içindekiler fotoğrafı) da T16'ya bağlı.
-3. **YouTube Data API anahtarı:** T31 ve T33 için (Google Cloud'da YouTube Data API v3). Ücretsiz kota yeterli.
-4. **Sabah bildirimi saati:** Rapor "öğrencinin seçtiği saat" diyor; şimdilik 08:00 sabit. Kurulumda mı sorulsun, ayarlar ekranında mı?
-5. **Tanımsız olduğu için benim seçtiklerim** (PROJECT-STATE'te işaretli; bakıp onaylaman yeter):
+Hedef: 14 Aralık App Store gönderimi. Saatler raporun görev listesindeki tahminler.
+
+| Durum | Görevler | Tahmini saat |
+|---|---|---|
+| Bitti | T02, T03, T04, T05, T09, T10, T13, T14, T15, T23, T32 | ≈100 / 267 |
+| Kısmen | T12 katalog: 32 MEB kitabı yüklü, konu taksonomisi yok | — |
+| Kalan kod işi | T11 fotoğraf, T16 giriş + senkron, T17-T20 sohbet ve güvenlik, T21-T22 veli onayı ve raporu, T24 analitik, T28 hesap silme, T31/T33/T34 YouTube | ≈130 |
+| Kurucularda | T01 Apple, T06 ton rehberi + PDR, T07 rıza metinleri, T08 bekleme listesi, marka | — |
+
+Çalışan döngü: kurulum → kitap ekleme (barkod, katalog, hızlı ekle) → bugünün planı → check-in + neden → yeniden planlama → bildirimler → seri ve kitap yüzdesi. Sprint 0'ın kod tarafı bitti, Sprint 1'in A akışı büyük ölçüde bitti, Sprint 2'den T23 öne alındı.
+
+## Bekleyenler
+
+**Onay (hemen)**
+
+1. **GitHub push:** 4 commit yerelde (T15, T32, T23, bu rapor).
+
+**Karar (son tarih ≈5 Kasım)**
+
+2. **E-posta sağlayıcı (karar 13):** Resend / Brevo / AWS SES.
+3. **Sync kapsamı (karar 14):** Öneri "cihaz asıl kaynak, sunucu kopya".
+
+Bu ikisi T16'yı tıkıyor; T11, T17, T21 ve T28 de T16'ya bağlı. Kalan kod işinin büyük kısmı bu kararlara bağlı.
+
+**Kuruculardan gelecekler**
+
+4. **YouTube Data API anahtarı:** T31 ve T33 için; ücretsiz kota yeterli.
+5. **Apple Developer hesabı (T01):** Gerçek cihazda barkod ve bildirim denemesi, TestFlight.
+6. **PDR danışmanı ve ton rehberi (T06):** T18'in önkoşulu ve yayın şartı. "Kötü hissediyorum" şu an yalnız planı hafifletiyor, destek ya da yönlendirme metni yok.
+7. **Marka, rıza metinleri (T07), bekleme listesi (T08).**
+
+**Göz atılacaklar (tanımsız olduğu için seçilenler, PROJECT-STATE'te işaretli)**
+
+8. **Sabah bildirim saati:** Şimdilik 08:00 sabit. Kurulumda mı sorulsun, ayarlar ekranında mı?
+9. **Seçilen kurallar:**
    - Kapasite en fazla %50'ye düşer.
    - Dinlenme günü seriyi bozmaz.
    - Bugünün check-in'i bitmediyse seri dünden sayılır.
-   - Sayfa başı varsayılan 3 dk, test başı 15 dk.
-   - "Konu zor"da bölme uygulanmadı.
+   - Sayfa başı 3 dk, test başı 15 dk varsayılan.
+   - "Konu zor"da bölme yok.
    - Öncelik skoru ağırlıkları varsayılan.
 
-## Dikkat edilecekler
+## Riskler
 
-- **Disk dolmuştu:** 25 Ekim'de 519 MB boş kalmıştı. Bu projenin yeniden üretilebilir derleme çıktılarını sildim (Android klasörü 1,1 GB, Xcode önbelleği 2,4 GB); şu an ≈6,4 GB boş. Büyük kalemler başka projelerin ya da paylaşılan önbelleklerin, onlara dokunmadım:
-  - Gradle önbelleği 13 GB
-  - Docker 15 GB (kullanılmayan eski Supabase imajları dahil; 2,4 GB'lık Postgres 17.6 imajı bizim değil)
-  - Simülatörler 8,7 GB
-  - chatapp derleme önbelleği 2,9 GB
-
-  Temizlik kararı senin.
-- **Simülatör paylaşımı:** Başka bir oturum iPhone 17 simülatörünü kullanıyor; iki simülatör açık. Bizim testler iPhone 15 Pro'ya sabitlendi.
-- **Yayından önce mutlaka:** PDR onayı, ton rehberi ve kriz protokolü (T06), güvenlik katmanı (T18). "Kötü hissediyorum" şu an yalnız planı hafifletiyor, destek ya da yönlendirme metni göstermiyor.
-- **Gerçek cihazda denenmeyenler:** barkod okuma, bildirimlerin gerçekten düşmesi. TestFlight için Apple Developer hesabı (T01) gerekiyor.
-- Android build silindi; Android'e dönülünce `expo prebuild` ve tam derleme gerekecek.
+- **Disk:** 25 Ekim'de 519 MB'a düştü. Bu projenin yeniden üretilebilir derleme çıktıları silindi (Android klasörü 1,1 GB, Xcode önbelleği 2,4 GB); akşam ≈9 GB boş. Büyük kalemler (Gradle 13 GB, Docker 15 GB, simülatörler 8,7 GB, chatapp derleme önbelleği 2,9 GB) paylaşılan ya da başka projelerin; temizlik kararı kurucularda.
+- **Takvim:** Kod tarafı önde. Asıl risk karar ve hesapların gecikmesi:
+  - Kararlar 13-14 gecikirse T16 ve ona bağlı işler sıkışır.
+  - PDR danışmanı 15 Kasım'a kadar bulunmazsa yayın şartı tutmaz.
+  - Apple hesabı olmadan TestFlight olmaz.
+- **Simülatör paylaşımı:** Başka bir oturum iPhone 17 simülatörünü kullanıyor; bu projenin testleri iPhone 15 Pro'ya sabitlendi.
+- **Denenmeyenler:** Barkod okuma ve bildirimlerin gerçekten düşmesi gerçek cihazda denenmedi. Android build silindi; Android'e dönülünce `expo prebuild` ve tam derleme gerekecek.
 
 ## Sıradaki
 
-Kararlar gelince T16 (giriş, onay öncesi yerel mod, senkron), ardından T11 ve T21 (veli onayı). YouTube anahtarı gelirse T31 ve T33.
+En hızlı ilerleme için:
+- push onayı,
+- karar 13 ve 14,
+- YouTube anahtarı.
+
+Sonra T16 (giriş, onay öncesi yerel mod, senkron), ardından T11 ve T21 (veli onayı). YouTube anahtarı gelirse T31 ve T33.
