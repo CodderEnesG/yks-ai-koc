@@ -72,6 +72,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   PLAN-2026-10-22-teknoloji-secimi-ve-t02.md         teknoloji seçiminin araştırması + T02 planı (tarihli kayıt)
   reports/
     2026-10-23-gun-raporu.md                       22-23 Ekim gün raporu (tarihli kayıt)
+    2026-10-25-gun-raporu.md                       24-25 Ekim gün raporu (tarihli kayıt)
   sources/
     2026-10-15-urun-ve-is-modeli-v1.pdf              ürün ve iş modeli tasarımı v1 (kaynak)
     2026-10-08-kaynak-kitap-verisi-fizibilitesi.md   veri, hukuk, maliyet fizibilitesi (kaynak)
