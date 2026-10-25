@@ -99,6 +99,7 @@ export const tr = {
   today: {
     title: 'Bugün',
     examCountdown: (days: number) => `Sınava ${days} gün`,
+    streak: (days: number) => `Seri: ${days} gün`,
     noBooks: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.',
     addBook: 'Kitap ekle',
     restDay: 'Bugün çalışma günün değil. Dinlen.',
@@ -168,6 +169,7 @@ export const tr = {
     empty: 'Henüz kitap eklemedin. Planın eklediğin kitaplara göre kurulur.',
     add: 'Kitap ekle',
     remove: 'Kaldır',
+    percentDone: (p: number) => `%${p} tamamlandı`,
     removeConfirm: (title: string) => `"${title}" kütüphanenden kaldırılsın mı?`,
     cancel: 'Vazgeç',
     summary: (total: number, kind: 'pages' | 'tests', units: number, minutes: number) =>

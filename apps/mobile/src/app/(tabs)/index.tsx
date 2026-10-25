@@ -10,7 +10,13 @@ import { Text } from '@/components/ui/text';
 import { loadReasonEvents } from '@/features/plan/checkin';
 import { CountsForm } from '@/features/plan/counts-form';
 import { groupTasks } from '@/features/plan/group';
-import { computePlan, refreshToday, useLibraryVersion, useTodayTasks } from '@/features/plan/repo';
+import {
+  computePlan,
+  refreshToday,
+  useLibraryVersion,
+  useStreak,
+  useTodayTasks,
+} from '@/features/plan/repo';
 import { syncNotifications } from '@/features/notifications/sync';
 import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
@@ -24,6 +30,7 @@ export default function TodayScreen() {
   const today = useToday();
   const version = useLibraryVersion();
   const tasks = useTodayTasks(today);
+  const streak = useStreak(today);
   // Uyarılar için plan; `version` SQLite girdilerinin imzası, değişince yeniden hesaplanır.
   const plan = useMemo(() => (version === undefined ? null : computePlan(today)), [today, version]);
 
@@ -74,6 +81,11 @@ export default function TodayScreen() {
           <Text testID="today-countdown" variant="large">
             {tr.today.examCountdown(daysLeft)}
           </Text>
+          {streak && streak.days > 0 ? (
+            <Text testID="today-streak" className="font-medium">
+              {tr.today.streak(streak.days)}
+            </Text>
+          ) : null}
           {groups.length > 0 ? (
             <Text testID="today-total" variant="muted">
               {tr.today.summary(tr.today.duration(totalSeconds), groups.length)}

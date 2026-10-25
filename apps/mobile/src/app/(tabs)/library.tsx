@@ -35,6 +35,12 @@ export default function LibraryScreen() {
             <Text variant="muted">
               {tr.library.summary(item.total, item.kind, item.unitCount, item.minutesPerItem)}
             </Text>
+            <View className="bg-muted mt-1 h-1.5 overflow-hidden rounded-full">
+              <View className="bg-primary h-full" style={{ width: `${item.percentDone}%` }} />
+            </View>
+            <Text testID="library-percent" variant="muted">
+              {tr.library.percentDone(item.percentDone)}
+            </Text>
             <Button
               variant="ghost"
               size="sm"

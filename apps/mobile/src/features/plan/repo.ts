@@ -5,6 +5,9 @@ import {
   parseCivilDate,
   type PlanResult,
   type Reason,
+  currentStreak,
+  type DayTask,
+  type Streak,
 } from '@yks/plan-engine';
 import { and, asc, eq, inArray, isNull } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite/query';
@@ -167,4 +170,22 @@ export function useLibraryVersion(): string | undefined {
   const profiles = useLiveQuery(db.select({ updatedAt: profile.updatedAt }).from(profile));
   if (updatedAt === undefined || profiles.updatedAt === undefined) return undefined;
   return JSON.stringify([data, profiles.data]);
+}
+
+/** Seri (T23): bugüne kadarki görevlerden, seri kuralıyla (plan motoru). */
+export function useStreak(today: CivilDate): Streak | undefined {
+  const { data, updatedAt } = useLiveQuery(
+    db
+      .select({ day: planTask.day, status: planTask.status, seconds: planTask.estSeconds })
+      .from(planTask)
+      .where(isNull(planTask.deletedAt)),
+    [today],
+  );
+  if (updatedAt === undefined) return undefined;
+  const days = new Map<CivilDate, DayTask[]>();
+  for (const t of data) {
+    const day = t.day as CivilDate;
+    days.set(day, [...(days.get(day) ?? []), { status: t.status, seconds: t.seconds }]);
+  }
+  return currentStreak(days, today);
 }

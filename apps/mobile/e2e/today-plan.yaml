@@ -25,3 +25,9 @@ appId: dev.placeholder.ykskoc
 - assertNotVisible: { id: today-overload }
 # T15: önümüzdeki günlerin bildirimleri kuruldu (geliştirme sürümünde sayısı görünür).
 - assertVisible: 'Kurulu bildirim: [1-9][0-9]*'
+# T23: "Yaptım" günü tamamlar, seri başlar; kitabın ilerleme yüzdesi kütüphanede.
+- tapOn: { id: checkin-done }
+- assertVisible: '✓ Tamamlandı'
+- assertVisible: 'Seri: 1 gün'
+- tapOn: 'Kütüphane'
+- assertVisible: '%[1-9][0-9]? tamamlandı'

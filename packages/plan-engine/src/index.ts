@@ -25,3 +25,5 @@ export { deriveAdjustments, isSafeMode, SAFE_MODE_DAYS } from './rules.ts';
 export type { Reason, ReasonEvent } from './rules.ts';
 export { DEFAULT_NOTE_RATIO, DEFAULT_WATCH_SPEED, videoMinutes, WATCH_SPEEDS } from './video.ts';
 export type { WatchSpeed } from './video.ts';
+export { currentStreak, isDayComplete } from './streak.ts';
+export type { DayTask, Streak } from './streak.ts';

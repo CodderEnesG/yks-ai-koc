@@ -3,7 +3,8 @@ import { useLiveQuery } from 'drizzle-orm/expo-sqlite/query';
 import { randomUUID } from 'expo-crypto';
 
 import { db } from '@/db/client';
-import { catalogEdition, libraryItem } from '@/db/schema';
+import { catalogEdition, libraryItem, planTask } from '@/db/schema';
+import { doneItemsByLibraryItem, percent } from '@/features/plan/progress';
 
 import {
   type CatalogEdition,
@@ -22,6 +23,8 @@ export interface LibraryEntry {
   unitCount: number;
   minutesPerItem: number;
   fromCatalog: boolean;
+  /** Yapılan sayfa/test yüzdesi (T23). */
+  percentDone: number;
 }
 
 /** Silinmemiş kaynaklar, öğrencinin sırasıyla; `undefined` yükleniyor. */
@@ -34,7 +37,19 @@ export function useLibrary(): LibraryEntry[] | undefined {
       .where(and(isNull(libraryItem.deletedAt), eq(libraryItem.sourceKind, 'book')))
       .orderBy(asc(libraryItem.sortOrder)),
   );
-  if (updatedAt === undefined) return undefined;
+  const done = useLiveQuery(
+    db
+      .select({
+        libraryItemId: planTask.libraryItemId,
+        unitKey: planTask.unitKey,
+        first: planTask.rangeFirst,
+        last: planTask.rangeLast,
+      })
+      .from(planTask)
+      .where(and(isNull(planTask.deletedAt), eq(planTask.status, 'done'))),
+  );
+  if (updatedAt === undefined || done.updatedAt === undefined) return undefined;
+  const doneItems = doneItemsByLibraryItem(done.data);
   return data.map(({ item, edition }) => {
     if (edition) {
       const pages = edition.units.reduce((a, u) => a + u.pageEnd - u.pageStart + 1, 0);
@@ -46,14 +61,17 @@ export function useLibrary(): LibraryEntry[] | undefined {
         unitCount: edition.units.length,
         minutesPerItem: item.minutesPerItem ?? 0,
         fromCatalog: true,
+        percentDone: percent(doneItems.get(item.id) ?? 0, pages),
       };
     }
     const units = item.customEdition?.units ?? [];
+    const total = units.reduce((a, u) => a + u.last - u.first + 1, 0);
     return {
       id: item.id,
       title: item.customEdition?.title ?? '',
       kind: units[0]?.kind ?? 'pages',
-      total: units.reduce((a, u) => a + u.last - u.first + 1, 0),
+      total,
+      percentDone: percent(doneItems.get(item.id) ?? 0, total),
       unitCount: units.length,
       minutesPerItem: item.minutesPerItem ?? 0,
       fromCatalog: false,
