@@ -1,6 +1,6 @@
 import { diffDays, isSafeMode, parseCivilDate, weekdayIndex } from '@yks/plan-engine';
 import { router } from 'expo-router';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
@@ -11,6 +11,7 @@ import { loadReasonEvents } from '@/features/plan/checkin';
 import { CountsForm } from '@/features/plan/counts-form';
 import { groupTasks } from '@/features/plan/group';
 import { computePlan, refreshToday, useLibraryVersion, useTodayTasks } from '@/features/plan/repo';
+import { syncNotifications } from '@/features/notifications/sync';
 import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
 import { tr } from '@/i18n/tr';
@@ -30,6 +31,15 @@ export default function TodayScreen() {
   useEffect(() => {
     if (version !== undefined) refreshToday(today, new Date());
   }, [today, version]);
+
+  // Önümüzdeki 7 günün bildirimleri: plan ya da bugünün check-in durumu değişince yeniden kurulur.
+  const checkedInToday =
+    tasks !== undefined && tasks.length > 0 && tasks.every((t) => t.status !== 'planned');
+  const hasPlan = plan !== null && plan.days.some((d) => d.tasks.length > 0);
+  const [scheduled, setScheduled] = useState<number | null>(null);
+  useEffect(() => {
+    if (plan && hasPlan) void syncNotifications({ today, plan, checkedInToday }).then(setScheduled);
+  }, [today, plan, hasPlan, checkedInToday]);
 
   // Güvenli mod (kötü hissediyorum sonrası 3 gün) bandı; görevler değişince yeniden okunur.
   const safeMode = useMemo(
@@ -111,6 +121,9 @@ export default function TodayScreen() {
           </Text>
         ) : null}
 
+        {__DEV__ && scheduled !== null ? (
+          <Text testID="dev-scheduled" variant="muted">{`Kurulu bildirim: ${scheduled}`}</Text>
+        ) : null}
         {__DEV__ ? (
           <Button testID="reset-onboarding" variant="outline" onPress={deleteProfile}>
             <Text>{tr.today.resetDev}</Text>

@@ -119,6 +119,16 @@ export const tr = {
       'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
   },
+  notifications: {
+    channel: 'Plan hatırlatmaları',
+    morningTitle: 'Bugünün planı hazır',
+    morningBody: (duration: string, books: number) =>
+      `≈ ${duration} · ${books} kitap. Başlamak için dokun.`,
+    eveningTitle: 'Bugün nasıl geçti?',
+    eveningBody: 'Check-in yap; yarının planı ona göre ayarlanır.',
+    lateTitle: 'Check-in bekliyor',
+    lateBody: 'Bir dakikanı alır. Yapamadıysan da söyle, planı kaydıralım.',
+  },
   checkin: {
     done: 'Yaptım',
     partial: 'Yarım kaldı',

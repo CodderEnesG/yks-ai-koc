@@ -23,3 +23,5 @@ appId: dev.placeholder.ykskoc
 - assertVisible: { id: today-total }
 - assertVisible: 'Bugün ≈ .* · 1 kitap'
 - assertNotVisible: { id: today-overload }
+# T15: önümüzdeki günlerin bildirimleri kuruldu (geliştirme sürümünde sayısı görünür).
+- assertVisible: 'Kurulu bildirim: [1-9][0-9]*'

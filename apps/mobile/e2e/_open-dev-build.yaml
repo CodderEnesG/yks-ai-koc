@@ -4,6 +4,8 @@ appId: dev.placeholder.ykskoc
 - launchApp:
     clearState: true
     stopApp: true
+    permissions:
+      notifications: allow
 - openLink: exp+yks-koc://?__expo_url=http%3A%2F%2F127.0.0.1%3A8081&__expo_disable_fab=1&__expo_disable_onboarding=1
 - runFlow:
     when:

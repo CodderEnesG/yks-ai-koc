@@ -32,7 +32,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
           <Button
             testID="checkin-done"
             size="sm"
-            className="flex-1"
+            className="flex-1 px-2"
             onPress={() => markTasks(g.taskIds, 'done', null, new Date())}>
             <Text>{tr.checkin.done}</Text>
           </Button>
@@ -41,7 +41,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
               testID="checkin-partial"
               size="sm"
               variant="outline"
-              className="flex-1"
+              className="flex-1 px-2"
               onPress={() =>
                 router.push({
                   pathname: '/checkin/partial',
@@ -55,7 +55,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
             testID="checkin-skip"
             size="sm"
             variant="outline"
-            className="flex-1"
+            className="flex-1 px-2"
             onPress={() => router.push({ pathname: '/checkin/reason', params: { ids } })}>
             <Text>{tr.checkin.skip}</Text>
           </Button>
