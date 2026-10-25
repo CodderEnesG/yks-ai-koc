@@ -1,15 +1,18 @@
 import type { CivilDate } from './civil-date.ts';
 
-/** Sayfa aralığı ya da test aralığı. `video` birimi T32'de eklenecek. */
-export type UnitKind = 'pages' | 'tests';
+/**
+ * Sayfa aralığı, test aralığı ya da tek video. Video bölünmez: `first === last` (listedeki sırası) ve
+ * süresi `videoMinutes` ile hesaplanır (rapor 2.6).
+ */
+export type UnitKind = 'pages' | 'tests' | 'video';
 
-/** Bir kaynağın (kitap) içindekilerdeki tek birim, kitap sırasıyla. */
+/** Bir kaynağın (kitap ya da oynatma listesi) tek birimi, kaynaktaki sırasıyla. */
 export interface StudyUnit {
   id: string;
   kind: UnitKind;
-  /** İlk sayfa ya da test numarası (dahil). */
+  /** İlk sayfa ya da test numarası (dahil); videoda listedeki sırası. */
   first: number;
-  /** Son sayfa ya da test numarası (dahil). */
+  /** Son sayfa ya da test numarası (dahil); videoda `first` ile aynı. */
   last: number;
   /** Birimin tamamı için tahmini dakika. */
   minutes: number;

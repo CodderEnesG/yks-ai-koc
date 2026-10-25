@@ -49,6 +49,9 @@ export function validatePlanInput(input: PlanInput): void {
         throw new PlanInputError(`Geçersiz aralık: ${unit.id}`);
       }
       if (unit.last < unit.first) throw new PlanInputError(`Aralık ters: ${unit.id}`);
+      if (unit.kind === 'video' && unit.first !== unit.last) {
+        throw new PlanInputError(`Video bölünemez, tek öğe olmalı: ${unit.id}`);
+      }
       if (!Number.isFinite(unit.minutes) || unit.minutes <= 0) {
         throw new PlanInputError(`Geçersiz süre: ${unit.id}`);
       }

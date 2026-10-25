@@ -7,7 +7,7 @@ import { buildPlan } from './schedule.ts';
 import type { PlanInput, PlanResult, StudySource, StudyUnit, UnitRange } from './types.ts';
 
 const unitSpec = fc.record({
-  kind: fc.constantFrom('pages' as const, 'tests' as const),
+  kind: fc.constantFrom('pages' as const, 'tests' as const, 'video' as const),
   first: fc.integer({ min: 1, max: 400 }),
   length: fc.integer({ min: 1, max: 40 }),
   minutes: fc.integer({ min: 1, max: 600 }),
@@ -41,7 +41,7 @@ const planInput: fc.Arbitrary<PlanInput> = fc
           id,
           kind: u.kind,
           first: u.first,
-          last: u.first + u.length - 1,
+          last: u.kind === 'video' ? u.first : u.first + u.length - 1,
           minutes: u.minutes,
           ...(u.examWeight !== null && { examWeight: u.examWeight }),
           ...(u.weakness !== null && { weakness: u.weakness }),
