@@ -22,6 +22,8 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | İstemci state | `zustand` ^5.0.16 | Kurulum taslağı (kalıcı değil). TanStack Query 5 yalnız Supabase çağrıları gelince (T16) |
 | Kimlik | `expo-crypto` ~58.0.7 (`randomUUID`) | Cihazda üretilen kayıt kimlikleri (sync şeması). Native modül: eklenince dev build yeniden derlendi |
 | Klavye | `react-native-keyboard-controller` 1.22.7 (`KeyboardProvider`, `KeyboardStickyView`) | Kurulum adımlarında "Devam" klavyenin üstüne yapışır (iOS sayı klavyesinde kapatma tuşu yok). RN `KeyboardAvoidingView` native stack içinde işe yaramadı. Sohbette de kullanılacak |
+| Supabase istemcisi | `@supabase/supabase-js` 2.118.0 | T10'da yalnız katalog okuması, oturum saklanmadan; oturum ve senkron T16'da. Ayarlar `apps/mobile/.env` (`EXPO_PUBLIC_SUPABASE_URL`, `_PUBLISHABLE_KEY`; yerelde `supabase status -o env`) |
+| Kamera | `expo-camera` ~58.0.12 | Barkod (EAN-13). İçindekiler fotoğrafı da bununla (T11) |
 | Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
 | Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |

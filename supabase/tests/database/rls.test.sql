@@ -54,7 +54,7 @@ select is(
   true,
   'server_updated_at sunucuda yazılır'
 );
-select is((select count(*)::int from public.work), 1, 'öğrenci kataloğu okur');
+select ok((select count(*) from public.work where id = 'aaaaaaaa-0000-0000-0000-000000000001') = 1, 'öğrenci kataloğu okur');
 select throws_ok(
   $$insert into public.work (publisher, subject, exam, kind) values ('X', 'Fizik', 'TYT', 'deneme')$$,
   '42501', null,
@@ -104,7 +104,7 @@ select throws_ok(
 -- Giriş yapmamış (anon): katalog açık, öğrenci verisi kapalı.
 reset request.jwt.claim.sub;
 set local role anon;
-select is((select count(*)::int from public.work), 1, 'anon kataloğu okur');
+select ok((select count(*) from public.work where id = 'aaaaaaaa-0000-0000-0000-000000000001') = 1, 'anon kataloğu okur');
 select throws_ok(
   $$select count(*) from public.profile$$,
   '42501', null,

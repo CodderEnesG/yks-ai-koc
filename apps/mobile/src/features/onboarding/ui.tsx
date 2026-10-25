@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
-import { KeyboardStickyView } from 'react-native-keyboard-controller';
+import { Pressable, View } from 'react-native';
+import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SafeAreaView } from '@/components/screen';
@@ -12,7 +12,8 @@ import { cn } from '@/lib/utils';
 export const STEP_COUNT = 6;
 
 interface StepScreenProps {
-  step: number;
+  /** Kurulum adımı; kurulum dışı ekranlarda verilmez. */
+  step?: number;
   title: string;
   subtitle?: string;
   children: ReactNode;
@@ -22,9 +23,13 @@ interface StepScreenProps {
   footer?: ReactNode;
 }
 
+// Klavyenin üstüne yapışan alt bölümün (Devam + isteğe bağlı ikinci düğme) payı.
+const FOOTER_OFFSET = 140;
+
 /**
- * Kurulumun tek bir adımı: başlık, içerik ve altta "Devam". Düğme klavye açılınca klavyenin üstüne
- * yapışır; iOS sayı klavyesinde kapatma tuşu olmadığı için öğrenci klavyeyi kapatmadan devam edebilmeli.
+ * Form ekranı: başlık, içerik ve altta "Devam". Düğme klavye açılınca klavyenin üstüne yapışır; iOS
+ * sayı klavyesinde kapatma tuşu olmadığı için öğrenci klavyeyi kapatmadan devam edebilmeli. İçerik
+ * klavye ve alt bölüm kadar boşluk bırakır, odaklanan alan görünür kalır.
  */
 export function StepScreen({
   step,
@@ -39,17 +44,21 @@ export function StepScreen({
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <ScrollView
-        contentContainerClassName="gap-6 p-6"
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ gap: 24, padding: 24 }}
+        bottomOffset={FOOTER_OFFSET}
+        extraKeyboardSpace={FOOTER_OFFSET}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="interactive">
         <View className="gap-2">
-          <Text variant="muted">{tr.onboarding.step(step, STEP_COUNT)}</Text>
+          {step !== undefined ? (
+            <Text variant="muted">{tr.onboarding.step(step, STEP_COUNT)}</Text>
+          ) : null}
           <Text variant="h3">{title}</Text>
           {subtitle ? <Text variant="muted">{subtitle}</Text> : null}
         </View>
         {children}
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <KeyboardStickyView offset={{ closed: 0, opened: insets.bottom }}>
         <View className="bg-background gap-2 p-6 pt-2">
           {footer}

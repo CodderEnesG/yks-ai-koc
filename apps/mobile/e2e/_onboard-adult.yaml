@@ -1,0 +1,21 @@
+# Kurulumu yetişkin öğrenci olarak varsayılanlarla geçer; kurulum dışındaki akışlar için.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _open-dev-build.yaml
+- tapOn: { id: start }
+- tapOn: { id: month-3 }
+- scrollUntilVisible:
+    element: { id: year-2000 }
+    visibilityPercentage: 100
+    centerElement: true
+- tapOn: { id: year-2000 }
+- tapOn: { id: continue }
+- tapOn: { id: grade-12 }
+- tapOn: { id: continue }
+- tapOn: { id: field-EA }
+- tapOn: { id: continue }
+- tapOn: { id: skip }
+- tapOn: { id: continue }
+- tapOn: { id: continue }
+- tapOn: { id: finish }
+- assertVisible: { id: today-countdown }

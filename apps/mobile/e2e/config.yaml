@@ -1,3 +1,4 @@
-# Maestro çalışma alanı: yalnız onboarding-*.yaml test sayılır; _ ile başlayanlar alt akış.
+# Maestro çalışma alanı: onboarding-*.yaml ve library-*.yaml test sayılır; _ ile başlayanlar alt akış.
 flows:
   - onboarding-*.yaml
+  - library-*.yaml

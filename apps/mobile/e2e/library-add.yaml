@@ -1,0 +1,48 @@
+# Kütüphane: takım ISBN'iyle katalogdan ekleme ve hızlı ekle. Yerel Supabase (katalog tohumu) açık olmalı.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- tapOn: 'Kütüphane'
+- assertVisible: 'Henüz kitap eklemedin. Planın eklediğin kitaplara göre kurulur.'
+# 1. Katalogdan: 3 Adım TYT sözel takım ISBN'i dört derste ortak; ders seçilir.
+- tapOn: { id: library-add }
+- tapOn: { id: add-search }
+- tapOn: { id: search-input }
+- inputText: '978-975-11-5998-4'
+- assertVisible: 'Bu barkod birden çok kitapta ortak; dersini seç.'
+- tapOn: { id: result-TYT-Tarih }
+- extendedWaitUntil:
+    visible: '19 bölüm · 130 sayfa'
+    timeout: 10000
+- tapOn: { id: minutes-5 }
+- tapOn: { id: continue }
+- assertVisible: '3 Adım Soru Bankası · TYT Tarih'
+- assertVisible: '.*sayfa başı 5 dk'
+# 2. Adla arama, Türkçe karakter olmadan.
+- tapOn: { id: library-add }
+- tapOn: { id: add-search }
+- tapOn: { id: search-input }
+- inputText: 'kimya ayt pekistirme'
+- assertVisible: { id: result-AYT-Kimya }
+- tapOn: { id: result-AYT-Kimya }
+- extendedWaitUntil:
+    visible: '.*bölüm.*'
+    timeout: 10000
+- tapOn: { id: continue }
+# 3. Katalogda olmayan kitap: hızlı ekle, test bazlı.
+- tapOn: { id: library-add }
+- tapOn: { id: add-quick }
+- tapOn: { id: quick-title }
+- inputText: 'X Yayınları TYT Fizik'
+- tapOn: { id: quick-kind-tests }
+# Klavye açıkken alan yapışkan düğmenin arkasında kalır; öğrenci gibi yukarı kaydır.
+# (Maestro örtülen öğeyi görünür sayar, scrollUntilVisible kaydırmaz.)
+- swipe:
+    start: 50%, 40%
+    end: 50%, 15%
+- tapOn: { id: quick-count }
+- inputText: '40'
+- tapOn: { id: minutes-20 }
+- tapOn: { id: continue }
+- assertVisible: 'X Yayınları TYT Fizik'
+- assertVisible: '40 test · 1 bölüm · test başı 20 dk'

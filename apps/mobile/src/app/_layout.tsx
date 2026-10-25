@@ -36,6 +36,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
+          <Stack.Screen name="book" />
         </Stack>
         <PortalHost />
       </ThemeProvider>
