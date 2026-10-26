@@ -1,0 +1,67 @@
+# T16: hesap bağlama (e-posta kodu), yedekleme ve yeni telefonda geri yükleme.
+# Yerel Supabase (sahte posta kutusu Mailpit, 127.0.0.1:54324) açık olmalı.
+appId: dev.placeholder.ykskoc
+---
+- runScript: scripts/clear-mail.js
+- runFlow: _onboard-adult.yaml
+- tapOn: { id: today-add-book }
+- tapOn: { id: add-quick }
+- tapOn: { id: quick-title }
+- inputText: 'Yedek Deneme Kitabı'
+- swipe:
+    start: 50%, 40%
+    end: 50%, 15%
+- tapOn: { id: quick-count }
+- inputText: '120'
+- tapOn: { id: continue }
+- tapOn: 'Bugün'
+- extendedWaitUntil:
+    visible: { id: today-task }
+    timeout: 10000
+- tapOn: { id: checkin-done }
+
+# 1. Hesap bağla.
+- tapOn: 'Ayarlar'
+- tapOn: { id: account-connect }
+- tapOn: { id: account-email }
+- inputText: ${output.email}
+- tapOn: { id: account-consent }
+- tapOn: { id: continue }
+- retry:
+    maxRetries: 5
+    commands:
+      - runScript: scripts/read-otp.js
+      - assertTrue: ${output.otp && output.otp.length === 6}
+- tapOn: { id: account-code }
+- inputText: ${output.otp}
+- tapOn: { id: continue }
+- extendedWaitUntil:
+    visible: 'Bağlı: .*'
+    timeout: 15000
+- tapOn: { id: sync-now }
+- extendedWaitUntil:
+    visible: { id: sync-status }
+    timeout: 15000
+- assertNotVisible: 'Yedeklenemedi.*'
+
+# 2. Yeni telefon: veriyi sil, aynı hesapla geri yükle.
+- runScript: scripts/clear-mail.js
+- runFlow: _open-dev-build.yaml
+- tapOn: { id: restore }
+- tapOn: { id: account-email }
+- inputText: ${output.email}
+- tapOn: { id: account-consent }
+- tapOn: { id: continue }
+- retry:
+    maxRetries: 5
+    commands:
+      - runScript: scripts/read-otp.js
+      - assertTrue: ${output.otp && output.otp.length === 6}
+- tapOn: { id: account-code }
+- inputText: ${output.otp}
+- tapOn: { id: continue }
+- extendedWaitUntil:
+    visible: { id: today-countdown }
+    timeout: 20000
+- assertVisible: 'Yedek Deneme Kitabı'
+- assertVisible: '✓ Tamamlandı'

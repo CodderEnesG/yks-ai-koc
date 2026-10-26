@@ -33,6 +33,11 @@ export default function TabsLayout() {
           renderingMode="template"
         />
       </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="settings">
+        <NativeTabs.Trigger.Label>{tr.settings.title}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="gearshape" md="settings" />
+      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }

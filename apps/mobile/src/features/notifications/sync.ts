@@ -3,6 +3,7 @@ import * as Notifications from 'expo-notifications';
 import { AndroidImportance } from 'expo-notifications';
 import { Platform } from 'react-native';
 
+import { parseTime, readMorningTime } from '@/features/settings/prefs';
 import { tr } from '@/i18n/tr';
 
 import { buildSchedule } from './schedule';
@@ -50,6 +51,7 @@ export async function syncNotifications(args: {
     now: Date.now(),
     loads,
     checkedInToday: args.checkedInToday,
+    morning: parseTime(readMorningTime()),
   });
 
   await Notifications.cancelAllScheduledNotificationsAsync();

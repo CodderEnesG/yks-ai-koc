@@ -4,3 +4,4 @@ flows:
   - library-*.yaml
   - today-*.yaml
   - checkin.yaml
+  - account-sync.yaml

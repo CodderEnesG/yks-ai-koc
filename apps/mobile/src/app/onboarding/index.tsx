@@ -18,7 +18,7 @@ export default function WelcomeScreen() {
         </Text>
         <Text variant="lead">{tr.onboarding.welcome.body}</Text>
       </View>
-      <View className="p-6">
+      <View className="gap-2 p-6">
         <Button
           testID="start"
           size="lg"
@@ -27,6 +27,12 @@ export default function WelcomeScreen() {
             router.push('/onboarding/birth');
           }}>
           <Text>{tr.onboarding.welcome.start}</Text>
+        </Button>
+        <Button
+          testID="restore"
+          variant="ghost"
+          onPress={() => router.push({ pathname: '/account/sign-in', params: { restore: '1' } })}>
+          <Text>{tr.today.restore}</Text>
         </Button>
       </View>
     </SafeAreaView>

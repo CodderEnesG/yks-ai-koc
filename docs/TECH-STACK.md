@@ -22,7 +22,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | İstemci state | `zustand` ^5.0.16 | Kurulum taslağı (kalıcı değil). TanStack Query 5 yalnız Supabase çağrıları gelince (T16) |
 | Kimlik | `expo-crypto` ~58.0.7 (`randomUUID`) | Cihazda üretilen kayıt kimlikleri (sync şeması). Native modül: eklenince dev build yeniden derlendi |
 | Klavye | `react-native-keyboard-controller` 1.22.7 (`KeyboardProvider`, `KeyboardStickyView`) | Kurulum adımlarında "Devam" klavyenin üstüne yapışır (iOS sayı klavyesinde kapatma tuşu yok). RN `KeyboardAvoidingView` native stack içinde işe yaramadı. Sohbette de kullanılacak |
-| Supabase istemcisi | `@supabase/supabase-js` 2.118.0 | T10'da yalnız katalog okuması, oturum saklanmadan; oturum ve senkron T16'da. Ayarlar `apps/mobile/.env` (`EXPO_PUBLIC_SUPABASE_URL`, `_PUBLISHABLE_KEY`; yerelde `supabase status -o env`) |
+| Supabase istemcisi | `@supabase/supabase-js` 2.118.0 | Katalog okuması (oturumsuz da) ve T16'dan beri e-posta OTP oturumu (`expo-sqlite/localStorage` ile saklanır), senkron upsert'leri. Ayarlar `apps/mobile/.env` (`EXPO_PUBLIC_SUPABASE_URL`, `_PUBLISHABLE_KEY`; yerelde `supabase status -o env`) |
 | Kamera | `expo-camera` ~58.0.12 | Barkod (EAN-13). İçindekiler fotoğrafı da bununla (T11) |
 | Bildirim | `expo-notifications` ~58.1.6 | Yerel, tarih tetikleyicili; 7 gün × en fazla 3 (iOS 64 bekleyen bildirim sınırının altında). `SCHEDULE_EXACT_ALARM` istenmez |
 | Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
@@ -73,7 +73,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 **Metro ve uçtan uca testler**
 - Metro'yu `CI=1` ile başlatma: Expo bu modda dosya izlemeyi kapatır ve değişiklikler uygulamaya gelmez (2026-10-24'te yarım saat buna gitti).
-- Maestro akışları `apps/mobile/e2e/`'de. Birden çok simülatör açıksa cihaz belirtilmeli (`maestro --device <UDID> test apps/mobile/e2e`); aksi hâlde Maestro başka bir projenin simülatörüne gidebilir. Dev build simülatöre kurulu ve Metro açıkken `maestro test apps/mobile/e2e` ile koşar. `_open-dev-build.yaml` temiz durumla açar ve kendiliğinden açılan Expo geliştirici menüsünü kapatır.
+- Maestro akışları `apps/mobile/e2e/`'de. Hesap akışı giriş kodunu yerel Mailpit API'sinden (`127.0.0.1:54324/api/v1/messages`) `scripts/read-otp.js` ile okur. Birden çok simülatör açıksa cihaz belirtilmeli (`maestro --device <UDID> test apps/mobile/e2e`); aksi hâlde Maestro başka bir projenin simülatörüne gidebilir. Dev build simülatöre kurulu ve Metro açıkken `maestro test apps/mobile/e2e` ile koşar. `_open-dev-build.yaml` temiz durumla açar ve kendiliğinden açılan Expo geliştirici menüsünü kapatır.
 - Maestro iOS'ta ekran dışındaki öğeyi görünür sayabilir: `scrollUntilVisible`'da `visibilityPercentage: 100` ve `centerElement: true` kullan. Sayı klavyesinde `hideKeyboard` tuşa basar; kullanma.
 
 **Üretilen dosyalar**

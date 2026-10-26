@@ -44,4 +44,15 @@ describe('buildSchedule', () => {
     const s = buildSchedule({ today, now: 0, loads: rest, checkedInToday: false });
     expect(s.some((n) => n.date === day(2))).toBe(false);
   });
+
+  it('sabah saati seçilebilir', () => {
+    const s = buildSchedule({
+      today,
+      now: 0,
+      loads,
+      checkedInToday: false,
+      morning: { hour: 6, minute: 30 },
+    });
+    expect(new Date(s[0]!.at).toISOString()).toBe('2026-10-26T03:30:00.000Z');
+  });
 });

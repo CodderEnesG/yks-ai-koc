@@ -4,8 +4,7 @@
 import { addDays, type CivilDate } from '@yks/plan-engine';
 
 export const SCHEDULE_DAYS = 7;
-// Sabah saati ürün belgelerinde "öğrencinin seçtiği saat"; seçim ekranı henüz yok (NOT DEFINED),
-// varsayılan 08:00.
+// Sabah saati öğrencinin seçtiği saat (Ayarlar); varsayılan 08:00.
 export const MORNING = { hour: 8, minute: 0 };
 export const EVENING = { hour: 20, minute: 0 };
 export const LATE_EVENING = { hour: 21, minute: 30 };
@@ -43,6 +42,7 @@ export function buildSchedule(args: {
   now: number;
   loads: readonly DayLoad[];
   checkedInToday: boolean;
+  morning?: { hour: number; minute: number };
 }): PlannedNotification[] {
   const result: PlannedNotification[] = [];
   for (let i = 0; i < SCHEDULE_DAYS; i++) {
@@ -50,7 +50,7 @@ export function buildSchedule(args: {
     const load = args.loads.find((l) => l.date === date);
     if (!load || load.seconds <= 0) continue;
     const slots = [
-      { kind: 'morning' as const, time: MORNING },
+      { kind: 'morning' as const, time: args.morning ?? MORNING },
       ...(i === 0 && args.checkedInToday
         ? []
         : [

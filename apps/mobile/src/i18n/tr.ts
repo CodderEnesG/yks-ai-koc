@@ -103,6 +103,7 @@ export const tr = {
     noBooks: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.',
     addBook: 'Kitap ekle',
     restDay: 'Bugün çalışma günün değil. Dinlen.',
+    restore: 'Hesabım var, geri yükle',
     nothingLeft: 'Planlanacak iş kalmadı.',
     ranges: (kind: 'pages' | 'tests' | 'video', ranges: { first: number; last: number }[]) =>
       ranges.map((r) => rangeLabel(kind, r.first, r.last)).join(', '),
@@ -119,6 +120,41 @@ export const tr = {
     unscheduled:
       'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
+  },
+  settings: {
+    title: 'Ayarlar',
+    morning: 'Sabah bildirimi',
+    morningHint: 'Günün planı bu saatte gelir.',
+    account: 'Hesap ve yedek',
+    accountHint: 'Hesap bağlarsan planın ve ilerlemen yedeklenir; telefon değiştirince geri gelir.',
+    connect: 'Hesap bağla',
+    connected: (email: string) => `Bağlı: ${email}`,
+    lastSync: (time: string) => `Son yedek: ${time}`,
+    neverSynced: 'Henüz yedeklenmedi',
+    syncNow: 'Şimdi yedekle',
+    syncDone: (n: number) => (n === 0 ? 'Yedek güncel' : `${n} kayıt yedeklendi`),
+    syncFailed: 'Yedeklenemedi; internet bağlantını kontrol et.',
+    signOut: 'Çıkış yap',
+    minorPending:
+      'Velin onay verene kadar verilerin yalnız bu telefonda kalır. Hesap bağlama onaydan sonra açılır.',
+  },
+  account: {
+    title: 'Hesap bağla',
+    restoreTitle: 'Hesabına giriş yap',
+    emailLabel: 'E-posta adresin',
+    emailPlaceholder: 'ornek@eposta.com',
+    // Yer tutucu: aydınlatma ve açık rıza metinleri T07'de (avukat ön görüşmesi). Herkese açık yayından önce
+    // gerçek metinle değiştirilmeli.
+    consent:
+      "Planımın ve ilerlememin yedeklenmek için Supabase'in Frankfurt (AB) sunucularında saklanmasını kabul ediyorum.",
+    consentDraft: 'Aydınlatma metni hazırlanıyor (taslak).',
+    sendCode: 'Kod gönder',
+    codeLabel: (email: string) => `${email} adresine gelen 6 haneli kodu yaz`,
+    verify: 'Doğrula',
+    resend: 'Kodu yeniden gönder',
+    invalidEmail: 'Geçerli bir e-posta adresi yaz',
+    failed: 'Olmadı; kodu kontrol edip tekrar dene.',
+    noBackup: 'Bu hesapta kayıtlı plan yok; kuruluma başlayalım.',
   },
   notifications: {
     channel: 'Plan hatırlatmaları',

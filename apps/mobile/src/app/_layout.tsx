@@ -9,6 +9,7 @@ import { Text, useColorScheme, View } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { db } from '@/db/client';
+import { useSync } from '@/features/sync/use-sync';
 import migrations from '../../drizzle/migrations';
 
 SplashScreen.preventAutoHideAsync();
@@ -16,6 +17,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const { success, error } = useMigrations(db, migrations);
+  useSync();
 
   useEffect(() => {
     if (error) SplashScreen.hideAsync();
@@ -38,6 +40,7 @@ export default function RootLayout() {
           <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
           <Stack.Screen name="book" />
           <Stack.Screen name="checkin" />
+          <Stack.Screen name="account" />
         </Stack>
         <PortalHost />
       </ThemeProvider>

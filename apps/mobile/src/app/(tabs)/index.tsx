@@ -18,6 +18,7 @@ import {
   useTodayTasks,
 } from '@/features/plan/repo';
 import { syncNotifications } from '@/features/notifications/sync';
+import { useMorningTime } from '@/features/settings/prefs';
 import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
 import { tr } from '@/i18n/tr';
@@ -43,10 +44,11 @@ export default function TodayScreen() {
   const checkedInToday =
     tasks !== undefined && tasks.length > 0 && tasks.every((t) => t.status !== 'planned');
   const hasPlan = plan !== null && plan.days.some((d) => d.tasks.length > 0);
+  const morning = useMorningTime();
   const [scheduled, setScheduled] = useState<number | null>(null);
   useEffect(() => {
     if (plan && hasPlan) void syncNotifications({ today, plan, checkedInToday }).then(setScheduled);
-  }, [today, plan, hasPlan, checkedInToday]);
+  }, [today, plan, hasPlan, checkedInToday, morning]);
 
   // Güvenli mod (kötü hissediyorum sonrası 3 gün) bandı; görevler değişince yeniden okunur.
   const safeMode = useMemo(
