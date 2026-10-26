@@ -36,6 +36,7 @@ jobs:
       - run: pnpm test
       # Paylaşılan paket Supabase Edge Functions'ta (Deno) da derlenmeli.
       - run: pnpm --filter @yks/plan-engine check:deno
+      - run: pnpm --filter @yks/safety check:deno
       # Her fonksiyon kendi deno.json'uyla (import map) denetlenir.
       - run: |
           for dir in supabase/functions/*/; do

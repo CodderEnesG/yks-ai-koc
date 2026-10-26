@@ -25,7 +25,15 @@ export const HARD_TOPIC_FACTOR = 1.3;
 export const SAFE_MODE_DAYS = 3;
 export const SAFE_MODE_FACTOR = 0.5;
 
-export function deriveAdjustments(events: readonly ReasonEvent[]): PlanAdjustments {
+/**
+ * `safetyDays`: risk sinyalinin (sohbette liste ya da sınıflandırıcı, Destek ekranında "planımı hafiflet")
+ * geldiği günler. Check-in nedeninden farklı olarak güvenli mod o gün başlar: bugün donmadıysa bugünün
+ * yükü de düşer (rapor 2.10 katman 4: 72 saat).
+ */
+export function deriveAdjustments(
+  events: readonly ReasonEvent[],
+  safetyDays: readonly CivilDate[] = [],
+): PlanAdjustments {
   const daysWith = (reason: Reason) =>
     [...new Set(events.filter((e) => e.reason === reason).map((e) => e.day))].sort();
 
@@ -46,6 +54,9 @@ export function deriveAdjustments(events: readonly ReasonEvent[]): PlanAdjustmen
   for (const day of daysWith('kotu_hissediyorum')) {
     for (let i = 1; i <= SAFE_MODE_DAYS; i++) dayFactors[addDays(day, i)] = SAFE_MODE_FACTOR;
   }
+  for (const day of safetyDays) {
+    for (let i = 0; i <= SAFE_MODE_DAYS; i++) dayFactors[addDays(day, i)] = SAFE_MODE_FACTOR;
+  }
 
   const unitFactors: Record<string, number> = {};
   for (const e of events) {
@@ -61,11 +72,18 @@ export function deriveAdjustments(events: readonly ReasonEvent[]): PlanAdjustmen
 }
 
 /** Güvenli mod bugün açık mı (sert ton kapanır; rapor 2.10 katman 4). */
-export function isSafeMode(events: readonly ReasonEvent[], today: CivilDate): boolean {
-  return events.some(
-    (e) =>
-      e.reason === 'kotu_hissediyorum' &&
-      diffDays(today, e.day) >= 1 &&
-      diffDays(today, e.day) <= SAFE_MODE_DAYS,
+export function isSafeMode(
+  events: readonly ReasonEvent[],
+  today: CivilDate,
+  safetyDays: readonly CivilDate[] = [],
+): boolean {
+  return (
+    events.some(
+      (e) =>
+        e.reason === 'kotu_hissediyorum' &&
+        diffDays(today, e.day) >= 1 &&
+        diffDays(today, e.day) <= SAFE_MODE_DAYS,
+    ) ||
+    safetyDays.some((day) => diffDays(today, day) >= 0 && diffDays(today, day) <= SAFE_MODE_DAYS)
   );
 }

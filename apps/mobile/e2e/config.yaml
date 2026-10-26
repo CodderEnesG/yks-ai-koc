@@ -9,3 +9,4 @@ flows:
   - account-delete.yaml
   - consent-minor.yaml
   - report-minor.yaml
+  - support.yaml

@@ -16,6 +16,7 @@ import { randomUUID } from 'expo-crypto';
 import { db } from '@/db/client';
 import { catalogEdition, libraryItem, planTask, profile } from '@/db/schema';
 import { editionTitle } from '@/features/library/rules';
+import { loadSafetyDays, useSafetyDays } from '@/features/safety/safe-mode';
 
 import { loadReasonEvents } from './checkin';
 import {
@@ -68,7 +69,7 @@ export function computePlan(today: CivilDate): PlanResult | null {
       weekdayMinutes: p.weekdayMinutes,
       library: loadLibrary(),
       done: loadDone(),
-      adjustments: deriveAdjustments(loadReasonEvents()),
+      adjustments: deriveAdjustments(loadReasonEvents(), loadSafetyDays()),
     }),
   );
 }
@@ -162,14 +163,16 @@ export function useTodayTasks(today: CivilDate): TodayTask[] | undefined {
   }));
 }
 
-/** Kütüphane ya da profil değişince bugünün yeniden hesaplanması için imza. */
+/** Kütüphane, profil ya da güvenli mod değişince bugünün yeniden hesaplanması için imza. */
 export function useLibraryVersion(): string | undefined {
   const { data, updatedAt } = useLiveQuery(
     db.select({ id: libraryItem.id, updatedAt: libraryItem.updatedAt }).from(libraryItem),
   );
   const profiles = useLiveQuery(db.select({ updatedAt: profile.updatedAt }).from(profile));
-  if (updatedAt === undefined || profiles.updatedAt === undefined) return undefined;
-  return JSON.stringify([data, profiles.data]);
+  const safetyDays = useSafetyDays();
+  if (updatedAt === undefined || profiles.updatedAt === undefined || safetyDays === undefined)
+    return undefined;
+  return JSON.stringify([data, profiles.data, safetyDays]);
 }
 
 /** Seri (T23): bugüne kadarki görevlerden, seri kuralıyla (plan motoru). */

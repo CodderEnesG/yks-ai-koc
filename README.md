@@ -4,7 +4,7 @@
 
 YKS AI Koç (çalışma adı) YKS'ye hazırlanan 11. ve 12. sınıf öğrencileri ile mezunlar içindir. Uygulamayı öğrenci kullanır, ödemeyi çoğunlukla veli yapar. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor. Planı kural motoru hesaplar; AI konuşur, yorumlar ve içindekiler sayfasını okur.
 
-Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS).
+Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS), `packages/ai` (LLM istemleri ve şemaları), `packages/safety` (güvenlik katmanı).
 
 ## Buradan başla
 

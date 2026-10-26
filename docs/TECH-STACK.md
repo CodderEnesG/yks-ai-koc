@@ -1,6 +1,6 @@
 # YKS AI Koç — Teknoloji Yığını
 
-Son doğrulama: **2026-10-23**. Yaşayan belge: kullanılan ve kullanılacak kütüphaneleri, sabit sürümleri, elenen seçenekleri ve kodlama kurallarını tutar. Seçimlerin araştırması ve gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de; mimari [final rapor](REPORT-2026-10-21-final-teknik-ve-is-modeli.md) bölüm 2'de. Yeni bir kütüphane eklemeden önce buraya ve PROJECT-STATE'e kayıt düşülür (AGENTS.md).
+Son doğrulama: **2026-10-26**. Yaşayan belge: kullanılan ve kullanılacak kütüphaneleri, sabit sürümleri, elenen seçenekleri ve kodlama kurallarını tutar. Seçimlerin araştırması ve gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de; mimari [final rapor](REPORT-2026-10-21-final-teknik-ve-is-modeli.md) bölüm 2'de. Yeni bir kütüphane eklemeden önce buraya ve PROJECT-STATE'e kayıt düşülür (AGENTS.md).
 
 Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı sayfalarından okunmuş tahmindir; kullanmadan önce yeniden kontrol edilir.
 
@@ -18,19 +18,20 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Yerel veri | `expo-sqlite` ~58.0.13, `drizzle-orm` **~0.45.4** (1.0 RC değil), `drizzle-kit` (migration üretimi), `babel-plugin-inline-import` (`.sql` gömme) | Migration'lar `apps/mobile/drizzle/`, şema `src/db/schema.ts` |
 | Web | `next` **16.4.3**, React 19.3, Tailwind 4, React Compiler, `cacheComponents`; `@supabase/supabase-js` 2.118.0 | Veli onay sayfası `/onay/[token]` (T21; istemci bileşeni, veli oturumu tarayıcıda, erişim yalnız RPC'lerle). `params` gibi istek verisi `Suspense` içinde okunur (cacheComponents kuralı). Ayarlar `apps/web/.env.local` (`.env.example`). Rapor sayfası `/rapor/[token]` (T22; sunucu bileşeni, `weekly-report`'u istek anında çağırır) |
 | Plan motoru | `packages/plan-engine`: bağımlılık yok | `vitest` ^5.0.5 + `fast-check` ^4.10.2 ile property testleri |
+| Güvenlik | `packages/safety`: bağımlılık yok; uygulama, `packages/ai` ve Edge Function'lar kullanır | Kriz listesi, karar kuralı, çıktı denetimi, sabit metinler (T18). Liste, istem ya da model değişince eval seti (T19) yeniden koşulur |
 | Şema/doğrulama | `zod` ^4.6.7 | Kurulum profili doğrulaması (T09). Hedef: aynı şemalar Edge Function ve LLM JSON şeması (`z.toJSONSchema`) için de kaynak olsun. Formlar küçükken düz state + `safeParse` |
 | İstemci state | `zustand` ^5.0.16 | Kurulum taslağı (kalıcı değil). TanStack Query 5 yalnız Supabase çağrıları gelince (T16) |
 | Kimlik | `expo-crypto` ~58.0.7 (`randomUUID`) | Cihazda üretilen kayıt kimlikleri (sync şeması). Native modül: eklenince dev build yeniden derlendi |
 | Klavye | `react-native-keyboard-controller` 1.22.7 (`KeyboardProvider`, `KeyboardStickyView`) | Kurulum adımlarında "Devam" klavyenin üstüne yapışır (iOS sayı klavyesinde kapatma tuşu yok). RN `KeyboardAvoidingView` native stack içinde işe yaramadı. Sohbette de kullanılacak |
 | Supabase istemcisi | `@supabase/supabase-js` 2.118.0 | Katalog okuması (oturumsuz da) ve T16'dan beri e-posta OTP oturumu (`expo-sqlite/localStorage` ile saklanır), senkron upsert'leri. Ayarlar `apps/mobile/.env` (`EXPO_PUBLIC_SUPABASE_URL`, `_PUBLISHABLE_KEY`; yerelde `supabase status -o env`) |
 | Kamera ve görsel | `expo-camera` ~58.0.12, `expo-image-picker` ~58.0.10, `expo-image-manipulator` ~58.0.15, `expo-file-system` ~58.0.10 | Barkod (EAN-13) expo-camera ile. İçindekiler fotoğrafı (T11) image-picker ile (kamera ya da galeri), 1600 px JPEG'e küçültülür, geçici dosyalar file-system ile hemen silinir. `scanDocumentAsync` kullanılmadı: picker iki platformda da galeriyi de veriyor |
-| LLM | `@anthropic-ai/sdk` **1.3.0** (tam sürüm) yalnız Edge Function'da ve `tools/toc-eval`'de; `packages/ai` istem, model adı ve Zod çıktı şemasını ikisine paylaştırır | İçindekiler okuma Claude Haiku 5.5, `messages.parse` + `zodOutputFormat` (T11). Sohbet T17'de |
+| LLM | `@anthropic-ai/sdk` **1.3.0** (tam sürüm) yalnız Edge Function'da ve `tools/toc-eval`'de; `packages/ai` istem, model adı ve Zod çıktı şemasını ikisine paylaştırır | İçindekiler okuma Claude Haiku 5.5, `messages.parse` + `zodOutputFormat` (T11). Risk sınıflandırma aynı yolla, `output_config.effort: 'low'`; istem kısa, önbellek eşiğinin altında, `cache_control` yok (T18). Sohbet T17'de |
 | Edge Functions | `supabase/functions/<ad>/` (Deno), her fonksiyonun kendi `deno.json` import map'i | Yerelde `supabase functions serve --env-file supabase/functions/.env` (gitignore'da). `"lock": false`: yerel Deno 2.9'un lockfile v5'ini edge runtime (Deno 2.1) okuyamıyor |
 | Bildirim | `expo-notifications` ~58.1.6 | Yerel, tarih tetikleyicili; 7 gün × en fazla 3 (iOS 64 bekleyen bildirim sınırının altında). `SCHEDULE_EXACT_ALARM` istenmez |
 | Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
 | Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
-| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru ve her Edge Function, `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
+| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru, güvenlik paketi ve her Edge Function, `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
 | Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0 | Ayarlar `.env`'de (`.env.example`) |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 

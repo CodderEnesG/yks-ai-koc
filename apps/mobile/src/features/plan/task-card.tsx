@@ -70,6 +70,15 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
                 : `${tr.checkin.statusPartial(tr.today.ranges(g.kind, g.doneRanges))}${reason ? ` · ${tr.checkin.reasons[reason]}` : ''}`}
           </Text>
           {reason ? <Text variant="muted">{tr.checkin.effects[reason]}</Text> : null}
+          {reason === 'kotu_hissediyorum' ? (
+            <Button
+              testID="checkin-support"
+              size="sm"
+              variant="outline"
+              onPress={() => router.push('/support')}>
+              <Text>{tr.support.open}</Text>
+            </Button>
+          ) : null}
         </View>
       )}
     </View>

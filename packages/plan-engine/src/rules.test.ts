@@ -71,3 +71,25 @@ describe('isSafeMode', () => {
     expect(isSafeMode(events, d('2026-11-06'))).toBe(false);
   });
 });
+
+describe('risk sinyaliyle güvenli mod', () => {
+  it('sinyal günü ve ertesi üç gün %50, ton yumuşak', () => {
+    const a = deriveAdjustments([], [d('2026-11-02')]);
+    expect(a.dayFactors).toEqual({
+      '2026-11-02': 0.5,
+      '2026-11-03': 0.5,
+      '2026-11-04': 0.5,
+      '2026-11-05': 0.5,
+    });
+    expect(isSafeMode([], d('2026-11-01'), [d('2026-11-02')])).toBe(false);
+    expect(isSafeMode([], d('2026-11-02'), [d('2026-11-02')])).toBe(true);
+    expect(isSafeMode([], d('2026-11-05'), [d('2026-11-02')])).toBe(true);
+    expect(isSafeMode([], d('2026-11-06'), [d('2026-11-02')])).toBe(false);
+  });
+
+  it('check-in nedeniyle üst üste gelince birikmez, %50 kalır', () => {
+    const a = deriveAdjustments([ev('2026-11-02', 'kotu_hissediyorum')], [d('2026-11-03')]);
+    expect(Object.values(a.dayFactors ?? {}).every((f) => f === 0.5)).toBe(true);
+    expect(Object.keys(a.dayFactors ?? {})).toHaveLength(4);
+  });
+});

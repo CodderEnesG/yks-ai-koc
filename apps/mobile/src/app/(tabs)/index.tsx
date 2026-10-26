@@ -18,6 +18,7 @@ import {
   useTodayTasks,
 } from '@/features/plan/repo';
 import { syncNotifications } from '@/features/notifications/sync';
+import { useSafetyDays } from '@/features/safety/safe-mode';
 import { useMorningTime } from '@/features/settings/prefs';
 import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
@@ -51,10 +52,12 @@ export default function TodayScreen() {
     if (plan && hasPlan) void syncNotifications({ today, plan, checkedInToday }).then(setScheduled);
   }, [today, plan, hasPlan, checkedInToday, morning]);
 
-  // Güvenli mod (kötü hissediyorum sonrası 3 gün) bandı; görevler değişince yeniden okunur.
+  // Güvenli mod bandı: "kötü hissediyorum" sonrası ya da risk sinyalinden (Destek ekranı, sohbet) 3 gün.
+  // Görevler değişince yeniden okunur.
+  const safetyDays = useSafetyDays();
   const safeMode = useMemo(
-    () => (tasks ? isSafeMode(loadReasonEvents(), today) : false),
-    [tasks, today],
+    () => (tasks && safetyDays ? isSafeMode(loadReasonEvents(), today, safetyDays) : false),
+    [tasks, today, safetyDays],
   );
 
   if (!profile || !tasks) return null;
@@ -132,9 +135,16 @@ export default function TodayScreen() {
         {weekdayIndex(today) === 6 ? <ReportShare /> : null}
 
         {safeMode ? (
-          <Text testID="safe-mode" className="bg-secondary rounded-xl p-3">
-            {tr.checkin.safeMode}
-          </Text>
+          <View className="bg-secondary gap-2 rounded-xl p-3">
+            <Text testID="safe-mode">{tr.checkin.safeMode}</Text>
+            <Button
+              testID="safe-mode-support"
+              size="sm"
+              variant="outline"
+              onPress={() => router.push('/support')}>
+              <Text>{tr.support.open}</Text>
+            </Button>
+          </View>
         ) : null}
 
         {groups.map((g) => (

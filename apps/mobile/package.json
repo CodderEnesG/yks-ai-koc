@@ -8,6 +8,7 @@
     "@rn-primitives/slot": "^1.5.2",
     "@supabase/supabase-js": "2.118.0",
     "@yks/plan-engine": "workspace:*",
+    "@yks/safety": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "~0.45.4",

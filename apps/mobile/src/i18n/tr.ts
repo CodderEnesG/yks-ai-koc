@@ -320,4 +320,20 @@ export const tr = {
       add: 'Ekle',
     },
   },
+  // Destek ekranı (T18). Kriz metinleri @yks/safety'de (sunucuyla ortak, PDR onayı bekliyor).
+  support: {
+    title: 'Destek',
+    settingsTitle: 'Zor bir an mı yaşıyorsun?',
+    settingsHint: 'Konuşabileceğin yerler ve planını birkaç gün hafifletme.',
+    open: 'Destek',
+    lines: 'Ücretsiz hatlar',
+    notify: 'Velime ya da rehberime haber ver',
+    notifyHint:
+      'Kendi telefonundan, seçtiğin kişiye kısa bir mesaj gönderirsin. Uygulama kimseye bir şey göndermez.',
+    lighten: 'Planımı birkaç gün hafiflet',
+    lightenHint: 'Bugün ve sonraki üç gün yükün yarıya iner, koç daha yumuşak konuşur.',
+    lightened: 'Hafif mod açık. Planın birkaç gün yarı yarıya.',
+    callFailed: (phone: string) => `Arama açılamadı. ${phone} numarasını elle arayabilirsin.`,
+    draft: 'Taslak metin: uzman onayından önce yayına çıkmaz.',
+  },
 } as const;

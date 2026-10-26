@@ -1,0 +1,25 @@
+# T18: Destek ekranı. Ayarlar'dan açılır; yardım hatları görünür, "planımı hafiflet" güvenli modu açar ve
+# Bugün'de hafif mod bandı çıkar (banttan Destek'e dönülür). Sunucu gerekmez.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- tapOn: 'Ayarlar'
+- scrollUntilVisible:
+    element: { id: support-open }
+    visibilityPercentage: 100
+    centerElement: true
+- tapOn: { id: support-open }
+- assertVisible: { id: support-intro }
+- assertVisible: { id: support-call-112 }
+- assertVisible: { id: support-call-183 }
+- assertVisible: { id: support-notify }
+- tapOn: { id: support-lighten }
+- assertVisible: { id: support-lightened }
+# iOS'ta geri: kenardan kaydırma.
+- swipe:
+    start: 1%, 50%
+    end: 90%, 50%
+- tapOn: 'Bugün'
+- assertVisible: { id: safe-mode }
+- tapOn: { id: safe-mode-support }
+- assertVisible: { id: support-lightened }

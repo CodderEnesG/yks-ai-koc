@@ -4,7 +4,7 @@ Son doğrulama: **2026-10-26**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T21, T22, T23, T28 ve T32 tamam (T10, T11, T13-T16, T32 Sprint 1; T21-T23 Sprint 2, T28 Sprint 3 işiydi); T12'nin ilk parçası (MEB katalog tohumu) uzak projede.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T18, T21, T22, T23, T28 ve T32 tamam (T10, T11, T13-T16, T32 Sprint 1; T18, T21-T23 Sprint 2, T28 Sprint 3 işiydi); T12'nin ilk parçası (MEB katalog tohumu) uzak projede.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
 
 T05 ölçüldü (2026-10-24): Fotoğraf benzeri bozulmuş 32 içindekiler görüntüsünde Claude Haiku 5.5 (varsayılan efor) sayfa numaralarının %100'ünü (669/669) doğru okudu, 32 kitabın hiçbiri düzeltme gerektirmedi; Gemini 3.5 Flash-Lite %99,0 ve 26/32. Rapordaki eşik (≥%95) geçildi; ikinci LLM sağlayıcısına gerek yok, içindekiler okuma Haiku 5.5 ile. Sınırlama: bozulma yapay, MEB dizgisi sade; T11 öncesinde 5-10 gerçek telefon fotoğrafıyla kontrol. Ayrıntı `tools/toc-eval/README.md`.
 
@@ -31,7 +31,16 @@ T21: Veli onayı. 18 yaş altı öğrenci Bugün ya da Ayarlar'dan "Veli onayı 
 - **Yayını engeller:** Aydınlatma ve rıza metinleri yer tutucu (`apps/web/src/lib/consent-text.ts`, T07). Rıza kayıtlarının hesap silindikten sonra saklanması ve veli e-postasının istek satırında kalması avukata sorulacak.
 - Linkin e-postayla gönderimi karar 13'ü bekliyor (**ERTELENDİ**); şimdilik WhatsApp ve paylaş menüsü. Uzak projede e-posta yok, onay akışı yalnız yerelde denendi. Migration uzak projede (2026-10-26); girişsiz çağrılarda tablolar ve onay fonksiyonları kapalı, bilinmeyen kod boş dönüyor. Web barındırma karar 15'e bağlı.
 - `create_consent_request` girişsiz çağrılabiliyor; hız sınırı yok (kötüye kullanım riski düşük, satır başına e-posta gitmiyor).
-- Akut riskte veliye bildirim (açık karar 7) T18 ile.
+- Akut riskte veliye otomatik bildirim yok (açık karar 7, T18'de varsayılan bırakıldı).
+
+T18: Güvenlik katmanı (rapor 2.10 katman 1-4 ve 7'nin kaydı). `packages/safety` (bağımlılıksız, sunucu ve uygulama ortak): Türkçe normalizasyon (ı/i, aksan, rakamla yazılan harf, tekrar harf), deterministik kriz listesi (akut/yüksek; kendine zarar, istismar, yeme, madde) ve sınav deyimleri, karar kuralı (`decide`), çıktı denetimi kalıpları ve sabit metinler. Karar: sınıflandırıcı listeyi düşüremez; akut → LLM yanıt üretmez, sabit metin; yüksek → güvenli mod ve destekleyici yanıt; yalnız deyim ("bu sınav beni öldürecek") → alarm yok, kontrol sorusu; sınıflandırıcı çalışmazsa mesaj LLM'e gitmez. `packages/ai`: Haiku 5.5 risk istemi ve şeması (`effort: low`) ve PII maskeleyici (e-posta, telefon, uzun numara, kullanıcı adı, okul, 81 il, "adım …" ve "… hoca" kalıbındaki adlar). `classify` Edge Function: yalnız girişli ve onaylı kullanıcı (`my_consent_ok`, değilse 403), liste + maskelenmiş metinle sınıflandırıcı, risk varsa `safety_event` kaydı (`record_safety_event`; tablo istemciye kapalı, mesaj metni tutulmaz, hesap silinince cascade); günde 100 sınıflandırma, kota dolunca yalnız liste. Güvenli mod: risk sinyalinin günü ve ertesi üç gün yük %50 (plan motorunda `safetyDays`), sinyal günleri cihazda, senkronlanmaz. Destek ekranı: 112 ve ALO 183 arama, "velime ya da rehberime haber ver" (paylaş menüsü; mesajı öğrenci kendisi gönderir), "planımı hafiflet"; Ayarlar'dan, hafif mod bandından ve "kötü hissediyorum" kartından açılır, sunucu gerektirmez, onaydan önce de çalışır. 9 pgTAP testi. Yerelde gerçek Haiku çağrısıyla uçtan uca denendi (2026-10-26): profilsiz kullanıcı 403, temiz mesaj `reply`, deyim `check`, "herkes bensiz daha mutlu olur" `support` (liste kaçırdı, sınıflandırıcı yakaladı; liste sonra genişletildi), "kendimi öldüreceğim" ve "babam bana vuruyor" `fixed`; öğrenci olayları okuyamıyor. Açık kalanlar:
+- **Yayını engeller:** Sabit metinler, kriz listesi ve çıktı kalıpları taslak (`PDR_APPROVED = false`, metin sürümü olay kaydına yazılıyor). PDR onayı (karar 6, T06) ve eval seti (T19; akut kaçırma ≤%2) gerekli.
+- Sohbete bağlama T17 ve T20'de: sohbet aynı adımları yanıttan önce kendi içinde çalıştıracak, çıktı denetimi ve "bildir" düğmesi orada; uygulamada gönderimden önce liste taraması T20'de.
+- Kürasyon paneli (24 saat inceleme) ve incelemeden 1 yıl sonra silme (pg_cron) yok (**ERTELENDİ**: panel web'de; silme pg_cron'la, pg_cron henüz yok, T22'nin e-postası da onu bekliyor).
+- Akut riskte veliye otomatik bildirim yok (açık karar 7); öğrenci kendisi haber verir.
+- PII maskeleyici bağlamsız adı yakalamaz ("dün Ayşe aradı"); T17'de genişletilecek. Sınıflandırma kotası 100 tahmin (**DECISION TO TEST**). Güvenli mod gün bazlı: sinyal günü + 3 gün, 72 saatten biraz uzun.
+- Sınıflandırıcı "herkes bensiz daha mutlu olur"u yüksek ama `diger` kategoride buldu (`kendine_zarar` beklenirdi); T19'da ölçülecek.
+- Migration uzak projeye gönderilmedi, `classify` deploy edilmedi. Maestro `support.yaml` yazıldı, simülatörde koşulmadı.
 
 T28: Ayarlar'da "Verileri sil" (onaylı, geri alınamaz). Hesap bağlıysa `account-delete` Edge Function'ı oturumdaki kullanıcıyı servis rolüyle siler; kişisel tablolar (`profile`, `library_item`, `plan_task`, `checkin`, `ai_usage`) `on delete cascade` ile hemen gider (rapordaki 7 gün sınırının içinde). Sunucu başarısızsa cihazda hiçbir şey silinmez. Sonra cihazdaki kişisel tablolar, ayarlar ve kurulu bildirimler silinir, uygulama kuruluma döner; katalog önbelleği kişisel değil, kalır. Hesapsız (ve onay bekleyen 18 yaş altı) kullanıcıda yalnız cihaz silinir. pgTAP testi `public`'te `auth.users`'a bağlı her yabancı anahtarın cascade olduğunu denetler; yeni kullanıcı tablosu cascade'siz eklenirse kırılır. Rıza isteği (T21) bu kuralın bilinçli istisnası (`set null`; rapor 2.11: sürüm, zaman, hash kalır). Maestro akışı yedekli hesabı silip aynı e-postayla geri yüklemenin yedek bulamadığını doğruluyor. `account-delete` uzak projede (2026-10-26; oturumsuz çağrı 401). Veli onayı geri çekilince silme T21'de (`withdraw_consent`).
 
@@ -47,7 +56,7 @@ T32: Plan motorunda `video` birimi: video bölünmez (tek öğe), süresi `süre
 T15: Yerel bildirimler (expo-notifications): planın önümüzdeki 7 günü için sabah 08:00 görev özeti ("≈ 2 sa · 2 kitap"), 20:00 ve 21:30 check-in hatırlatması; dinlenme günleri ve check-in yapılan günün akşamı atlanır. Saatler İstanbul saatine sabit (UTC+3). Uygulama açıldıkça ve check-in'de yeniden kurulur; izin ilk plan oluşunca istenir. Sabah saati varsayılan 08:00, Ayarlar sekmesinden değiştirilir (T16 ile, 2026-10-26). Simülatörde kurulan bildirim sayısı doğrulandı; bildirimin gerçekten düşmesi denenmedi.
 
 T14: Bugün kartlarında check-in: "Yaptım", "Yarım kaldı" (nereye kadar + neden; görev bölünür, kalanı sonraki günlere döner), "Yapamadım" (neden). İsteğe bağlı doğru/yanlış günlük kaydı. Neden kuralları plan motorunda (`deriveAdjustments`), check-in geçmişinden saf olarak türetilir: üç gün üst üste "zaman yetmedi" kapasiteyi %15 düşürür (her yeni üçlü tekrar, en fazla %50'ye), "konu zor" birim süresini ×1,3 yapar, "isteksizim" ertesi gün en kısa görevi başa alır, "kötü hissediyorum" ertesi üç gün yükü %50 yapar ve hafif mod bandı çıkar. Karttaki not yalnız planın ne yaptığını söyler. Kapsam dışında kalanlar:
-- Destek metni ve risk taraması: PDR onayıyla T06 ve T18'de.
+- Destek: "kötü hissediyorum" kartından Destek ekranı açılır (T18); metinler PDR onayı bekliyor (T06).
 - "Sıradaki görev ikiye bölünür" (konu zor): bölme ölçüsü tanımlı değil (**NOT DEFINED**), yalnız ×1,3 uygulanıyor.
 - Kapasite alt sınırı %50: raporda yok, plan anlamsızlaşmasın diye eklendi (**DECISION TO TEST**).
 - Check-in'i geri alma yok.
@@ -90,10 +99,11 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   web/                                               Next.js 16 (veli onayı ve rapor sayfaları; şimdilik yer tutucu)
 /packages
   plan-engine/                                       saf TS plan motoru çekirdeği (T04) + property testleri
-  ai/                                                LLM istemleri ve çıktı şemaları (içindekiler okuma; T11)
+  ai/                                                LLM istemleri, çıktı şemaları, PII maskeleyici (içindekiler okuma T11, risk sınıflandırma T18)
+  safety/                                            kriz listesi, karar kuralı, çıktı denetimi, sabit metinler (T18)
 /supabase
   migrations/  tests/database/                       şema, RLS, katalog tohumu; pgTAP testleri
-  functions/                                         Edge Functions (toc-extract)
+  functions/                                         Edge Functions (toc-extract, account-delete, classify)
 /tools
   toc-eval/                                          MEB OGM içindekiler doğru cevap veri seti (T05, T12); PDF'ler data-private'da
 /docs

@@ -118,6 +118,14 @@ export default function SettingsScreen() {
         </View>
 
         <View className="gap-2">
+          <Text className="font-medium">{tr.support.settingsTitle}</Text>
+          <Text variant="muted">{tr.support.settingsHint}</Text>
+          <Button testID="support-open" variant="outline" onPress={() => router.push('/support')}>
+            <Text>{tr.support.open}</Text>
+          </Button>
+        </View>
+
+        <View className="gap-2">
           <Text className="font-medium">{s.deleteTitle}</Text>
           <Text variant="muted">{s.deleteHint(!!session)}</Text>
           <Button

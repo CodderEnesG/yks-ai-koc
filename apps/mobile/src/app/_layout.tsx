@@ -41,6 +41,7 @@ export default function RootLayout() {
           <Stack.Screen name="book" />
           <Stack.Screen name="checkin" />
           <Stack.Screen name="account" />
+          <Stack.Screen name="support" />
         </Stack>
         <PortalHost />
       </ThemeProvider>

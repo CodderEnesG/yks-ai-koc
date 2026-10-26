@@ -35,7 +35,7 @@ const plan = buildPlan({
 ## Henüz olmayanlar
 
 - Öncelik skoru ağırlıkları varsayılan (0,4 sınav ağırlığı, 0,3 zayıflık, 0,3 kitap içi sıra): rapor formülü veriyor, ağırlıkları vermiyor (**NOT DEFINED**). Gecikme terimi yok.
-- Neden kuralları (kapasite %15 düşüşü, süre ×1,3, ısınma görevi, güvenli modda %50 yük): T14.
+- Neden kuralları (kapasite %15 düşüşü, süre ×1,3, ısınma görevi, güvenli modda %50 yük): T14. Risk sinyaliyle açılan güvenli mod (`deriveAdjustments` ve `isSafeMode`in `safetyDays` girdisi): T18.
 - `video` birim türü, izleme hızı ve not payı: T32.
 
 ```sh
