@@ -48,6 +48,14 @@
         {
           "color": "#171717"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "İçindekiler sayfasının fotoğrafını seçmek için galerine erişiyoruz. Fotoğraf okunduktan sonra silinir.",
+          "cameraPermission": "İçindekiler sayfasının fotoğrafını çekmek için kamerayı kullanıyoruz. Fotoğraf okunduktan sonra silinir.",
+          "microphonePermission": false
+        }
       ]
     ],
     "experiments": {

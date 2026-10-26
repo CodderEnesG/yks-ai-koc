@@ -23,12 +23,14 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Kimlik | `expo-crypto` ~58.0.7 (`randomUUID`) | Cihazda üretilen kayıt kimlikleri (sync şeması). Native modül: eklenince dev build yeniden derlendi |
 | Klavye | `react-native-keyboard-controller` 1.22.7 (`KeyboardProvider`, `KeyboardStickyView`) | Kurulum adımlarında "Devam" klavyenin üstüne yapışır (iOS sayı klavyesinde kapatma tuşu yok). RN `KeyboardAvoidingView` native stack içinde işe yaramadı. Sohbette de kullanılacak |
 | Supabase istemcisi | `@supabase/supabase-js` 2.118.0 | Katalog okuması (oturumsuz da) ve T16'dan beri e-posta OTP oturumu (`expo-sqlite/localStorage` ile saklanır), senkron upsert'leri. Ayarlar `apps/mobile/.env` (`EXPO_PUBLIC_SUPABASE_URL`, `_PUBLISHABLE_KEY`; yerelde `supabase status -o env`) |
-| Kamera | `expo-camera` ~58.0.12 | Barkod (EAN-13). İçindekiler fotoğrafı da bununla (T11) |
+| Kamera ve görsel | `expo-camera` ~58.0.12, `expo-image-picker` ~58.0.10, `expo-image-manipulator` ~58.0.15, `expo-file-system` ~58.0.10 | Barkod (EAN-13) expo-camera ile. İçindekiler fotoğrafı (T11) image-picker ile (kamera ya da galeri), 1600 px JPEG'e küçültülür, geçici dosyalar file-system ile hemen silinir. `scanDocumentAsync` kullanılmadı: picker iki platformda da galeriyi de veriyor |
+| LLM | `@anthropic-ai/sdk` **1.3.0** (tam sürüm) yalnız Edge Function'da ve `tools/toc-eval`'de; `packages/ai` istem, model adı ve Zod çıktı şemasını ikisine paylaştırır | İçindekiler okuma Claude Haiku 5.5, `messages.parse` + `zodOutputFormat` (T11). Sohbet T17'de |
+| Edge Functions | `supabase/functions/<ad>/` (Deno), her fonksiyonun kendi `deno.json` import map'i | Yerelde `supabase functions serve --env-file supabase/functions/.env` (gitignore'da). `"lock": false`: yerel Deno 2.9'un lockfile v5'ini edge runtime (Deno 2.1) okuyamıyor |
 | Bildirim | `expo-notifications` ~58.1.6 | Yerel, tarih tetikleyicili; 7 gün × en fazla 3 (iOS 64 bekleyen bildirim sınırının altında). `SCHEDULE_EXACT_ALARM` istenmez |
 | Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
 | Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
-| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` | `.github/workflows/ci.yml` |
+| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru ve `toc-extract`; fonksiyon `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
 | Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0 | Ayarlar `.env`'de (`.env.example`) |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 
@@ -36,19 +38,15 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 | Katman | Seçim | Görev |
 |---|---|---|
-| Backend | Supabase `eu-central-1` (genel "Europe" değil): Postgres + RLS, Auth (e-posta OTP), Edge Functions (Deno), Storage (geçici görsel), pg_cron. `@supabase/supabase-js` 2.x, oturum `expo-sqlite/localStorage` ile | T03, T16 |
-| Sync | Elle sync; kapsam açık karar #14 (öneri: cihaz asıl kaynak, outbox ile gönder + yeni cihazda geri yükle) | T16 |
-| LLM | `@anthropic-ai/sdk` yalnız Edge Function'da, **tam sürüme sabit** (1.x hızlı değişiyor) | T17, T18 |
+| Backend (kalan) | Supabase pg_cron (haftalık rapor), gerçek e-posta sağlayıcısı (SMTP). Storage kullanılmıyor: içindekiler görüntüsü istek gövdesiyle gider, hiçbir yere yazılmaz | T22 |
 | Listeler | FlatList (kısa listeler), `@shopify/flash-list` 2 (sohbet) | T13, T17 |
 | Sohbet | Kendi arayüzümüz + `react-native-keyboard-controller`; akış için AI SDK `useChat` + `expo/fetch` ya da elle SSE okuyucu (Türkçe çok baytlı karakter testiyle seçilir) | T17 |
 | Modal | Expo Router `formSheet`; gerekirse `@gorhom/bottom-sheet` 5 | — |
-| Kamera | `expo-camera` (ISBN `ean13`, içindekiler için `scanDocumentAsync`; olmazsa `expo-image-picker`), `expo-image-manipulator`, `expo-file-system` ile geçici dosya silme | T10, T11 |
-| Bildirim | `expo-notifications`; `SCHEDULE_EXACT_ALARM` istenmez | T14 |
 | YouTube | Link yapıştırma + `Linking.openURL`; paylaş menüsünden alma sonra | T31 |
 | İkon/diğer | `lucide-react-native` (+ Reusables `icon` bileşeni), `expo-haptics`, `expo-image` | — |
 | Test (uygulama) | Bileşen testleri için `jest-expo` + React Native Testing Library (gerekirse); Maestro akışları release öncesi 3-5'e tamamlanır | T25 |
 | Gözlem | PostHog EU (session replay kapalı), Sentry EU (org kurulurken EU seçilir). 18 yaş altında onaydan önce ikisi de kapalı | T27 |
-| E-posta | Açık karar #13 (Resend / Brevo / AWS SES Frankfurt) | T16 öncesi |
+| E-posta | Açık karar #13 (Resend / Brevo / AWS SES Frankfurt). Yerelde Mailpit; sağlayıcı seçilince yalnız SMTP ayarı değişir | Yayın öncesi |
 | Web barındırma | Öneri: Cloudflare Workers + AB yerleşimi; olmazsa Vercel Pro fra1 (açık karar #15) | Sprint 2 |
 | Ödeme | RevenueCat (`react-native-purchases`) | Şubat 2027 |
 
@@ -69,12 +67,13 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 **Paylaşılan paketler (`packages/*`)**
 - Saf TS, kaynak koddan tüketilir (`exports` → `src/index.ts`); build adımı yok.
 - Göreli import'lar `.ts` uzantısıyla yazılır (`./civil-date.ts`). Deno uzantı ister; Metro ve Next `allowImportingTsExtensions` ile kabul eder, Next'te `transpilePackages` gerekir.
-- Edge Functions'a import map ile alınır: fonksiyonun `deno.json`'unda `"@yks/plan-engine": "../../../packages/plan-engine/src/index.ts"`. Yerelde `deno check` ile doğrulandı; Supabase deploy'unun `supabase/` dışını paketlemesi T03'te doğrulanacak.
+- Edge Functions'a import map ile alınır: fonksiyonun `deno.json`'unda `"@yks/plan-engine": "../../../packages/plan-engine/src/index.ts"`. Yerelde `deno check` ve `supabase functions serve` ile doğrulandı (`toc-extract` → `packages/ai`); uzak deploy'un `supabase/` dışını paketlemesi ilk deploy'da doğrulanacak.
 
 **Metro ve uçtan uca testler**
 - Metro'yu `CI=1` ile başlatma: Expo bu modda dosya izlemeyi kapatır ve değişiklikler uygulamaya gelmez (2026-10-24'te yarım saat buna gitti).
 - Maestro akışları `apps/mobile/e2e/`'de. Hesap akışı giriş kodunu yerel Mailpit API'sinden (`127.0.0.1:54324/api/v1/messages`) `scripts/read-otp.js` ile okur. Birden çok simülatör açıksa cihaz belirtilmeli (`maestro --device <UDID> test apps/mobile/e2e`); aksi hâlde Maestro başka bir projenin simülatörüne gidebilir. Dev build simülatöre kurulu ve Metro açıkken `maestro test apps/mobile/e2e` ile koşar. `_open-dev-build.yaml` temiz durumla açar ve kendiliğinden açılan Expo geliştirici menüsünü kapatır.
-- Maestro iOS'ta ekran dışındaki öğeyi görünür sayabilir: `scrollUntilVisible`'da `visibilityPercentage: 100` ve `centerElement: true` kullan. Sayı klavyesinde `hideKeyboard` tuşa basar; kullanma.
+- Maestro iOS'ta ekran dışındaki ya da klavyenin arkasındaki öğeyi görünür sayabilir: `scrollUntilVisible`'da `visibilityPercentage: 100` ve `centerElement: true` kullan, kaydırmadan önce klavyeyi bir başlığa dokunarak kapat. Sayı klavyesinde `hideKeyboard` tuşa basar; kullanma.
+- `toc-add.yaml` simülatör galerisinde bir içindekiler görüntüsü ister (`xcrun simctl addmedia <UDID> data-private/meb-ogm/toc-photo/<kitap>.jpg`; telifli, repoya girmez) ve `supabase functions serve` açık olmalı. Her koşu bir gerçek Claude çağrısı yapar (≈0,001$, tahmin).
 
 **Üretilen dosyalar**
 - Expo Router typed routes `.expo/types/router.d.ts`'e Metro (`expo start`) tarafından üretilir ve gitignore'dadır. CI'da bu dosya olmadığı için rota adları denetlenmez (`Href` serbest string olur); yerelde Metro açıkken typecheck rota yazım hatalarını yakalar.
@@ -84,10 +83,10 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 ## Yerel veri ve sync şeması
 
-- Onaydan önce Supabase'e hiçbir çağrı yapılmaz (anonim giriş dahil).
+- Onaydan önce Supabase'e kişisel veri gitmez ve giriş yapılmaz (anonim giriş dahil); yalnız katalog oturumsuz okunur (rapor 2.11).
 - Her kullanıcı tablosunda: cihazda üretilen `id` (UUID), `user_id`, `updated_at` (istemci zamanı), `server_updated_at` (sunucuda trigger), `deleted_at` (sunucuda gerçek DELETE yok).
 - RLS: `using (user_id = auth.uid())` ve `with check (user_id = auth.uid())`. 30 Ekim 2026'dan sonra her migration'a açık `GRANT … TO authenticated` (doğrulanacak).
-- Sync kapsamı açık karar #14'e bağlı; şema iki seçenekte de aynı.
+- Sync kapsamı (karar 14, 2026-10-26): cihaz asıl kaynak, sunucu yedek. Son gönderimden beri değişen satırlar upsert edilir; tam çekme yalnız yeni telefonda geri yüklemede.
 
 ## Elenenler
 

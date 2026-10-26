@@ -1,0 +1,36 @@
+# T11: içindekiler fotoğrafından kitap ekleme (galeri yolu; simülatörde kamera yok).
+# Önkoşul: simülatör galerisinde bir içindekiler görüntüsü (xcrun simctl addmedia; yalnız yerel,
+# telifli görüntü repoya girmez), yerel Supabase ve `supabase functions serve` açık. Gerçek Claude çağrısı
+# yapar (≈0,001$).
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- runFlow: _connect-account.yaml
+- tapOn: 'Kütüphane'
+- tapOn: { id: library-add }
+- tapOn: { id: add-toc }
+- tapOn: { id: toc-library }
+# Simülatörün örnek fotoğrafları "08 August 2012" biçiminde; eklenen görüntü yılsız ("October 24, 17:50").
+- tapOn: 'Photo, [A-Z][a-z]+ \d{1,2}, \d\d:\d\d'
+- extendedWaitUntil:
+    visible: 'Kontrol et'
+    timeout: 60000
+- assertVisible: { id: toc-row-0 }
+- tapOn: { id: toc-title }
+- inputText: '3 Adım TYT Tarih (fotoğraf)'
+# Klavye açıkken Maestro arkasındaki satırları görünür sayar ve kaydırmaz; önce klavyeyi kapat.
+- tapOn: 'Kontrol et'
+# 19 bölüm ekrana sığmaz; son satıra kadar kaydırıp hepsinin okunduğunu doğrula.
+- scrollUntilVisible:
+    element: { id: toc-row-18 }
+- assertNotVisible: { id: toc-row-19 }
+- scrollUntilVisible:
+    element: { id: toc-last-page }
+    visibilityPercentage: 100
+    centerElement: true
+- assertNotVisible: { id: toc-issues }
+- tapOn: { id: toc-last-page }
+- inputText: '125'
+- tapOn: { id: continue }
+- assertVisible: '3 Adım TYT Tarih \(fotoğraf\)'
+- assertVisible: '115 sayfa · 19 bölüm.*'

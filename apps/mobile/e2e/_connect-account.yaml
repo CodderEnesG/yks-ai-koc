@@ -1,0 +1,21 @@
+# Ayarlar'dan hesap bağlar; giriş kodu yerel Mailpit'ten okunur. output.email kullanılır.
+appId: dev.placeholder.ykskoc
+---
+- runScript: scripts/clear-mail.js
+- tapOn: 'Ayarlar'
+- tapOn: { id: account-connect }
+- tapOn: { id: account-email }
+- inputText: ${output.email}
+- tapOn: { id: account-consent }
+- tapOn: { id: continue }
+- retry:
+    maxRetries: 5
+    commands:
+      - runScript: scripts/read-otp.js
+      - assertTrue: ${output.otp && output.otp.length === 6}
+- tapOn: { id: account-code }
+- inputText: ${output.otp}
+- tapOn: { id: continue }
+- extendedWaitUntil:
+    visible: 'Bağlı: .*'
+    timeout: 15000

@@ -14,30 +14,12 @@ import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
-import { z } from 'zod';
+import { TOC_MODEL, TOC_PROMPT as PROMPT, type Toc, TocSchema } from '@yks/ai';
 
 const DATA_DIR = 'data-private/meb-ogm';
 const CONCURRENCY = 4;
 
 process.loadEnvFile('.env');
-
-const TocSchema = z.object({
-  birimler: z.array(
-    z.object({
-      numara: z.number().int().nullable(),
-      baslik: z.string(),
-      sayfa: z.number().int().nullable(),
-    }),
-  ),
-});
-type Toc = z.infer<typeof TocSchema>;
-
-const PROMPT = `Bu görüntü bir YKS hazırlık kitabının içindekiler sayfası.
-Her birim (ünite, konu, test) satırını sayfadaki sırasıyla çıkar:
-- numara: satırın başındaki basılı numara; numara yoksa null
-- baslik: başlığı sayfada yazdığı gibi, Türkçe karakterleri koruyarak
-- sayfa: satırın sonundaki başlangıç sayfa numarası; okunmuyorsa null, tahmin etme
-"Cevap Anahtarı", "Kaynakça", "Sözlük" gibi birim olmayan satırları alma.`;
 
 interface Image {
   data: string;
@@ -57,7 +39,7 @@ interface Reader {
 
 function claudeReader(name: string, effort: 'low' | 'medium'): Reader {
   const client = new Anthropic();
-  const model = 'claude-haiku-5-5';
+  const model = TOC_MODEL;
   return {
     name,
     model: `${model} (effort ${effort})`,

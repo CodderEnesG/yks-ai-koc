@@ -27,6 +27,13 @@ export default function AddBookScreen() {
           onPress={() => router.push('/book/search')}
         />
         <Choice
+          testID="add-toc"
+          label={o.toc.label}
+          description={o.toc.description}
+          selected={false}
+          onPress={() => router.push('/book/toc')}
+        />
+        <Choice
           testID="add-quick"
           label={o.quick.label}
           description={o.quick.description}

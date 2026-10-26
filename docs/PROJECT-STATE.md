@@ -1,16 +1,21 @@
 # YKS AI Koç — Proje Durumu
 
-Son doğrulama: **2026-10-23**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
+Son doğrulama: **2026-10-26**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T13, T14, T15, T16, T23 ve T32 tamam (T10, T13-T16, T32 Sprint 1; T23 Sprint 2 işiydi); T12'nin ilk parçası (MEB katalog tohumu) uzak projede.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T23 ve T32 tamam (T10, T11, T13-T16, T32 Sprint 1; T23 Sprint 2 işiydi); T12'nin ilk parçası (MEB katalog tohumu) uzak projede.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
 
 T05 ölçüldü (2026-10-24): Fotoğraf benzeri bozulmuş 32 içindekiler görüntüsünde Claude Haiku 5.5 (varsayılan efor) sayfa numaralarının %100'ünü (669/669) doğru okudu, 32 kitabın hiçbiri düzeltme gerektirmedi; Gemini 3.5 Flash-Lite %99,0 ve 26/32. Rapordaki eşik (≥%95) geçildi; ikinci LLM sağlayıcısına gerek yok, içindekiler okuma Haiku 5.5 ile. Sınırlama: bozulma yapay, MEB dizgisi sade; T11 öncesinde 5-10 gerçek telefon fotoğrafıyla kontrol. Ayrıntı `tools/toc-eval/README.md`.
 
 T05 verisi hazır: fotoğraf yerine MEB OGM'nin 32 ücretsiz YKS kitabının (3 Adım, Konu Pekiştirme) içindekiler sayfaları ve PDF metin katmanından çıkarılan doğru cevap: 670 birim, 649'u başlangıç sayfasında bağımsız olarak doğrulandı. PDF'ler `data-private/`'da, araçlar `tools/toc-eval/`'da. Bulgular: kitapların kendi içindekilerinde hata var (onay ekranı gerekli), 3 Adım serisinde ISBN dersleri ayırmıyor (barkod aramasında ders seçimi gerekli), basılı sayfa PDF sayfasından 2 geride. Sınırlama: görüntüler temiz PDF render'ı, telefon fotoğrafı değil; ölçüm iyimser çıkar.
 
 T03: Supabase projesi Frankfurt'ta (`hhfwzfkhcrmakcvmsvbx`), repo bağlı. Şema v1 (`supabase/migrations/`): katalog (`topic`, `work`, `edition`, `unit`; ham başlık yok, herkes okur, yalnız service role yazar) ve öğrenci tabloları (`profile`, `library_item`, `plan_task`, `checkin`; yalnız sahibi okur/yazar, silme yok, `server_updated_at` tetikleyicisi). Varsayılan yetkiler geri alınıp açık GRANT verildi; yetki ve RLS iki katman. 19 pgTAP testi yerelde geçiyor ve CI'a eklendi. Uzak projeye uygulandı (2026-10-25); publishable anahtarla katalog okunuyor, öğrenci tabloları girişsiz kullanıcıya kapalı (42501). Rıza/veli (T21), sohbet/güvenlik (T17/T18) ve YouTube önbelleği (T31) tabloları kendi görevlerinde. Yerel yığın depolama servisi olmadan başlatılıyor (`-x storage-api,imgproxy,logflare,vector`); eski CLI'da depolama konteyneri sağlıksız çıkıyor.
+
+T11: Kütüphanede "İçindekilerden ekle": fotoğraf çekilir ya da galeriden seçilir, cihazda 1600 px JPEG'e küçültülür, orijinal ve küçük kopya hemen silinir. Görüntü `toc-extract` Edge Function'ına gider; fonksiyon görüntüyü hiçbir yere yazmaz, Haiku 5.5'e yapılandırılmış çıktıyla (`packages/ai`'deki şema ve istem, T05 ölçümüyle aynı) okutur. Yalnız girişli ve onaylı kullanıcı (18 yaş altında onaydan önce ekran kapalı); günde 20 okuma (`ai_usage` tablosu ve `consume_ai_quota`, İstanbul günü; 6 pgTAP testi). Öğrenci "Kontrol et" ekranında bölüm adlarını ve başlangıç sayfalarını düzeltir, kitabın son sayfasını girer; artmayan ya da boş sayfa işaretlenir. Kitap özel baskı olarak eklenir; bölüm adları yalnız bu öğrencinin kütüphanesinde ve kendi yedeğinde kalır, paylaşılan kataloğa girmez. Maestro akışı galeriye eklenen bir MEB içindekiler görüntüsüyle (yalnız yerel) uçtan uca doğruluyor: 19 bölüm, gerçek Claude çağrısı. Açık kalanlar:
+- Fonksiyon uzak projeye deploy edilmedi, `ANTHROPIC_API_KEY` uzakta tanımlı değil, `ai_usage` migration'ı uzakta yok (onay bekliyor).
+- Gerçek telefon fotoğrafıyla deneme yapılmadı (T05'teki 5-10 fotoğraf kontrolü); simülatörde kamera yok.
+- Günlük 20 sınırı tahmin (**DECISION TO TEST**). Okunamayan görüntüde öğrenciye "tekrar çek" denir; elle bölüm girme yolu "hızlı ekle".
 
 T16: E-posta + tek kullanımlık kodla giriş (supabase-js, oturum cihazda), Ayarlar sekmesinden hesap bağlama, otomatik yedek (girişte, öne gelince, açıkken dakikada bir; tek seferde tek gönderim) ve yeni telefonda "Hesabım var, geri yükle". Karar 14'e göre cihaz asıl kaynak: son gönderimden beri değişen satırlar upsert edilir, tam çekme yalnız telefonda profil yokken. 18 yaş altında onay gelmeden giriş ekranı gösterilmez, hiçbir veri gitmez (`canSync`). Ayarlar'da sabah bildirim saati. Yerelde e-postalar sahte posta kutusuna (Mailpit) düşer; Maestro akışı kodu oradan okuyup hesap bağlama, yedek ve geri yüklemeyi doğruluyor. Açık kalanlar:
 - **Yayını engeller:** Hesap bağlamadaki rıza kutusunun metni yer tutucu. Aydınlatma ve açık rıza metinleri T07'de; rıza kaydı sunucuda tutulmuyor (consent tablosu T21'de).
@@ -21,7 +26,7 @@ T23: Seri ve kitap ilerlemesi. Seri kuralı plan motorunda (`isDayComplete`, `cu
 
 T32: Plan motorunda `video` birimi: video bölünmez (tek öğe), süresi `süre / izleme hızı × (1 + not payı)` (varsayılan 1×, %25; hızlar 1, 1,25, 1,5, 2). Oynatma listesi kitap gibi bir kaynak, videolar liste sırasıyla ilerler; property testleri video birimlerini de üretiyor. Liste ekleme (T31) ve video görev kartı (T33) YouTube API anahtarı bekliyor; "bağlı" mod (video ↔ kitap bölümü) Ocak'ta (T37).
 
-T15: Yerel bildirimler (expo-notifications): planın önümüzdeki 7 günü için sabah 08:00 görev özeti ("≈ 2 sa · 2 kitap"), 20:00 ve 21:30 check-in hatırlatması; dinlenme günleri ve check-in yapılan günün akşamı atlanır. Saatler İstanbul saatine sabit (UTC+3). Uygulama açıldıkça ve check-in'de yeniden kurulur; izin ilk plan oluşunca istenir. Sabah saatini seçme ekranı yok, varsayılan 08:00 (**NOT DEFINED**: rapor "öğrencinin seçtiği saat" diyor). Simülatörde kurulan bildirim sayısı doğrulandı; bildirimin gerçekten düşmesi denenmedi.
+T15: Yerel bildirimler (expo-notifications): planın önümüzdeki 7 günü için sabah 08:00 görev özeti ("≈ 2 sa · 2 kitap"), 20:00 ve 21:30 check-in hatırlatması; dinlenme günleri ve check-in yapılan günün akşamı atlanır. Saatler İstanbul saatine sabit (UTC+3). Uygulama açıldıkça ve check-in'de yeniden kurulur; izin ilk plan oluşunca istenir. Sabah saati varsayılan 08:00, Ayarlar sekmesinden değiştirilir (T16 ile, 2026-10-26). Simülatörde kurulan bildirim sayısı doğrulandı; bildirimin gerçekten düşmesi denenmedi.
 
 T14: Bugün kartlarında check-in: "Yaptım", "Yarım kaldı" (nereye kadar + neden; görev bölünür, kalanı sonraki günlere döner), "Yapamadım" (neden). İsteğe bağlı doğru/yanlış günlük kaydı. Neden kuralları plan motorunda (`deriveAdjustments`), check-in geçmişinden saf olarak türetilir: üç gün üst üste "zaman yetmedi" kapasiteyi %15 düşürür (her yeni üçlü tekrar, en fazla %50'ye), "konu zor" birim süresini ×1,3 yapar, "isteksizim" ertesi gün en kısa görevi başa alır, "kötü hissediyorum" ertesi üç gün yükü %50 yapar ve hafif mod bandı çıkar. Karttaki not yalnız planın ne yaptığını söyler. Kapsam dışında kalanlar:
 - Destek metni ve risk taraması: PDR onayıyla T06 ve T18'de.
@@ -44,7 +49,7 @@ T02 spike sonuçları (2026-10-23, yerelde):
 | Kontrol | Sonuç |
 |---|---|
 | pnpm 10.34.7 workspaces, isolated mod, Metro | Çalışıyor; `node-linker=hoisted` gerekmedi |
-| `plan-engine` `.ts` uzantılı import'larla Metro, Next 16 ve Deno'da | Üçünde de derleniyor. Deno'ya import map ile kaynak koddan alınır (bundle yok). Supabase deploy'unun `supabase/` dışını paketlemesi T03'te doğrulanacak |
+| `plan-engine` `.ts` uzantılı import'larla Metro, Next 16 ve Deno'da | Üçünde de derleniyor. Deno'ya import map ile kaynak koddan alınır (bundle yok). `toc-extract` → `packages/ai` yerel edge runtime'da çalışıyor; uzak deploy'un `supabase/` dışını paketlemesi ilk deploy'da doğrulanacak |
 | Uniwind 1.13 + RN Reusables (Button, Text), Expo Router native tabs | Android emülatörde ve iOS simülatörde çalışıyor |
 | expo-sqlite + Drizzle 0.45.4: migration, `useLiveQuery`, yeniden başlatmada kalıcılık | Android emülatörde çalışıyor |
 | Android dev build (Gradle 9.4.1, JDK 17) | Başarılı |
@@ -67,6 +72,10 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   web/                                               Next.js 16 (veli onayı ve rapor sayfaları; şimdilik yer tutucu)
 /packages
   plan-engine/                                       saf TS plan motoru çekirdeği (T04) + property testleri
+  ai/                                                LLM istemleri ve çıktı şemaları (içindekiler okuma; T11)
+/supabase
+  migrations/  tests/database/                       şema, RLS, katalog tohumu; pgTAP testleri
+  functions/                                         Edge Functions (toc-extract)
 /tools
   toc-eval/                                          MEB OGM içindekiler doğru cevap veri seti (T05, T12); PDF'ler data-private'da
 /docs
@@ -115,7 +124,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 
 ## Güncel teknik kararlar (öneri, kod başlarken teyit edilecek)
 
-Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [TECH-STACK](TECH-STACK.md)'te. Mimari rapor 2.2-2.15'te.
+Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-image-picker, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [TECH-STACK](TECH-STACK.md)'te. Mimari rapor 2.2-2.15'te.
 
 `ARCHITECTURE.md` henüz yok. Kod başlamadan önce gerekmiyor; rapor bölüm 2 bu işi görüyor. Rapor ile kod ayrışmaya başlayınca yazılacak.
 

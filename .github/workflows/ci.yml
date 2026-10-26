@@ -36,6 +36,7 @@ jobs:
       - run: pnpm test
       # Paylaşılan paket Supabase Edge Functions'ta (Deno) da derlenmeli.
       - run: pnpm --filter @yks/plan-engine check:deno
+      - run: deno check --config supabase/functions/toc-extract/deno.json supabase/functions/toc-extract/index.ts
 
   # Supabase şeması ve RLS testleri (pgTAP). Yalnız veritabanı konteyneri başlatılır.
   db:

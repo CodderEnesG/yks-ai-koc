@@ -98,7 +98,67 @@ export type QuickAdd = z.infer<typeof quickAddSchema>;
 /** Cihazdaki özel baskı biçimi (sunucuda library_item.custom_edition). */
 export interface CustomEdition {
   title: string;
-  units: { key: string; kind: ItemKind; first: number; last: number }[];
+  /** `title` yalnız içindekilerden eklenen özel baskıda; yalnız bu öğrencide kalır (paylaşılmaz). */
+  units: { key: string; kind: ItemKind; first: number; last: number; title?: string }[];
+}
+
+export interface TocRow {
+  title: string;
+  /** Öğrencinin düzenleyebildiği başlangıç sayfası (metin; boş olabilir). */
+  start: string;
+}
+
+export type TocRowIssue = 'missing' | 'not_ascending';
+
+/**
+ * İçindekiler onay ekranı (T11): satırların başlangıç sayfaları artan olmalı, son birim kitabın son
+ * sayfasında biter. Sorun varsa satır bazında döner, yoksa özel baskı.
+ */
+export function editionFromToc(
+  bookTitle: string,
+  rows: readonly TocRow[],
+  lastPage: number,
+):
+  | { edition: CustomEdition; issues: [] }
+  | { edition: null; issues: { index: number; issue: TocRowIssue }[] } {
+  const issues: { index: number; issue: TocRowIssue }[] = [];
+  const starts = rows.map((r) => (/^\d+$/.test(r.start.trim()) ? Number(r.start.trim()) : null));
+  let previous = 0;
+  starts.forEach((start, index) => {
+    if (start === null || start < 1) issues.push({ index, issue: 'missing' });
+    else {
+      if (start <= previous) issues.push({ index, issue: 'not_ascending' });
+      previous = start;
+    }
+  });
+  const lastStart = starts.at(-1);
+  if (
+    rows.length === 0 ||
+    !Number.isInteger(lastPage) ||
+    lastStart == null ||
+    lastPage < lastStart
+  ) {
+    issues.push({ index: rows.length, issue: 'missing' });
+  }
+  if (issues.length > 0 || bookTitle.trim().length < 2) {
+    return {
+      edition: null,
+      issues: issues.length > 0 ? issues : [{ index: -1, issue: 'missing' }],
+    };
+  }
+  return {
+    edition: {
+      title: bookTitle.trim(),
+      units: rows.map((r, i) => ({
+        key: String(i + 1),
+        kind: 'pages',
+        first: starts[i]!,
+        last: i + 1 < rows.length ? starts[i + 1]! - 1 : lastPage,
+        title: r.title.trim(),
+      })),
+    },
+    issues: [],
+  };
 }
 
 export function quickAddEdition(input: QuickAdd): CustomEdition {

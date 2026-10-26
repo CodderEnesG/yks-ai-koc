@@ -5,3 +5,4 @@ flows:
   - today-*.yaml
   - checkin.yaml
   - account-sync.yaml
+  - toc-add.yaml

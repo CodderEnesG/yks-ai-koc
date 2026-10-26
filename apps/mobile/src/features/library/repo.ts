@@ -8,6 +8,7 @@ import { doneItemsByLibraryItem, percent } from '@/features/plan/progress';
 
 import {
   type CatalogEdition,
+  type CustomEdition,
   editionTitle,
   type ItemKind,
   type QuickAdd,
@@ -112,6 +113,23 @@ export function addCatalogBook(
       })
       .run();
   });
+}
+
+/** İçindekilerden eklenen özel baskı (T11). */
+export function addCustomBook(edition: CustomEdition, minutesPerItem: number, now: Date): void {
+  const timestamp = now.toISOString();
+  db.insert(libraryItem)
+    .values({
+      id: randomUUID(),
+      sourceKind: 'book',
+      customEdition: edition,
+      minutesPerItem,
+      sortOrder: nextSortOrder(),
+      status: 'active',
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    })
+    .run();
 }
 
 export function addQuickBook(input: QuickAdd, now: Date): void {
