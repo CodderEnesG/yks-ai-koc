@@ -1,6 +1,6 @@
 -- Hesap silme (T28). Çalıştırma: supabase test db
 -- account-delete fonksiyonu yalnız auth kullanıcısını siler; kişisel veri cascade ile gider. Yeni bir
--- kullanıcı tablosu cascade'siz eklenirse ilk test kırılır (rıza kayıtları T21'de bilinçli istisna olacak).
+-- kullanıcı tablosu cascade'siz eklenirse ilk test kırılır (rıza isteği bilinçli istisna).
 begin;
 create extension if not exists pgtap with schema extensions;
 select plan(6);
@@ -11,8 +11,10 @@ select is_empty(
      where c.contype = 'f'
        and c.confrelid = 'auth.users'::regclass
        and c.connamespace = 'public'::regnamespace
-       and c.confdeltype <> 'c'$$,
-  'public şemasında auth.users''a bağlı her yabancı anahtar on delete cascade'
+       and c.confdeltype <> 'c'
+       -- Bilinçli istisna: rıza kayıtları hesap silinse de kalır (rapor 2.11); bağlantı set null.
+       and c.conrelid <> 'public.consent_request'::regclass$$,
+  'public şemasında auth.users''a bağlı her yabancı anahtar on delete cascade (rıza isteği hariç)'
 );
 
 insert into auth.users (id, email) values
@@ -30,6 +32,9 @@ values ('a4444444-0000-0000-0000-000000000002', 'book',
 select public.consume_ai_quota('toc', 20);
 
 set local request.jwt.claim.sub = '55555555-5555-5555-5555-555555555555';
+insert into public.profile (id, birth_year, birth_month, grade, field, exam_date, weekday_minutes, consent_status, updated_at)
+values ('a5555555-0000-0000-0000-000000000001', 2000, 1, 'mezun', 'SAY', '2027-06-19',
+        array[60,60,60,60,60,60,60], 'not_required', now());
 insert into public.library_item (id, source_kind, custom_edition, sort_order, minutes_per_item, updated_at)
 values ('a5555555-0000-0000-0000-000000000002', 'book',
         '{"title":"y","units":[]}'::jsonb, 0, 3, now());

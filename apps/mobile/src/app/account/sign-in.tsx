@@ -4,7 +4,9 @@ import { TextInput, View } from 'react-native';
 
 import { Text } from '@/components/ui/text';
 import { Choice, StepScreen } from '@/features/onboarding/ui';
-import { sendCode, verifyCode } from '@/features/sync/auth';
+import { claimConsent } from '@/features/consent/consent';
+import { useProfile } from '@/features/profile/repo';
+import { sendCode, signOut, verifyCode } from '@/features/sync/auth';
 import { push, restore } from '@/features/sync/sync';
 import { tr } from '@/i18n/tr';
 
@@ -14,6 +16,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function SignInScreen() {
   const { restore: restoreParam } = useLocalSearchParams<{ restore?: string }>();
   const isRestore = restoreParam === '1';
+  const profile = useProfile();
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [sent, setSent] = useState(false);
@@ -51,6 +54,15 @@ export default function SignInScreen() {
           setError(a.noBackup);
           router.replace('/onboarding/birth');
         }
+        return;
+      }
+      // 18 yaş altı: veli onayı bu hesaba bağlanmadan sunucu veriyi kabul etmez (T21). Velinin hesabıyla
+      // ya da başka öğrencinin onayıyla bağlanamaz; o durumda oturum kapatılır.
+      if (profile?.consentStatus === 'granted' && !(await claimConsent())) {
+        await signOut();
+        setSent(false);
+        setCode('');
+        setError(a.claimFailed);
         return;
       }
       // Giriş tamam; ilk gönderim hata verirse otomatik senkron sonra yeniden dener.

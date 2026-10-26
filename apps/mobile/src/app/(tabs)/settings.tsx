@@ -81,9 +81,14 @@ export default function SettingsScreen() {
         <View className="gap-2">
           <Text className="font-medium">{s.account}</Text>
           {!canSync(profile.consentStatus) ? (
-            <Text testID="account-minor" variant="muted">
-              {s.minorPending}
-            </Text>
+            <>
+              <Text testID="account-minor" variant="muted">
+                {profile.consentStatus === 'withdrawn' ? s.minorWithdrawn : s.minorPending}
+              </Text>
+              <Button testID="consent-open" onPress={() => router.push('/account/consent')}>
+                <Text>{tr.consent.open}</Text>
+              </Button>
+            </>
           ) : session ? (
             <>
               <Text testID="account-connected">{s.connected(session.user.email ?? '')}</Text>

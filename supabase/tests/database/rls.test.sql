@@ -76,6 +76,11 @@ select is_empty(
   $$update public.profile set grade = 'mezun' where id = 'a0000000-0000-0000-0000-000000000001' returning id$$,
   'B, A''nın profilini güncelleyemez'
 );
+-- T21'den beri kişisel kayıt için profil (reşit ya da onaylı) şart.
+insert into public.profile (id, birth_year, birth_month, grade, field, exam_date, weekday_minutes,
+  consent_status, updated_at)
+values ('b0000000-0000-0000-0000-000000000001', 2000, 1, 'mezun', 'EA', '2027-06-19',
+  '{60,60,60,60,60,60,60}', 'not_required', now());
 select lives_ok(
   $$insert into public.library_item (id, source_kind, custom_edition, updated_at)
     values ('b0000000-0000-0000-0000-000000000002', 'book', '{"units": []}', now())$$,

@@ -16,7 +16,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | UI/stil | `uniwind` **1.13.0** (ücretsiz), `tailwindcss` ^4.3.3, RN Reusables bileşenleri (`src/components/ui/`, kod repoda) + `@rn-primitives/slot`, `@rn-primitives/portal`, `class-variance-authority`, `clsx`, `tailwind-merge` | Tema `src/global.css`'te yer tutucu (shadcn neutral); branding gelince yalnız değişkenler değişir |
 | Animasyon/jest | `react-native-reanimated` 4.7.1, `react-native-worklets` 0.13.0, `react-native-gesture-handler` ~3.3.0 | Expo pin'leri. Uniwind ücretsizde `className` animasyonu yok; animasyon doğrudan Reanimated ile |
 | Yerel veri | `expo-sqlite` ~58.0.13, `drizzle-orm` **~0.45.4** (1.0 RC değil), `drizzle-kit` (migration üretimi), `babel-plugin-inline-import` (`.sql` gömme) | Migration'lar `apps/mobile/drizzle/`, şema `src/db/schema.ts` |
-| Web | `next` **16.4.3**, React 19.3, Tailwind 4, React Compiler | Veli onayı ve rapor sayfaları (T21, T22) |
+| Web | `next` **16.4.3**, React 19.3, Tailwind 4, React Compiler, `cacheComponents`; `@supabase/supabase-js` 2.118.0 | Veli onay sayfası `/onay/[token]` (T21; istemci bileşeni, veli oturumu tarayıcıda, erişim yalnız RPC'lerle). `params` gibi istek verisi `Suspense` içinde okunur (cacheComponents kuralı). Ayarlar `apps/web/.env.local` (`.env.example`). Rapor sayfası T22 |
 | Plan motoru | `packages/plan-engine`: bağımlılık yok | `vitest` ^5.0.5 + `fast-check` ^4.10.2 ile property testleri |
 | Şema/doğrulama | `zod` ^4.6.7 | Kurulum profili doğrulaması (T09). Hedef: aynı şemalar Edge Function ve LLM JSON şeması (`z.toJSONSchema`) için de kaynak olsun. Formlar küçükken düz state + `safeParse` |
 | İstemci state | `zustand` ^5.0.16 | Kurulum taslağı (kalıcı değil). TanStack Query 5 yalnız Supabase çağrıları gelince (T16) |
@@ -73,6 +73,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 - Metro'yu `CI=1` ile başlatma: Expo bu modda dosya izlemeyi kapatır ve değişiklikler uygulamaya gelmez (2026-10-24'te yarım saat buna gitti).
 - Maestro akışları `apps/mobile/e2e/`'de. Hesap akışı giriş kodunu yerel Mailpit API'sinden (`127.0.0.1:54324/api/v1/messages`) `scripts/read-otp.js` ile okur. Birden çok simülatör açıksa cihaz belirtilmeli (`maestro --device <UDID> test apps/mobile/e2e`); aksi hâlde Maestro başka bir projenin simülatörüne gidebilir. Dev build simülatöre kurulu ve Metro açıkken `maestro test apps/mobile/e2e` ile koşar. `_open-dev-build.yaml` temiz durumla açar ve kendiliğinden açılan Expo geliştirici menüsünü kapatır.
 - Maestro iOS'ta ekran dışındaki ya da klavyenin arkasındaki öğeyi görünür sayabilir: `scrollUntilVisible`'da `visibilityPercentage: 100` ve `centerElement: true` kullan, kaydırmadan önce klavyeyi bir başlığa dokunarak kapat. Sayı klavyesinde `hideKeyboard` tuşa basar; kullanma.
+- Web sayfaları simülatörün Safari'sinde test edilir (`openLink`). Web görünümünde de ekran dışındaki öğe görünür sayılır: dokunmadan önce `scrollUntilVisible` + `centerElement`. Onay kutularına `aria-label` ile dokunulur; durum `checked: true` ile doğrulanır. `consent-minor.yaml` için `pnpm --filter @yks/web dev` açık olmalı; mobil `.env`'de `EXPO_PUBLIC_WEB_URL`.
 - `toc-add.yaml` simülatör galerisinde bir içindekiler görüntüsü ister (`xcrun simctl addmedia <UDID> data-private/meb-ogm/toc-photo/<kitap>.jpg`; telifli, repoya girmez) ve `supabase functions serve` açık olmalı. Her koşu bir gerçek Claude çağrısı yapar (≈0,001$, tahmin).
 
 **Üretilen dosyalar**
@@ -85,7 +86,8 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 - Onaydan önce Supabase'e kişisel veri gitmez ve giriş yapılmaz (anonim giriş dahil); yalnız katalog oturumsuz okunur (rapor 2.11).
 - Her kullanıcı tablosunda: cihazda üretilen `id` (UUID), `user_id`, `updated_at` (istemci zamanı), `server_updated_at` (sunucuda trigger), `deleted_at` (sunucuda gerçek DELETE yok).
-- Her kullanıcı tablosu `user_id … references auth.users (id) on delete cascade`: hesap silme (T28) yalnız auth kullanıcısını siler. pgTAP testi denetler; tek istisna rıza kayıtları (T21).
+- Her kullanıcı tablosu `user_id … references auth.users (id) on delete cascade`: hesap silme (T28) yalnız auth kullanıcısını siler. pgTAP testi denetler; tek istisna `consent_request` (`set null`, rıza kayıtları kalır).
+- 18 yaş altı veri sunucuda da onaysız kabul edilmez: öğrenci tablolarında kısıtlayıcı (restrictive) RLS politikaları (`consent_ok`, `my_consent_ok`). Yeni öğrenci tablosu da aynı politikayı almalı.
 - RLS: `using (user_id = auth.uid())` ve `with check (user_id = auth.uid())`. 30 Ekim 2026'dan sonra her migration'a açık `GRANT … TO authenticated` (doğrulanacak).
 - Sync kapsamı (karar 14, 2026-10-26): cihaz asıl kaynak, sunucu yedek. Son gönderimden beri değişen satırlar upsert edilir; tam çekme yalnız yeni telefonda geri yüklemede.
 

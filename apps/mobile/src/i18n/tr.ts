@@ -137,6 +137,7 @@ export const tr = {
     signOut: 'Çıkış yap',
     minorPending:
       'Velin onay verene kadar verilerin yalnız bu telefonda kalır. Hesap bağlama onaydan sonra açılır.',
+    minorWithdrawn: 'Velin onayını geri çekti; verilerin yalnız bu telefonda.',
     deleteTitle: 'Verileri sil',
     deleteHint: (account: boolean) =>
       account
@@ -166,6 +167,34 @@ export const tr = {
     invalidEmail: 'Geçerli bir e-posta adresi yaz',
     failed: 'Olmadı; kodu kontrol edip tekrar dene.',
     noBackup: 'Bu hesapta kayıtlı plan yok; kuruluma başlayalım.',
+    claimFailed:
+      'Velinin onayı bu hesaba bağlanamadı. Kendi e-posta adresinle giriş yap (velinin adresiyle değil).',
+  },
+  consent: {
+    title: 'Veli onayı',
+    intro:
+      '18 yaşından küçük olduğun için sohbet, fotoğrafla kitap ekleme ve yedekleme velinin onayından sonra açılır. O zamana kadar planın yalnız bu telefonda çalışır.',
+    emailLabel: 'Velinin e-posta adresi',
+    emailHint:
+      'Velin onay sayfasında bu adrese gelen kodla doğrulama yapacak. Sunucuya yalnız bu adres gider.',
+    create: 'Onay linki oluştur',
+    failed: 'Link oluşturulamadı; internet bağlantını kontrol et.',
+    pendingTitle: 'Link hazır',
+    pendingBody: (email: string) =>
+      `Linki veline gönder. Velin sayfayı açıp ${email} adresiyle onay verince burada görünür. Link 7 gün geçerli.`,
+    whatsapp: "WhatsApp'tan gönder",
+    share: 'Başka yolla paylaş',
+    shareMessage: (link: string) =>
+      `YKS AI Koç'u kullanmak için onayına ihtiyacım var. Bu linkten açıklamayı okuyup onay verebilirsin: ${link}`,
+    check: 'Durumu kontrol et',
+    stillPending: 'Henüz onay gelmedi.',
+    newLink: 'Yeni link oluştur',
+    expired: 'Linkin süresi doldu; yeni bir link oluştur.',
+    grantedTitle: 'Velin onay verdi',
+    grantedBody: 'Artık hesabını bağlayıp planını yedekleyebilirsin.',
+    withdrawn:
+      'Velin onayını geri çekti. Sunucudaki yedeğin silindi; planın bu telefonda çalışmaya devam ediyor. İstersen yeniden onay isteyebilirsin.',
+    open: 'Veli onayı iste',
   },
   notifications: {
     channel: 'Plan hatırlatmaları',

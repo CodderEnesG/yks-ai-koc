@@ -110,6 +110,23 @@ export default function TodayScreen() {
           </Text>
         ) : null}
 
+        {profile.consentStatus === 'pending' || profile.consentStatus === 'withdrawn' ? (
+          <View className="bg-secondary gap-2 rounded-xl p-3">
+            <Text variant="muted">
+              {profile.consentStatus === 'withdrawn'
+                ? tr.settings.minorWithdrawn
+                : tr.settings.minorPending}
+            </Text>
+            <Button
+              testID="today-consent"
+              size="sm"
+              variant="outline"
+              onPress={() => router.push('/account/consent')}>
+              <Text>{tr.consent.open}</Text>
+            </Button>
+          </View>
+        ) : null}
+
         {safeMode ? (
           <Text testID="safe-mode" className="bg-secondary rounded-xl p-3">
             {tr.checkin.safeMode}

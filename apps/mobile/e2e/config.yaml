@@ -7,3 +7,4 @@ flows:
   - account-sync.yaml
   - toc-add.yaml
   - account-delete.yaml
+  - consent-minor.yaml

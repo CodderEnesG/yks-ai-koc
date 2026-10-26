@@ -1,0 +1,17 @@
+# Kurulumu 18 yaş altı öğrenci olarak varsayılanlarla geçer (veli onayı bekler).
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _open-dev-build.yaml
+- tapOn: { id: start }
+- tapOn: { id: month-11 }
+- tapOn: { id: year-2010 }
+- tapOn: { id: continue }
+- tapOn: { id: grade-11 }
+- tapOn: { id: continue }
+- tapOn: { id: field-EA }
+- tapOn: { id: continue }
+- tapOn: { id: skip }
+- tapOn: { id: continue }
+- tapOn: { id: continue }
+- tapOn: { id: finish }
+- assertVisible: { id: today-countdown }
