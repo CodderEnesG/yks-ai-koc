@@ -15,10 +15,12 @@ appId: dev.placeholder.ykskoc
 - assertVisible: { id: support-notify }
 - tapOn: { id: support-lighten }
 - assertVisible: { id: support-lightened }
-# iOS'ta geri: kenardan kaydırma.
-- swipe:
-    start: 1%, 50%
-    end: 90%, 50%
+# Geri yerine yeniden başlat: native geri düğmesinin erişilebilir adı yok, kenardan kaydırma tutmuyor.
+# Böylece güvenli modun kalıcı olduğu da sınanır.
+- launchApp
+- extendedWaitUntil:
+    visible: 'Bugün'
+    timeout: 15000
 - tapOn: 'Bugün'
 - assertVisible: { id: safe-mode }
 - tapOn: { id: safe-mode-support }
