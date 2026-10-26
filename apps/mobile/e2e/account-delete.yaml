@@ -1,0 +1,43 @@
+# T28: hesap ve veri silme. Bağlı hesap yedeklenir, Ayarlar'dan silinir; uygulama kuruluma döner ve aynı
+# e-postayla geri yükleme yedek bulamaz (sunucudaki veri de gitmiş). Yerel Supabase ve
+# `supabase functions serve` açık olmalı.
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- runFlow: _connect-account.yaml
+- tapOn: { id: sync-now }
+- extendedWaitUntil:
+    visible: { id: sync-status }
+    timeout: 15000
+- scrollUntilVisible:
+    element: { id: delete-data }
+    visibilityPercentage: 100
+    centerElement: true
+- assertVisible: 'Hesabımı ve verilerimi sil'
+- tapOn: { id: delete-data }
+- tapOn: 'Vazgeç'
+- assertVisible: { id: delete-data }
+- tapOn: { id: delete-data }
+- tapOn: 'Sil'
+- extendedWaitUntil:
+    visible: { id: restore }
+    timeout: 15000
+
+# Aynı hesapla geri yükleme: yedek yok, kurulum baştan.
+- runScript: scripts/clear-mail.js
+- tapOn: { id: restore }
+- tapOn: { id: account-email }
+- inputText: ${output.email}
+- tapOn: { id: account-consent }
+- tapOn: { id: continue }
+- retry:
+    maxRetries: 5
+    commands:
+      - runScript: scripts/read-otp.js
+      - assertTrue: ${output.otp && output.otp.length === 6}
+- tapOn: { id: account-code }
+- inputText: ${output.otp}
+- tapOn: { id: continue }
+- extendedWaitUntil:
+    visible: { id: month-1 }
+    timeout: 15000

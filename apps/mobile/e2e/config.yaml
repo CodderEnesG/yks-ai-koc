@@ -6,3 +6,4 @@ flows:
   - checkin.yaml
   - account-sync.yaml
   - toc-add.yaml
+  - account-delete.yaml

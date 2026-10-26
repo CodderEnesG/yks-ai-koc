@@ -30,7 +30,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Metinler | Tipli `src/i18n/tr.ts` nesnesi (`tr.onboarding.…`) | Türkçe tek dil; ikinci dil gelirse i18next'e taşınır. Tarih biçimi Intl'siz (`src/lib/date.ts`) |
 | Test (mobil) | `vitest` ^5.0.5 saf mantık için (`src/**/*.test.ts`); Maestro 2 akışları `apps/mobile/e2e/` (yerelde, CI'da değil) | Bileşen testleri gerekirse `jest-expo` + RNTL |
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
-| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru ve `toc-extract`; fonksiyon `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
+| CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru ve her Edge Function, `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
 | Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0 | Ayarlar `.env`'de (`.env.example`) |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 
@@ -67,7 +67,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 **Paylaşılan paketler (`packages/*`)**
 - Saf TS, kaynak koddan tüketilir (`exports` → `src/index.ts`); build adımı yok.
 - Göreli import'lar `.ts` uzantısıyla yazılır (`./civil-date.ts`). Deno uzantı ister; Metro ve Next `allowImportingTsExtensions` ile kabul eder, Next'te `transpilePackages` gerekir.
-- Edge Functions'a import map ile alınır: fonksiyonun `deno.json`'unda `"@yks/plan-engine": "../../../packages/plan-engine/src/index.ts"`. Yerelde `deno check` ve `supabase functions serve` ile doğrulandı (`toc-extract` → `packages/ai`); uzak deploy'un `supabase/` dışını paketlemesi ilk deploy'da doğrulanacak.
+- Edge Functions'a import map ile alınır: fonksiyonun `deno.json`'unda `"@yks/plan-engine": "../../../packages/plan-engine/src/index.ts"`. Yerelde `deno check` ve `supabase functions serve` ile doğrulandı (`toc-extract` → `packages/ai`); `supabase functions deploy` da `supabase/` dışındaki paketi topluyor (2026-10-26, CLI 2.47.2).
 
 **Metro ve uçtan uca testler**
 - Metro'yu `CI=1` ile başlatma: Expo bu modda dosya izlemeyi kapatır ve değişiklikler uygulamaya gelmez (2026-10-24'te yarım saat buna gitti).
@@ -85,6 +85,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 - Onaydan önce Supabase'e kişisel veri gitmez ve giriş yapılmaz (anonim giriş dahil); yalnız katalog oturumsuz okunur (rapor 2.11).
 - Her kullanıcı tablosunda: cihazda üretilen `id` (UUID), `user_id`, `updated_at` (istemci zamanı), `server_updated_at` (sunucuda trigger), `deleted_at` (sunucuda gerçek DELETE yok).
+- Her kullanıcı tablosu `user_id … references auth.users (id) on delete cascade`: hesap silme (T28) yalnız auth kullanıcısını siler. pgTAP testi denetler; tek istisna rıza kayıtları (T21).
 - RLS: `using (user_id = auth.uid())` ve `with check (user_id = auth.uid())`. 30 Ekim 2026'dan sonra her migration'a açık `GRANT … TO authenticated` (doğrulanacak).
 - Sync kapsamı (karar 14, 2026-10-26): cihaz asıl kaynak, sunucu yedek. Son gönderimden beri değişen satırlar upsert edilir; tam çekme yalnız yeni telefonda geri yüklemede.
 

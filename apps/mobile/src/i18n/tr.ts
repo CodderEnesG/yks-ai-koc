@@ -137,6 +137,17 @@ export const tr = {
     signOut: 'Çıkış yap',
     minorPending:
       'Velin onay verene kadar verilerin yalnız bu telefonda kalır. Hesap bağlama onaydan sonra açılır.',
+    deleteTitle: 'Verileri sil',
+    deleteHint: (account: boolean) =>
+      account
+        ? 'Hesabın, sunucudaki yedeğin ve bu telefondaki planın, kitapların ve check-in kayıtların kalıcı olarak silinir.'
+        : 'Bu telefondaki planın, kitapların ve check-in kayıtların kalıcı olarak silinir.',
+    deleteButton: (account: boolean) => (account ? 'Hesabımı ve verilerimi sil' : 'Verilerimi sil'),
+    deleteConfirmTitle: 'Her şey silinsin mi?',
+    deleteConfirmBody: 'Bu işlem geri alınamaz. Uygulama kurulumun başına döner.',
+    deleteConfirm: 'Sil',
+    cancel: 'Vazgeç',
+    deleteFailed: 'Silinemedi; internet bağlantını kontrol edip tekrar dene.',
   },
   account: {
     title: 'Hesap bağla',

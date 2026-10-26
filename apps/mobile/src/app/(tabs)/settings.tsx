@@ -1,10 +1,11 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { deleteAccountAndData } from '@/features/account/delete';
 import { Choice } from '@/features/onboarding/ui';
 import { useProfile } from '@/features/profile/repo';
 import { MORNING_CHOICES, setMorningTime, useMorningTime } from '@/features/settings/prefs';
@@ -23,6 +24,8 @@ export default function SettingsScreen() {
   const session = useSession();
   const morning = useMorningTime();
   const [status, setStatus] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(false);
   const s = tr.settings;
   if (!profile || session === undefined || morning === undefined) return null;
 
@@ -34,6 +37,24 @@ export default function SettingsScreen() {
       setStatus(s.syncFailed);
     }
   };
+
+  const runDelete = async () => {
+    setDeleting(true);
+    setDeleteError(false);
+    try {
+      await deleteAccountAndData();
+      router.replace('/onboarding');
+    } catch {
+      setDeleteError(true);
+      setDeleting(false);
+    }
+  };
+
+  const confirmDelete = () =>
+    Alert.alert(s.deleteConfirmTitle, s.deleteConfirmBody, [
+      { text: s.cancel, style: 'cancel' },
+      { text: s.deleteConfirm, style: 'destructive', onPress: () => void runDelete() },
+    ]);
 
   return (
     <SafeAreaView className="bg-background flex-1">
@@ -87,6 +108,23 @@ export default function SettingsScreen() {
               </Button>
             </>
           )}
+        </View>
+
+        <View className="gap-2">
+          <Text className="font-medium">{s.deleteTitle}</Text>
+          <Text variant="muted">{s.deleteHint(!!session)}</Text>
+          <Button
+            testID="delete-data"
+            variant="destructive"
+            disabled={deleting}
+            onPress={confirmDelete}>
+            <Text>{s.deleteButton(!!session)}</Text>
+          </Button>
+          {deleteError ? (
+            <Text testID="delete-failed" className="text-destructive text-sm">
+              {s.deleteFailed}
+            </Text>
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>
