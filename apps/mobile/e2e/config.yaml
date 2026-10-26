@@ -8,3 +8,4 @@ flows:
   - toc-add.yaml
   - account-delete.yaml
   - consent-minor.yaml
+  - report-minor.yaml

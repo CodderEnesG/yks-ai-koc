@@ -11,6 +11,7 @@ import { supabase } from '@/lib/supabase';
 
 const TOKEN_KEY = 'consent_token';
 const EMAIL_KEY = 'consent_parent_email';
+const REPORT_KEY = 'consent_report';
 
 export type ConsentRequestStatus = 'pending' | 'granted' | 'withdrawn' | 'expired' | 'invalid';
 
@@ -32,10 +33,15 @@ function base64Url(bytes: Uint8Array): string {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-export function consentLink(token: string): string {
+/** Veli sayfalarının (apps/web) adresi. */
+export function webLink(path: string): string {
   const base = process.env.EXPO_PUBLIC_WEB_URL;
   if (!base) throw new Error('EXPO_PUBLIC_WEB_URL apps/mobile/.env içinde olmalı');
-  return `${base.replace(/\/$/, '')}/onay/${token}`;
+  return `${base.replace(/\/$/, '')}${path}`;
+}
+
+export function consentLink(token: string): string {
+  return webLink(`/onay/${token}`);
 }
 
 /** Açık istek: kod ve velinin e-postası (yalnız ekranda göstermek için). */
@@ -45,6 +51,12 @@ export function useConsentRequest(): { token: string; parentEmail: string } | nu
   const token = data.find((r) => r.key === TOKEN_KEY)?.value;
   const parentEmail = data.find((r) => r.key === EMAIL_KEY)?.value;
   return token && parentEmail ? { token, parentEmail } : null;
+}
+
+/** Velinin haftalık rapora rıza verip vermediği (son durum sorgusundan). */
+export function useReportConsent(): boolean {
+  const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, REPORT_KEY)));
+  return data[0]?.value === '1';
 }
 
 /** Yeni istek açar (öncekinin yerine geçer). 32 rastgele bayt → 43 karakterlik kod. */
@@ -74,8 +86,11 @@ export async function refreshConsentStatus(): Promise<ConsentRequestStatus | nul
   if (!token) return null;
   const { data, error } = await supabase.rpc('consent_request_status', { p_token: token });
   if (error) throw error;
-  const row = (data as { status: Exclude<ConsentRequestStatus, 'invalid'> }[] | null)?.[0];
+  const row = (
+    data as { status: Exclude<ConsentRequestStatus, 'invalid'>; report_consent: boolean }[] | null
+  )?.[0];
   const status: ConsentRequestStatus = row?.status ?? 'invalid';
+  writeMeta(REPORT_KEY, status === 'granted' && row?.report_consent ? '1' : '0');
   const [p] = db.select().from(profile).limit(1).all();
   if (p && status === 'granted' && p.consentStatus !== 'granted') setLocalConsent('granted');
   if (p && status === 'withdrawn' && p.consentStatus !== 'withdrawn') {

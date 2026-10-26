@@ -1,5 +1,5 @@
 // Kitap ilerlemesi (T23): yapılan sayfa/test sayısı. Aynı aralık iki kez yapıldı sayılsa da bir kez
-// sayılır (aralıklar birim içinde birleştirilir). Saf; vitest ile test edilir.
+// sayılır (aralıklar birim içinde birleştirilir). Öğrencinin kütüphanesi ve veli raporu (T22) aynı kodu kullanır.
 
 export interface DoneTask {
   libraryItemId: string;

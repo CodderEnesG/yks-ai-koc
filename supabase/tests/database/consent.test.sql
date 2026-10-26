@@ -74,12 +74,12 @@ select is(public.claim_consent(repeat('a', 43)), false, 'veli hesabı öğrenci 
 
 reset role;
 select is(
-  (select array_agg(kind order by kind) from public.consent),
+  (select array_agg(kind order by kind) from public.consent where request_id = (select id from public.consent_request where token_hash = public.consent_token_hash(repeat('a', 43)))),
   array['ai_yurt_disi', 'aydinlatma'],
   'rızalar ayrı satırlar; rapor rızası verilmedi'
 );
 select ok(
-  (select bool_and(ip_hash is not null and evidence_hash !~ 'Ayşe') from public.consent),
+  (select bool_and(ip_hash is not null and evidence_hash !~ 'Ayşe') from public.consent where request_id = (select id from public.consent_request where token_hash = public.consent_token_hash(repeat('a', 43)))),
   'IP ve ad açık tutulmaz, hash tutulur'
 );
 
@@ -115,7 +115,7 @@ select is_empty(
   'öğrencinin profili silindi'
 );
 select ok(
-  (select count(*) = 2 and bool_and(withdrawn_at is not null) from public.consent),
+  (select count(*) = 2 and bool_and(withdrawn_at is not null) from public.consent where request_id = (select id from public.consent_request where token_hash = public.consent_token_hash(repeat('a', 43)))),
   'rıza kayıtları geri çekilme zamanıyla kalır'
 );
 

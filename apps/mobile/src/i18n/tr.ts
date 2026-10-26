@@ -196,6 +196,12 @@ export const tr = {
       'Velin onayını geri çekti. Sunucudaki yedeğin silindi; planın bu telefonda çalışmaya devam ediyor. İstersen yeniden onay isteyebilirsin.',
     open: 'Veli onayı iste',
   },
+  report: {
+    share: 'Haftalık raporu velime gönder',
+    message: (link: string) => `Bu haftaki çalışma raporum: ${link}`,
+    noConsent: 'Velin haftalık rapora izin vermedi.',
+    failed: 'Rapor linki alınamadı; internet bağlantını kontrol et.',
+  },
   notifications: {
     channel: 'Plan hatırlatmaları',
     morningTitle: 'Bugünün planı hazır',

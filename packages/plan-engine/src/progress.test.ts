@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { doneItemsByLibraryItem, percent } from './progress';
+import { doneItemsByLibraryItem, percent } from './progress.ts';
 
 describe('doneItemsByLibraryItem', () => {
   it('birim içinde aralıkları birleştirir, çakışanı bir kez sayar', () => {

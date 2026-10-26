@@ -27,3 +27,7 @@ export { DEFAULT_NOTE_RATIO, DEFAULT_WATCH_SPEED, videoMinutes, WATCH_SPEEDS } f
 export type { WatchSpeed } from './video.ts';
 export { currentStreak, isDayComplete } from './streak.ts';
 export type { DayTask, Streak } from './streak.ts';
+export { doneItemsByLibraryItem, percent } from './progress.ts';
+export type { DoneTask } from './progress.ts';
+export { weeklySummary, weekStartOf } from './weekly.ts';
+export type { ReportBook, ReportTask, WeeklySummary } from './weekly.ts';

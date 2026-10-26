@@ -7,74 +7,10 @@ appId: dev.placeholder.ykskoc
 - runFlow: _onboard-minor.yaml
 - assertVisible: { id: today-consent }
 
-# 1. Öğrenci linki oluşturur.
-- tapOn: { id: today-consent }
-- tapOn: { id: consent-email }
-- inputText: ${output.parentEmail}
-- tapOn: { id: continue }
-- extendedWaitUntil:
-    visible: { id: consent-link }
-    timeout: 10000
-- copyTextFrom: { id: consent-link }
-- evalScript: ${output.link = maestro.copiedText}
-- tapOn: { id: consent-check }
-- assertVisible: { id: consent-pending }
-
-# 2. Veli sayfayı açar ve onay verir.
-- runScript: scripts/clear-mail.js
-- openLink: ${output.link}
-- extendedWaitUntil:
-    visible: 'Aydınlatma metni.*'
-    timeout: 20000
-# Web görünümünde ekran dışındaki öğe de "görünür" sayılır; dokunmadan önce ortaya kaydır.
-- scrollUntilVisible:
-    element: 'AI ve yurt dışı aktarım rızası'
-    visibilityPercentage: 100
-    centerElement: true
-- tapOn: 'AI ve yurt dışı aktarım rızası'
-- assertVisible:
-    text: 'AI ve yurt dışı aktarım rızası'
-    checked: true
-- scrollUntilVisible:
-    element: 'Adınız ve soyadınız'
-    visibilityPercentage: 100
-    centerElement: true
-- tapOn: 'Adınız ve soyadınız'
-- inputText: 'Ayşe Yılmaz'
-- tapOn: 'E-posta adresiniz.*'
-- inputText: ${output.parentEmail}
-- scrollUntilVisible:
-    element: 'Doğrulama kodu gönder'
-    visibilityPercentage: 100
-    centerElement: true
-- assertVisible:
-    text: 'Doğrulama kodu gönder'
-    enabled: true
-- tapOn: 'Doğrulama kodu gönder'
-- retry:
-    maxRetries: 5
-    commands:
-      - runScript: scripts/read-otp.js
-      - assertTrue: ${output.otp && output.otp.length === 6}
-- tapOn: 'E-postanıza gelen.*'
-- inputText: ${output.otp}
-- tapOn: 'Onay veriyorum'
-- extendedWaitUntil:
-    visible: 'Onay verildi.*'
-    timeout: 15000
-
-# 3. Öğrenci uygulamaya döner: onay görünür, hesap bağlanır ve yedek sunucuya yazılır.
-- launchApp
-- tapOn: 'Ayarlar'
-- extendedWaitUntil:
-    visible: { id: account-connect }
-    timeout: 15000
-- runFlow: _connect-account.yaml
-- tapOn: { id: sync-now }
-- extendedWaitUntil:
-    visible: { id: sync-status }
-    timeout: 15000
-- assertNotVisible: 'Yedeklenemedi.*'
+- runFlow:
+    file: _consent-grant.yaml
+    env:
+      REPORT: 'false'
 
 # 4. Veli onayı geri çeker: öğrencinin sunucu hesabı silinir, uygulama yerel moda döner.
 - runScript: scripts/clear-mail.js
@@ -85,6 +21,7 @@ appId: dev.placeholder.ykskoc
 - tapOn: 'Onayı geri çekmek istiyorum'
 - tapOn: 'E-posta adresiniz.*'
 - inputText: ${output.parentEmail}
+- tapOn: 'Done'
 - tapOn: 'Doğrulama kodu gönder'
 - retry:
     maxRetries: 5

@@ -1,10 +1,10 @@
+import { doneItemsByLibraryItem, percent } from '@yks/plan-engine';
 import { and, asc, eq, isNull, max } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite/query';
 import { randomUUID } from 'expo-crypto';
 
 import { db } from '@/db/client';
 import { catalogEdition, libraryItem, planTask } from '@/db/schema';
-import { doneItemsByLibraryItem, percent } from '@/features/plan/progress';
 
 import {
   type CatalogEdition,

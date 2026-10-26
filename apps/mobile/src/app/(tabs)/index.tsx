@@ -21,6 +21,7 @@ import { syncNotifications } from '@/features/notifications/sync';
 import { useMorningTime } from '@/features/settings/prefs';
 import { TaskCard } from '@/features/plan/task-card';
 import { deleteProfile, useProfile } from '@/features/profile/repo';
+import { ReportShare } from '@/features/report/report-share';
 import { tr } from '@/i18n/tr';
 import { formatCivilDate } from '@/lib/date';
 import { useToday } from '@/lib/use-today';
@@ -126,6 +127,9 @@ export default function TodayScreen() {
             </Button>
           </View>
         ) : null}
+
+        {/* Pazar: haftalık raporu veliye gönderme zamanı (rapor 2.12). */}
+        {weekdayIndex(today) === 6 ? <ReportShare /> : null}
 
         {safeMode ? (
           <Text testID="safe-mode" className="bg-secondary rounded-xl p-3">

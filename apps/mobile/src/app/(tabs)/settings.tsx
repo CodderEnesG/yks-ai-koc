@@ -8,6 +8,7 @@ import { Text } from '@/components/ui/text';
 import { deleteAccountAndData } from '@/features/account/delete';
 import { Choice } from '@/features/onboarding/ui';
 import { useProfile } from '@/features/profile/repo';
+import { ReportShare } from '@/features/report/report-share';
 import { MORNING_CHOICES, setMorningTime, useMorningTime } from '@/features/settings/prefs';
 import { signOut, useSession } from '@/features/sync/auth';
 import { canSync } from '@/features/sync/mapping';
@@ -93,6 +94,7 @@ export default function SettingsScreen() {
             <>
               <Text testID="account-connected">{s.connected(session.user.email ?? '')}</Text>
               <Text variant="muted">{last ? s.lastSync(formatTime(last)) : s.neverSynced}</Text>
+              <ReportShare />
               <Button testID="sync-now" variant="outline" onPress={syncNow}>
                 <Text>{s.syncNow}</Text>
               </Button>
