@@ -6,6 +6,7 @@ import { Linking, ScrollView, Share, View } from 'react-native';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { track } from '@/features/analytics/analytics';
 import { startSafeMode, useSafetyDays } from '@/features/safety/safe-mode';
 import { tr } from '@/i18n/tr';
 import { useToday } from '@/lib/use-today';
@@ -76,7 +77,10 @@ export default function SupportScreen() {
               <Button
                 testID="support-lighten"
                 variant="outline"
-                onPress={() => startSafeMode(today)}>
+                onPress={() => {
+                  startSafeMode(today);
+                  track('guvenli_mod_acildi', { kaynak: 'destek' });
+                }}>
                 <Text>{s.lighten}</Text>
               </Button>
               <Text variant="muted">{s.lightenHint}</Text>

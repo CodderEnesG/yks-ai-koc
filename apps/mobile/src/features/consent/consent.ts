@@ -7,6 +7,7 @@ import { getRandomBytes } from 'expo-crypto';
 
 import { db } from '@/db/client';
 import { appMeta, profile } from '@/db/schema';
+import { startAnalytics, stopAnalytics, track } from '@/features/analytics/analytics';
 import { supabase } from '@/lib/supabase';
 
 const TOKEN_KEY = 'consent_token';
@@ -92,9 +93,14 @@ export async function refreshConsentStatus(): Promise<ConsentRequestStatus | nul
   const status: ConsentRequestStatus = row?.status ?? 'invalid';
   writeMeta(REPORT_KEY, status === 'granted' && row?.report_consent ? '1' : '0');
   const [p] = db.select().from(profile).limit(1).all();
-  if (p && status === 'granted' && p.consentStatus !== 'granted') setLocalConsent('granted');
+  if (p && status === 'granted' && p.consentStatus !== 'granted') {
+    setLocalConsent('granted');
+    startAnalytics();
+    track('veli_onayladi');
+  }
   if (p && status === 'withdrawn' && p.consentStatus !== 'withdrawn') {
     setLocalConsent('withdrawn');
+    await stopAnalytics();
     await supabase.auth.signOut({ scope: 'local' });
   }
   return status;

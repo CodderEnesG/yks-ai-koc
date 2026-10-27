@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { startAnalytics, track } from '@/features/analytics/analytics';
 import { isMinor, profileIssues, profileSchema } from '@/features/onboarding/rules';
 import { useOnboarding } from '@/features/onboarding/store';
 import { saveProfile } from '@/features/profile/repo';
@@ -59,6 +60,11 @@ export default function DoneScreen() {
           size="lg"
           onPress={() => {
             saveProfile(profile, today, new Date());
+            // 18 yaş altında veli onayına kadar analitik yok (değişmez kural).
+            if (!minor) {
+              startAnalytics();
+              track('onboarding_tamam', { sinif: profile.grade, alan: profile.field });
+            }
             draft.reset();
             router.replace('/');
           }}>

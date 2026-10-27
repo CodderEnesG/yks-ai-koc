@@ -7,6 +7,7 @@ import { randomUUID } from 'expo-crypto';
 
 import { db } from '@/db/client';
 import { checkin, planTask } from '@/db/schema';
+import { track } from '@/features/analytics/analytics';
 
 import { planUnitId } from './inputs';
 
@@ -26,6 +27,26 @@ function loadTasks(ids: readonly string[]) {
     .all();
 }
 
+/** Günün son kartı işaretlendiyse analitik olayı (T24): yapılan görev oranı ve ilk neden. */
+function trackIfDayDone(day: string | undefined): void {
+  if (!day) return;
+  const tasks = db
+    .select()
+    .from(planTask)
+    .where(and(eq(planTask.day, day), isNull(planTask.deletedAt)))
+    .all();
+  if (tasks.length === 0 || tasks.some((t) => t.status === 'planned')) return;
+  const done = tasks.filter((t) => t.status === 'done').length;
+  const reason = tasks.find((t) => t.reason)?.reason;
+  track('checkin', {
+    tamam_orani: Math.round((done / tasks.length) * 100) / 100,
+    ...(reason ? { neden: reason } : {}),
+  });
+  if (tasks.some((t) => t.reason === 'kotu_hissediyorum')) {
+    track('guvenli_mod_acildi', { kaynak: 'checkin' });
+  }
+}
+
 /** Grubun tüm görevleri yapıldı ya da hiç yapılamadı. */
 export function markTasks(
   ids: readonly string[],
@@ -34,10 +55,12 @@ export function markTasks(
   now: Date,
 ): void {
   const timestamp = now.toISOString();
+  const day = loadTasks(ids)[0]?.day;
   db.update(planTask)
     .set({ status, reason: status === 'skipped' ? reason : null, updatedAt: timestamp })
     .where(inArray(planTask.id, [...ids]))
     .run();
+  trackIfDayDone(day);
 }
 
 /**
@@ -51,8 +74,9 @@ export function markPartial(
   now: Date,
 ): void {
   const timestamp = now.toISOString();
+  const tasks = loadTasks(ids);
   db.transaction((tx) => {
-    for (const t of loadTasks(ids)) {
+    for (const t of tasks) {
       if (t.rangeLast <= doneThrough) {
         tx.update(planTask)
           .set({ status: 'done', reason: null, updatedAt: timestamp })
@@ -91,6 +115,7 @@ export function markPartial(
       }
     }
   });
+  trackIfDayDone(tasks[0]?.day);
 }
 
 /** Plan motorunun neden kuralları için geçmiş (rules.ts: deriveAdjustments). */

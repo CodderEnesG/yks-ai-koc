@@ -38,7 +38,7 @@ export default function ScanScreen() {
           const isbn = normalizeIsbn(data);
           if (!isbn || handled.current) return;
           handled.current = true;
-          router.replace({ pathname: '/book/search', params: { q: isbn } });
+          router.replace({ pathname: '/book/search', params: { q: isbn, via: 'barkod' } });
         }}
       />
       <View className="absolute inset-x-0 bottom-0 gap-3 p-6 pb-12">

@@ -16,7 +16,7 @@ import { Choice } from '@/features/onboarding/ui';
 import { tr } from '@/i18n/tr';
 
 export default function SearchScreen() {
-  const params = useLocalSearchParams<{ q?: string }>();
+  const params = useLocalSearchParams<{ q?: string; via?: 'barkod' }>();
   const [query, setQuery] = useState(params.q ?? '');
   const [catalog, setCatalog] = useState<CatalogEdition[] | null>(null);
   const [failed, setFailed] = useState(false);
@@ -52,7 +52,12 @@ export default function SearchScreen() {
             label={editionTitle(e)}
             description={`${e.publisher} · ${tr.library.edition.pages(e.pageCount)}`}
             selected={false}
-            onPress={() => router.push({ pathname: '/book/edition', params: { id: e.id } })}
+            onPress={() =>
+              router.push({
+                pathname: '/book/edition',
+                params: { id: e.id, via: params.via ?? 'katalog' },
+              })
+            }
           />
         ))}
         {(searched && catalog && results.length === 0) || failed ? (

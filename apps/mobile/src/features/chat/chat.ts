@@ -7,6 +7,7 @@ import { randomUUID } from 'expo-crypto';
 
 import { db } from '@/db/client';
 import { chatMessage } from '@/db/schema';
+import { track } from '@/features/analytics/analytics';
 import { loadReasonEvents } from '@/features/plan/checkin';
 import { loadSafetyDays, startSafeMode } from '@/features/safety/safe-mode';
 import { supabase } from '@/lib/supabase';
@@ -70,7 +71,11 @@ export async function sendChatMessage(
       })
       .run();
   });
-  if (res.startSafeMode) startSafeMode(today);
+  track('sohbet_mesaj', { aksiyon: res.action });
+  if (res.startSafeMode) {
+    startSafeMode(today);
+    track('guvenli_mod_acildi', { kaynak: 'sohbet' });
+  }
   return { action: res.action };
 }
 

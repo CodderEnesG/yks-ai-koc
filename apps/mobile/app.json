@@ -56,7 +56,8 @@
           "cameraPermission": "İçindekiler sayfasının fotoğrafını çekmek için kamerayı kullanıyoruz. Fotoğraf okunduktan sonra silinir.",
           "microphonePermission": false
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,

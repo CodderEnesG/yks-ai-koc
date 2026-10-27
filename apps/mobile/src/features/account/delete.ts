@@ -6,6 +6,7 @@ import * as Notifications from 'expo-notifications';
 
 import { db } from '@/db/client';
 import { appMeta, chatMessage, checkin, libraryItem, planTask, profile } from '@/db/schema';
+import { stopAnalytics } from '@/features/analytics/analytics';
 import { useOnboarding } from '@/features/onboarding/store';
 import { supabase } from '@/lib/supabase';
 
@@ -17,6 +18,7 @@ export async function deleteAccountAndData(): Promise<void> {
     // Kullanıcı sunucuda yok; yalnız cihazdaki oturumu kapat.
     await supabase.auth.signOut({ scope: 'local' });
   }
+  await stopAnalytics();
   await Notifications.cancelAllScheduledNotificationsAsync();
   db.transaction((tx) => {
     tx.delete(chatMessage).run();

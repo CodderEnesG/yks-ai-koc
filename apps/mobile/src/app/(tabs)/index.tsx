@@ -7,6 +7,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { trackPlanCreatedOnce } from '@/features/analytics/analytics';
 import { loadReasonEvents } from '@/features/plan/checkin';
 import { CountsForm } from '@/features/plan/counts-form';
 import { groupTasks } from '@/features/plan/group';
@@ -51,6 +52,10 @@ export default function TodayScreen() {
   useEffect(() => {
     if (plan && hasPlan) void syncNotifications({ today, plan, checkedInToday }).then(setScheduled);
   }, [today, plan, hasPlan, checkedInToday, morning]);
+
+  useEffect(() => {
+    if (hasPlan) trackPlanCreatedOnce();
+  }, [hasPlan]);
 
   // Güvenli mod bandı: "kötü hissediyorum" sonrası ya da risk sinyalinden (Destek ekranı, sohbet) 3 gün.
   // Görevler değişince yeniden okunur.

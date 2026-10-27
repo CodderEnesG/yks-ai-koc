@@ -3,6 +3,7 @@ import { NativeTabs } from 'expo-router/native-tabs';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
+import { useAnalyticsGate } from '@/features/analytics/use-analytics';
 import { useConsentWatch } from '@/features/consent/use-consent-watch';
 import { useProfile } from '@/features/profile/repo';
 import { tr } from '@/i18n/tr';
@@ -10,6 +11,7 @@ import { tr } from '@/i18n/tr';
 export default function TabsLayout() {
   const profile = useProfile();
   useConsentWatch(profile?.consentStatus);
+  useAnalyticsGate(profile?.consentStatus);
 
   useEffect(() => {
     if (profile !== undefined) SplashScreen.hideAsync();

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Text } from '@/components/ui/text';
+import { track } from '@/features/analytics/analytics';
 import { fetchCatalog, fetchUnits } from '@/features/library/catalog';
 import { addCatalogBook } from '@/features/library/repo';
 import {
@@ -18,7 +19,7 @@ type Units = Awaited<ReturnType<typeof fetchUnits>>;
 
 // Katalog birimleri sayfa aralığıdır (MEB kitaplarında test sayısı yok); süre sayfa başına sorulur.
 export default function EditionScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, via } = useLocalSearchParams<{ id: string; via?: 'barkod' | 'katalog' }>();
   const [edition, setEdition] = useState<CatalogEdition | null>(null);
   const [units, setUnits] = useState<Units | null>(null);
   const [minutes, setMinutes] = useState(DEFAULT_MINUTES.pages);
@@ -38,6 +39,7 @@ export default function EditionScreen() {
       canContinue={units !== null && units.length > 0}
       onContinue={() => {
         addCatalogBook(edition, units ?? [], minutes, new Date());
+        track('kitap_eklendi', { yontem: via === 'barkod' ? 'barkod' : 'katalog' });
         router.dismissTo('/library');
       }}>
       <Text testID="edition-units">

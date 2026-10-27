@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import { Text } from '@/components/ui/text';
+import { track } from '@/features/analytics/analytics';
 import { addQuickBook } from '@/features/library/repo';
 import {
   DEFAULT_MINUTES,
@@ -35,6 +36,7 @@ export default function QuickAddScreen() {
       onContinue={() => {
         if (!parsed.success) return;
         addQuickBook(parsed.data, new Date());
+        track('kitap_eklendi', { yontem: 'hizli' });
         router.dismissTo('/library');
       }}>
       <View className="gap-2">

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import { Text } from '@/components/ui/text';
+import { track } from '@/features/analytics/analytics';
 import { addCustomBook } from '@/features/library/repo';
 import { DEFAULT_MINUTES, editionFromToc, MINUTE_CHOICES } from '@/features/library/rules';
 import { useTocDraft } from '@/features/library/toc';
@@ -31,6 +32,7 @@ export default function TocReviewScreen() {
       onContinue={() => {
         if (!result.edition) return;
         addCustomBook(result.edition, minutes, new Date());
+        track('kitap_eklendi', { yontem: 'icindekiler' });
         draft.set([]);
         router.dismissTo('/library');
       }}>
