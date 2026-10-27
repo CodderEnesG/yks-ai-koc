@@ -4,7 +4,7 @@
 
 YKS AI Koç (çalışma adı) YKS'ye hazırlanan 11. ve 12. sınıf öğrencileri ile mezunlar içindir. Uygulamayı öğrenci kullanır, ödemeyi çoğunlukla veli yapar. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor. Planı kural motoru hesaplar; AI konuşur, yorumlar ve içindekiler sayfasını okur.
 
-Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS), `brand/` (marka kiti: logo, renkler, yazı tipleri, uygulama ikonu).
+Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS).
 
 ## Buradan başla
 
@@ -26,8 +26,6 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
   - [2026-10-15-urun-ve-is-modeli-v1.pdf](docs/sources/2026-10-15-urun-ve-is-modeli-v1.pdf): ürün döngüleri, MVP kapsamı, mimari taslağı, paketler.
   - [2026-10-08-kaynak-kitap-verisi-fizibilitesi.md](docs/sources/2026-10-08-kaynak-kitap-verisi-fizibilitesi.md): veri, hukuk ve maliyet araştırması (koşullu GO).
   - [2026-10-08-kaynak-kitap-verisi-ozet.md](docs/sources/2026-10-08-kaynak-kitap-verisi-ozet.md): fizibilitenin yönetici özeti.
-
-- [brand/BENIOKU.md](brand/BENIOKU.md): marka kiti (Lamba) — marka dosyası ve üretim yönetimi PDF'leri, yazı tipleri, renk paleti, logo, uygulama ikonu, lamba çizimleri. Marka dosyasının canlı hâli Claude Docs'ta; PDF'ler tarihli kopya.
 
 Henüz yazılmayanlar: `PRODUCT.md` (kanonik ürün tanımı, gereksinim kimlikleriyle), `ARCHITECTURE.md` ve `DESIGN.md`. Hangi sırayla yazılacakları PROJECT-STATE'te.
 

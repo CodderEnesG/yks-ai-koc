@@ -145,7 +145,7 @@ Tam tablo ve önerilerimiz rapor bölüm 7'de. Son tarihi yakın olanlar:
 
 | # | Karar | Son tarih |
 |---|---|---|
-| 8 | Marka ve App Store adı, alan adı. Marka adı **Lamba** olarak belirlendi; marka dosyası v2, logo, renk paleti, yazı tipleri ve uygulama ikonu `brand/`'de (26 Ekim). Bekleyen: slogan, ilerleme biriminin adı, TÜRKPATENT ve mağaza ad kontrolü | 1 Kasım |
+| 8 | Marka ve App Store adı, alan adı. Marka adı **Lamba** olarak belirlendi; marka dosyası v2, logo, renk paleti, yazı tipleri ve uygulama ikonu hazır, canlı hâli Claude Docs'ta (repodaki `brand/` kopyası 27 Ekim'de kaldırıldı). Bekleyen: slogan, ilerleme biriminin adı, TÜRKPATENT ve mağaza ad kontrolü | 1 Kasım |
 | 5 | Ton rehberi v1 | 1 Kasım (taslak) |
 | 6 | PDR danışmanı | 15 Kasım |
 | 7 | **OPEN QUESTION:** Akut riskte veliye otomatik bildirim gidecek mi | 29 Kasım |
