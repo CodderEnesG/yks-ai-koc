@@ -74,7 +74,7 @@ T31 + T33 + T34: YouTube oynatma listesi (rapor 2.8, MVP hafif sürüm). **Kod y
 - Hesapsız (ya da onaysız) öğrenci liste ekleyemez (**DECISION TO TEST**: liste sunucudan gelir, kota kullanıcıya bağlı).
 - YouTube logosu yerine metin etiketi; resmi logo varlığı ve marka kurallarına uyum yayından önce (**NOT DEFINED**).
 - Paylaş menüsünden liste alma, liste başına 500 video sınırı üstü, gömülemeyen video işareti arayüzde yok. Kullanım şartları ve gizlilik metnine YouTube API Hizmetleri ve Google Gizlilik Politikası eklenmeli (III.A.1-2; T07).
-- Uzak projede (2026-10-27): migration ve `youtube-import` (girişsiz 401, önbellek tabloları kapalı). **`YOUTUBE_API_KEY` secret'ı uzakta henüz yok**; konana kadar uzakta liste eklenemez.
+- Uzak projede (2026-10-27): migration ve `youtube-import` (girişsiz 401, önbellek tabloları kapalı). `YOUTUBE_API_KEY` secret olarak tanımlı; uzakta e-posta olmadığı için girişli liste ekleme uzakta denenmedi.
 
 T32: Plan motorunda `video` birimi: video bölünmez (tek öğe), süresi `süre / izleme hızı × (1 + not payı)` (varsayılan 1×, %25; hızlar 1, 1,25, 1,5, 2). Oynatma listesi kitap gibi bir kaynak, videolar liste sırasıyla ilerler; property testleri video birimlerini de üretiyor. Liste ekleme T31'de, video kartı T33'te; "bağlı" mod (video ↔ kitap bölümü) Ocak'ta (T37).
 
