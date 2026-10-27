@@ -4,7 +4,7 @@
 
 YKS AI Koç (çalışma adı) YKS'ye hazırlanan 11. ve 12. sınıf öğrencileri ile mezunlar içindir. Uygulamayı öğrenci kullanır, ödemeyi çoğunlukla veli yapar. Değer AI'ın zekâsından gelmiyor, takipten geliyor: plan yapmak kolay, onu her gün uygulatmak zor. Planı kural motoru hesaplar; AI konuşur, yorumlar ve içindekiler sayfasını okur.
 
-Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS), `packages/ai` (LLM istemleri ve şemaları), `packages/safety` (güvenlik katmanı).
+Repo ürün ve karar belgelerini ve pnpm monorepo'yu içerir: `apps/mobile` (Expo SDK 58), `apps/web` (Next.js 16), `packages/plan-engine` (saf TS), `packages/ai` (LLM istemleri ve şemaları), `packages/safety` (güvenlik katmanı), `brand/` (marka kiti: logo, karakter çizimleri, marka kılavuzu).
 
 ## Buradan başla
 
@@ -26,6 +26,8 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
   - [2026-10-15-urun-ve-is-modeli-v1.pdf](docs/sources/2026-10-15-urun-ve-is-modeli-v1.pdf): ürün döngüleri, MVP kapsamı, mimari taslağı, paketler.
   - [2026-10-08-kaynak-kitap-verisi-fizibilitesi.md](docs/sources/2026-10-08-kaynak-kitap-verisi-fizibilitesi.md): veri, hukuk ve maliyet araştırması (koşullu GO).
   - [2026-10-08-kaynak-kitap-verisi-ozet.md](docs/sources/2026-10-08-kaynak-kitap-verisi-ozet.md): fizibilitenin yönetici özeti.
+
+- [brand/kilavuz/lamba-marka-kilavuzu.html](brand/kilavuz/lamba-marka-kilavuzu.html): marka kiti (Lamba) — logo varyantları (yatay/dikey/simge, dumanlı/dumansız, açık/koyu), karakter çizimleri (`cizimler/`), marka kılavuzu.
 
 Henüz yazılmayanlar: `PRODUCT.md` (kanonik ürün tanımı, gereksinim kimlikleriyle), `ARCHITECTURE.md` ve `DESIGN.md`. Hangi sırayla yazılacakları PROJECT-STATE'te.
 
