@@ -77,6 +77,7 @@ export const tr = {
       day: 'Gün',
       month: 'Ay',
       year: 'Yıl',
+      placeholder: { day: 'GG', month: 'AA', year: 'YYYY' },
       invalid: 'Geçerli ve ileride bir tarih gir',
       none: 'Tahmini tarih yok; tarihi kendin gir.',
     },

@@ -1,3 +1,4 @@
+import { Stack } from 'expo-router';
 import type { ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller';
@@ -44,6 +45,9 @@ export function StepScreen({
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
+      {step !== undefined ? (
+        <Stack.Screen options={{ headerTitle: () => <StepProgress step={step} /> }} />
+      ) : null}
       <KeyboardAwareScrollView
         contentContainerStyle={{ gap: 24, padding: 24 }}
         bottomOffset={FOOTER_OFFSET}
@@ -71,6 +75,25 @@ export function StepScreen({
   );
 }
 
+/** Üst çubukta, geri okunun yanında kurulum ilerlemesi: biten ve şu anki adım dolu bölüt. */
+function StepProgress({ step }: { step: number }) {
+  return (
+    <View
+      testID="step-progress"
+      accessibilityRole="progressbar"
+      accessibilityLabel={tr.onboarding.step(step, STEP_COUNT)}
+      accessibilityValue={{ min: 0, max: STEP_COUNT, now: step }}
+      className="w-44 flex-row gap-1.5">
+      {Array.from({ length: STEP_COUNT }, (_, i) => (
+        <View
+          key={i}
+          className={cn('h-1.5 flex-1 rounded-full', i < step ? 'bg-foreground' : 'bg-border')}
+        />
+      ))}
+    </View>
+  );
+}
+
 interface ChoiceProps {
   label: string;
   description?: string;
@@ -80,7 +103,10 @@ interface ChoiceProps {
   className?: string;
 }
 
-/** Seçilebilir kart; tek seçimli listelerde kullanılır. */
+/**
+ * Seçilebilir kart ya da çip; tek seçimli listelerde kullanılır. Seçili hali ana metin renginde dolgu ve tik
+ * (lamba-design DECISIONS.md, 3. sürüm): turuncu ekranda yalnız tek ana eylemde.
+ */
 export function Choice({ label, description, selected, onPress, testID, className }: ChoiceProps) {
   return (
     <Pressable
@@ -89,12 +115,21 @@ export function Choice({ label, description, selected, onPress, testID, classNam
       accessibilityState={{ selected }}
       onPress={onPress}
       className={cn(
-        'border-border rounded-xl border px-4 py-3 active:opacity-70',
-        selected && 'border-primary bg-secondary',
+        'border-control min-h-11 justify-center rounded-xl border px-4 py-3 active:opacity-70',
+        selected && 'bg-foreground border-foreground',
         className,
       )}>
-      <Text className={cn('font-sans-semibold', selected && 'text-primary')}>{label}</Text>
-      {description ? <Text variant="muted">{description}</Text> : null}
+      <View className="flex-row items-center gap-2">
+        {selected ? <Text className="text-background font-sans-bold">✓</Text> : null}
+        <View className="shrink gap-0.5">
+          <Text className={cn('font-sans-semibold', selected && 'text-background')}>{label}</Text>
+          {description ? (
+            <Text variant="muted" className={cn(selected && 'text-background')}>
+              {description}
+            </Text>
+          ) : null}
+        </View>
+      </View>
     </Pressable>
   );
 }

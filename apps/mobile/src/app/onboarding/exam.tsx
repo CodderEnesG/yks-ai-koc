@@ -46,7 +46,9 @@ export default function ExamScreen() {
         onChangeText={(value) => setParts({ ...parts, [key]: value.replace(/\D/g, '') })}
         keyboardType="number-pad"
         maxLength={maxLength}
+        placeholder={tr.onboarding.exam.placeholder[key]}
         className="border-input text-foreground rounded-xl border px-4 py-3 text-center text-lg"
+        placeholderTextColorClassName="accent-muted-foreground"
       />
     </View>
   );
@@ -63,7 +65,7 @@ export default function ExamScreen() {
       }}>
       {estimated !== null && !custom ? (
         <View className="gap-3">
-          <View className="border-primary bg-secondary rounded-xl border px-4 py-4">
+          <View className="border-control bg-card rounded-xl border px-4 py-4">
             <Text testID="exam-estimated" variant="large">
               {formatCivilDate(estimated)}
             </Text>

@@ -90,11 +90,22 @@ type ButtonProps = React.ComponentProps<typeof Pressable> &
   React.RefAttributes<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
+// Pasif durum saydamlıkla değil şekille (lamba kararı 27 Ekim): kesik çerçeve ve soluk metin. Çerçevesiz
+// düğmelerde (ghost, link) çerçeve yok, yalnız metin solar.
+const framed = (variant: ButtonProps['variant']) => variant !== 'ghost' && variant !== 'link';
+
 function Button({ className, variant, size, ...props }: ButtonProps) {
+  const disabled = Boolean(props.disabled);
   return (
-    <TextClassContext.Provider value={buttonTextVariants({ variant, size })}>
+    <TextClassContext.Provider
+      value={cn(buttonTextVariants({ variant, size }), disabled && 'text-muted-foreground')}>
       <Pressable
-        className={cn(props.disabled && 'opacity-50', buttonVariants({ variant, size }), className)}
+        className={cn(
+          buttonVariants({ variant, size }),
+          className,
+          disabled && 'shadow-none',
+          disabled && framed(variant) && 'border-control border border-dashed bg-transparent',
+        )}
         role="button"
         {...props}
       />

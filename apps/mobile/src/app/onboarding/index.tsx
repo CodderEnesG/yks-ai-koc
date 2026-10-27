@@ -1,6 +1,7 @@
 import { router, Stack } from 'expo-router';
 import { View } from 'react-native';
 
+import { Alaaddin } from '@/components/alaaddin';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -12,7 +13,9 @@ export default function WelcomeScreen() {
   return (
     <SafeAreaView className="bg-background flex-1">
       <Stack.Screen options={{ headerShown: false }} />
+      {/* Logo yok: marka açılış ekranında; yazı logosu ve lamba aynı ekranda olmaz (DECISIONS.md). */}
       <View className="flex-1 justify-center gap-4 p-6">
+        <Alaaddin scene="karsilama" height={240} />
         <Text variant="h2" className="border-b-0">
           {tr.onboarding.welcome.title}
         </Text>

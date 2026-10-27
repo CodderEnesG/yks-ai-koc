@@ -1,8 +1,11 @@
 import { diffDays, istanbulDate, parseCivilDate } from '@yks/plan-engine';
 import { router } from 'expo-router';
+import { type SFSymbol, SymbolView } from 'expo-symbols';
 import { useState } from 'react';
 import { View } from 'react-native';
+import { useCSSVariable } from 'uniwind';
 
+import { Alaaddin } from '@/components/alaaddin';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -22,6 +25,7 @@ export default function DoneScreen() {
   if (!parsed.success || issues.length > 0) {
     return (
       <SafeAreaView className="bg-background flex-1 justify-center gap-4 p-6">
+        <Alaaddin scene="hata" height={180} />
         <Text>
           {issues.includes('exam_in_past')
             ? tr.onboarding.exam.invalid
@@ -41,10 +45,21 @@ export default function DoneScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <View className="flex-1 gap-4 p-6">
+      <View className="flex-1 justify-center gap-4 p-6">
+        {/* Kurulumun bitişi tek seferlik dönüm noktası: Alaaddin "mutlu" (DECISIONS.md, 3. sürüm). */}
+        <Alaaddin scene="mutlu" height={180} />
         <Text variant="h3">{tr.onboarding.done.title}</Text>
-        <Text testID="done-days-left">{tr.onboarding.done.daysLeft(daysLeft)}</Text>
-        <Text>{tr.onboarding.done.weeklyHours(weeklyHours)}</Text>
+        <SummaryRow
+          icon="calendar"
+          androidIcon="calendar_month"
+          testID="done-days-left"
+          text={tr.onboarding.done.daysLeft(daysLeft)}
+        />
+        <SummaryRow
+          icon="clock"
+          androidIcon="schedule"
+          text={tr.onboarding.done.weeklyHours(weeklyHours)}
+        />
         {minor ? (
           <View
             testID="minor-notice"
@@ -72,5 +87,32 @@ export default function DoneScreen() {
         </Button>
       </View>
     </SafeAreaView>
+  );
+}
+
+function SummaryRow({
+  icon,
+  androidIcon,
+  text,
+  testID,
+}: {
+  icon: SFSymbol;
+  androidIcon: 'calendar_month' | 'schedule';
+  text: string;
+  testID?: string;
+}) {
+  const color = useCSSVariable('--color-foreground');
+  return (
+    <View className="flex-row items-center gap-3">
+      <SymbolView
+        name={{ ios: icon, android: androidIcon }}
+        size={22}
+        tintColor={typeof color === 'string' ? color : undefined}
+        fallback={null}
+      />
+      <Text testID={testID} className="flex-1">
+        {text}
+      </Text>
+    </View>
   );
 }
