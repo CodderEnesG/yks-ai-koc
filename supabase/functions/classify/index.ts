@@ -3,11 +3,11 @@
 // yanıt üretmeden önce kendi içinde çalıştıracak; bu uç tek başına sınıflandırma ve eval içindir.
 // Mesaj metni hiçbir yere yazılmaz ve loglanmaz; LLM'e PII maskelenmiş hâli gider.
 import Anthropic from '@anthropic-ai/sdk';
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import { createClient } from '@supabase/supabase-js';
-import { maskPii, RISK_EFFORT, RISK_MODEL, RISK_PROMPT, RiskSchema } from '@yks/ai';
-import { type Assessment, decide, SAFETY_TEXT_VERSION, screenText } from '@yks/safety';
+import { decide, SAFETY_TEXT_VERSION, screenText } from '@yks/safety';
 import { z } from 'zod';
+
+import { classifyRisk } from '../_shared/classify.ts';
 
 // Kota dolunca sınıflandırıcı atlanır, liste yine çalışır (güvenlik kotaya takılmaz). Sınır tahmin.
 const DAILY_LIMIT = 100;
@@ -18,25 +18,6 @@ const RequestSchema = z.object({ text: z.string().trim().min(1).max(MAX_LENGTH) 
 
 const json = (status: number, body: unknown) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
-
-async function classify(text: string): Promise<Assessment | null> {
-  const client = new Anthropic({ apiKey: Deno.env.get('ANTHROPIC_API_KEY') });
-  try {
-    const response = await client.messages.parse({
-      model: RISK_MODEL,
-      max_tokens: 2048,
-      system: RISK_PROMPT,
-      output_config: { effort: RISK_EFFORT, format: zodOutputFormat(RiskSchema) },
-      messages: [{ role: 'user', content: maskPii(text) }],
-    });
-    const risk = response.parsed_output;
-    if (response.stop_reason === 'refusal' || !risk) return null;
-    return { level: risk.risk, category: risk.kategori };
-  } catch (error) {
-    console.error('classify', error instanceof Error ? error.name : 'unknown');
-    return null;
-  }
-}
 
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(405, { error: 'method_not_allowed' });
@@ -60,7 +41,8 @@ Deno.serve(async (req) => {
     p_kind: 'safety',
     p_limit: DAILY_LIMIT,
   });
-  const decision = decide(list, allowed ? await classify(text) : null);
+  const anthropic = new Anthropic({ apiKey: Deno.env.get('ANTHROPIC_API_KEY') });
+  const decision = decide(list, allowed ? await classifyRisk(anthropic, text) : null);
 
   if (decision.level !== 'yok') {
     const { error } = await supabase.rpc('record_safety_event', {

@@ -89,3 +89,19 @@ export const checkin = sqliteTable('checkin', {
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at').notNull(),
 });
+
+// Koç sohbeti (T20). Ekran bu kopyayı gösterir; sunucudaki kopya koçun bağlamı ve güvenlik incelemesi
+// için (chat_message, 90 gün). Senkronlanmaz: yeni telefonda sohbet geçmişi gelmez.
+export const chatMessage = sqliteTable('chat_message', {
+  id: text('id').primaryKey(),
+  role: text('role', { enum: ['user', 'assistant'] }).notNull(),
+  content: text('content').notNull(),
+  /** Öğrenci mesajı: gönderiliyor, gönderildi ya da gönderilemedi. */
+  status: text('status', { enum: ['sending', 'sent', 'failed'] }).notNull(),
+  /** Koç yanıtının nasıl üretildiği (sunucudaki action). */
+  action: text('action', {
+    enum: ['reply', 'check', 'support', 'fixed', 'unavailable', 'replaced'],
+  }),
+  createdAt: text('created_at').notNull(),
+  reportedAt: text('reported_at'),
+});

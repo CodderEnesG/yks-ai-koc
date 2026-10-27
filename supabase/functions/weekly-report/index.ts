@@ -3,15 +3,10 @@
 // saklanmaz. Sayıları plan motoru üretir (öğrencinin ekranıyla aynı kural); sohbet içeriği hiçbir zaman
 // okunmaz ve dönmez.
 import { createClient } from '@supabase/supabase-js';
-import {
-  addDays,
-  istanbulDate,
-  type ReportBook,
-  type ReportTask,
-  type UnitKind,
-  weeklySummary,
-} from '@yks/plan-engine';
+import { addDays, istanbulDate, type ReportTask, weeklySummary } from '@yks/plan-engine';
 import { z } from 'zod';
+
+import { loadBooks } from '../_shared/books.ts';
 
 // Seri için geriye bakılan gün sayısı; daha uzun seri raporda bu sınırda kalır.
 const HISTORY_DAYS = 180;
@@ -23,11 +18,6 @@ const json = (status: number, body: unknown) =>
     status,
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
   });
-
-interface CustomEdition {
-  title: string;
-  units: { kind: UnitKind; first: number; last: number }[];
-}
 
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(405, { error: 'method_not_allowed' });
@@ -48,7 +38,7 @@ Deno.serve(async (req) => {
   if (!owner) return json(404, { error: 'not_found' });
 
   const today = istanbulDate(Date.now());
-  const [tasks, items] = await Promise.all([
+  const [tasks, books] = await Promise.all([
     db
       .from('plan_task')
       .select(
@@ -58,42 +48,9 @@ Deno.serve(async (req) => {
       .is('deleted_at', null)
       .gte('day', addDays(today, -HISTORY_DAYS))
       .lte('day', today),
-    db
-      .from('library_item')
-      .select(
-        'id, custom_edition, edition:edition_id(work:work_id(series, subject, exam), unit(page_start, page_end))',
-      )
-      .eq('user_id', owner)
-      .eq('source_kind', 'book')
-      .is('deleted_at', null)
-      .order('sort_order'),
+    loadBooks(db, owner),
   ]);
-  if (tasks.error || items.error) return json(500, { error: 'server_error' });
-
-  const books: ReportBook[] = items.data.map((item) => {
-    const edition = item.edition as unknown as {
-      work: { series: string | null; subject: string; exam: string };
-      unit: { page_start: number; page_end: number }[];
-    } | null;
-    if (edition) {
-      // apps/mobile editionTitle ile aynı biçim.
-      const w = edition.work;
-      return {
-        id: item.id,
-        title: `${w.series ?? w.subject} · ${w.exam} ${w.subject}`,
-        kind: 'pages',
-        total: edition.unit.reduce((a, u) => a + u.page_end - u.page_start + 1, 0),
-      };
-    }
-    const custom = item.custom_edition as CustomEdition | null;
-    const units = custom?.units ?? [];
-    return {
-      id: item.id,
-      title: custom?.title ?? '',
-      kind: units[0]?.kind ?? 'pages',
-      total: units.reduce((a, u) => a + u.last - u.first + 1, 0),
-    };
-  });
+  if (tasks.error || !books) return json(500, { error: 'server_error' });
 
   const reportTasks: ReportTask[] = tasks.data.map((t) => ({
     day: t.day,

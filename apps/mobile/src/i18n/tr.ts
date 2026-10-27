@@ -196,6 +196,29 @@ export const tr = {
       'Velin onayını geri çekti. Sunucudaki yedeğin silindi; planın bu telefonda çalışmaya devam ediyor. İstersen yeniden onay isteyebilirsin.',
     open: 'Veli onayı iste',
   },
+  chat: {
+    title: 'Koç',
+    intro:
+      'Ben bir yapay zekâ koçuyum. Planını, aksayan günleri ve motivasyonunu konuşabiliriz; soru çözmem. Yazdıkların velinle paylaşılmaz.',
+    placeholder: 'Koçuna yaz…',
+    send: 'Gönder',
+    sending: 'Gönderiliyor…',
+    failed: 'Gönderilemedi',
+    retry: 'Tekrar dene',
+    report: 'Bildir',
+    reported: 'Bildirildi, teşekkürler',
+    support: 'Destek ekranını aç',
+    tooLong: (max: number) => `Mesaj en fazla ${max} karakter olabilir.`,
+    errors: {
+      quota: 'Bugünkü mesaj hakkın doldu; yarın devam edelim.',
+      consent: 'Sohbet velinin onayından sonra açılır.',
+      auth: 'Oturumun kapanmış; Ayarlar’dan hesabını yeniden bağla.',
+      network: 'Mesaj gönderilemedi; internet bağlantını kontrol et.',
+    },
+    needConsent:
+      'Sohbet, velin onay verdikten sonra açılır. O zamana kadar planın bu telefonda çalışmaya devam ediyor.',
+    needAccount: 'Koçla konuşmak için önce hesabını bağla; sohbet sunucuda işlenir.',
+  },
   report: {
     share: 'Haftalık raporu velime gönder',
     message: (link: string) => `Bu haftaki çalışma raporum: ${link}`,

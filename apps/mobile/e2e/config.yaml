@@ -10,3 +10,4 @@ flows:
   - consent-minor.yaml
   - report-minor.yaml
   - support.yaml
+  - chat.yaml
