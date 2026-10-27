@@ -1,5 +1,6 @@
 pnpm-lock.yaml
 docs/
+brand/
 **/drizzle/
 **/uniwind-types.d.ts
 **/.next/
