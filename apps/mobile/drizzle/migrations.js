@@ -7,6 +7,7 @@ import m0002 from './0002_library.sql';
 import m0003 from './0003_plan_task.sql';
 import m0004 from './0004_checkin.sql';
 import m0005 from './0005_chat_message.sql';
+import m0006 from './0006_youtube.sql';
 
   export default {
     journal,
@@ -16,7 +17,8 @@ m0001,
 m0002,
 m0003,
 m0004,
-m0005
+m0005,
+m0006
     }
   }
   

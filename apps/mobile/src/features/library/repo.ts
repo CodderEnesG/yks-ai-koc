@@ -4,7 +4,7 @@ import { useLiveQuery } from 'drizzle-orm/expo-sqlite/query';
 import { randomUUID } from 'expo-crypto';
 
 import { db } from '@/db/client';
-import { catalogEdition, libraryItem, planTask } from '@/db/schema';
+import { catalogEdition, libraryItem, planTask, ytPlaylist } from '@/db/schema';
 
 import {
   type CatalogEdition,
@@ -18,7 +18,7 @@ import {
 export interface LibraryEntry {
   id: string;
   title: string;
-  kind: ItemKind;
+  kind: ItemKind | 'video';
   /** Toplam sayfa ya da test sayısı. */
   total: number;
   unitCount: number;
@@ -26,16 +26,19 @@ export interface LibraryEntry {
   fromCatalog: boolean;
   /** Yapılan sayfa/test yüzdesi (T23). */
   percentDone: number;
+  /** YouTube listesi (T31): kanal ve izleme hızı; önbellek silindiyse `missing`. */
+  playlist?: { channelTitle: string; speed: number; missing: boolean };
 }
 
 /** Silinmemiş kaynaklar, öğrencinin sırasıyla; `undefined` yükleniyor. */
 export function useLibrary(): LibraryEntry[] | undefined {
   const { data, updatedAt } = useLiveQuery(
     db
-      .select({ item: libraryItem, edition: catalogEdition })
+      .select({ item: libraryItem, edition: catalogEdition, playlist: ytPlaylist })
       .from(libraryItem)
       .leftJoin(catalogEdition, eq(libraryItem.editionId, catalogEdition.id))
-      .where(and(isNull(libraryItem.deletedAt), eq(libraryItem.sourceKind, 'book')))
+      .leftJoin(ytPlaylist, eq(libraryItem.ytPlaylistId, ytPlaylist.id))
+      .where(isNull(libraryItem.deletedAt))
       .orderBy(asc(libraryItem.sortOrder)),
   );
   const done = useLiveQuery(
@@ -51,7 +54,26 @@ export function useLibrary(): LibraryEntry[] | undefined {
   );
   if (updatedAt === undefined || done.updatedAt === undefined) return undefined;
   const doneItems = doneItemsByLibraryItem(done.data);
-  return data.map(({ item, edition }) => {
+  return data.map(({ item, edition, playlist }): LibraryEntry => {
+    if (item.sourceKind === 'playlist') {
+      // Her video bir birim (1-1); yapılan video sayısı aynı sayaçtan.
+      const total = playlist?.videos.length ?? 0;
+      return {
+        id: item.id,
+        title: playlist?.title ?? '',
+        kind: 'video',
+        total,
+        unitCount: total,
+        minutesPerItem: 0,
+        fromCatalog: false,
+        percentDone: percent(doneItems.get(item.id) ?? 0, total),
+        playlist: {
+          channelTitle: playlist?.channelTitle ?? '',
+          speed: item.watchSpeed ?? 1,
+          missing: playlist === null,
+        },
+      };
+    }
     if (edition) {
       const pages = edition.units.reduce((a, u) => a + u.pageEnd - u.pageStart + 1, 0);
       return {
@@ -80,7 +102,7 @@ export function useLibrary(): LibraryEntry[] | undefined {
   });
 }
 
-function nextSortOrder(): number {
+export function nextSortOrder(): number {
   const [row] = db
     .select({ value: max(libraryItem.sortOrder) })
     .from(libraryItem)

@@ -29,7 +29,9 @@ export function libraryItemToServer(i: LibraryItem) {
     source_kind: i.sourceKind,
     edition_id: i.editionId,
     custom_edition: i.customEdition,
-    yt_playlist_id: null,
+    yt_playlist_id: i.ytPlaylistId,
+    watch_speed: i.watchSpeed,
+    note_ratio: i.noteRatio,
     sort_order: i.sortOrder,
     priority: i.priority,
     status: i.status,
@@ -39,18 +41,21 @@ export function libraryItemToServer(i: LibraryItem) {
   };
 }
 
-/** Katalog kitabının birim anahtarı katalog birim kimliğidir (unit_id); özel baskıda custom_unit_key. */
+/**
+ * Birim anahtarı: katalog kitabında katalog birim kimliği (unit_id), özel baskıda custom_unit_key, YouTube
+ * listesinde video kimliği (video_id; sunucuda videonun aralığı yok, cihazda 1-1).
+ */
 export function planTaskToServer(t: PlanTask, fromCatalog: boolean) {
   return {
     id: t.id,
     library_item_id: t.libraryItemId,
     day: t.day,
     kind: t.kind,
-    unit_id: fromCatalog ? t.unitKey : null,
-    custom_unit_key: fromCatalog ? null : t.unitKey,
+    unit_id: fromCatalog && t.kind !== 'video' ? t.unitKey : null,
+    custom_unit_key: fromCatalog || t.kind === 'video' ? null : t.unitKey,
     range_first: t.kind === 'video' ? null : t.rangeFirst,
     range_last: t.kind === 'video' ? null : t.rangeLast,
-    video_id: null,
+    video_id: t.kind === 'video' ? t.unitKey : null,
     est_seconds: t.estSeconds,
     status: t.status,
     reason: t.reason,
@@ -98,6 +103,9 @@ export function libraryItemFromServer(s: ServerLibraryItem): LibraryItem {
     sourceKind: s.source_kind,
     editionId: s.edition_id,
     customEdition: s.custom_edition,
+    ytPlaylistId: s.yt_playlist_id,
+    watchSpeed: s.watch_speed === null ? null : Number(s.watch_speed),
+    noteRatio: s.note_ratio === null ? null : Number(s.note_ratio),
     minutesPerItem: s.minutes_per_item === null ? null : Number(s.minutes_per_item),
     sortOrder: s.sort_order,
     priority: s.priority,
@@ -114,7 +122,7 @@ export function planTaskFromServer(s: ServerPlanTask): PlanTask {
     libraryItemId: s.library_item_id,
     day: s.day,
     kind: s.kind,
-    unitKey: s.unit_id ?? s.custom_unit_key ?? '',
+    unitKey: s.unit_id ?? s.custom_unit_key ?? s.video_id ?? '',
     rangeFirst: s.range_first ?? 1,
     rangeLast: s.range_last ?? 1,
     estSeconds: s.est_seconds,

@@ -1,10 +1,12 @@
 // Cihazdaki profil ve kütüphaneyi plan motorunun girdisine çevirir (T13). Saf; vitest ile test edilir.
-import type {
-  CivilDate,
-  PlanAdjustments,
-  PlanInput,
-  StudySource,
-  StudyUnit,
+import {
+  type CivilDate,
+  type PlanAdjustments,
+  type PlanInput,
+  type StudySource,
+  type StudyUnit,
+  videoMinutes,
+  type WatchSpeed,
 } from '@yks/plan-engine';
 
 import type { CustomEdition, ItemKind } from '@/features/library/rules';
@@ -16,6 +18,12 @@ export interface LibrarySourceRow {
   /** Katalog baskısının birimleri (sayfa aralığı) ya da null. */
   catalogUnits: { id: string; seq: number; pageStart: number; pageEnd: number }[] | null;
   customEdition: CustomEdition | null;
+  /** YouTube listesi: videolar liste sırasıyla, izleme hızı ve not payı (T31). */
+  playlist?: {
+    videos: { videoId: string; durationSeconds: number }[];
+    speed: WatchSpeed;
+    noteRatio: number;
+  } | null;
 }
 
 export interface DoneRange {
@@ -46,6 +54,21 @@ function unit(
 }
 
 export function toStudySource(row: LibrarySourceRow): StudySource {
+  if (row.playlist) {
+    // Her video tek, bölünmez birim; anahtar video kimliği, aralık 1-1 (sırayı birim sırası verir).
+    const { videos, speed, noteRatio } = row.playlist;
+    return {
+      id: row.id,
+      order: row.sortOrder,
+      units: videos.map((v) => ({
+        id: planUnitId(row.id, v.videoId),
+        kind: 'video',
+        first: 1,
+        last: 1,
+        minutes: videoMinutes(v.durationSeconds, speed, noteRatio),
+      })),
+    };
+  }
   const units = row.catalogUnits
     ? row.catalogUnits.map((u) =>
         unit(row.id, u.id, 'pages', u.pageStart, u.pageEnd, row.minutesPerItem),

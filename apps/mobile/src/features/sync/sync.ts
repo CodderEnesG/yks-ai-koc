@@ -6,6 +6,7 @@ import { eq, gte } from 'drizzle-orm';
 import { db } from '@/db/client';
 import { appMeta, catalogEdition, checkin, libraryItem, planTask, profile } from '@/db/schema';
 import { fetchCatalog, fetchUnits } from '@/features/library/catalog';
+import { refreshPlaylists } from '@/features/library/youtube';
 import { supabase } from '@/lib/supabase';
 
 import {
@@ -127,6 +128,8 @@ export async function restore(): Promise<boolean> {
   });
   // Geri yüklenenler sunucuda zaten var; imleç ileri alınır.
   writeCursor(now);
+  // YouTube listelerinin videoları senkronlanmaz (API verisi); sunucu önbelleğinden yeniden gelir.
+  await refreshPlaylists(new Date(), true).catch(() => undefined);
   return true;
 }
 

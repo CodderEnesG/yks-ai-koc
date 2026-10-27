@@ -1,7 +1,7 @@
 -- Saklama süreleri (rapor 2.11). Çalıştırma: supabase test db
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(13);
+select plan(15);
 
 insert into auth.users (id, email) values
   ('dddddddd-1111-1111-1111-111111111111', 'saklama@test.local');
@@ -25,6 +25,13 @@ insert into public.consent_request (token_hash, parent_email, status, expires_at
   (public.consent_token_hash(repeat('q', 43)), 'yeni@test.local', 'pending', now() - interval '29 days'),
   (public.consent_token_hash(repeat('g', 43)), 'onay@test.local', 'granted', now() - interval '60 days');
 
+insert into public.yt_playlist (id, title, channel_title, fetched_at) values
+  ('PLeskiListe0000000001', 'eski', 'kanal', now() - interval '31 days'),
+  ('PLyeniListe0000000001', 'yeni', 'kanal', now() - interval '29 days');
+insert into public.yt_video (playlist_id, position, video_id, title, channel_title, duration_seconds, embeddable, made_for_kids) values
+  ('PLeskiListe0000000001', 0, 'vid0000001', 'v', 'kanal', 600, true, false),
+  ('PLyeniListe0000000001', 0, 'vid0000002', 'v', 'kanal', 600, true, false);
+
 insert into public.ai_usage (user_id, day, kind, count) values
   ('dddddddd-1111-1111-1111-111111111111', current_date - 40, 'chat', 3),
   ('dddddddd-1111-1111-1111-111111111111', current_date, 'chat', 1);
@@ -40,7 +47,7 @@ reset role;
 
 select is(
   public.run_retention(),
-  '{"chat_message": 1, "safety_event": 1, "report_link": 1, "consent_request": 1, "ai_usage": 1}'::jsonb,
+  '{"chat_message": 1, "safety_event": 1, "report_link": 1, "consent_request": 1, "ai_usage": 1, "yt_playlist": 1}'::jsonb,
   'her tablodan yalnız süresi geçen satır silinir'
 );
 
@@ -65,9 +72,13 @@ select is(
   (select count(*)::int from public.ai_usage where user_id = 'dddddddd-1111-1111-1111-111111111111'),
   1, '30 günden eski kota sayacı gitti'
 );
+select is_empty($$select 1 from public.yt_video where playlist_id = 'PLeskiListe0000000001'$$,
+  '30 günü geçen YouTube listesi videolarıyla gitti (politika III.E.4)');
+select isnt_empty($$select 1 from public.yt_playlist where id = 'PLyeniListe0000000001'$$,
+  '29 günlük liste kaldı');
 select is(
   public.run_retention(),
-  '{"chat_message": 0, "safety_event": 0, "report_link": 0, "consent_request": 0, "ai_usage": 0}'::jsonb,
+  '{"chat_message": 0, "safety_event": 0, "report_link": 0, "consent_request": 0, "ai_usage": 0, "yt_playlist": 0}'::jsonb,
   'ikinci koşu bir şey silmez'
 );
 

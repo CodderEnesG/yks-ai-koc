@@ -33,7 +33,20 @@ export default function LibraryScreen() {
             className="border-border gap-1 rounded-xl border p-4">
             <Text className="font-medium">{item.title}</Text>
             <Text variant="muted">
-              {tr.library.summary(item.total, item.kind, item.unitCount, item.minutesPerItem)}
+              {item.playlist
+                ? item.playlist.missing
+                  ? tr.library.playlistMissing
+                  : tr.library.playlistSummary(
+                      item.total,
+                      item.playlist.speed,
+                      item.playlist.channelTitle,
+                    )
+                : tr.library.summary(
+                    item.total,
+                    item.kind === 'tests' ? 'tests' : 'pages',
+                    item.unitCount,
+                    item.minutesPerItem,
+                  )}
             </Text>
             <View className="bg-muted mt-1 h-1.5 overflow-hidden rounded-full">
               <View className="bg-primary h-full" style={{ width: `${item.percentDone}%` }} />

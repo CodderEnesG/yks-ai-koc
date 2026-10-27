@@ -54,6 +54,9 @@ describe('eşleme gidiş-dönüş', () => {
         title: 'X',
         units: [{ key: '1', kind: 'tests' as const, first: 1, last: 40 }],
       },
+      ytPlaylistId: null,
+      watchSpeed: null,
+      noteRatio: null,
       minutesPerItem: 15,
       sortOrder: 0,
       priority: 0,
@@ -88,6 +91,56 @@ describe('eşleme gidiş-dönüş', () => {
       custom_unit_key: 'unit-uuid',
     });
     expect(planTaskFromServer(planTaskToServer(task, true))).toEqual(task);
+    expect(planTaskFromServer(planTaskToServer(task, false))).toEqual(task);
+  });
+
+  it('YouTube listesi ve video görevi; video kimliği video_id, aralık sunucuda yok (T31)', () => {
+    const item = {
+      id: 'i2',
+      sourceKind: 'playlist' as const,
+      editionId: null,
+      customEdition: null,
+      ytPlaylistId: 'PLxA687tYuMWgPS-2u6vQnIw4FWj3_3pbH',
+      watchSpeed: 1.5,
+      noteRatio: 0.25,
+      minutesPerItem: null,
+      sortOrder: 1,
+      priority: 0,
+      status: 'active' as const,
+      createdAt: ts,
+      updatedAt: ts,
+      deletedAt: null,
+    };
+    expect(libraryItemToServer(item)).toMatchObject({
+      source_kind: 'playlist',
+      yt_playlist_id: 'PLxA687tYuMWgPS-2u6vQnIw4FWj3_3pbH',
+      edition_id: null,
+      custom_edition: null,
+    });
+    expect(libraryItemFromServer(libraryItemToServer(item))).toEqual(item);
+
+    const task = {
+      id: 't2',
+      libraryItemId: 'i2',
+      day: '2026-10-27',
+      kind: 'video' as const,
+      unitKey: 'vidA0000001',
+      rangeFirst: 1,
+      rangeLast: 1,
+      estSeconds: 1200,
+      status: 'done' as const,
+      reason: null,
+      createdAt: ts,
+      updatedAt: ts,
+      deletedAt: null,
+    };
+    expect(planTaskToServer(task, false)).toMatchObject({
+      unit_id: null,
+      custom_unit_key: null,
+      video_id: 'vidA0000001',
+      range_first: null,
+      range_last: null,
+    });
     expect(planTaskFromServer(planTaskToServer(task, false))).toEqual(task);
   });
 });

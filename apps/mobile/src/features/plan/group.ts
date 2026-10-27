@@ -1,5 +1,6 @@
 // Bugünün görevlerini kitap başına tek kartta toplar (T13). Motor görevleri birim birim üretir; aynı
-// kitabın ardışık birimleri öğrenciye tek aralık olarak gösterilir. Saf; vitest ile test edilir.
+// kitabın ardışık birimleri öğrenciye tek aralık olarak gösterilir. Video görevleri birleşmez: her video
+// kendi kartında (T33). Saf; vitest ile test edilir.
 
 export interface TaskLike {
   id: string;
@@ -13,6 +14,7 @@ export interface TaskLike {
   estSeconds: number;
   status?: 'planned' | 'done' | 'partial' | 'skipped';
   reason?: string | null;
+  video?: { id: string; title: string; channelTitle: string; durationSeconds: number };
 }
 
 export interface TaskGroup {
@@ -30,6 +32,9 @@ export interface TaskGroup {
   doneRanges: { first: number; last: number }[];
   /** Görevlerde seçilen nedenler, ilk seçilme sırasıyla. */
   reasons: string[];
+  /** Video kartı: video anahtarı ve (önbellek varsa) bilgileri. */
+  videoKey?: string;
+  video?: TaskLike['video'];
 }
 
 function pushRange(ranges: { first: number; last: number }[], first: number, last: number): void {
@@ -42,7 +47,12 @@ function pushRange(ranges: { first: number; last: number }[], first: number, las
 export function groupTasks(tasks: readonly TaskLike[]): TaskGroup[] {
   const groups: TaskGroup[] = [];
   for (const t of tasks) {
-    let g = groups.find((x) => x.libraryItemId === t.libraryItemId && x.kind === t.kind);
+    let g = groups.find(
+      (x) =>
+        x.libraryItemId === t.libraryItemId &&
+        x.kind === t.kind &&
+        (t.kind !== 'video' || x.videoKey === t.unitKey),
+    );
     if (!g) {
       g = {
         libraryItemId: t.libraryItemId,
@@ -55,6 +65,7 @@ export function groupTasks(tasks: readonly TaskLike[]): TaskGroup[] {
         status: 'planned',
         doneRanges: [],
         reasons: [],
+        ...(t.kind === 'video' && { videoKey: t.unitKey, video: t.video }),
       };
       groups.push(g);
     }

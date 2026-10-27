@@ -11,3 +11,4 @@ flows:
   - report-minor.yaml
   - support.yaml
   - chat.yaml
+  - youtube-add.yaml

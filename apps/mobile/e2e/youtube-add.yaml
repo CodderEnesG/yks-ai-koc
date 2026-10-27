@@ -1,0 +1,27 @@
+# T31 + T33: YouTube oynatma listesi ekleme ve video görevi. Yetişkin öğrenci hesap bağlar, liste linkini
+# yapıştırır, hızı seçer; Bugün'de video kartı (başlık, YouTube etiketi, "YouTube'da aç") görünür ve
+# "İzledim" ile işaretlenir. Yerel Supabase ve `supabase functions serve` açık olmalı (YOUTUBE_API_KEY).
+# Koşu: maestro test -e PLAYLIST='https://www.youtube.com/playlist?list=...' e2e/youtube-add.yaml
+appId: dev.placeholder.ykskoc
+---
+- runFlow: _onboard-adult.yaml
+- runFlow: _connect-account.yaml
+- tapOn: 'Kütüphane'
+- tapOn: { id: library-add }
+- tapOn: { id: add-youtube }
+- tapOn: { id: youtube-link }
+- inputText: ${PLAYLIST}
+- tapOn: { id: continue }
+- extendedWaitUntil:
+    visible: { id: youtube-preview }
+    timeout: 30000
+- tapOn: { id: youtube-speed-1.5 }
+- tapOn: { id: continue }
+- tapOn: 'Bugün'
+- extendedWaitUntil:
+    visible: { id: video-title }
+    timeout: 15000
+- assertVisible: '▶ YouTube'
+- assertVisible: { id: video-open }
+- tapOn: { id: checkin-done }
+- assertVisible: '✓ İzlendi'

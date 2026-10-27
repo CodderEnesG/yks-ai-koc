@@ -67,4 +67,23 @@ describe('groupTasks', () => {
     expect(c!.status).toBe('done');
     expect(groupTasks([t('6', 'd', 1, 2)])[0]!.status).toBe('planned');
   });
+
+  it('video görevleri birleşmez; her video kendi kartında (T33)', () => {
+    const video = (id: string, key: string): TaskLike => ({
+      id,
+      libraryItemId: 'liste',
+      unitKey: key,
+      title: 'Liste',
+      kind: 'video',
+      first: 1,
+      last: 1,
+      estSeconds: 900,
+      video: { id: key, title: `Ders ${key}`, channelTitle: 'Kanal', durationSeconds: 720 },
+    });
+    const groups = groupTasks([video('1', 'vidA0000001'), video('2', 'vidB0000001')]);
+    expect(groups).toHaveLength(2);
+    expect(groups.map((g) => g.videoKey)).toEqual(['vidA0000001', 'vidB0000001']);
+    expect(groups[0]!.video?.title).toBe('Ders vidA0000001');
+    expect(groups[0]!.taskIds).toEqual(['1']);
+  });
 });

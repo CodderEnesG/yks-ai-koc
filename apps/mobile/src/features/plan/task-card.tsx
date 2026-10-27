@@ -1,6 +1,7 @@
 import type { Reason } from '@yks/plan-engine';
+import { videoUrl } from '@yks/youtube';
 import { router } from 'expo-router';
-import { View } from 'react-native';
+import { Linking, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -9,23 +10,58 @@ import { tr } from '@/i18n/tr';
 import { markTasks } from './checkin';
 import type { TaskGroup } from './group';
 
-/** Bugünün bir kitabı: aralık, süre ve check-in (yaptım / yarım kaldı / yapamadım). */
+/**
+ * Bugünün bir kitabı (aralık, süre) ya da bir videosu (T33: başlık, kanal, YouTube etiketi, "YouTube'da
+ * aç"; oynatıcı yok, izleme verisi toplanmaz) ve check-in (yaptım / yarım kaldı / yapamadım).
+ */
 export function TaskCard({ group: g }: { group: TaskGroup }) {
   const ids = g.taskIds.join(',');
   const first = g.ranges[0]!.first;
   const last = g.ranges.at(-1)!.last;
   const reason = g.reasons[0] as Reason | undefined;
+  const isVideo = g.kind === 'video';
 
   return (
     <View testID="today-task" className="border-border gap-2 rounded-xl border p-4">
-      <Text className="font-medium">{g.title}</Text>
-      <View className="flex-row justify-between gap-3">
-        <Text testID="today-task-range" className="flex-1">
-          {tr.today.ranges(g.kind, g.ranges)}
-        </Text>
-        <Text variant="muted">≈ {tr.today.duration(g.estSeconds)}</Text>
-      </View>
-      {g.unitCount > 1 ? <Text variant="muted">{tr.today.units(g.unitCount)}</Text> : null}
+      {isVideo ? (
+        <>
+          <Text testID="video-title" className="font-medium">
+            {g.video?.title ?? tr.today.videoMissing}
+          </Text>
+          <Text variant="muted">
+            {[g.title, g.video?.channelTitle].filter(Boolean).join(' · ')}
+          </Text>
+          <View className="flex-row items-center justify-between gap-3">
+            {/* YouTube içeriğin kaynağı olarak açıkça gösterilir (politika III.F.2). */}
+            <Text className="text-xs font-semibold text-[#FF0000]">▶ YouTube</Text>
+            <Text variant="muted">
+              {g.video
+                ? tr.today.videoDuration(g.video.durationSeconds, g.estSeconds)
+                : `≈ ${tr.today.duration(g.estSeconds)}`}
+            </Text>
+          </View>
+          {g.videoKey ? (
+            <Button
+              testID="video-open"
+              size="sm"
+              variant="outline"
+              onPress={() => void Linking.openURL(videoUrl(g.videoKey!))}>
+              <Text>{tr.today.openYouTube}</Text>
+            </Button>
+          ) : null}
+        </>
+      ) : (
+        <>
+          <Text className="font-medium">{g.title}</Text>
+          <View className="flex-row justify-between gap-3">
+            <Text testID="today-task-range" className="flex-1">
+              {tr.today.ranges(g.kind, g.ranges)}
+            </Text>
+            <Text variant="muted">≈ {tr.today.duration(g.estSeconds)}</Text>
+          </View>
+          {g.unitCount > 1 ? <Text variant="muted">{tr.today.units(g.unitCount)}</Text> : null}
+        </>
+      )}
 
       {g.status === 'planned' ? (
         <View className="flex-row gap-2">
@@ -34,7 +70,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
             size="sm"
             className="flex-1 px-2"
             onPress={() => markTasks(g.taskIds, 'done', null, new Date())}>
-            <Text>{tr.checkin.done}</Text>
+            <Text>{isVideo ? tr.checkin.watched : tr.checkin.done}</Text>
           </Button>
           {g.kind !== 'video' && last > first ? (
             <Button
@@ -57,14 +93,16 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
             variant="outline"
             className="flex-1 px-2"
             onPress={() => router.push({ pathname: '/checkin/reason', params: { ids } })}>
-            <Text>{tr.checkin.skip}</Text>
+            <Text>{isVideo ? tr.checkin.notWatched : tr.checkin.skip}</Text>
           </Button>
         </View>
       ) : (
         <View testID="checkin-status" className="gap-1">
           <Text className="font-medium">
             {g.status === 'done'
-              ? tr.checkin.statusDone
+              ? isVideo
+                ? tr.checkin.statusWatched
+                : tr.checkin.statusDone
               : g.status === 'skipped'
                 ? `${tr.checkin.statusSkipped}${reason ? ` · ${tr.checkin.reasons[reason]}` : ''}`
                 : `${tr.checkin.statusPartial(tr.today.ranges(g.kind, g.doneRanges))}${reason ? ` · ${tr.checkin.reasons[reason]}` : ''}`}

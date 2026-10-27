@@ -115,3 +115,43 @@ describe('toPlanInput ayarları', () => {
     expect(() => buildPlan(input)).not.toThrow();
   });
 });
+
+describe('YouTube listesi (T31)', () => {
+  const playlist: LibrarySourceRow = {
+    id: 'item-yt',
+    sortOrder: 2,
+    minutesPerItem: 1,
+    catalogUnits: null,
+    customEdition: null,
+    playlist: {
+      videos: [
+        { videoId: 'vidA0000001', durationSeconds: 1200 },
+        { videoId: 'vidB0000001', durationSeconds: 600 },
+      ],
+      speed: 1.5,
+      noteRatio: 0.25,
+    },
+  };
+
+  it('her video bölünmez bir birim; süre hız ve not payıyla', () => {
+    expect(toStudySource(playlist).units).toEqual([
+      { id: 'item-yt:vidA0000001', kind: 'video', first: 1, last: 1, minutes: (20 / 1.5) * 1.25 },
+      { id: 'item-yt:vidB0000001', kind: 'video', first: 1, last: 1, minutes: (10 / 1.5) * 1.25 },
+    ]);
+  });
+
+  it('plan motoru listeyi sırayla ve yapılan videoyu atlayarak planlar', () => {
+    const result = buildPlan(
+      toPlanInput({
+        from: parseCivilDate('2026-11-02'),
+        examDate: parseCivilDate('2027-06-19'),
+        weekdayMinutes: [60, 60, 60, 60, 60, 60, 60],
+        library: [playlist],
+        done: [{ unitId: 'item-yt:vidA0000001', first: 1, last: 1 }],
+      }),
+    );
+    const tasks = result.days.flatMap((d) => d.tasks);
+    expect(tasks.map((t) => t.unitId)).toEqual(['item-yt:vidB0000001']);
+    expect(tasks[0]!.kind).toBe('video');
+  });
+});

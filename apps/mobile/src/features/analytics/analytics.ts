@@ -16,7 +16,7 @@ import type { ChatAction } from '@/features/chat/chat';
 
 export type AnalyticsEvents = {
   onboarding_tamam: { sinif: '11' | '12' | 'mezun'; alan: 'SAY' | 'EA' | 'SOZ' | 'DIL' };
-  kitap_eklendi: { yontem: 'barkod' | 'katalog' | 'hizli' | 'icindekiler' };
+  kitap_eklendi: { yontem: 'barkod' | 'katalog' | 'hizli' | 'icindekiler' | 'youtube' };
   plan_olustu: Record<string, never>;
   /** Günün son kartı işaretlenince: yapılan görev oranı (0-1) ve varsa ilk neden. */
   checkin: { tamam_orani: number; neden?: Reason };

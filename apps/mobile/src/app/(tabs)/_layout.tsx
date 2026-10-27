@@ -5,13 +5,18 @@ import { useEffect } from 'react';
 
 import { useAnalyticsGate } from '@/features/analytics/use-analytics';
 import { useConsentWatch } from '@/features/consent/use-consent-watch';
+import { usePlaylistRefresh } from '@/features/library/use-playlist-refresh';
 import { useProfile } from '@/features/profile/repo';
+import { useSession } from '@/features/sync/auth';
+import { canSync } from '@/features/sync/mapping';
 import { tr } from '@/i18n/tr';
 
 export default function TabsLayout() {
   const profile = useProfile();
   useConsentWatch(profile?.consentStatus);
   useAnalyticsGate(profile?.consentStatus);
+  const session = useSession();
+  usePlaylistRefresh(!!session && !!profile && canSync(profile.consentStatus));
 
   useEffect(() => {
     if (profile !== undefined) SplashScreen.hideAsync();

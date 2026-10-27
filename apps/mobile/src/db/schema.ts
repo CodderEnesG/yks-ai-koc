@@ -52,6 +52,11 @@ export const libraryItem = sqliteTable('library_item', {
   editionId: text('edition_id'),
   /** Özel baskı ("hızlı ekle" ya da içindekiler fotoğrafı); yalnız bu öğrenciye ait. */
   customEdition: text('custom_edition', { mode: 'json' }).$type<CustomEdition>(),
+  /** YouTube oynatma listesi (T31); videolar `ytPlaylist`'te. */
+  ytPlaylistId: text('yt_playlist_id'),
+  /** Video izleme hızı (1, 1,25, 1,5, 2) ve not payı (0-1); yalnız listede. */
+  watchSpeed: real('watch_speed'),
+  noteRatio: real('note_ratio'),
   minutesPerItem: real('minutes_per_item'),
   sortOrder: integer('sort_order').notNull(),
   priority: integer('priority').notNull().default(0),
@@ -104,4 +109,25 @@ export const chatMessage = sqliteTable('chat_message', {
   }),
   createdAt: text('created_at').notNull(),
   reportedAt: text('reported_at'),
+});
+
+// YouTube oynatma listesinin cihazdaki kopyası (T31). API verisi: en fazla 30 gün (YouTube API Hizmetleri
+// III.E.4); 25 günü geçince yenilenir, yenilenemezse 30. günde silinir (T34). Senkronlanmaz.
+export const ytPlaylist = sqliteTable('yt_playlist', {
+  id: text('id').primaryKey(),
+  title: text('title').notNull(),
+  channelTitle: text('channel_title').notNull(),
+  videos: text('videos', { mode: 'json' })
+    .$type<
+      {
+        videoId: string;
+        title: string;
+        channelTitle: string;
+        durationSeconds: number;
+        embeddable: boolean;
+        madeForKids: boolean;
+      }[]
+    >()
+    .notNull(),
+  fetchedAt: text('fetched_at').notNull(),
 });

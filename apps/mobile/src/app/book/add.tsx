@@ -40,6 +40,13 @@ export default function AddBookScreen() {
           selected={false}
           onPress={() => router.push('/book/quick')}
         />
+        <Choice
+          testID="add-youtube"
+          label={o.youtube.label}
+          description={o.youtube.description}
+          selected={false}
+          onPress={() => router.push('/book/youtube')}
+        />
       </View>
     </SafeAreaView>
   );

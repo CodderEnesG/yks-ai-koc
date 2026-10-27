@@ -120,6 +120,17 @@ export const tr = {
     unscheduled:
       'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
+    openYouTube: "YouTube'da aç",
+    videoMissing: 'Video bilgisi yenileniyor',
+    videoDuration: (videoSeconds: number, planSeconds: number) => {
+      const fmt = (seconds: number) => {
+        const minutes = Math.max(1, Math.round(seconds / 60));
+        const h = Math.floor(minutes / 60);
+        const m = minutes % 60;
+        return h === 0 ? `${m} dk` : m === 0 ? `${h} sa` : `${h} sa ${m} dk`;
+      };
+      return `${fmt(videoSeconds)} video · ≈ ${fmt(planSeconds)} not dahil`;
+    },
   },
   settings: {
     title: 'Ayarlar',
@@ -240,6 +251,9 @@ export const tr = {
     partial: 'Yarım kaldı',
     skip: 'Yapamadım',
     statusDone: '✓ Tamamlandı',
+    watched: 'İzledim',
+    notWatched: 'İzleyemedim',
+    statusWatched: '✓ İzlendi',
     statusSkipped: 'Yapılmadı',
     statusPartial: (done: string) => `Yarım: ${done} yapıldı`,
     reasonTitle: 'Ne oldu?',
@@ -285,6 +299,38 @@ export const tr = {
       search: { label: 'Ara', description: 'ISBN ya da kitap adıyla katalogda' },
       toc: { label: 'İçindekilerden ekle', description: 'Fotoğrafını çek, bölümleri biz okuyalım' },
       quick: { label: 'Hızlı ekle', description: 'Katalogda yoksa: ad ve sayfa ya da test sayısı' },
+      youtube: {
+        label: 'YouTube listesi',
+        description: 'Ders oynatma listesinin linkini yapıştır',
+      },
+    },
+    playlistSummary: (videos: number, speed: number, channel: string) =>
+      `${videos} video · ${speed.toLocaleString('tr-TR')}× · ${channel}`,
+    playlistMissing: 'Liste bilgisi 30 günü geçti; yenilenince plana döner.',
+    youtube: {
+      title: 'YouTube listesi ekle',
+      subtitle: 'Ders oynatma listesinin linkini yapıştır. Videolar planına sırayla girer.',
+      linkLabel: 'Liste linki',
+      placeholder: 'https://www.youtube.com/playlist?list=…',
+      fetch: 'Listeyi getir',
+      fetching: 'Liste getiriliyor…',
+      preview: (videos: number, duration: string) => `${videos} video · toplam ${duration}`,
+      speedLabel: 'İzleme hızı',
+      noteLabel: 'Not alma payı',
+      noteHint: 'Durdurup not almak için videoya eklenen süre.',
+      add: 'Kütüphaneme ekle',
+      kidsNote: 'Bu listede "çocuklara özel" işaretli videolar var.',
+      errors: {
+        invalid_link: 'Bu bir YouTube oynatma listesi linki değil.',
+        not_found: 'Liste bulunamadı ya da gizli.',
+        empty: 'Listede izlenebilir video yok.',
+        quota: 'Bugünkü liste ekleme hakkın doldu; yarın tekrar dene.',
+        consent: 'Liste ekleme velinin onayından sonra açılır.',
+        unavailable: "YouTube'a şu an ulaşılamıyor; biraz sonra tekrar dene.",
+        network: 'Liste getirilemedi; internet bağlantını kontrol et.',
+      },
+      needAccount: 'YouTube listesi eklemek için hesabını bağla; liste sunucudan getirilir.',
+      needConsent: 'YouTube listesi eklemek velinin onayından sonra açılır.',
     },
     scan: {
       title: 'Barkodu çerçeveye getir',
