@@ -9,6 +9,7 @@ export const tr = {
     continue: 'Devam',
     skip: 'Şimdilik geç',
     estimated: 'tahmini',
+    back: 'Geri',
   },
   months: [
     'Ocak',
