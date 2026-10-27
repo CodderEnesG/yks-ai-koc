@@ -41,6 +41,13 @@ export default function ScanScreen() {
           router.replace({ pathname: '/book/search', params: { q: isbn, via: 'barkod' } });
         }}
       />
+      {/* Hedef çerçeve: ISBN barkodu yatay ve geniş; tarama kameranın tamamında yapılır, çerçeve yol gösterir. */}
+      <View
+        pointerEvents="none"
+        className="absolute inset-0 items-center justify-center"
+        accessibilityElementsHidden>
+        <View testID="scan-frame" className="h-40 w-72 rounded-2xl border-2 border-white" />
+      </View>
       <View className="absolute inset-x-0 bottom-0 gap-3 p-6 pb-12">
         <Text className="text-center text-white">{tr.library.scan.title}</Text>
         <Button variant="secondary" onPress={() => router.replace('/book/search')}>

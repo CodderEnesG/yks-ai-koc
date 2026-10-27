@@ -4,6 +4,7 @@ import { Alert, ScrollView, View } from 'react-native';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { YouTubeMark } from '@/components/youtube-mark';
 import { removeLibraryItem, useLibrary } from '@/features/library/repo';
 import { tr } from '@/i18n/tr';
 
@@ -32,6 +33,7 @@ export default function LibraryScreen() {
             testID={`library-item-${item.title}`}
             className="border-border gap-1 rounded-xl border p-4">
             <Text className="font-medium">{item.title}</Text>
+            {item.playlist ? <YouTubeMark /> : null}
             <Text variant="muted">
               {item.playlist
                 ? item.playlist.missing

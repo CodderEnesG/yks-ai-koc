@@ -5,6 +5,7 @@ import { Linking, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { YouTubeMark } from '@/components/youtube-mark';
 import { tr } from '@/i18n/tr';
 
 import { markTasks } from './checkin';
@@ -33,7 +34,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
           </Text>
           <View className="flex-row items-center justify-between gap-3">
             {/* YouTube içeriğin kaynağı olarak açıkça gösterilir (politika III.F.2). */}
-            <Text className="text-xs font-semibold text-[#FF0000]">▶ YouTube</Text>
+            <YouTubeMark />
             <Text variant="muted">
               {g.video
                 ? tr.today.videoDuration(g.video.durationSeconds, g.estSeconds)

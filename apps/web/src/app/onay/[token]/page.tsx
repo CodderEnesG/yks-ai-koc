@@ -5,7 +5,7 @@ import { ConsentForm } from './consent-form';
 
 // Link bir sır taşır: arama motoruna girmez, başka siteye referer olarak gitmez.
 export const metadata: Metadata = {
-  title: 'Veli onayı · YKS Koç',
+  title: 'Veli onayı · lamba',
   robots: { index: false, follow: false },
   referrer: 'no-referrer',
 };

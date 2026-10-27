@@ -1,7 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
 
+import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { Choice, StepScreen } from '@/features/onboarding/ui';
 import { claimConsent } from '@/features/consent/consent';
@@ -11,6 +12,8 @@ import { push, restore } from '@/features/sync/sync';
 import { tr } from '@/i18n/tr';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Yeni kod istemeden önce bekleme (Supabase aynı adrese sık kod göndermez). */
+const RESEND_SECONDS = 60;
 
 // E-posta + tek kullanımlık kod (T16). `restore=1`: yeni telefonda kurulum yerine geri yükleme.
 export default function SignInScreen() {
@@ -23,16 +26,23 @@ export default function SignInScreen() {
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [resendIn, setResendIn] = useState(0);
   const a = tr.account;
+
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const timer = setTimeout(() => setResendIn((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [resendIn]);
   const input = 'border-input text-foreground rounded-xl border px-4 py-3 text-lg';
 
-  const run = async (fn: () => Promise<void>) => {
+  const run = async (fn: () => Promise<void>, failure: string = a.failed) => {
     setBusy(true);
     setError(null);
     try {
       await fn();
     } catch {
-      setError(a.failed);
+      setError(failure);
     } finally {
       setBusy(false);
     }
@@ -42,7 +52,11 @@ export default function SignInScreen() {
     run(async () => {
       await sendCode(email.trim());
       setSent(true);
-    });
+      setCode('');
+      setResendIn(RESEND_SECONDS);
+    }, a.sendFailed);
+  const trimmed = email.trim();
+  const showInvalid = trimmed.length >= 6 && !EMAIL_RE.test(trimmed);
 
   const onVerify = () =>
     run(async () => {
@@ -91,6 +105,11 @@ export default function SignInScreen() {
               className={input}
               placeholderTextColorClassName="accent-muted-foreground"
             />
+            {showInvalid ? (
+              <Text testID="account-email-invalid" variant="muted" className="text-sm">
+                {a.invalidEmail}
+              </Text>
+            ) : null}
           </View>
           <Choice
             testID="account-consent"
@@ -112,6 +131,27 @@ export default function SignInScreen() {
             autoComplete="one-time-code"
             className={`${input} text-center tracking-widest`}
           />
+          <View className="flex-row flex-wrap gap-2">
+            <Button
+              testID="account-resend"
+              size="sm"
+              variant="ghost"
+              disabled={busy || resendIn > 0}
+              onPress={() => void onSend()}>
+              <Text>{resendIn > 0 ? a.resendIn(resendIn) : a.resend}</Text>
+            </Button>
+            <Button
+              testID="account-change-email"
+              size="sm"
+              variant="ghost"
+              disabled={busy}
+              onPress={() => {
+                setSent(false);
+                setError(null);
+              }}>
+              <Text>{a.changeEmail}</Text>
+            </Button>
+          </View>
         </View>
       )}
       {error ? <Text className="text-destructive text-sm">{error}</Text> : null}

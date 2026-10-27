@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 // Link bir sır taşır: arama motoruna girmez, başka siteye referer olarak gitmez.
 export const metadata: Metadata = {
-  title: 'Haftalık rapor · YKS Koç',
+  title: 'Haftalık rapor · lamba',
   robots: { index: false, follow: false },
   referrer: 'no-referrer',
 };

@@ -1,7 +1,7 @@
 import { CHAT_MAX_LENGTH } from '@yks/ai/limits';
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
-import { FlatList, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, TextInput, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 import { SafeAreaView } from '@/components/screen';
@@ -85,6 +85,17 @@ export default function CoachScreen() {
           renderItem={({ item }) => (
             <Bubble message={item} onRetry={() => void run(() => retryChatMessage(item, today))} />
           )}
+          // Yanıt güvenlik taraması ve üretimle birkaç saniye sürer (akışsız; T17).
+          ListFooterComponent={
+            busy ? (
+              <View
+                testID="coach-thinking"
+                className="bg-muted mt-3 flex-row items-center gap-2 self-start rounded-2xl rounded-bl-sm px-4 py-3">
+                <ActivityIndicator size="small" />
+                <Text variant="muted">{c.thinking}</Text>
+              </View>
+            ) : undefined
+          }
         />
         {error ? (
           <Text testID="coach-error" className="text-destructive px-4 text-sm">
@@ -120,9 +131,17 @@ function Bubble({ message, onRetry }: { message: ChatMessage; onRetry: () => voi
   if (message.role === 'user') {
     return (
       <View className="max-w-[85%] gap-1 self-end">
-        <View className="bg-primary rounded-2xl rounded-br-sm px-4 py-2">
+        <View
+          className={`bg-primary rounded-2xl rounded-br-sm px-4 py-2 ${
+            message.status === 'sending' ? 'opacity-60' : ''
+          }`}>
           <Text className="text-primary-foreground">{message.content}</Text>
         </View>
+        {message.status === 'sending' ? (
+          <Text variant="muted" className="self-end text-xs">
+            {c.sending}
+          </Text>
+        ) : null}
         {message.status === 'failed' ? (
           <Button testID="coach-retry" size="sm" variant="ghost" onPress={onRetry}>
             <Text className="text-destructive text-xs">{`${c.failed} · ${c.retry}`}</Text>

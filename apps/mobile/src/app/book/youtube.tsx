@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { ActivityIndicator, TextInput, View } from 'react-native';
 
 import { Text } from '@/components/ui/text';
+import { YouTubeMark } from '@/components/youtube-mark';
 import { track } from '@/features/analytics/analytics';
 import {
   addPlaylist,
@@ -109,7 +110,7 @@ export default function YouTubeScreen() {
             <Text className="font-medium">{result.playlist.title}</Text>
             <Text variant="muted">{result.playlist.channelTitle}</Text>
             <Text>{y.preview(result.videos.length, tr.today.duration(totalSeconds))}</Text>
-            <Text className="text-xs font-semibold text-[#FF0000]">▶ YouTube</Text>
+            <YouTubeMark />
             {result.videos.some((v) => v.madeForKids) ? (
               <Text variant="muted">{y.kidsNote}</Text>
             ) : null}

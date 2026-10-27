@@ -198,7 +198,7 @@ export function ConsentForm({ token }: { token: string }) {
   return (
     <div className="mt-4 space-y-4">
       <p className="text-neutral-600">
-        Çocuğunuz YKS AI Koç&apos;u kullanmak için onayınızı istiyor. Lütfen aşağıdaki açıklamayı
+        Çocuğunuz lamba uygulamasını kullanmak için onayınızı istiyor. Lütfen aşağıdaki açıklamayı
         okuyun.
       </p>
       <section className="space-y-2 rounded-lg bg-neutral-100 p-4 text-sm">
