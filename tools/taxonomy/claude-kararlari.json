@@ -1,0 +1,410 @@
+{
+  "3adim-ayt-cografya:5": {
+    "konu": "COG/11.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-cografya:6": {
+    "konu": "COG/11.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-cografya:17": {
+    "konu": "COG/11.3.5-11.3.9",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-cografya:18": {
+    "konu": "COG/11.3.5-11.3.9",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:1": {
+    "konu": "TDE/dil-bilgisi/kelimede-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:2": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:4": {
+    "konu": "TDE/9.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:5": {
+    "konu": "TDE/10.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:13": {
+    "konu": "TDE/11.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:14": {
+    "konu": "TDE/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:15": {
+    "konu": "TDE/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:16": {
+    "konu": "TDE/A.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:17": {
+    "konu": "TDE/9.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:18": {
+    "konu": "TDE/10.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:20": {
+    "konu": "TDE/A.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-edebiyat:26": {
+    "konu": "TDE/11.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-fizik:23": {
+    "konu": null,
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:1": {
+    "konu": null,
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:2": {
+    "konu": null,
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:3": {
+    "konu": null,
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:5": {
+    "konu": "MAT/11.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:6": {
+    "konu": "MAT/11.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:10": {
+    "konu": "MAT/10.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:15": {
+    "konu": "MAT/11.1.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:32": {
+    "konu": "MAT/10.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-ayt-matematik:33": {
+    "konu": "MAT/10.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-biyoloji:10": {
+    "konu": "BIY/10.2.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-cografya:17": {
+    "konu": "COG/10.2.1-10.2.7",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-cografya:19": {
+    "konu": "COG/12.2.7-12.2.9",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:5": {
+    "konu": "FEL/10.3.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:6": {
+    "konu": "FEL/10.3.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:7": {
+    "konu": "FEL/10.3.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:8": {
+    "konu": "FEL/10.3.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:9": {
+    "konu": "FEL/10.3.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:10": {
+    "konu": "FEL/10.3.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:11": {
+    "konu": "FEL/10.3.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:12": {
+    "konu": "FEL/10.3.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:13": {
+    "konu": "FEL/10.3.6",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-felsefe:14": {
+    "konu": "FEL/10.3.7",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-fizik:13": {
+    "konu": "FIZ/10.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-fizik:14": {
+    "konu": "FIZ/10.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-fizik:18": {
+    "konu": "FIZ/10.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-kimya:2": {
+    "konu": "KIM/9.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-kimya:3": {
+    "konu": "KIM/9.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-kimya:6": {
+    "konu": "KIM/9.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-kimya:7": {
+    "konu": "KIM/9.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-matematik:3": {
+    "konu": "MAT/9.3.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-matematik:4": {
+    "konu": "MAT/9.3.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-matematik:21": {
+    "konu": "MAT/10.2.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-matematik:25": {
+    "konu": "MAT/9.4.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-matematik:29": {
+    "konu": "MAT/10.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:4": {
+    "konu": "TDE/dil-bilgisi/kelimede-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:5": {
+    "konu": "TDE/dil-bilgisi/kelimede-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:6": {
+    "konu": "TDE/dil-bilgisi/kelimede-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:7": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:16": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:17": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:18": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:19": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:20": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:21": {
+    "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:22": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:23": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:24": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:25": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "3adim-tyt-turkce:26": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-biyoloji:7": {
+    "konu": "BIY/11.1.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-biyoloji:17": {
+    "konu": "BIY/12.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-cografya:2": {
+    "konu": "COG/11.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-cografya:4": {
+    "konu": "COG/11.2.13-11.2.20",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-cografya:5": {
+    "konu": "COG/11.2.13-11.2.20",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-cografya:16": {
+    "konu": "COG/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-fizik:8": {
+    "konu": "FIZ/11.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-fizik:14": {
+    "konu": "FIZ/11.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-fizik:16": {
+    "konu": "FIZ/12.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-fizik:23": {
+    "konu": "FIZ/12.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-kimya:16": {
+    "konu": "KIM/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-matematik:3": {
+    "konu": "MAT/11.2.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:3": {
+    "konu": "TDE/10.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:9": {
+    "konu": "TDE/11.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:11": {
+    "konu": "TDE/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:12": {
+    "konu": "TDE/12.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:18": {
+    "konu": "TDE/10.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:22": {
+    "konu": "TDE/10.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:24": {
+    "konu": "TDE/11.6",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-ayt-tde:26": {
+    "konu": "TDE/10.6",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-biyoloji:12": {
+    "konu": "BIY/10.2.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-biyoloji:15": {
+    "konu": "BIY/10.2.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-cografya:8": {
+    "konu": "COG/9.2.1-9.2.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-cografya:10": {
+    "konu": "COG/10.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-cografya:14": {
+    "konu": "COG/10.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-cografya:17": {
+    "konu": "COG/10.2.11",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-felsefe:17": {
+    "konu": "FEL/11.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-kimya:3": {
+    "konu": "KIM/9.2",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-kimya:6": {
+    "konu": "KIM/9.4",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-kimya:7": {
+    "konu": "KIM/9.5",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-kimya:8": {
+    "konu": "KIM/10.1",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-matematik:11": {
+    "konu": "MAT/9.4.3",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-tde:2": {
+    "konu": "TDE/dil-bilgisi/kelimede-anlam",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-tde:4": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-tde:5": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  },
+  "konu-pekistirme-tyt-tde:8": {
+    "konu": "TDE/dil-bilgisi",
+    "neden": "claude-haiku-5-5, 2026-10-27"
+  }
+}

@@ -4,7 +4,7 @@ Son doğrulama: **2026-10-27**. Bu belge projenin güncel durumunu tutar; deği�
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T18, T21, T22, T23, T28 ve T32 tamam; T17, T20, T24 (PostHog), T31, T33 ve T34 kodu yazıldı (uçtan uca denenmedi) (T10, T11, T13-T16, T31-T33 Sprint 1; T17, T18, T20-T24, T34 Sprint 2, T28 Sprint 3 işiydi); T12'nin ilk parçası (MEB katalog tohumu) uzak projede.** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T18, T21, T22, T23, T28 ve T32 tamam; T17, T20, T24 (PostHog), T31, T33 ve T34 kodu yazıldı (uçtan uca denenmedi) (T10, T11, T13-T16, T31-T33 Sprint 1; T17, T18, T20-T24, T34 Sprint 2, T28 Sprint 3 işiydi); T12 katalog tohumu uzak projede, konu taksonomisi ve eşlemesi yerelde (editör doğrulaması bekliyor).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
 
 T05 ölçüldü (2026-10-24): Fotoğraf benzeri bozulmuş 32 içindekiler görüntüsünde Claude Haiku 5.5 (varsayılan efor) sayfa numaralarının %100'ünü (669/669) doğru okudu, 32 kitabın hiçbiri düzeltme gerektirmedi; Gemini 3.5 Flash-Lite %99,0 ve 26/32. Rapordaki eşik (≥%95) geçildi; ikinci LLM sağlayıcısına gerek yok, içindekiler okuma Haiku 5.5 ile. Sınırlama: bozulma yapay, MEB dizgisi sade; T11 öncesinde 5-10 gerçek telefon fotoğrafıyla kontrol. Ayrıntı `tools/toc-eval/README.md`.
 
@@ -90,7 +90,9 @@ T13: Bugün ekranı plan motoruna bağlı. Profil ve kütüphane plan girdisine 
 
 T10: Kütüphane sekmesi; kitap üç yoldan eklenir: barkod (expo-camera, EAN-13), ISBN ya da adla katalog araması (Türkçe karakter katlamalı, cihazda) ve "hızlı ekle" (ad + toplam sayfa/test). Takım ISBN'inde ders seçtirilir. Katalog baskısının birimleri cihaza kopyalanır (plan motoru çevrimdışı çalışır). Öğrenci kitap eklerken sayfa/test başına dakika seçer; varsayılanlar (sayfa 3 dk, test 15 dk) tanımlı değildi (**NOT DEFINED**, Ocak'ta gerçek tamamlamalardan öğrenilecek). Katalog okuması onaydan önce de yapılır (rapor 2.11; kişisel veri yok, anon rolü yalnız kataloğu okur). Maestro akışı katalogdan ve hızlı ekle yolunu iOS'ta doğruluyor; **barkod okuma simülatörde kamera olmadığı için denenmedi**, gerçek cihazda bakılacak. Sunucuya `library_item.minutes_per_item` eklendi.
 
-T12 (ilk parça): `tools/toc-eval/catalog-seed.ts` 32 MEB kitabını (670 birim) katalog migration'ına çevirir; yalnız olgular (ISBN, sayfa sayısı, birim sayfa aralıkları), ham başlık ve konu eşlemesi yok, baskılar `draft`. Konu taksonomisi ve editör doğrulaması T12'nin kalanında. Tohum ve `minutes_per_item` migration'ları uzak projeye uygulandı (2026-10-25; 32 baskı).
+T12 (ilk parça): `tools/toc-eval/catalog-seed.ts` 32 MEB kitabını (670 birim) katalog migration'ına çevirir; yalnız olgular (ISBN, sayfa sayısı, birim sayfa aralıkları), ham başlık ve konu eşlemesi yok, baskılar `draft`. Tohum ve `minutes_per_item` migration'ları uzak projeye uygulandı (2026-10-25; 32 baskı).
+
+T12 (taksonomi, 2026-10-27): `tools/taxonomy` MEB'in 2026 YKS kazanım belgesinden `MEB-2027` konu ağacını (13 ders, 195 ünite, 306 konu) ve 670 katalog biriminin konu eşlemesini üretir: 556 kural, 98 Claude Haiku kararı, 16 eşlenmedi (12 YDT İngilizce, taksonomisi **ERTELENDİ**; 4 karma tekrar birimi). Adların 455/501'i belgede birebir; kalanların gerekçesi `tools/taxonomy/README.md`'de. Sınav ağırlığı belgede yok (**NOT DEFINED**, null). Migration `20261027160000_topic_taxonomy.sql` ve pgTAP testi yazıldı; **uzak projeye uygulanmadı**, test CI'da koşacak. Kalan: baskıların editör doğrulaması (`draft` → doğrulandı; kişi işi).
 
 T09: Kurulum 6 adım (doğum ayı/yılı, sınıf, alan, hedef sıralama/puan, sınav tarihi, hafta içi/sonu süre) ve özet; profil cihazda SQLite'a yazılır, kurulum yapılmamışsa sekmelerden kuruluma yönlendirilir. 18 yaş altı (doğum ayı içinde de reşit olmayan sayılır) özet ekranında veli onayı uyarısı görür ve profil `pending` onay durumuyla kaydedilir; onay akışı T21'de. Kurallar vitest ile, uçtan uca akış iki Maestro testiyle (yetişkin, 18 yaş altı) iOS simülatörde doğrulandı. Android'de henüz denenmedi.
 
@@ -131,6 +133,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   functions/                                         Edge Functions (toc-extract, account-delete, classify)
 /tools
   toc-eval/                                          MEB OGM içindekiler doğru cevap veri seti (T05, T12); PDF'ler data-private'da
+  taxonomy/                                          MEB-2027 konu taksonomisi ve katalog eşlemesi (T12)
 /docs
   PROJECT-STATE.md                                   bu dosya
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)

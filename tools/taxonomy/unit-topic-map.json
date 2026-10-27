@@ -1,0 +1,4200 @@
+{
+  "mufredat": "MEB-2027",
+  "ozet": {
+    "birim": 670,
+    "eslenen": 654,
+    "kural": 556,
+    "claude": 102,
+    "elle": 0,
+    "eslesmedi": 16,
+    "belirsiz": 102
+  },
+  "kitaplar": {
+    "3adim-tyt-biyoloji": [
+      {
+        "sira": 1,
+        "konu": "BIY/9.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "BIY/9.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "BIY/9.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "BIY/9.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "BIY/10.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "BIY/10.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "BIY/10.2.1",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 11,
+        "konu": "BIY/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "BIY/10.2.1",
+        "yontem": "kural",
+        "skor": 0.8
+      },
+      {
+        "sira": 13,
+        "konu": "BIY/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "BIY/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "BIY/10.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-cografya": [
+      {
+        "sira": 1,
+        "konu": "COG/9.1.1-9.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "COG/9.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "COG/9.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "COG/9.1.6-9.1.8",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "COG/9.1.9-9.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "COG/9.1.9-9.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "COG/9.1.12-9.1.13",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "COG/10.1.1-10.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "COG/10.1.3-10.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "COG/10.1.6-10.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "COG/10.1.8",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "COG/10.1.9-10.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "COG/10.1.12-10.1.14",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "COG/10.1.15-10.1.17",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "COG/10.2.1-10.2.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "COG/9.2.1-9.2.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "COG/10.2.1-10.2.7",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "COG/10.2.8-10.2.10",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "COG/12.2.7-12.2.9",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 20,
+        "konu": "COG/9.3.1-9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "COG/9.3.1-9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "COG/10.4.1-10.4.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "COG/10.4.1-10.4.4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-felsefe": [
+      {
+        "sira": 1,
+        "konu": "FEL/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FEL/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FEL/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FEL/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FEL/10.3.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "FEL/10.3.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "FEL/10.3.2",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 8,
+        "konu": "FEL/10.3.2",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 9,
+        "konu": "FEL/10.3.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 10,
+        "konu": "FEL/10.3.4",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 11,
+        "konu": "FEL/10.3.4",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 12,
+        "konu": "FEL/10.3.5",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 13,
+        "konu": "FEL/10.3.6",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 14,
+        "konu": "FEL/10.3.7",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 15,
+        "konu": "FEL/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "FEL/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "FEL/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "FEL/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "FEL/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "FEL/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "FEL/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "FEL/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "FEL/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "FEL/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "FEL/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "FEL/11.5",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-fizik": [
+      {
+        "sira": 1,
+        "konu": "FIZ/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FIZ/9.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FIZ/9.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FIZ/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FIZ/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "FIZ/9.5.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "FIZ/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "FIZ/10.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "FIZ/10.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "FIZ/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "FIZ/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "FIZ/10.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "FIZ/10.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 14,
+        "konu": "FIZ/10.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 15,
+        "konu": "FIZ/10.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "FIZ/10.4.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "FIZ/10.4.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "FIZ/10.4",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      }
+    ],
+    "3adim-tyt-kimya": [
+      {
+        "sira": 1,
+        "konu": "KIM/9.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "KIM/9.1",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 3,
+        "konu": "KIM/9.2",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "KIM/9.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "KIM/9.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "KIM/9.4",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "KIM/9.5",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 8,
+        "konu": "KIM/10.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "KIM/10.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "KIM/10.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "KIM/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "KIM/10.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-matematik": [
+      {
+        "sira": 1,
+        "konu": "MAT/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "MAT/9.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "MAT/9.3.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "MAT/9.3.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 5,
+        "konu": "MAT/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "MAT/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "MAT/9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "MAT/9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "MAT/9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "MAT/9.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "MAT/9.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "MAT/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "MAT/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "MAT/10.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "MAT/11.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "MAT/10.2.1",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 22,
+        "konu": "MAT/10.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "MAT/10.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "MAT/9.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "MAT/9.4.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 26,
+        "konu": "MAT/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 27,
+        "konu": "MAT/9.4.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 28,
+        "konu": "MAT/9.4.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 29,
+        "konu": "MAT/10.5",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 30,
+        "konu": "MAT/10.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 31,
+        "konu": "MAT/10.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 32,
+        "konu": "MAT/10.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 33,
+        "konu": "MAT/10.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 34,
+        "konu": "MAT/10.6.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-tarih": [
+      {
+        "sira": 1,
+        "konu": "TAR/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TAR/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TAR/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TAR/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "TAR/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "TAR/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TAR/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TAR/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TAR/10.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TAR/10.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TAR/10.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TAR/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TAR/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "TAR/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TAR/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TAR/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "ITA/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "ITA/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "ITA/3",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-tyt-turkce": [
+      {
+        "sira": 1,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 5,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 8,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 17,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 19,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 20,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 21,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 22,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 23,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 24,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 25,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 26,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 27,
+        "konu": "TDE/dil-bilgisi/imla-ve-noktalama",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 28,
+        "konu": "TDE/dil-bilgisi/imla-ve-noktalama",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-biyoloji": [
+      {
+        "sira": 1,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "BIY/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "BIY/11.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "BIY/11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "BIY/11.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "BIY/11.1.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "BIY/11.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "BIY/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "BIY/11.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "BIY/12.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "BIY/12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "BIY/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "BIY/12.2.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "BIY/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "BIY/12.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "BIY/12.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "BIY/12.4.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-cografya": [
+      {
+        "sira": 1,
+        "konu": "COG/11.1.1-11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "COG/11.1.1-11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "COG/12.1.1-12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "COG/12.2.1-12.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "COG/11.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "COG/11.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "COG/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "COG/12.2.4-12.2.5",
+        "yontem": "kural",
+        "skor": 0.83
+      },
+      {
+        "sira": 9,
+        "konu": "COG/11.2.8-11.2.12",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "COG/12.2.14-12.2.17",
+        "yontem": "kural",
+        "skor": 0.75
+      },
+      {
+        "sira": 14,
+        "konu": "COG/11.3.1-11.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "COG/11.3.5-11.3.9",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "COG/12.3.1-12.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "COG/11.3.5-11.3.9",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "COG/11.3.5-11.3.9",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 19,
+        "konu": "COG/12.3.10-12.3.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "COG/11.4.1-11.4.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "COG/11.4.1-11.4.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "COG/12.4.1-12.4.4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-felsefe": [
+      {
+        "sira": 1,
+        "konu": "PSI/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "PSI/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "PSI/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "PSI/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "PSI/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "PSI/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "PSI/4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "PSI/4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "SOS/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "SOS/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "SOS/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "SOS/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "SOS/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "SOS/4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "SOS/5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "SOS/6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "MAN/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "MAN/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "MAN/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "MAN/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "MAN/4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-fizik": [
+      {
+        "sira": 1,
+        "konu": "FIZ/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FIZ/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FIZ/11.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FIZ/11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FIZ/11.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "FIZ/11.1.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "FIZ/11.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "FIZ/11.1.9",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "FIZ/11.1.10",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "FIZ/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "FIZ/11.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "FIZ/11.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "FIZ/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "FIZ/11.2.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "FIZ/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "FIZ/12.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "FIZ/12.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "FIZ/12.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "FIZ/12.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "FIZ/12.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "FIZ/12.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "FIZ/12.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": null,
+        "yontem": "claude",
+        "skor": 0,
+        "belirsiz": true
+      }
+    ],
+    "3adim-ayt-kimya": [
+      {
+        "sira": 1,
+        "konu": "KIM/11.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "KIM/11.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "KIM/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "KIM/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "KIM/11.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "KIM/11.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "KIM/11.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "KIM/11.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "KIM/11.6",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "KIM/11.6.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "KIM/12.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "KIM/12.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "KIM/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "KIM/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "KIM/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "KIM/12.3.2",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-matematik": [
+      {
+        "sira": 1,
+        "konu": null,
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 2,
+        "konu": null,
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 3,
+        "konu": null,
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "MAT/10.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "MAT/11.4",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "MAT/11.4",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "MAT/11.3.2",
+        "yontem": "kural",
+        "skor": 0.8
+      },
+      {
+        "sira": 8,
+        "konu": "MAT/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "MAT/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "MAT/10.1",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 11,
+        "konu": "MAT/12.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "MAT/12.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "MAT/12.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "MAT/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "MAT/11.1.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 16,
+        "konu": "MAT/12.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "MAT/12.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "MAT/11.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "MAT/12.5.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "MAT/12.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "MAT/12.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "MAT/12.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "MAT/12.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "MAT/12.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "MAT/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "MAT/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 27,
+        "konu": "MAT/12.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 28,
+        "konu": "MAT/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 29,
+        "konu": "MAT/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 30,
+        "konu": "MAT/12.7.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 31,
+        "konu": "MAT/11.6.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 32,
+        "konu": "MAT/10.5",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 33,
+        "konu": "MAT/10.5",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      }
+    ],
+    "3adim-ayt-tarih": [
+      {
+        "sira": 1,
+        "konu": "TAR/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TAR/9.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TAR/9.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TAR/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "TAR/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "TAR/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TAR/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TAR/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TAR/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TAR/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TAR/10.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TAR/10.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TAR/10.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "TAR/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TAR/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TAR/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "TAR/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "TAR/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "ITA/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "ITA/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "ITA/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "ITA/4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "ITA/5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "ITA/6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "ITA/7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "ITA/8",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "3adim-ayt-edebiyat": [
+      {
+        "sira": 1,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 2,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 3,
+        "konu": "TDE/12.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TDE/9.2",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 5,
+        "konu": "TDE/10.2",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "TDE/11.2",
+        "yontem": "kural",
+        "skor": 0.8
+      },
+      {
+        "sira": 7,
+        "konu": "TDE/9.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TDE/9.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TDE/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TDE/12.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TDE/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TDE/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TDE/11.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 14,
+        "konu": "TDE/12.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 15,
+        "konu": "TDE/12.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 16,
+        "konu": "TDE/A.2",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 17,
+        "konu": "TDE/9.5",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "TDE/10.5",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 19,
+        "konu": "TDE/12.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "TDE/A.3",
+        "yontem": "claude",
+        "skor": 1,
+        "belirsiz": true
+      },
+      {
+        "sira": 21,
+        "konu": "TDE/10.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "TDE/11.3",
+        "yontem": "kural",
+        "skor": 0.75
+      },
+      {
+        "sira": 23,
+        "konu": "TDE/11.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "TDE/A.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "TDE/A.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "TDE/11.1",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      }
+    ],
+    "3adim-ydt-ingilizce": [
+      {
+        "sira": 1,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 2,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 3,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 4,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 5,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 6,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 7,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 8,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 9,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 10,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 11,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      },
+      {
+        "sira": 12,
+        "konu": null,
+        "yontem": "eslesmedi",
+        "skor": 0
+      }
+    ],
+    "konu-pekistirme-tyt-biyoloji": [
+      {
+        "sira": 1,
+        "konu": "BIY/9.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "BIY/9.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "BIY/9.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "BIY/9.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "BIY/9.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "BIY/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "BIY/10.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "BIY/10.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "BIY/10.2.1",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 13,
+        "konu": "BIY/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "BIY/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "BIY/10.2.1",
+        "yontem": "claude",
+        "skor": 0,
+        "belirsiz": true
+      },
+      {
+        "sira": 16,
+        "konu": "BIY/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "BIY/10.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "BIY/10.3.3",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-tyt-cografya": [
+      {
+        "sira": 1,
+        "konu": "COG/9.1.1-9.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "COG/9.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "COG/9.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "COG/9.1.6-9.1.8",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "COG/9.1.9-9.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "COG/9.1.9-9.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "COG/9.1.12-9.1.13",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "COG/9.2.1-9.2.4",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 9,
+        "konu": "COG/9.4.1-9.4.2",
+        "yontem": "kural",
+        "skor": 0.83
+      },
+      {
+        "sira": 10,
+        "konu": "COG/10.1",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 11,
+        "konu": "COG/10.1.6-10.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "COG/10.1.8",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "COG/10.1.9-10.1.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "COG/10.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 15,
+        "konu": "COG/10.2.1-10.2.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "COG/10.2.8-10.2.10",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "COG/10.2.11",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "COG/10.4.1-10.4.4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-tyt-felsefe": [
+      {
+        "sira": 1,
+        "konu": "FEL/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FEL/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FEL/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FEL/10.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FEL/10.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "FEL/10.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "FEL/10.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "FEL/10.3.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "FEL/10.3.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "FEL/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "FEL/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "FEL/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "FEL/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "FEL/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "FEL/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "FEL/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "FEL/11.5",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      }
+    ],
+    "konu-pekistirme-tyt-fizik": [
+      {
+        "sira": 1,
+        "konu": "FIZ/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FIZ/9.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FIZ/9.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FIZ/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FIZ/9.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "FIZ/9.5.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "FIZ/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "FIZ/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "FIZ/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "FIZ/10.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "FIZ/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "FIZ/10.4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-tyt-kimya": [
+      {
+        "sira": 1,
+        "konu": "KIM/9.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "KIM/9.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "KIM/9.2",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "KIM/9.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "KIM/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "KIM/9.4",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 7,
+        "konu": "KIM/9.5",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 8,
+        "konu": "KIM/10.1",
+        "yontem": "claude",
+        "skor": 0.6,
+        "belirsiz": true
+      },
+      {
+        "sira": 9,
+        "konu": "KIM/10.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "KIM/10.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "KIM/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "KIM/10.4.1",
+        "yontem": "kural",
+        "skor": 0.8
+      }
+    ],
+    "konu-pekistirme-tyt-matematik": [
+      {
+        "sira": 1,
+        "konu": "MAT/9.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "MAT/9.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "MAT/9.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "MAT/9.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "MAT/9.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "MAT/9.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "MAT/9.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "MAT/9.3.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "MAT/9.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "MAT/9.4.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "MAT/9.4.3",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 12,
+        "konu": "MAT/9.4.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "MAT/9.4.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "MAT/9.5.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "MAT/9.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "MAT/10.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "MAT/10.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "MAT/10.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "MAT/10.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "MAT/10.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "MAT/10.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "MAT/10.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "MAT/10.5",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "MAT/10.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "MAT/10.6.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-tyt-tarih": [
+      {
+        "sira": 1,
+        "konu": "TAR/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TAR/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TAR/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TAR/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "TAR/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "TAR/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TAR/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TAR/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TAR/10.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TAR/10.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TAR/10.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TAR/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TAR/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "TAR/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TAR/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TAR/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "ITA/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "ITA/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "ITA/3",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-tyt-tde": [
+      {
+        "sira": 1,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TDE/dil-bilgisi/kelimede-anlam",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 3,
+        "konu": "TDE/dil-bilgisi/paragrafta-anlam",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 5,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "TDE/dil-bilgisi/imla-ve-noktalama",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TDE/dil-bilgisi/imla-ve-noktalama",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TDE/dil-bilgisi",
+        "yontem": "claude",
+        "skor": 0.33,
+        "belirsiz": true
+      },
+      {
+        "sira": 9,
+        "konu": "TDE/dil-bilgisi/fiiller",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TDE/dil-bilgisi/isim-tamlamalari",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TDE/dil-bilgisi/cumlenin-ogeleri",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TDE/dil-bilgisi/cumle-cesitleri",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TDE/dil-bilgisi/anlatim-bozukluklari",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-biyoloji": [
+      {
+        "sira": 1,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "BIY/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "BIY/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "BIY/11.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "BIY/11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "BIY/11.1.4",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 8,
+        "konu": "BIY/11.1.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "BIY/11.1.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "BIY/11.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "BIY/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "BIY/11.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "BIY/12.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "BIY/12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "BIY/12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "BIY/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "BIY/12.2",
+        "yontem": "claude",
+        "skor": 0.6,
+        "belirsiz": true
+      },
+      {
+        "sira": 18,
+        "konu": "BIY/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "BIY/12.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "BIY/12.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "BIY/12.4.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-cografya": [
+      {
+        "sira": 1,
+        "konu": "COG/11.1.1-11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "COG/11.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 3,
+        "konu": "COG/11.2.8-11.2.12",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "claude",
+        "skor": 0.57,
+        "belirsiz": true
+      },
+      {
+        "sira": 5,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 6,
+        "konu": "COG/11.2.13-11.2.20",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "COG/11.3.1-11.3.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "COG/11.3.5-11.3.9",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "COG/11.4.1-11.4.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "COG/12.1.1-12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "COG/12.2.1-12.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "COG/12.2.4-12.2.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "COG/12.2.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "COG/12.2.10-12.2.13",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "COG/12.2.14-12.2.17",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "COG/12.3",
+        "yontem": "claude",
+        "skor": 0.25,
+        "belirsiz": true
+      },
+      {
+        "sira": 17,
+        "konu": "COG/12.3.10-12.3.11",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "COG/12.4.1-12.4.4",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-fizik": [
+      {
+        "sira": 1,
+        "konu": "FIZ/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "FIZ/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "FIZ/11.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "FIZ/11.1.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "FIZ/11.1.4",
+        "yontem": "kural",
+        "skor": 0.8
+      },
+      {
+        "sira": 6,
+        "konu": "FIZ/11.1.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "FIZ/11.1.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "FIZ/11.1",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 9,
+        "konu": "FIZ/11.1.10",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "FIZ/11.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "FIZ/11.2.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "FIZ/11.2.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "FIZ/11.2.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "FIZ/11.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 15,
+        "konu": "FIZ/12.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "FIZ/12.1",
+        "yontem": "claude",
+        "skor": 0.43,
+        "belirsiz": true
+      },
+      {
+        "sira": 17,
+        "konu": "FIZ/12.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "FIZ/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "FIZ/12.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "FIZ/12.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "FIZ/12.4.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "FIZ/12.4.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "FIZ/12.5",
+        "yontem": "claude",
+        "skor": 0.6,
+        "belirsiz": true
+      },
+      {
+        "sira": 24,
+        "konu": "FIZ/12.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "FIZ/12.5.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "FIZ/12.6",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-kimya": [
+      {
+        "sira": 1,
+        "konu": "KIM/11.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "KIM/11.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "KIM/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "KIM/11.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "KIM/11.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "KIM/11.3",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "KIM/11.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "KIM/11.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "KIM/11.6",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "KIM/11.6.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "KIM/12.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "KIM/12.1",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "KIM/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "KIM/12.2",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "KIM/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "KIM/12.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 17,
+        "konu": "KIM/12.4",
+        "yontem": "kural-ust",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-matematik": [
+      {
+        "sira": 1,
+        "konu": "MAT/11.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "MAT/11.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "MAT/11.2.1",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "MAT/11.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "MAT/11.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "MAT/11.3.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "MAT/11.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "MAT/11.4.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "MAT/11.5",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "MAT/11.5",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "MAT/11.6.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "MAT/11.7",
+        "yontem": "kural-ust",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "MAT/12.1.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "MAT/12.1.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "MAT/12.1.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "MAT/12.2.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "MAT/12.3.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "MAT/12.3.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "MAT/12.4.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "MAT/12.5.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "MAT/12.5.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "MAT/12.5.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "MAT/12.6.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "MAT/12.6.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "MAT/12.7.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-tarih": [
+      {
+        "sira": 1,
+        "konu": "TAR/9.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TAR/9.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TAR/9.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 4,
+        "konu": "TAR/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "TAR/9.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "TAR/9.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TAR/10.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TAR/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TAR/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 10,
+        "konu": "TAR/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 11,
+        "konu": "TAR/10.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 12,
+        "konu": "TAR/10.6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 13,
+        "konu": "TAR/10.7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 14,
+        "konu": "TAR/11.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TAR/11.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TAR/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "TAR/11.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "TAR/11.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 19,
+        "konu": "ITA/1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 20,
+        "konu": "ITA/2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "ITA/3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "ITA/4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 23,
+        "konu": "ITA/5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 24,
+        "konu": "ITA/6",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 25,
+        "konu": "ITA/7",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "ITA/8",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ],
+    "konu-pekistirme-ayt-tde": [
+      {
+        "sira": 1,
+        "konu": "TDE/12.1",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 2,
+        "konu": "TDE/9.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 3,
+        "konu": "TDE/10.3",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 4,
+        "konu": "TDE/12.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 5,
+        "konu": "TDE/10.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 6,
+        "konu": "TDE/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 7,
+        "konu": "TDE/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 8,
+        "konu": "TDE/11.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 9,
+        "konu": "TDE/11.3",
+        "yontem": "claude",
+        "skor": 0.6,
+        "belirsiz": true
+      },
+      {
+        "sira": 10,
+        "konu": "TDE/12.3",
+        "yontem": "kural",
+        "skor": 0.8
+      },
+      {
+        "sira": 11,
+        "konu": "TDE/12.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 12,
+        "konu": "TDE/12.3",
+        "yontem": "claude",
+        "skor": 0.5,
+        "belirsiz": true
+      },
+      {
+        "sira": 13,
+        "konu": "TDE/12.3",
+        "yontem": "kural",
+        "skor": 0.75
+      },
+      {
+        "sira": 14,
+        "konu": "TDE/9.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 15,
+        "konu": "TDE/10.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 16,
+        "konu": "TDE/12.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 17,
+        "konu": "TDE/10.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 18,
+        "konu": "TDE/10.2",
+        "yontem": "claude",
+        "skor": 0.67,
+        "belirsiz": true
+      },
+      {
+        "sira": 19,
+        "konu": "TDE/11.2",
+        "yontem": "kural",
+        "skor": 0.86
+      },
+      {
+        "sira": 20,
+        "konu": "TDE/12.2",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 21,
+        "konu": "TDE/12.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 22,
+        "konu": "TDE/10.5",
+        "yontem": "claude",
+        "skor": 0.6,
+        "belirsiz": true
+      },
+      {
+        "sira": 23,
+        "konu": "TDE/11.6",
+        "yontem": "kural",
+        "skor": 0.83
+      },
+      {
+        "sira": 24,
+        "konu": "TDE/11.6",
+        "yontem": "claude",
+        "skor": 0.19,
+        "belirsiz": true
+      },
+      {
+        "sira": 25,
+        "konu": "TDE/A.3",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 26,
+        "konu": "TDE/10.6",
+        "yontem": "claude",
+        "skor": 0.75,
+        "belirsiz": true
+      },
+      {
+        "sira": 27,
+        "konu": "TDE/11.7",
+        "yontem": "kural",
+        "skor": 0.83
+      },
+      {
+        "sira": 28,
+        "konu": "TDE/12.5",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 29,
+        "konu": "TDE/A.4",
+        "yontem": "kural",
+        "skor": 1
+      },
+      {
+        "sira": 30,
+        "konu": "TDE/12.1",
+        "yontem": "kural",
+        "skor": 1
+      }
+    ]
+  }
+}
