@@ -39,7 +39,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 
 | Katman | Seçim | Görev |
 |---|---|---|
-| Backend (kalan) | Supabase pg_cron (haftalık rapor), gerçek e-posta sağlayıcısı (SMTP). Storage kullanılmıyor: içindekiler görüntüsü istek gövdesiyle gider, hiçbir yere yazılmaz | T22 |
+| Backend (kalan) | Gerçek e-posta sağlayıcısı (SMTP) ve Pazar raporu e-postası için pg_cron işi (pg_cron saklama temizliği için kurulu, `retention-daily`). Storage kullanılmıyor: içindekiler görüntüsü istek gövdesiyle gider, hiçbir yere yazılmaz | T22 |
 | Listeler | FlatList (kısa listeler), `@shopify/flash-list` 2 (sohbet) | T13, T17 |
 | Sohbet | Kendi arayüzümüz + `react-native-keyboard-controller`; akış için AI SDK `useChat` + `expo/fetch` ya da elle SSE okuyucu (Türkçe çok baytlı karakter testiyle seçilir) | T17 |
 | Modal | Expo Router `formSheet`; gerekirse `@gorhom/bottom-sheet` 5 | — |

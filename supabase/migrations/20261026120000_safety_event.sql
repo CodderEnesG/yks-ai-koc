@@ -5,7 +5,7 @@
 --
 -- Tablo istemciye kapalı: öğrenci ne okur ne yazar. Kayıt yalnız Edge Function'dan, öğrencinin oturumuyla
 -- record_safety_event ile düşer. 18 yaş altı onaysız kullanıcı için kayıt kabul edilmez (değişmez kural).
--- Saklama: incelemeden sonra 1 yıl (rapor 2.11, avukat teyidiyle); silme işi pg_cron gelince (henüz yok).
+-- Saklama: incelemeden sonra 1 yıl (rapor 2.11, avukat teyidiyle); silme günlük temizlikte (run_retention).
 create table public.safety_event (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users (id) on delete cascade,

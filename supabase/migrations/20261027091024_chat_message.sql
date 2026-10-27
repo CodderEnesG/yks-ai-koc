@@ -5,7 +5,7 @@
 -- * Sohbet içeriği hiçbir zaman veliye gösterilmez (değişmez kural): rapor fonksiyonu bu tabloyu okumaz,
 --   veli rolüne hiçbir politika yok.
 -- * Saklama 90 günlük kayan pencere: `chat` her istekte o öğrencinin eski mesajlarını siler
---   (purge_chat_messages). Uzun süre yazmayan öğrencinin eskileri pg_cron gelince temizlenecek (henüz yok).
+--   (purge_chat_messages). Uzun süre yazmayan öğrencinin eskilerini günlük temizlik siler (run_retention).
 -- * Hesap silinince ya da veli onayı geri çekilince cascade ile gider.
 create table public.chat_message (
   id uuid primary key,
