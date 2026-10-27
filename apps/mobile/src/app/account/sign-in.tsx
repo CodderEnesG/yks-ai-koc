@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { Choice, StepScreen } from '@/features/onboarding/ui';
 import { claimConsent } from '@/features/consent/consent';
@@ -93,7 +94,7 @@ export default function SignInScreen() {
       {!sent ? (
         <>
           <View className="gap-2">
-            <Text className="font-medium">{a.emailLabel}</Text>
+            <Text className="font-sans-semibold">{a.emailLabel}</Text>
             <TextInput
               testID="account-email"
               value={email}
@@ -121,7 +122,7 @@ export default function SignInScreen() {
         </>
       ) : (
         <View className="gap-2">
-          <Text className="font-medium">{a.codeLabel(email.trim())}</Text>
+          <Text className="font-sans-semibold">{a.codeLabel(email.trim())}</Text>
           <TextInput
             testID="account-code"
             value={code}
@@ -154,7 +155,7 @@ export default function SignInScreen() {
           </View>
         </View>
       )}
-      {error ? <Text className="text-destructive text-sm">{error}</Text> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
     </StepScreen>
   );
 }

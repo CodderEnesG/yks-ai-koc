@@ -6,6 +6,7 @@ import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import {
   type ChatMessage,
@@ -98,12 +99,12 @@ export default function CoachScreen() {
           }
         />
         {error ? (
-          <Text testID="coach-error" className="text-destructive px-4 text-sm">
+          <ErrorText testID="coach-error" className="px-4">
             {error}
-          </Text>
+          </ErrorText>
         ) : null}
         {'issue' in checked && checked.issue === 'too_long' ? (
-          <Text className="text-destructive px-4 text-sm">{c.tooLong(CHAT_MAX_LENGTH)}</Text>
+          <ErrorText className="px-4">{c.tooLong(CHAT_MAX_LENGTH)}</ErrorText>
         ) : null}
         <View className="border-border flex-row items-end gap-2 border-t p-3">
           <TextInput
@@ -144,7 +145,7 @@ function Bubble({ message, onRetry }: { message: ChatMessage; onRetry: () => voi
         ) : null}
         {message.status === 'failed' ? (
           <Button testID="coach-retry" size="sm" variant="ghost" onPress={onRetry}>
-            <Text className="text-destructive text-xs">{`${c.failed} · ${c.retry}`}</Text>
+            <ErrorText>{`${c.failed} · ${c.retry}`}</ErrorText>
           </Button>
         ) : null}
       </View>

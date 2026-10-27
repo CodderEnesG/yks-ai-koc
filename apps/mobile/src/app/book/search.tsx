@@ -4,6 +4,7 @@ import { ScrollView, TextInput, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { fetchCatalog } from '@/features/library/catalog';
 import {
@@ -43,7 +44,7 @@ export default function SearchScreen() {
           className="border-input text-foreground rounded-xl border px-4 py-3 text-lg"
           placeholderTextColorClassName="accent-muted-foreground"
         />
-        {failed ? <Text className="text-destructive">{tr.library.search.error}</Text> : null}
+        {failed ? <ErrorText>{tr.library.search.error}</ErrorText> : null}
         {sharedIsbn ? <Text variant="muted">{tr.library.search.sharedIsbn}</Text> : null}
         {results.map((e) => (
           <Choice

@@ -48,7 +48,7 @@ export default function EditionScreen() {
           : tr.library.edition.loading}
       </Text>
       <View className="gap-2">
-        <Text className="font-medium">{tr.library.edition.minutesTitle}</Text>
+        <Text className="font-sans-semibold">{tr.library.edition.minutesTitle}</Text>
         <View className="flex-row gap-2">
           {MINUTE_CHOICES.pages.map((m) => (
             <Choice

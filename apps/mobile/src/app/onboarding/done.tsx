@@ -49,7 +49,7 @@ export default function DoneScreen() {
           <View
             testID="minor-notice"
             className="border-border bg-muted gap-2 rounded-xl border p-4">
-            <Text className="font-semibold">{tr.onboarding.done.minorTitle}</Text>
+            <Text className="font-sans-semibold">{tr.onboarding.done.minorTitle}</Text>
             <Text variant="muted">{tr.onboarding.done.minorBody}</Text>
           </View>
         ) : null}

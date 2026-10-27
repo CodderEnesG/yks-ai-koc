@@ -6,7 +6,7 @@ import { Text } from '@/components/ui/text';
  */
 export function YouTubeMark() {
   return (
-    <Text testID="youtube-mark" className="text-xs font-semibold text-[#FF0000]">
+    <Text testID="youtube-mark" className="text-xs font-sans-semibold text-[#FF0000]">
       ▶ YouTube
     </Text>
   );

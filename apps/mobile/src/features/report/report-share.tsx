@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Linking, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { useReportConsent } from '@/features/consent/consent';
 import { useSession } from '@/features/sync/auth';
@@ -50,7 +51,7 @@ export function ReportShare() {
           {link}
         </Text>
       ) : null}
-      {error ? <Text className="text-destructive text-sm">{error}</Text> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
     </View>
   );
 }

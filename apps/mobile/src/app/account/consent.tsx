@@ -4,6 +4,7 @@ import { Linking, ScrollView, Share, TextInput, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import {
   consentLink,
@@ -95,7 +96,7 @@ export default function ConsentScreen() {
           <Text testID="consent-expired">{c.expired}</Text>
         ) : null}
         <View className="gap-2">
-          <Text className="font-medium">{c.emailLabel}</Text>
+          <Text className="font-sans-semibold">{c.emailLabel}</Text>
           <TextInput
             testID="consent-email"
             value={email}
@@ -109,7 +110,7 @@ export default function ConsentScreen() {
           />
           <Text variant="muted">{c.emailHint}</Text>
         </View>
-        {error ? <Text className="text-destructive text-sm">{error}</Text> : null}
+        {error ? <ErrorText>{error}</ErrorText> : null}
       </StepScreen>
     );
   }
@@ -142,7 +143,7 @@ export default function ConsentScreen() {
             {c.stillPending}
           </Text>
         ) : null}
-        {error ? <Text className="text-destructive text-sm">{error}</Text> : null}
+        {error ? <ErrorText>{error}</ErrorText> : null}
         <Button variant="ghost" onPress={() => setNewRequest(true)}>
           <Text>{c.newLink}</Text>
         </Button>

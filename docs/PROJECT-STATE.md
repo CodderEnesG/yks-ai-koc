@@ -167,6 +167,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Tasarım: YouTube logosu | Resmi YouTube logosu kendi renkleriyle; marka paletinin bilinçli istisnası (YouTube API politikası değişmez kural) (2026-10-27). Uygulamada şu an metin etiketi. |
 | Tasarım: güvenli mod dumanı | Sakin. "Soluk" ara verip dönüş için kalır (2026-10-27). |
 | Tasarım: Bugün sayımı | "2 kitap · 1 video"; videolar kitap sayılmaz; sabah bildirimi de aynı (2026-10-27, uygulandı). |
+| Uygulama teması (temel) | Marka teması uygulamada (2026-10-27): palet ve açık/koyu token'lar, Source Sans 3 + Bricolage Grotesque, kırmızısız hata (`ErrorText`) ve tehlikeli eylem (kalın çerçeve), görev kartı durum şekilleri, marka renkli başlık çubukları ve sekme vurgusu, SF Symbols sekme ikonları, marka uygulama ikonu ve açılış ekranı. Ekran düzenleri Figma sürümleri geldikçe. **Simülatörde görülmedi**; native değişiklik var, yeniden derleme gerekir. Tehlikeli eylemdeki çöp kutusu ikonu ikon kütüphanesi gelince. |
 | İçindekiler okuma modeli (T05) | Claude Haiku 5.5, varsayılan efor. Gemini bırakıldı; tek LLM sağlayıcısı (Anthropic) kuralı geçerli (2026-10-24). |
 | Kurulum: hedef (T09) | Hedef sıralama ya da puan; öğrenci türünü seçer, atlayabilir (2026-10-24). |
 | Kurulum: sınav tarihi (T09) | Sınıfa göre tahmini tarih dolu gelir (12. sınıf ve mezun: Haziran 2027, 11. sınıf: Haziran 2028); öğrenci değiştirebilir. ÖSYM takvimi (≈14 Kasım) açıklanınca tek yerden güncellenir (2026-10-24). |

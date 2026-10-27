@@ -4,6 +4,7 @@ import { Alert, ScrollView, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { deleteAccountAndData } from '@/features/account/delete';
 import { Choice } from '@/features/onboarding/ui';
@@ -63,7 +64,7 @@ export default function SettingsScreen() {
         <Text variant="h3">{s.title}</Text>
 
         <View className="gap-2">
-          <Text className="font-medium">{s.morning}</Text>
+          <Text className="font-sans-semibold">{s.morning}</Text>
           <Text variant="muted">{s.morningHint}</Text>
           <View className="flex-row flex-wrap gap-2">
             {MORNING_CHOICES.map((t) => (
@@ -80,7 +81,7 @@ export default function SettingsScreen() {
         </View>
 
         <View className="gap-2">
-          <Text className="font-medium">{s.account}</Text>
+          <Text className="font-sans-semibold">{s.account}</Text>
           {!canSync(profile.consentStatus) ? (
             <>
               <Text testID="account-minor" variant="muted">
@@ -118,7 +119,7 @@ export default function SettingsScreen() {
         </View>
 
         <View className="gap-2">
-          <Text className="font-medium">{tr.support.settingsTitle}</Text>
+          <Text className="font-sans-semibold">{tr.support.settingsTitle}</Text>
           <Text variant="muted">{tr.support.settingsHint}</Text>
           <Button testID="support-open" variant="outline" onPress={() => router.push('/support')}>
             <Text>{tr.support.open}</Text>
@@ -126,7 +127,7 @@ export default function SettingsScreen() {
         </View>
 
         <View className="gap-2">
-          <Text className="font-medium">{s.deleteTitle}</Text>
+          <Text className="font-sans-semibold">{s.deleteTitle}</Text>
           <Text variant="muted">{s.deleteHint(!!session)}</Text>
           <Button
             testID="delete-data"
@@ -135,11 +136,7 @@ export default function SettingsScreen() {
             onPress={confirmDelete}>
             <Text>{s.deleteButton(!!session)}</Text>
           </Button>
-          {deleteError ? (
-            <Text testID="delete-failed" className="text-destructive text-sm">
-              {s.deleteFailed}
-            </Text>
-          ) : null}
+          {deleteError ? <ErrorText testID="delete-failed">{s.deleteFailed}</ErrorText> : null}
         </View>
       </ScrollView>
     </SafeAreaView>

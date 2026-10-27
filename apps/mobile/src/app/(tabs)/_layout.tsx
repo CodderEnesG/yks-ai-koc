@@ -2,6 +2,7 @@ import { Redirect } from 'expo-router';
 import { NativeTabs } from 'expo-router/native-tabs';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 
 import { useAnalyticsGate } from '@/features/analytics/use-analytics';
 import { useConsentWatch } from '@/features/consent/use-consent-watch';
@@ -13,6 +14,7 @@ import { tr } from '@/i18n/tr';
 
 export default function TabsLayout() {
   const profile = useProfile();
+  const scheme = useColorScheme();
   useConsentWatch(profile?.consentStatus);
   useAnalyticsGate(profile?.consentStatus);
   const session = useSession();
@@ -26,31 +28,38 @@ export default function TabsLayout() {
   if (profile === null) return <Redirect href="/onboarding" />;
 
   return (
-    <NativeTabs>
+    // Seçili sekme marka vurgusunda (koyu: turuncu, açık: gece moru); ikonlar SF Symbols (Figma 1. sürüm).
+    <NativeTabs tintColor={scheme === 'dark' ? '#FF9F43' : '#1C1330'}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>{tr.today.title}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Icon sf={{ default: 'sun.max', selected: 'sun.max.fill' }} md="today" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="library">
         <NativeTabs.Trigger.Label>{tr.library.title}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
+          sf={{ default: 'books.vertical', selected: 'books.vertical.fill' }}
+          md="menu_book"
         />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="coach">
         <NativeTabs.Trigger.Label>{tr.chat.title}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="bubble.left.and.bubble.right" md="chat" />
+        <NativeTabs.Trigger.Icon
+          sf={{
+            default: 'bubble.left.and.bubble.right',
+            selected: 'bubble.left.and.bubble.right.fill',
+          }}
+          md="chat"
+        />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="settings">
         <NativeTabs.Trigger.Label>{tr.settings.title}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="gearshape" md="settings" />
+        <NativeTabs.Trigger.Icon
+          sf={{ default: 'gearshape', selected: 'gearshape.fill' }}
+          md="settings"
+        />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

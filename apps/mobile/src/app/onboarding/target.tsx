@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { parseTarget, TARGET_KINDS, type TargetKind } from '@/features/onboarding/rules';
 import { useOnboarding } from '@/features/onboarding/store';
@@ -61,9 +62,7 @@ export default function TargetScreen() {
           className="border-input text-foreground rounded-xl border px-4 py-3 text-lg"
           placeholderTextColorClassName="accent-muted-foreground"
         />
-        {showError ? (
-          <Text className="text-destructive text-sm">{tr.onboarding.target.invalid[kind]}</Text>
-        ) : null}
+        {showError ? <ErrorText>{tr.onboarding.target.invalid[kind]}</ErrorText> : null}
       </View>
     </StepScreen>
   );

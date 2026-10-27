@@ -40,7 +40,7 @@ export default function QuickAddScreen() {
         router.dismissTo('/library');
       }}>
       <View className="gap-2">
-        <Text className="font-medium">{q.name}</Text>
+        <Text className="font-sans-semibold">{q.name}</Text>
         <TextInput
           testID="quick-title"
           value={title}
@@ -51,7 +51,7 @@ export default function QuickAddScreen() {
         />
       </View>
       <View className="gap-2">
-        <Text className="font-medium">{q.kind}</Text>
+        <Text className="font-sans-semibold">{q.kind}</Text>
         <View className="flex-row gap-3">
           {(['pages', 'tests'] as const).map((k) => (
             <Choice
@@ -69,7 +69,7 @@ export default function QuickAddScreen() {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="font-medium">{q.count[kind]}</Text>
+        <Text className="font-sans-semibold">{q.count[kind]}</Text>
         <TextInput
           testID="quick-count"
           value={count}
@@ -79,7 +79,7 @@ export default function QuickAddScreen() {
         />
       </View>
       <View className="gap-2">
-        <Text className="font-medium">
+        <Text className="font-sans-semibold">
           {kind === 'pages'
             ? tr.library.edition.minutesTitle
             : tr.library.edition.minutesTitleTests}

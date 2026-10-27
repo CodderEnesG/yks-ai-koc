@@ -17,17 +17,15 @@ const buttonVariants = cva(
           'bg-primary active:bg-primary/90 shadow-sm shadow-black/5',
           Platform.select({ web: 'hover:bg-primary/90' }),
         ),
+        // Kırmızı yok (lamba kararı 27 Ekim): kalın çerçeve; ekran ikon ve "Geri alınamaz" metniyle tamamlar.
         destructive: cn(
-          'bg-destructive active:bg-destructive/90 dark:bg-destructive/60 shadow-sm shadow-black/5',
-          Platform.select({
-            web: 'hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
-          }),
+          'border-control active:bg-accent border-2 bg-transparent',
+          Platform.select({ web: 'hover:bg-accent' }),
         ),
+        // Çerçeve bilgi taşıdığı için `control` (çizgi rengi değil); saydam zemin yok.
         outline: cn(
-          'border-border bg-background active:bg-accent dark:bg-input/30 dark:border-input dark:active:bg-input/50 border shadow-sm shadow-black/5',
-          Platform.select({
-            web: 'hover:bg-accent dark:hover:bg-input/50',
-          }),
+          'border-control active:bg-accent border bg-transparent',
+          Platform.select({ web: 'hover:bg-accent' }),
         ),
         secondary: cn(
           'bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5',
@@ -55,14 +53,14 @@ const buttonVariants = cva(
 
 const buttonTextVariants = cva(
   cn(
-    'text-foreground text-sm font-medium',
+    'text-foreground text-sm font-sans-semibold',
     Platform.select({ web: 'pointer-events-none transition-colors' }),
   ),
   {
     variants: {
       variant: {
         default: 'text-primary-foreground',
-        destructive: 'text-white',
+        destructive: 'text-foreground',
         outline: cn(
           'group-active:text-accent-foreground',
           Platform.select({ web: 'group-hover:text-accent-foreground' }),

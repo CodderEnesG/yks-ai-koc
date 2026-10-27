@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { MAX_DAY_MINUTES, MINUTE_STEP, splitWeek } from '@/features/onboarding/rules';
 import { useOnboarding } from '@/features/onboarding/store';
@@ -76,9 +77,7 @@ export default function TimeScreen() {
           <Text>{tr.onboarding.time.perDay}</Text>
         </Button>
       ) : null}
-      {!atLeastOne ? (
-        <Text className="text-destructive text-sm">{tr.onboarding.time.atLeastOne}</Text>
-      ) : null}
+      {!atLeastOne ? <ErrorText>{tr.onboarding.time.atLeastOne}</ErrorText> : null}
     </StepScreen>
   );
 }

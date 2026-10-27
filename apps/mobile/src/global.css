@@ -2,51 +2,76 @@
 @import 'uniwind';
 
 /*
- * Yer tutucu tema (shadcn "neutral"). Branding gelince yalnız bu değişkenler değişir;
- * bileşenler `bg-primary`, `text-foreground` gibi anlamsal sınıfları kullanır.
+ * lamba marka teması (brand/kilavuz, lamba-design/TOKENS.md, 27 Ekim 2026). Bileşenler `bg-primary`,
+ * `text-foreground` gibi anlamsal sınıfları kullanır; renk değişikliği yalnız burada yapılır.
+ *
+ * Palet: gece moru #1C1330, krem #F6EEE0, turuncu #FF9F43 (≈ 60/30/10) ve kılavuzdaki destek tonları.
+ * Kılavuzda olmayan renk yok; doğru/yanlış/uyarı için renk yok (şekil, ikon, metin). Turuncu yalnız gece
+ * moru zeminde; açık temada vurgu gece moru. Tek istisna YouTube logosu (YouTubeMark).
  */
 @layer theme {
   :root {
     @variant light {
-      --color-background: #ffffff;
-      --color-foreground: #0a0a0a;
-      --color-card: #ffffff;
-      --color-card-foreground: #0a0a0a;
-      --color-popover: #ffffff;
-      --color-popover-foreground: #0a0a0a;
-      --color-primary: #171717;
-      --color-primary-foreground: #fafafa;
-      --color-secondary: #f5f5f5;
-      --color-secondary-foreground: #171717;
-      --color-muted: #f5f5f5;
-      --color-muted-foreground: #737373;
-      --color-accent: #f5f5f5;
-      --color-accent-foreground: #171717;
-      --color-destructive: #e7000b;
-      --color-border: #e5e5e5;
-      --color-input: #e5e5e5;
-      --color-ring: #a1a1a1;
+      --color-background: #f6eee0;
+      --color-foreground: #1c1330;
+      --color-card: #fbf6ec;
+      --color-card-foreground: #1c1330;
+      --color-popover: #fbf6ec;
+      --color-popover-foreground: #1c1330;
+      --color-primary: #1c1330;
+      --color-primary-foreground: #f6eee0;
+      --color-secondary: #fbf6ec;
+      --color-secondary-foreground: #1c1330;
+      --color-muted: #fbf6ec;
+      --color-muted-foreground: #5c5170;
+      --color-accent: #efe4d0;
+      --color-accent-foreground: #1c1330;
+      /* Kırmızı yok (karar 27 Ekim): hata ve tehlikeli eylem ana metin renginde, ikon ve çerçeveyle ayrılır. */
+      --color-destructive: #1c1330;
+      --color-border: #d9ccb4;
+      --color-input: #5c5170;
+      --color-ring: #1c1330;
+      /* Figma 1. sürümde eklenenler: çerçeveli düğme ve giriş kenarı, önemli vurgu, Alaaddin/duman zemini. */
+      --color-control: #5c5170;
+      --color-emphasis: #1c1330;
+      --color-stage: #1c1330;
     }
 
     @variant dark {
-      --color-background: #0a0a0a;
-      --color-foreground: #fafafa;
-      --color-card: #171717;
-      --color-card-foreground: #fafafa;
-      --color-popover: #171717;
-      --color-popover-foreground: #fafafa;
-      --color-primary: #e5e5e5;
-      --color-primary-foreground: #171717;
-      --color-secondary: #262626;
-      --color-secondary-foreground: #fafafa;
-      --color-muted: #262626;
-      --color-muted-foreground: #a1a1a1;
-      --color-accent: #262626;
-      --color-accent-foreground: #fafafa;
-      --color-destructive: #ff6467;
-      --color-border: #2e2e2e;
-      --color-input: #383838;
-      --color-ring: #737373;
+      --color-background: #1c1330;
+      --color-foreground: #f6eee0;
+      --color-card: #2a1f45;
+      --color-card-foreground: #f6eee0;
+      --color-popover: #2a1f45;
+      --color-popover-foreground: #f6eee0;
+      --color-primary: #ff9f43;
+      --color-primary-foreground: #1c1330;
+      --color-secondary: #2a1f45;
+      --color-secondary-foreground: #f6eee0;
+      --color-muted: #2a1f45;
+      --color-muted-foreground: #bdb2cf;
+      --color-accent: #251a3d;
+      --color-accent-foreground: #f6eee0;
+      --color-destructive: #f6eee0;
+      --color-border: #3a2d57;
+      --color-input: #bdb2cf;
+      --color-ring: #ff9f43;
+      --color-control: #bdb2cf;
+      --color-emphasis: #ff9f43;
+      --color-stage: #1c1330;
     }
   }
+}
+
+/*
+ * Yazı tipleri (app.json expo-font ile gömülü; adlar dosya adıyla birebir). React Native ağırlığı kendisi
+ * üretmez: her ağırlık ayrı aile. Metin ve butonlar Source Sans 3, başlıklar Bricolage Grotesque.
+ * `font-medium/semibold/bold` yerine `font-sans-semibold`, `font-sans-bold`, `font-display` kullanılır.
+ */
+@theme {
+  --font-sans: 'SourceSans3_400Regular';
+  --font-sans-semibold: 'SourceSans3_600SemiBold';
+  --font-sans-bold: 'SourceSans3_700Bold';
+  --font-display: 'BricolageGrotesque_700Bold';
+  --font-display-heavy: 'BricolageGrotesque_800ExtraBold';
 }

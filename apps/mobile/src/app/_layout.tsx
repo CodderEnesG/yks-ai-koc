@@ -5,14 +5,41 @@ import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { Text, useColorScheme, View } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
+import { ErrorText } from '@/components/error-text';
 import { db } from '@/db/client';
 import { useSync } from '@/features/sync/use-sync';
 import migrations from '../../drizzle/migrations';
 
 SplashScreen.preventAutoHideAsync();
+
+// Gezinme çubukları ve geçiş zeminleri marka renklerinde (global.css ile aynı değerler).
+const LAMBA_DARK = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#FF9F43',
+    background: '#1C1330',
+    card: '#1C1330',
+    text: '#F6EEE0',
+    border: '#3A2D57',
+    notification: '#FF9F43',
+  },
+};
+const LAMBA_LIGHT = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#1C1330',
+    background: '#F6EEE0',
+    card: '#F6EEE0',
+    text: '#1C1330',
+    border: '#D9CCB4',
+    notification: '#1C1330',
+  },
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -26,7 +53,7 @@ export default function RootLayout() {
   if (error) {
     return (
       <View className="bg-background flex-1 items-center justify-center p-6">
-        <Text className="text-destructive">Veritabanı hazırlanamadı: {error.message}</Text>
+        <ErrorText>Veritabanı hazırlanamadı: {error.message}</ErrorText>
       </View>
     );
   }
@@ -34,7 +61,7 @@ export default function RootLayout() {
 
   return (
     <KeyboardProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === 'dark' ? LAMBA_DARK : LAMBA_LIGHT}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />

@@ -10,6 +10,7 @@ import { tr } from '@/i18n/tr';
 
 import { markTasks } from './checkin';
 import type { TaskGroup } from './group';
+import { StatusMark } from './status-mark';
 
 /**
  * Bugünün bir kitabı (aralık, süre) ya da bir videosu (T33: başlık, kanal, YouTube etiketi, "YouTube'da
@@ -23,12 +24,15 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
   const isVideo = g.kind === 'video';
 
   return (
-    <View testID="today-task" className="border-border gap-2 rounded-xl border p-4">
+    <View testID="today-task" className="bg-card border-border gap-2 rounded-xl border p-4">
       {isVideo ? (
         <>
-          <Text testID="video-title" className="font-medium">
-            {g.video?.title ?? tr.today.videoMissing}
-          </Text>
+          <View className="flex-row items-start gap-2">
+            <StatusMark status={g.status} />
+            <Text testID="video-title" className="font-sans-semibold flex-1">
+              {g.video?.title ?? tr.today.videoMissing}
+            </Text>
+          </View>
           <Text variant="muted">
             {[g.title, g.video?.channelTitle].filter(Boolean).join(' · ')}
           </Text>
@@ -53,7 +57,10 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
         </>
       ) : (
         <>
-          <Text className="font-medium">{g.title}</Text>
+          <View className="flex-row items-start gap-2">
+            <StatusMark status={g.status} />
+            <Text className="font-sans-semibold flex-1">{g.title}</Text>
+          </View>
           <View className="flex-row justify-between gap-3">
             <Text testID="today-task-range" className="flex-1">
               {tr.today.ranges(g.kind, g.ranges)}
@@ -99,7 +106,7 @@ export function TaskCard({ group: g }: { group: TaskGroup }) {
         </View>
       ) : (
         <View testID="checkin-status" className="gap-1">
-          <Text className="font-medium">
+          <Text className="font-sans-semibold">
             {g.status === 'done'
               ? isVideo
                 ? tr.checkin.statusWatched

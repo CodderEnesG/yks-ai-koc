@@ -130,6 +130,12 @@ export const tr = {
       'Bazı bölümler bir günlük süreden uzun; plana giremedi. Günlük süreni ya da test başı dakikayı gözden geçir.',
     resetDev: 'Kurulumu sıfırla (geliştirme)',
     openYouTube: "YouTube'da aç",
+    statusLabel: {
+      planned: 'Planlı',
+      done: 'Tamamlandı',
+      mixed: 'Yarım kaldı',
+      skipped: 'Yapılmadı',
+    },
     videoMissing: 'Video bilgisi yenileniyor',
     videoDuration: (videoSeconds: number, planSeconds: number) => {
       const fmt = (seconds: number) => {

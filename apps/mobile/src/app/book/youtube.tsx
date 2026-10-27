@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, TextInput, View } from 'react-native';
 
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { YouTubeMark } from '@/components/youtube-mark';
 import { track } from '@/features/analytics/analytics';
@@ -76,7 +77,7 @@ export default function YouTubeScreen() {
         router.dismissTo('/library');
       }}>
       <View className="gap-2">
-        <Text className="font-medium">{y.linkLabel}</Text>
+        <Text className="font-sans-semibold">{y.linkLabel}</Text>
         <TextInput
           testID="youtube-link"
           value={link}
@@ -98,16 +99,12 @@ export default function YouTubeScreen() {
           <Text variant="muted">{y.fetching}</Text>
         </View>
       ) : null}
-      {error ? (
-        <Text testID="youtube-error" className="text-destructive text-sm">
-          {error}
-        </Text>
-      ) : null}
+      {error ? <ErrorText testID="youtube-error">{error}</ErrorText> : null}
 
       {result ? (
         <>
           <View testID="youtube-preview" className="border-border gap-1 rounded-xl border p-4">
-            <Text className="font-medium">{result.playlist.title}</Text>
+            <Text className="font-sans-semibold">{result.playlist.title}</Text>
             <Text variant="muted">{result.playlist.channelTitle}</Text>
             <Text>{y.preview(result.videos.length, tr.today.duration(totalSeconds))}</Text>
             <YouTubeMark />
@@ -116,7 +113,7 @@ export default function YouTubeScreen() {
             ) : null}
           </View>
           <View className="gap-2">
-            <Text className="font-medium">{y.speedLabel}</Text>
+            <Text className="font-sans-semibold">{y.speedLabel}</Text>
             <View className="flex-row gap-2">
               {WATCH_SPEEDS.map((s) => (
                 <Choice
@@ -131,7 +128,7 @@ export default function YouTubeScreen() {
             </View>
           </View>
           <View className="gap-2">
-            <Text className="font-medium">{y.noteLabel}</Text>
+            <Text className="font-sans-semibold">{y.noteLabel}</Text>
             <Text variant="muted">{y.noteHint}</Text>
             <View className="flex-row gap-2">
               {NOTE_CHOICES.map((n) => (

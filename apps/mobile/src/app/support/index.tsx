@@ -5,6 +5,7 @@ import { Linking, ScrollView, Share, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { track } from '@/features/analytics/analytics';
 import { startSafeMode, useSafetyDays } from '@/features/safety/safe-mode';
@@ -43,7 +44,7 @@ export default function SupportScreen() {
         </View>
 
         <View className="gap-3">
-          <Text className="font-medium">{s.lines}</Text>
+          <Text className="font-sans-semibold">{s.lines}</Text>
           {HELP_LINES.map((line) => (
             <View key={line.phone} className="gap-1">
               <Button testID={`support-call-${line.phone}`} onPress={() => void call(line.phone)}>
@@ -52,9 +53,7 @@ export default function SupportScreen() {
               <Text variant="muted">{line.description}</Text>
             </View>
           ))}
-          {callFailed ? (
-            <Text className="text-destructive text-sm">{s.callFailed(callFailed)}</Text>
-          ) : null}
+          {callFailed ? <ErrorText>{s.callFailed(callFailed)}</ErrorText> : null}
         </View>
 
         <View className="gap-2">

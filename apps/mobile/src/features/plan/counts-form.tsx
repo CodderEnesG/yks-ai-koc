@@ -26,7 +26,7 @@ export function CountsForm({ day }: { day: CivilDate }) {
   const toNumber = (v: string) => (v === '' ? null : Number(v));
   return (
     <View className="border-border gap-2 rounded-xl border p-4">
-      <Text className="font-medium">{tr.checkin.countsTitle}</Text>
+      <Text className="font-sans-semibold">{tr.checkin.countsTitle}</Text>
       <View className="flex-row items-center gap-2">
         <TextInput
           testID="counts-correct"

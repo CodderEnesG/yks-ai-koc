@@ -93,7 +93,7 @@ export function Choice({ label, description, selected, onPress, testID, classNam
         selected && 'border-primary bg-secondary',
         className,
       )}>
-      <Text className={cn('font-medium', selected && 'text-primary')}>{label}</Text>
+      <Text className={cn('font-sans-semibold', selected && 'text-primary')}>{label}</Text>
       {description ? <Text variant="muted">{description}</Text> : null}
     </Pressable>
   );

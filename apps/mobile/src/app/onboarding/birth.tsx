@@ -25,7 +25,7 @@ export default function BirthScreen() {
       canContinue={draft.birthMonth !== undefined && draft.birthYear !== undefined}
       onContinue={() => router.push('/onboarding/grade')}>
       <View className="gap-2">
-        <Text className="font-medium">{tr.onboarding.birth.month}</Text>
+        <Text className="font-sans-semibold">{tr.onboarding.birth.month}</Text>
         <View className="flex-row flex-wrap gap-2">
           {tr.months.map((name, i) => (
             <Choice
@@ -40,7 +40,7 @@ export default function BirthScreen() {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="font-medium">{tr.onboarding.birth.year}</Text>
+        <Text className="font-sans-semibold">{tr.onboarding.birth.year}</Text>
         <View className="flex-row flex-wrap gap-2">
           {years.map((year) => (
             <Choice

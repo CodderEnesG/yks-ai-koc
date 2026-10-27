@@ -4,6 +4,7 @@ import { ActivityIndicator, View } from 'react-native';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { extractToc, pickTocImage, TocFailure, useTocDraft } from '@/features/library/toc';
 import { useProfile } from '@/features/profile/repo';
@@ -67,7 +68,7 @@ export default function TocScreen() {
             </Button>
           </View>
         )}
-        {error ? <Text className="text-destructive">{error}</Text> : null}
+        {error ? <ErrorText>{error}</ErrorText> : null}
       </View>
     </SafeAreaView>
   );

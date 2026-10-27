@@ -32,7 +32,7 @@ export default function LibraryScreen() {
             key={item.id}
             testID={`library-item-${item.title}`}
             className="border-border gap-1 rounded-xl border p-4">
-            <Text className="font-medium">{item.title}</Text>
+            <Text className="font-sans-semibold">{item.title}</Text>
             {item.playlist ? <YouTubeMark /> : null}
             <Text variant="muted">
               {item.playlist
@@ -61,7 +61,7 @@ export default function LibraryScreen() {
               size="sm"
               className="self-start px-0"
               onPress={() => confirmRemove(item.id, item.title)}>
-              <Text className="text-destructive">{tr.library.remove}</Text>
+              <Text className="font-sans-semibold underline">{tr.library.remove}</Text>
             </Button>
           </View>
         ))}

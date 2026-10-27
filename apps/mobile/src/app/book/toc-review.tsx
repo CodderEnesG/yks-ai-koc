@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { track } from '@/features/analytics/analytics';
 import { addCustomBook } from '@/features/library/repo';
@@ -37,7 +38,7 @@ export default function TocReviewScreen() {
         router.dismissTo('/library');
       }}>
       <View className="gap-2">
-        <Text className="font-medium">{t.bookName}</Text>
+        <Text className="font-sans-semibold">{t.bookName}</Text>
         <TextInput
           testID="toc-title"
           value={title}
@@ -69,12 +70,12 @@ export default function TocReviewScreen() {
         );
       })}
       {result.issues.some((x) => x.index < rows.length && x.index >= 0) ? (
-        <Text testID="toc-issues" className="text-destructive text-sm">
+        <ErrorText testID="toc-issues">
           {result.issues.some((x) => x.issue === 'not_ascending') ? t.issueOrder : t.issueMissing}
-        </Text>
+        </ErrorText>
       ) : null}
       <View className="gap-2">
-        <Text className="font-medium">{t.lastPage}</Text>
+        <Text className="font-sans-semibold">{t.lastPage}</Text>
         <TextInput
           testID="toc-last-page"
           value={lastPage}
@@ -84,7 +85,7 @@ export default function TocReviewScreen() {
         />
       </View>
       <View className="gap-2">
-        <Text className="font-medium">{tr.library.edition.minutesTitle}</Text>
+        <Text className="font-sans-semibold">{tr.library.edition.minutesTitle}</Text>
         <View className="flex-row gap-2">
           {MINUTE_CHOICES.pages.map((m) => (
             <Choice

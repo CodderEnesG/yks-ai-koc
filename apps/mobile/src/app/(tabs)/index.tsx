@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { trackPlanCreatedOnce } from '@/features/analytics/analytics';
 import { loadReasonEvents } from '@/features/plan/checkin';
@@ -93,7 +94,7 @@ export default function TodayScreen() {
             {tr.today.examCountdown(daysLeft)}
           </Text>
           {streak && streak.days > 0 ? (
-            <Text testID="today-streak" className="font-medium">
+            <Text testID="today-streak" className="font-sans-semibold">
               {tr.today.streak(streak.days)}
             </Text>
           ) : null}
@@ -165,14 +166,12 @@ export default function TodayScreen() {
         ) : null}
 
         {overload ? (
-          <Text testID="today-overload" className="text-destructive text-sm">
+          <ErrorText testID="today-overload">
             {tr.today.overload(plan?.optional.length ?? 0)}
-          </Text>
+          </ErrorText>
         ) : null}
         {plan?.warnings.some((w) => w.code === 'unscheduled') ? (
-          <Text testID="today-unscheduled" className="text-destructive text-sm">
-            {tr.today.unscheduled}
-          </Text>
+          <ErrorText testID="today-unscheduled">{tr.today.unscheduled}</ErrorText>
         ) : null}
 
         {__DEV__ && scheduled !== null ? (

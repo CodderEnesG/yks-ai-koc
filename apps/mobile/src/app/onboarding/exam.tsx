@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
+import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
 import { defaultExamDate } from '@/features/onboarding/rules';
 import { useOnboarding } from '@/features/onboarding/store';
@@ -81,7 +82,7 @@ export default function ExamScreen() {
             {input('year', tr.onboarding.exam.year, 4)}
           </View>
           {parts.year.length === 4 && !valid ? (
-            <Text className="text-destructive text-sm">{tr.onboarding.exam.invalid}</Text>
+            <ErrorText>{tr.onboarding.exam.invalid}</ErrorText>
           ) : null}
           {estimated !== null ? (
             <Button variant="ghost" onPress={() => setCustom(false)}>
