@@ -44,7 +44,8 @@ export async function syncNotifications(args: {
   const loads = args.plan.days.map((d) => ({
     date: d.date,
     seconds: d.seconds,
-    books: new Set(d.tasks.map((t) => t.sourceId)).size,
+    books: new Set(d.tasks.filter((t) => t.kind !== 'video').map((t) => t.sourceId)).size,
+    videos: d.tasks.filter((t) => t.kind === 'video').length,
   }));
   const schedule = buildSchedule({
     today: args.today,
@@ -60,7 +61,7 @@ export async function syncNotifications(args: {
       n.kind === 'morning'
         ? {
             title: tr.notifications.morningTitle,
-            body: tr.notifications.morningBody(tr.today.duration(n.seconds), n.books),
+            body: tr.notifications.morningBody(tr.today.duration(n.seconds), n.books, n.videos),
           }
         : n.kind === 'evening'
           ? { title: tr.notifications.eveningTitle, body: tr.notifications.eveningBody }

@@ -99,7 +99,11 @@ export default function TodayScreen() {
           ) : null}
           {groups.length > 0 ? (
             <Text testID="today-total" variant="muted">
-              {tr.today.summary(tr.today.duration(totalSeconds), groups.length)}
+              {tr.today.summary(
+                tr.today.duration(totalSeconds),
+                new Set(groups.filter((g) => g.kind !== 'video').map((g) => g.libraryItemId)).size,
+                groups.filter((g) => g.kind === 'video').length,
+              )}
             </Text>
           ) : null}
         </View>

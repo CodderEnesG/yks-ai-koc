@@ -16,6 +16,7 @@ export interface DayLoad {
   date: CivilDate;
   seconds: number;
   books: number;
+  videos: number;
 }
 
 export interface PlannedNotification {
@@ -26,6 +27,7 @@ export interface PlannedNotification {
   date: CivilDate;
   seconds: number;
   books: number;
+  videos: number;
 }
 
 export function istanbulTime(date: CivilDate, time: { hour: number; minute: number }): number {
@@ -68,6 +70,7 @@ export function buildSchedule(args: {
         date,
         seconds: load.seconds,
         books: load.books,
+        videos: load.videos,
       });
     }
   }

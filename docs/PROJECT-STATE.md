@@ -162,6 +162,11 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Senkron kapsamı (karar 14) | Cihaz asıl kaynak, sunucu kopya: cihazda yazılanlar sunucuya gönderilir, tam çekme yalnız yeni telefonda/yeniden kurulumda; aynı anda iki telefon desteklenmez (2026-10-26). |
 | E-posta sağlayıcı (karar 13, ara karar) | T16 yerel Supabase'in sahte posta kutusuyla geliştirilir; gerçek sağlayıcı avukat ön görüşmesinden sonra seçilir, yalnız SMTP ayarı değişir (2026-10-26). Karar 13 açık kalıyor. |
 | Sabah bildirim saati | Ayarlar ekranında seçilir, varsayılan 08:00 (2026-10-26). |
+| Tasarım çalışma alanı | Figma Make için ayrı özel repo `CodderEnesG/lamba-design`: ürün özeti, ekran envanteri, kurallar, token'lar, marka paketi ve tasarım kararları (`DECISIONS.md`). Ürün kararlarının asıl yeri bu repo; tasarım kararları oradan buraya ve uygulamanın temasına işlenir (2026-10-27). |
+| Tasarım: tehlikeli eylem ve hata | Kırmızı yok (marka kılavuzu). Tehlikeli eylem kalın çerçeve, çöp kutusu ikonu, "Geri alınamaz" ve sistem onayıyla; hata çarpı ikonu ve "Tekrar bak: …" ile (2026-10-27). Uygulamaya tema geçişinde işlenecek. |
+| Tasarım: YouTube logosu | Resmi YouTube logosu kendi renkleriyle; marka paletinin bilinçli istisnası (YouTube API politikası değişmez kural) (2026-10-27). Uygulamada şu an metin etiketi. |
+| Tasarım: güvenli mod dumanı | Sakin. "Soluk" ara verip dönüş için kalır (2026-10-27). |
+| Tasarım: Bugün sayımı | "2 kitap · 1 video"; videolar kitap sayılmaz; sabah bildirimi de aynı (2026-10-27, uygulandı). |
 | İçindekiler okuma modeli (T05) | Claude Haiku 5.5, varsayılan efor. Gemini bırakıldı; tek LLM sağlayıcısı (Anthropic) kuralı geçerli (2026-10-24). |
 | Kurulum: hedef (T09) | Hedef sıralama ya da puan; öğrenci türünü seçer, atlayabilir (2026-10-24). |
 | Kurulum: sınav tarihi (T09) | Sınıfa göre tahmini tarih dolu gelir (12. sınıf ve mezun: Haziran 2027, 11. sınıf: Haziran 2028); öğrenci değiştirebilir. ÖSYM takvimi (≈14 Kasım) açıklanınca tek yerden güncellenir (2026-10-24). |

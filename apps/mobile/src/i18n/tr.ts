@@ -4,6 +4,13 @@ function rangeLabel(kind: 'pages' | 'tests' | 'video', first: number, last: numb
   return kind === 'pages' ? `s. ${span}` : `Test ${span}`;
 }
 
+/** "2 kitap · 1 video"; sıfır olan tür yazılmaz (videolar kitap sayılmaz; tasarım kararı 27 Ekim). */
+function sourceCount(books: number, videos: number): string {
+  return [books > 0 ? `${books} kitap` : '', videos > 0 ? `${videos} video` : '']
+    .filter(Boolean)
+    .join(' · ');
+}
+
 export const tr = {
   common: {
     continue: 'Devam',
@@ -109,7 +116,8 @@ export const tr = {
     ranges: (kind: 'pages' | 'tests' | 'video', ranges: { first: number; last: number }[]) =>
       ranges.map((r) => rangeLabel(kind, r.first, r.last)).join(', '),
     units: (n: number) => (n > 1 ? `${n} bölüm` : ''),
-    summary: (duration: string, books: number) => `Bugün ≈ ${duration} · ${books} kitap`,
+    summary: (duration: string, books: number, videos: number) =>
+      `Bugün ≈ ${duration} · ${sourceCount(books, videos)}`,
     duration: (seconds: number) => {
       const minutes = Math.max(1, Math.round(seconds / 60));
       const h = Math.floor(minutes / 60);
@@ -244,8 +252,8 @@ export const tr = {
   notifications: {
     channel: 'Plan hatırlatmaları',
     morningTitle: 'Bugünün planı hazır',
-    morningBody: (duration: string, books: number) =>
-      `≈ ${duration} · ${books} kitap. Başlamak için dokun.`,
+    morningBody: (duration: string, books: number, videos: number) =>
+      `≈ ${duration} · ${sourceCount(books, videos)}. Başlamak için dokun.`,
     eveningTitle: 'Bugün nasıl geçti?',
     eveningBody: 'Check-in yap; yarının planı ona göre ayarlanır.',
     lateTitle: 'Check-in bekliyor',

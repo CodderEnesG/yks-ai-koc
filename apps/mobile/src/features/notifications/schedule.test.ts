@@ -5,7 +5,12 @@ import { buildSchedule, istanbulTime } from './schedule';
 
 const today = parseCivilDate('2026-10-26'); // Pazartesi
 const day = (offset: number) => parseCivilDate(`2026-10-${26 + offset}`);
-const loads = Array.from({ length: 6 }, (_, i) => ({ date: day(i), seconds: 7200, books: 2 }));
+const loads = Array.from({ length: 6 }, (_, i) => ({
+  date: day(i),
+  seconds: 7200,
+  books: 2,
+  videos: 0,
+}));
 
 describe('istanbulTime', () => {
   it('İstanbul saati UTC+3', () => {
