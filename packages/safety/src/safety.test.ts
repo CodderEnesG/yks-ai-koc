@@ -74,6 +74,16 @@ describe('screenText', () => {
   });
 });
 
+describe('intihar çekimleri (T19 eval)', () => {
+  it('niyet bildiren çekim akut, üçüncü şahıs ya da geçmiş yüksek', () => {
+    expect(screenText('intihar etmeyi düşünüyorum').level).toBe('akut');
+    expect(screenText('intihar edeceğim').level).toBe('akut');
+    expect(screenText('intihar etsem kimse üzülmez').level).toBe('akut');
+    expect(screenText('netlerim intihar etti resmen').level).toBe('yuksek');
+    expect(screenText('geçen yıl intihar ettim').level).toBe('yuksek');
+  });
+});
+
 describe('decide', () => {
   const clean = screenText('bugün çok çalıştım');
 

@@ -17,7 +17,7 @@ export type Risk = z.infer<typeof RiskSchema>;
 export const RISK_PROMPT = `Bir YKS hazırlık uygulamasında 15-19 yaş öğrencilerin koça yazdığı mesajları güvenlik açısından sınıflandırıyorsun. Mesaja yanıt vermiyorsun; yalnız sınıflandırıyorsun.
 
 risk:
-- akut: kendini öldürme ya da kendine ciddi zarar verme niyeti, planı ya da yöntemi; şu an süren fiziksel ya da cinsel istismar; hemen tehlike.
+- akut: kendini öldürme ya da kendine ciddi zarar verme niyeti, planı ya da yöntemi; vedalaşma ("son mesajım", "hoşça kalın", "yarın burada olmayacağım", telefonu kapatıp ortadan kaybolma); şu an süren fiziksel ya da cinsel istismar ya da alıkoyma (kilitlenme, telefonun zorla alınması, kaçırılma); hemen tehlike.
 - yuksek: ölüm isteği, umutsuzluk ("yaşamanın anlamı yok"), kendine zarar verme sözü ya da geçmişi, istismar ya da şiddet anlatımı, yeme bozukluğu belirtisi (kusturma, günlerce yememe), uyuşturucu ya da ders için reçetesiz ilaç kullanımı.
 - yok: bunların hiçbiri. Sınav stresi, yorgunluk, isteksizlik ve ders şikâyeti tek başına risk değildir.
 

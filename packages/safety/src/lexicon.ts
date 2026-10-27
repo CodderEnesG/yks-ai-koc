@@ -24,7 +24,11 @@ export const LEXICON: readonly LexiconEntry[] = [
     'kendine_zarar',
     'kendimi öldür',
     'intihar ed',
-    'intihar et',
+    // "intihar et" tek başına "netlerim intihar etti" gibi deyimleri de tutuyordu (T19 eval); yalnız niyet
+    // bildiren çekimler. "intihar ettim/etti" aşağıdaki genel "intihar" ile yüksek kalır.
+    'intihar etc',
+    'intihar etm',
+    'intihar ets',
     'canıma kıy',
     'hayatıma son ver',
     'her şeye son ver',
