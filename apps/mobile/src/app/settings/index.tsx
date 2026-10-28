@@ -21,6 +21,8 @@ function formatTime(iso: string): string {
   return `${d.toLocaleDateString('tr-TR')} ${d.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}`;
 }
 
+// Ayarlar artık sekme değil (lamba kararı, 28 Ekim): Bugün'ün dişli ikonundan açılır, geri okuyla
+// kapanır (bkz. settings/_layout.tsx). Sekme çubuğu günlük döngünün üç adımına ayrıldı.
 export default function SettingsScreen() {
   const profile = useProfile();
   const session = useSession();

@@ -193,6 +193,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | İlk kullanıcılar | Kendi çevremiz + koç, dershane, öğretmen tanıdıklar |
 | GitHub | `CodderEnesG/yks-ai-koc` private, `mhmmcoding` collaborator |
 | YouTube oynatma listesi (Muhammed) | MVP'de hafif sürüm: link yapıştırılır, videolar süreleriyle göreve dönüşür, "YouTube'da aç" ile izlenir. Tam özellik (oynatıcı, izleme takibi, liste↔kitap eşlemesi) Ocak planında. Video ile kitabın sırasını öğrenci seçer. |
+| Geri bildirim toplama | Uygulamada yıldız/metin/anket toplayan tek bir bileşen (tasarımı `lamba-design`'da: `FeedbackSheet` sayfa/özellik bazlı, `InlineFeedback` bölüm bazlı mikro geri bildirim). Panel tarafı: özel bir yönetim ekranı **yazılmayacak**; yanıtlar `feedback_response` tablosuna düşer, ekip Supabase Studio'dan okur. Gerekçe: bütçe kısıtı; hacim artınca gerçek panel değerlendirilir (2026-10-28). Migration (`20261028120000_feedback_response.sql`, 9 pgTAP testi) yazıldı; **yerelde ve uzak projede denenmedi** (bu ortamda Docker/Supabase CLI yok), uygulama tarafında bu tabloya yazan kod da yok (yalnız tasarım). Henüz T numarası almadı. |
 
 ## Güncel teknik kararlar (öneri, kod başlarken teyit edilecek)
 
