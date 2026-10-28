@@ -21,7 +21,7 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: { id: video-title }
     timeout: 15000
-- assertVisible: '▶ YouTube'
+- assertVisible: { id: youtube-mark }
 - assertVisible: { id: video-open }
 - tapOn: { id: checkin-done }
 - assertVisible: '✓ İzlendi'

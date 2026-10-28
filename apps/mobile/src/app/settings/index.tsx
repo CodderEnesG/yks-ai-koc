@@ -1,6 +1,8 @@
 import { router } from 'expo-router';
+import { SymbolView } from 'expo-symbols';
 import { useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
+import { useCSSVariable } from 'uniwind';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
@@ -31,6 +33,7 @@ export default function SettingsScreen() {
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState(false);
   const s = tr.settings;
+  const foreground = useCSSVariable('--color-foreground');
   if (!profile || session === undefined || morning === undefined) return null;
 
   const last = lastPushedAt();
@@ -136,6 +139,12 @@ export default function SettingsScreen() {
             variant="destructive"
             disabled={deleting}
             onPress={confirmDelete}>
+            <SymbolView
+              name={{ ios: 'trash', android: 'delete' }}
+              size={18}
+              tintColor={typeof foreground === 'string' ? foreground : undefined}
+              fallback={null}
+            />
             <Text>{s.deleteButton(!!session)}</Text>
           </Button>
           {deleteError ? <ErrorText testID="delete-failed">{s.deleteFailed}</ErrorText> : null}

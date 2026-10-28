@@ -6,6 +6,8 @@ import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useCSSVariable } from 'uniwind';
 
+import { Alaaddin } from '@/components/alaaddin';
+import { LampGlow } from '@/components/lamp-glow';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
@@ -131,6 +133,7 @@ export default function TodayScreen() {
 
         {!hasSources && tasks.length === 0 ? (
           <View className="border-border gap-3 rounded-xl border p-4">
+            <Alaaddin scene="bos-plan" height={160} />
             <Text>{tr.today.noBooks}</Text>
             <Button testID="today-add-book" onPress={() => router.push('/book/add')}>
               <Text>{tr.today.addBook}</Text>
@@ -139,9 +142,12 @@ export default function TodayScreen() {
         ) : null}
 
         {hasSources && tasks.length === 0 ? (
-          <Text testID="today-empty" variant="muted">
-            {restDay ? tr.today.restDay : tr.today.nothingLeft}
-          </Text>
+          <View className="gap-2">
+            <Alaaddin scene={restDay ? 'mola' : 'gun-tamam'} height={160} />
+            <Text testID="today-empty" variant="muted">
+              {restDay ? tr.today.restDay : tr.today.nothingLeft}
+            </Text>
+          </View>
         ) : null}
 
         {profile.consentStatus === 'pending' || profile.consentStatus === 'withdrawn' ? (
@@ -166,6 +172,7 @@ export default function TodayScreen() {
 
         {safeMode ? (
           <View className="bg-secondary gap-2 rounded-xl p-3">
+            <LampGlow dim size={48} />
             <Text testID="safe-mode">{tr.checkin.safeMode}</Text>
             <Button
               testID="safe-mode-support"

@@ -8,6 +8,9 @@ const SCENES = {
   karsilama: require('../../assets/images/alaaddin/karsilama.png'),
   mutlu: require('../../assets/images/alaaddin/mutlu.png'),
   hata: require('../../assets/images/alaaddin/hata.png'),
+  'bos-plan': require('../../assets/images/alaaddin/bos-plan.png'),
+  'gun-tamam': require('../../assets/images/alaaddin/gun-tamam.png'),
+  mola: require('../../assets/images/alaaddin/mola.png'),
 } as const;
 
 export type AlaaddinScene = keyof typeof SCENES;
