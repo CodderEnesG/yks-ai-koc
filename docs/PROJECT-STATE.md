@@ -1,10 +1,10 @@
 # YKS AI Koç — Proje Durumu
 
-Son doğrulama: **2026-10-27**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
+Son doğrulama: **2026-10-28**. Bu belge projenin güncel durumunu tutar; değişiklik günlüğü değildir.
 
 ## Güncel aşama
 
-**Sprint 0 sürüyor; T02, T03, T04, T05, T09, T10, T11, T13, T14, T15, T16, T18, T21, T22, T23, T28 ve T32 tamam; T17, T20, T24 (PostHog), T31, T33 ve T34 kodu yazıldı (uçtan uca denenmedi) (T10, T11, T13-T16, T31-T33 Sprint 1; T17, T18, T20-T24, T34 Sprint 2, T28 Sprint 3 işiydi); T12 katalog tohumu uzak projede, konu taksonomisi ve eşlemesi yerelde (editör doğrulaması bekliyor).** Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de. Sprint 0'ın geri kalanı (22 Ekim - 1 Kasım): T01, T03, T05-T08. Supabase hesabını Enes açacak; T03 hesapla başlar.
+**Sprint 1 ve 2'nin kod işi bitti (2026-10-28); tahmini saatlerin ≈212/267'si.** Tamam: T02-T05, T09-T16, T18, T21-T23, T28, T32. Kodu yazıldı ama uçtan uca denenmedi: T17, T20, T24 (PostHog; Sentry DSN bekliyor), T31, T33, T34. T19 ölçüldü (akut kaçırma %2,5, hedef ≤%2). T12 tamam, taksonomi migration'ı uzak projeye uygulanmadı, baskıların editör doğrulaması bekliyor. Marka (**lamba**) teması ve kurulum tasarımı uygulamada, simülatörde görülmedi. Kurucularda kalanlar: T01 Apple hesabı, T06 ton rehberi + PDR, T07 rıza metinleri, T08 bekleme listesi. Sprint 3 (T25-T30) başlamadı. Son gün raporu: [2026-10-28](reports/2026-10-28-gun-raporu.md). Kullanılan kütüphaneler ve kurallar [TECH-STACK](TECH-STACK.md)'te, seçimin gerekçesi [PLAN-2026-10-22](PLAN-2026-10-22-teknoloji-secimi-ve-t02.md)'de.
 
 T05 ölçüldü (2026-10-24): Fotoğraf benzeri bozulmuş 32 içindekiler görüntüsünde Claude Haiku 5.5 (varsayılan efor) sayfa numaralarının %100'ünü (669/669) doğru okudu, 32 kitabın hiçbiri düzeltme gerektirmedi; Gemini 3.5 Flash-Lite %99,0 ve 26/32. Rapordaki eşik (≥%95) geçildi; ikinci LLM sağlayıcısına gerek yok, içindekiler okuma Haiku 5.5 ile. Sınırlama: bozulma yapay, MEB dizgisi sade; T11 öncesinde 5-10 gerçek telefon fotoğrafıyla kontrol. Ayrıntı `tools/toc-eval/README.md`.
 
@@ -72,7 +72,7 @@ T23: Seri ve kitap ilerlemesi. Seri kuralı plan motorunda (`isDayComplete`, `cu
 
 T31 + T33 + T34: YouTube oynatma listesi (rapor 2.8, MVP hafif sürüm). **Kod yazıldı; uçtan uca test (`youtube-add.yaml`, liste linki `-e PLAYLIST=…` ile) koşulmadı**; `youtube-import`'un YouTube okuması gerçek API'yle denendi (201 videoluk liste 3,5 sn; özel/silinmiş/süresiz videolar düşüyor, olmayan liste null). Kütüphanede "YouTube listesi": link yapıştırılır (`@yks/youtube` ayrıştırır; telefon YouTube'u doğrudan çağırmaz), `youtube-import` Edge Function ortak önbellekten (`yt_playlist` / `yt_video`, 25 günden yeniyse) ya da YouTube Data API'den (API anahtarı yalnız sunucuda, OAuth yok) başlık, kanal, süre, gömülebilirlik ve "çocuklara özel" bilgisini getirir; öğrenci önizlemeyi görür, izleme hızını (1-2×) ve not payını (%0/25/50) seçer. Her video bölünmez bir plan birimi (anahtar video kimliği). Bugün'de her video ayrı kart: video başlığı, liste ve kanal, kırmızı "▶ YouTube" etiketi (III.F.2), video ve plan süresi, "YouTube'da aç" (oynatıcı yok, izleme verisi toplanmaz) ve "İzledim / İzleyemedim". Yalnız girişli ve onaylı öğrenci; günde 20 liste. YouTube API politikası III.E.4: sunucu önbelleği 30 günde silinir (`run_retention`), cihazdaki kopya açılışta 25 günü geçince yenilenir, yenilenemezse 30. günde silinir ve liste yenilenene kadar plana girmez; hesap silinince cihaz kopyası gider. Videolar senkronlanmaz; geri yüklemede sunucudan yeniden gelir. Seçilenler ve açık kalanlar:
 - Hesapsız (ya da onaysız) öğrenci liste ekleyemez (**DECISION TO TEST**: liste sunucudan gelir, kota kullanıcıya bağlı).
-- YouTube logosu yerine metin etiketi; resmi logo varlığı ve marka kurallarına uyum yayından önce (**NOT DEFINED**).
+- Şu an metin etiketi ("▶ YouTube"). Tasarım kararı resmi YouTube logosu (2026-10-27); logo varlığı ve YouTube marka kurallarına uyum yayından önce.
 - Paylaş menüsünden liste alma, liste başına 500 video sınırı üstü, gömülemeyen video işareti arayüzde yok. Kullanım şartları ve gizlilik metnine YouTube API Hizmetleri ve Google Gizlilik Politikası eklenmeli (III.A.1-2; T07).
 - Uzak projede (2026-10-27): migration ve `youtube-import` (girişsiz 401, önbellek tabloları kapalı). `YOUTUBE_API_KEY` secret olarak tanımlı; uzakta e-posta olmadığı için girişli liste ekleme uzakta denenmedi.
 
@@ -114,6 +114,13 @@ Bundle ID ve Android paket adı yer tutucu (`dev.placeholder.ykskoc`); branding 
 
 Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönderimi 14 Aralık.
 
+## Sıradaki
+
+1. **Test turu (yeni işten önce):** iOS dev build'i yeniden derle (yazı tipleri, PostHog native modülleri, ikonlar değişti), Maestro'yu baştan koş. Hiç koşulmayanlar `chat.yaml`, `support.yaml`, `youtube-add.yaml` (`-e PLAYLIST=<liste linki>`). Tema ve kurulum ekranlarını gözle kontrol et.
+2. **Uzak proje:** CI'daki db işi yeşilse T12 migration'ı (`supabase db push`). PostHog'a olay düştüğünü doğrula.
+3. **Tasarım:** Figma Make sürümleri geldikçe ekranlara işlenir; kararlar `lamba-design/DECISIONS.md`'de. Uygulamada henüz yok: Bugün'de duman ve Alaaddin sahneleri, resmi YouTube logosu, çöp kutusu ikonu (ikon kütüphanesi seçilmedi; seçmeden önce TECH-STACK'e kayıt).
+4. **Yayını engelleyenler (kurucularda):** PDR (T06), rıza metinleri (T07), e-posta sağlayıcı (karar 13), Apple hesabı (T01), Sentry DSN. Ayrıntı aşağıdaki görev paragraflarında ve açık kararlarda.
+
 ## Repo durumu
 
 ```
@@ -123,17 +130,19 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
 /.github/workflows/ci.yml                            format, typecheck, lint, test, deno check
 /apps
   mobile/                                            Expo SDK 58, Expo Router, Uniwind + Reusables, expo-sqlite + Drizzle
-  web/                                               Next.js 16 (veli onayı ve rapor sayfaları; şimdilik yer tutucu)
+  web/                                               Next.js 16: veli onayı `/onay/[token]` (T21), haftalık rapor `/rapor/[token]` (T22)
 /packages
   plan-engine/                                       saf TS plan motoru çekirdeği (T04) + property testleri
   ai/                                                LLM istemleri, çıktı şemaları, PII maskeleyici (içindekiler okuma T11, risk sınıflandırma T18)
   safety/                                            kriz listesi, karar kuralı, çıktı denetimi, sabit metinler (T18)
+  youtube/                                           oynatma listesi linki ve ISO süre ayrıştırma (T31)
 /supabase
   migrations/  tests/database/                       şema, RLS, katalog tohumu; pgTAP testleri
-  functions/                                         Edge Functions (toc-extract, account-delete, classify)
+  functions/                                         Edge Functions: toc-extract, account-delete, classify, chat, weekly-report, youtube-import; ortak kod _shared/
 /tools
   toc-eval/                                          MEB OGM içindekiler doğru cevap veri seti (T05, T12); PDF'ler data-private'da
   taxonomy/                                          MEB-2027 konu taksonomisi ve katalog eşlemesi (T12)
+  safety-eval/                                       güvenlik eval seti ve ölçüm betiği (T19)
 /docs
   PROJECT-STATE.md                                   bu dosya
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)
@@ -143,6 +152,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   reports/
     2026-10-23-gun-raporu.md                       22-23 Ekim gün raporu (tarihli kayıt)
     2026-10-25-gun-raporu.md                       24-25 Ekim gün raporu (tarihli kayıt)
+    2026-10-28-gun-raporu.md                       26-28 Ekim gün raporu (tarihli kayıt)
   sources/
     2026-10-15-urun-ve-is-modeli-v1.pdf              ürün ve iş modeli tasarımı v1 (kaynak)
     2026-10-08-kaynak-kitap-verisi-fizibilitesi.md   veri, hukuk, maliyet fizibilitesi (kaynak)
@@ -166,9 +176,9 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | E-posta sağlayıcı (karar 13, ara karar) | T16 yerel Supabase'in sahte posta kutusuyla geliştirilir; gerçek sağlayıcı avukat ön görüşmesinden sonra seçilir, yalnız SMTP ayarı değişir (2026-10-26). Karar 13 açık kalıyor. |
 | Sabah bildirim saati | Ayarlar ekranında seçilir, varsayılan 08:00 (2026-10-26). |
 | Tasarım çalışma alanı | Figma Make için ayrı özel repo `CodderEnesG/lamba-design`: ürün özeti, ekran envanteri, kurallar, token'lar, marka paketi ve tasarım kararları (`DECISIONS.md`). Ürün kararlarının asıl yeri bu repo; tasarım kararları oradan buraya ve uygulamanın temasına işlenir (2026-10-27). |
-| Tasarım: tehlikeli eylem ve hata | Kırmızı yok (marka kılavuzu). Tehlikeli eylem kalın çerçeve, çöp kutusu ikonu, "Geri alınamaz" ve sistem onayıyla; hata çarpı ikonu ve "Tekrar bak: …" ile (2026-10-27). Uygulamaya tema geçişinde işlenecek. |
+| Tasarım: tehlikeli eylem ve hata | Kırmızı yok (marka kılavuzu). Tehlikeli eylem kalın çerçeve, çöp kutusu ikonu, "Geri alınamaz" ve sistem onayıyla; hata çarpı ikonu ve "Tekrar bak: …" ile (2026-10-27). Uygulamada; çöp kutusu ikonu hariç. |
 | Tasarım: YouTube logosu | Resmi YouTube logosu kendi renkleriyle; marka paletinin bilinçli istisnası (YouTube API politikası değişmez kural) (2026-10-27). Uygulamada şu an metin etiketi. |
-| Tasarım: güvenli mod dumanı | Sakin. "Soluk" ara verip dönüş için kalır (2026-10-27). |
+| Tasarım: güvenli mod dumanı | Sakin. "Soluk" ara verip dönüş için kalır (2026-10-27). Uygulamada duman henüz yok. |
 | Tasarım: Bugün sayımı | "2 kitap · 1 video"; videolar kitap sayılmaz; sabah bildirimi de aynı (2026-10-27, uygulandı). |
 | Uygulama teması (temel) | Marka teması uygulamada (2026-10-27): palet ve açık/koyu token'lar, Source Sans 3 + Bricolage Grotesque, kırmızısız hata (`ErrorText`) ve tehlikeli eylem (kalın çerçeve), görev kartı durum şekilleri, marka renkli başlık çubukları ve sekme vurgusu, SF Symbols sekme ikonları, marka uygulama ikonu ve açılış ekranı. Kurulum ekranları Figma 3. sürümüne göre: üst çubukta 6 bölütlü ilerleme, tikli ve ana metin renginde dolgulu seçim kutusu, kesik çerçeveli pasif düğme, Karşılama ve Hazırsın'da Alaaddin sahnesi (logosuz Karşılama, "mutlu" Hazırsın). Diğer ekran düzenleri Figma sürümleri geldikçe. **Simülatörde görülmedi**; native değişiklik var, yeniden derleme gerekir. Tehlikeli eylemdeki çöp kutusu ikonu ikon kütüphanesi gelince. |
 | İçindekiler okuma modeli (T05) | Claude Haiku 5.5, varsayılan efor. Gemini bırakıldı; tek LLM sağlayıcısı (Anthropic) kuralı geçerli (2026-10-24). |
