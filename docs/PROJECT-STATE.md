@@ -214,6 +214,7 @@ Tam tablo ve önerilerimiz rapor bölüm 7'de. Son tarihi yakın olanlar:
 | 12 | **OPEN QUESTION:** Liste↔kitap otomatik eşleme önerisi YouTube'un "türetilmiş veri" yasağına (III.E.4.h) takılıyor mu | Ocak |
 | 13 | **OPEN QUESTION:** E-posta sağlayıcı. Supabase'in yerleşik e-postası production'da OTP göndermiyor; özel SMTP yeni veri işleyen demek. Resend (veri ABD), Brevo (AB), AWS SES Frankfurt. Avukat ön görüşmesine bağlı | T16 öncesi (≈5 Kasım) |
 | 15 | Web barındırma. Öneri: Cloudflare Workers Free + AB yerleşimi; 3 MiB sınırı aşılırsa Vercel Pro fra1 (Vercel Hobby ticari kullanıma izin vermiyor) | Sprint 2 |
+| 16 | **OPEN QUESTION:** Onboarding (T09) derinleştirilsin mi (daha fazla kişiselleştirme sorusu)? Kaynak taraması bunu desteklemiyor (hızlı ilk değer anı daha güçlü destekli; kişiselleştirme sinyalleri kademeli toplanabilir) ve veli onayı/veri minimizasyonu kurallarıyla geriliyor. Ayrıntı [2026-10-28 kaynak](sources/2026-10-28-onboarding-derinligi-ve-kisisellestirme.md) | Belirlenmedi |
 
 ## Yol haritası
 
