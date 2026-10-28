@@ -84,7 +84,7 @@ appId: dev.placeholder.ykskoc
 
 # 3. Öğrenci uygulamaya döner: onay görünür, hesap bağlanır ve yedek sunucuya yazılır.
 - launchApp
-- tapOn: 'Ayarlar'
+- tapOn: { id: settings-open }
 - extendedWaitUntil:
     visible: { id: account-connect }
     timeout: 15000

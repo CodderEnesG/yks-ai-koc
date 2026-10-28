@@ -29,10 +29,18 @@ export default function TabsLayout() {
 
   return (
     // Seçili sekme marka vurgusunda (koyu: turuncu, açık: gece moru); ikonlar SF Symbols (Figma 1. sürüm).
+    // Ayarlar artık burada değil (lamba kararı, 28 Ekim): Bugün'ün dişli ikonundan açılır. Sıra: Bugün,
+    // Alaaddin, Kütüphane — günün en sık kullanılan iki yüzeyi (plan + koç) yan yana.
     <NativeTabs tintColor={scheme === 'dark' ? '#FF9F43' : '#1C1330'}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>{tr.today.title}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'sun.max', selected: 'sun.max.fill' }} md="today" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="coach">
+        <NativeTabs.Trigger.Label>{tr.chat.title}</NativeTabs.Trigger.Label>
+        {/* Genel bir sohbet ikonu yerine marka lambası: Alaaddin'e özgü bir kimlik (lamba kararı, 28 Ekim). */}
+        <NativeTabs.Trigger.Icon src={require('../../../assets/images/alaaddin-tab-icon.png')} />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="library">
@@ -40,25 +48,6 @@ export default function TabsLayout() {
         <NativeTabs.Trigger.Icon
           sf={{ default: 'books.vertical', selected: 'books.vertical.fill' }}
           md="menu_book"
-        />
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="coach">
-        <NativeTabs.Trigger.Label>{tr.chat.title}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          sf={{
-            default: 'bubble.left.and.bubble.right',
-            selected: 'bubble.left.and.bubble.right.fill',
-          }}
-          md="chat"
-        />
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="settings">
-        <NativeTabs.Trigger.Label>{tr.settings.title}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          sf={{ default: 'gearshape', selected: 'gearshape.fill' }}
-          md="settings"
         />
       </NativeTabs.Trigger>
     </NativeTabs>

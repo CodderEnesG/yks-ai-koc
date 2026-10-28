@@ -1,8 +1,8 @@
-# Ayarlar'dan hesap bağlar; giriş kodu yerel Mailpit'ten okunur. output.email kullanılır.
+# Bugün'ün dişli ikonundan hesap bağlar; giriş kodu yerel Mailpit'ten okunur. output.email kullanılır.
 appId: dev.placeholder.ykskoc
 ---
 - runScript: scripts/clear-mail.js
-- tapOn: 'Ayarlar'
+- tapOn: { id: settings-open }
 - tapOn: { id: account-connect }
 - tapOn: { id: account-email }
 - inputText: ${output.email}

@@ -1,9 +1,9 @@
-# T18: Destek ekranı. Ayarlar'dan açılır; yardım hatları görünür, "planımı hafiflet" güvenli modu açar ve
-# Bugün'de hafif mod bandı çıkar (banttan Destek'e dönülür). Sunucu gerekmez.
+# T18: Destek ekranı. Bugün'ün dişli ikonundan açılır; yardım hatları görünür, "planımı hafiflet" güvenli
+# modu açar ve Bugün'de hafif mod bandı çıkar (banttan Destek'e dönülür). Sunucu gerekmez.
 appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
-- tapOn: 'Ayarlar'
+- tapOn: { id: settings-open }
 - scrollUntilVisible:
     element: { id: support-open }
     visibilityPercentage: 100

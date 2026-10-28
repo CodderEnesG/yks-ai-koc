@@ -5,7 +5,7 @@ appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
 - runFlow: _connect-account.yaml
-- tapOn: 'Koç'
+- tapOn: 'Alaaddin'
 - assertVisible: { id: coach-input }
 
 # Normal mesaj: koç yanıt verir, öğrenci yanıtı bildirebilir.

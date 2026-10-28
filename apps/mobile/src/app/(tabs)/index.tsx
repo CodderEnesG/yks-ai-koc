@@ -1,8 +1,10 @@
 import { diffDays, isSafeMode, parseCivilDate, weekdayIndex } from '@yks/plan-engine';
 import { router } from 'expo-router';
+import { SymbolView } from 'expo-symbols';
 import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { useCSSVariable } from 'uniwind';
 
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
@@ -65,6 +67,7 @@ export default function TodayScreen() {
     () => (tasks && safetyDays ? isSafeMode(loadReasonEvents(), today, safetyDays) : false),
     [tasks, today, safetyDays],
   );
+  const foreground = useCSSVariable('--color-foreground');
 
   if (!profile || !tasks) return null;
 
@@ -85,28 +88,45 @@ export default function TodayScreen() {
         contentContainerStyle={{ gap: 16, padding: 24 }}
         bottomOffset={24}
         keyboardShouldPersistTaps="handled">
-        <View className="gap-1">
-          <Text variant="h3">{tr.today.title}</Text>
-          <Text variant="muted">
-            {formatCivilDate(today)} · {tr.weekdays[weekdayIndex(today)]}
-          </Text>
-          <Text testID="today-countdown" variant="large">
-            {tr.today.examCountdown(daysLeft)}
-          </Text>
-          {streak && streak.days > 0 ? (
-            <Text testID="today-streak" className="font-sans-semibold">
-              {tr.today.streak(streak.days)}
+        <View className="flex-row items-start justify-between gap-3">
+          <View className="flex-1 gap-1">
+            <Text variant="h3">{tr.today.title}</Text>
+            <Text variant="muted">
+              {formatCivilDate(today)} · {tr.weekdays[weekdayIndex(today)]}
             </Text>
-          ) : null}
-          {groups.length > 0 ? (
-            <Text testID="today-total" variant="muted">
-              {tr.today.summary(
-                tr.today.duration(totalSeconds),
-                new Set(groups.filter((g) => g.kind !== 'video').map((g) => g.libraryItemId)).size,
-                groups.filter((g) => g.kind === 'video').length,
-              )}
+            <Text testID="today-countdown" variant="large">
+              {tr.today.examCountdown(daysLeft)}
             </Text>
-          ) : null}
+            {streak && streak.days > 0 ? (
+              <Text testID="today-streak" className="font-sans-semibold">
+                {tr.today.streak(streak.days)}
+              </Text>
+            ) : null}
+            {groups.length > 0 ? (
+              <Text testID="today-total" variant="muted">
+                {tr.today.summary(
+                  tr.today.duration(totalSeconds),
+                  new Set(groups.filter((g) => g.kind !== 'video').map((g) => g.libraryItemId))
+                    .size,
+                  groups.filter((g) => g.kind === 'video').length,
+                )}
+              </Text>
+            ) : null}
+          </View>
+          {/* Ayarlar artık sekme değil (lamba kararı, 28 Ekim): buradan açılır. */}
+          <Button
+            testID="settings-open"
+            variant="ghost"
+            size="icon"
+            accessibilityLabel={tr.settings.title}
+            onPress={() => router.push('/settings')}>
+            <SymbolView
+              name={{ ios: 'gearshape', android: 'settings' }}
+              size={22}
+              tintColor={typeof foreground === 'string' ? foreground : undefined}
+              fallback={null}
+            />
+          </Button>
         </View>
 
         {!hasSources && tasks.length === 0 ? (

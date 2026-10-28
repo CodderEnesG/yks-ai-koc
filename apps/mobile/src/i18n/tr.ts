@@ -61,7 +61,7 @@ export const tr = {
     },
     target: {
       title: 'Hedefin ne?',
-      subtitle: 'Koçun seni buna göre motive eder. Emin değilsen geçebilirsin.',
+      subtitle: 'Alaaddin seni buna göre motive eder. Emin değilsen geçebilirsin.',
       kinds: { siralama: 'Sıralama', puan: 'Puan' },
       placeholder: { siralama: 'Örn. 20000', puan: 'Örn. 450' },
       invalid: {
@@ -109,8 +109,8 @@ export const tr = {
     title: 'Bugün',
     examCountdown: (days: number) => `Sınava ${days} gün`,
     streak: (days: number) => `Seri: ${days} gün`,
-    noBooks: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.',
-    addBook: 'Kitap ekle',
+    noBooks: 'Planın eklediğin kaynaklara göre kurulur. İlk kaynağını ekle.',
+    addBook: 'Kaynak ekle',
     restDay: 'Bugün çalışma günün değil. Dinlen.',
     restore: 'Hesabım var, geri yükle',
     nothingLeft: 'Planlanacak iş kalmadı.',
@@ -227,13 +227,13 @@ export const tr = {
     open: 'Veli onayı iste',
   },
   chat: {
-    title: 'Koç',
+    title: 'Alaaddin',
     intro:
       'Ben bir yapay zekâ koçuyum. Planını, aksayan günleri ve motivasyonunu konuşabiliriz; soru çözmem. Yazdıkların velinle paylaşılmaz.',
-    placeholder: 'Koçuna yaz…',
+    placeholder: 'Alaaddin’e yaz…',
     send: 'Gönder',
     sending: 'Gönderiliyor…',
-    thinking: 'Koç düşünüyor…',
+    thinking: 'Alaaddin düşünüyor…',
     failed: 'Gönderilemedi',
     retry: 'Tekrar dene',
     report: 'Bildir',
@@ -248,7 +248,7 @@ export const tr = {
     },
     needConsent:
       'Sohbet, velin onay verdikten sonra açılır. O zamana kadar planın bu telefonda çalışmaya devam ediyor.',
-    needAccount: 'Koçla konuşmak için önce hesabını bağla; sohbet sunucuda işlenir.',
+    needAccount: 'Alaaddin’le konuşmak için önce hesabını bağla; sohbet sunucuda işlenir.',
   },
   report: {
     share: 'Haftalık raporu velime gönder',
@@ -284,7 +284,7 @@ export const tr = {
       isteksiz: 'İsteksizim',
       kotu_hissediyorum: 'Kötü hissediyorum',
     },
-    // Planın ne yaptığını söyleyen olgusal notlar. Koç tonu ve destek metinleri ton rehberi ve PDR
+    // Planın ne yaptığını söyleyen olgusal notlar. Alaaddin'in tonu ve destek metinleri ton rehberi ve PDR
     // onayıyla gelecek (T06, T18); burada yalnız plan değişikliği anlatılır.
     effects: {
       zaman_yetmedi:
@@ -305,8 +305,8 @@ export const tr = {
   },
   library: {
     title: 'Kütüphane',
-    empty: 'Henüz kitap eklemedin. Planın eklediğin kitaplara göre kurulur.',
-    add: 'Kitap ekle',
+    empty: 'Henüz kaynak eklemedin. Planın eklediğin kitap ve listelere göre kurulur.',
+    add: 'Kaynak ekle',
     remove: 'Kaldır',
     percentDone: (p: number) => `%${p} tamamlandı`,
     removeConfirm: (title: string) => `"${title}" kütüphanenden kaldırılsın mı?`,
@@ -314,7 +314,7 @@ export const tr = {
     summary: (total: number, kind: 'pages' | 'tests', units: number, minutes: number) =>
       `${total} ${kind === 'pages' ? 'sayfa' : 'test'} · ${units} bölüm · ${kind === 'pages' ? 'sayfa' : 'test'} başı ${minutes.toLocaleString('tr-TR')} dk`,
     addOptions: {
-      title: 'Kitabını nasıl ekleyelim?',
+      title: 'Kaynağını nasıl ekleyelim?',
       scan: { label: 'Barkodu okut', description: 'Arka kapaktaki ISBN barkodu' },
       search: { label: 'Ara', description: 'ISBN ya da kitap adıyla katalogda' },
       toc: { label: 'İçindekilerden ekle', description: 'Fotoğrafını çek, bölümleri biz okuyalım' },

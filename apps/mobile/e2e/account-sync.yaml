@@ -21,7 +21,7 @@ appId: dev.placeholder.ykskoc
 - tapOn: { id: checkin-done }
 
 # 1. Hesap bağla.
-- tapOn: 'Ayarlar'
+- tapOn: { id: settings-open }
 - tapOn: { id: account-connect }
 - tapOn: { id: account-email }
 - inputText: ${output.email}
