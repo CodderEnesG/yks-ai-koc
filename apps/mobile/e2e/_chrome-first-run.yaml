@@ -1,0 +1,19 @@
+# Android: Chrome ilk açılışta karşılama ve hesap/bildirim diyalogları gösterir; varsa geçilir.
+# Emülatör dili İngilizce. iOS'ta çağrılmaz.
+appId: dev.placeholder.ykskoc
+---
+- runFlow:
+    when:
+      visible: 'Accept & continue|Use without an account|Continue'
+    commands:
+      - tapOn: 'Accept & continue|Use without an account|Continue'
+- runFlow:
+    when:
+      visible: 'Use without an account|No thanks|No, thanks'
+    commands:
+      - tapOn: 'Use without an account|No thanks|No, thanks'
+- runFlow:
+    when:
+      visible: 'No thanks|No, thanks|Not now'
+    commands:
+      - tapOn: 'No thanks|No, thanks|Not now'

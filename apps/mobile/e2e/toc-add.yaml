@@ -3,6 +3,10 @@
 # telifli görüntü repoya girmez), yerel Supabase ve `supabase functions serve` açık. Gerçek Claude çağrısı
 # yapar (≈0,001$).
 appId: dev.placeholder.ykskoc
+# Galeriye eklenen görsel ve seçici etiketi iOS simülatörüne özgü (xcrun simctl addmedia). Android'de
+# koşulmaz: maestro test --exclude-tags ios-only.
+tags:
+  - ios-only
 ---
 - runFlow: _onboard-adult.yaml
 - runFlow: _connect-account.yaml

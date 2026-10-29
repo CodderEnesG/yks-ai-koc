@@ -107,13 +107,13 @@ tablolar güncellenir; commit, push, CI yeşil.
 | G1 Yerel yığın | TAMAM | Docker, Supabase (depolamasız), `migration up` (youtube_cache, topic_taxonomy, feedback_response), pgTAP 118/118; functions serve, web, Metro arka planda. |
 | G2 Uzak Supabase | TAMAM | `db push` parola istemedi; T12 taksonomisi ve `feedback_response` uzakta. REST: `topic` 514 satır (13 ders + 195 ünite + 306 konu), `feedback_response` girişsiz 42501. `run_retention` ve PostHog kullanıcıda (aşağıda). |
 | G3 iOS taban test turu | TAMAM | `prebuild --clean` + derleme (ad "lamba", yazı tipleri ve PostHog pod'ları içeride). Taban koşusu 3/13; düzeltmelerden sonra 13/13. Kırılma sebepleri: Ayarlar'ın sekmeden çıkması (akışlar Ayarlar'da kalıyordu → `_relaunch.yaml`), değişen metinler, klavyenin örttüğü öğeler (Maestro örtülen öğeyi görünür sayıp klavyeye dokunuyor), dev client menüsü. Uygulama hataları: Alaaddin sekme ikonu 900×441 px tek boyut (sekme çubuğunu kaplıyordu → @1x/@2x/@3x), sohbet giriş çubuğu sekme çubuğunun altında, aynı listenin videolarında yinelenen React anahtarı (kırmızı hata ekranı), `toc-extract` import map'inde `@yks/safety` yok (yerel edge runtime'da fonksiyon açılmıyordu), çöp kutusu ikonunun adı düğme etiketine karışıyordu, Ayarlar'dan sıfırlamada eski sekmeler yığında kalıyordu. `feedback_response` sağlamlaştırma migration'ı. YouTube testi: Bıyıklı Matematik "55 Günde TYT Matematik Kampı 2027" (118 video). |
-| G4.1 Tasarım sistemi temeli | YAPILACAK | |
-| G4.2 Bugün ve check-in | YAPILACAK | |
-| G4.3 Kütüphane ve ekleme | YAPILACAK | |
-| G4.4 Alaaddin sohbeti ve Destek | YAPILACAK | |
-| G4.5 Kurulum farkları | YAPILACAK | |
-| G4.6 YouTube logosu | YAPILACAK | |
-| G5 iOS tam regresyon | YAPILACAK | |
+| G4.1 Tasarım sistemi temeli | TAMAM | Yazı ölçeği, yarıçap, 44 pt dokunma alanı, `tonal` düğme, `accent` palete; Icon, Banner, EmptyState, ErrorState, Loading, LockedState, TextField, SearchField, NavCard, Chip, ProgressBar; webp sahneler (`dusunuyor`, `sakin` yeni). Ayrıca: yazı tipleri iOS'ta hiç yüklenmiyordu (dosya adı ≠ PostScript adı), düzeltildi. |
+| G4.2 Bugün ve check-in | TAMAM | Başlık, büyük geri sayım, seri çip, EmptyState, Banner'lar, gün tamam kartı (`isDayComplete`), sakin kapanış, görev kartı (düğmeler tam genişlik), etiketli doğru/yanlış. Check-in adımları kurulumla aynı bileşenler; değiştirilmedi. |
+| G4.3 Kütüphane ve ekleme | TAMAM | Kütüphane kartları + ProgressBar, NavCard seçim, SearchField, LockedState/Loading (içindekiler, YouTube), barkod izin ekranı ve sahne token'ları. Hızlı ekle ve içindekiler kontrol ekranının düzeni değişmedi (kısmi). |
+| G4.4 Alaaddin sohbeti ve Destek | TAMAM | Balonlar, akut yanıt bloğu, giriş çubuğu, 72 pt arama satırları. Metinler değişmedi (`packages/safety`). |
+| G4.5 Kurulum farkları | TAMAM | İlerleme çubuğunda aktif adım vurgulu, büyük Devam, Hazırsın kartı. |
+| G4.6 YouTube logosu | TAMAM | Prototipteki resmi logo dosyaları (açık/koyu zemin), değiştirilmeden. Kaynağın teyidi kullanıcıda. |
+| G5 iOS tam regresyon | TAMAM | 13/13 (toc-add ilk denemede dev link açılışında takıldı, tek başına geçti). Açık ve koyu temada ekran görüntüleri kontrol edildi. İki ayrı QA ajanı (arkadaşın commit'leri, G4 diff'i) bulguları düzeltildi. |
 | G6 Android | YAPILACAK | |
 | G7 Kapanış | YAPILACAK | |
 
@@ -121,19 +121,19 @@ tablolar güncellenir; commit, push, CI yeşil.
 
 | Akış | iOS taban (G3) | iOS regresyon (G5) | Android (G6) |
 |---|---|---|---|
-| onboarding-adult | geçti | | |
-| onboarding-minor | geçti | | |
-| support | geçti | | |
-| library-add | düştü → geçti | | |
-| today-plan | düştü → geçti | | |
-| checkin | düştü → geçti | | |
-| account-sync | düştü → geçti | | |
-| account-delete | düştü → geçti | | |
-| chat | düştü → geçti | | |
-| toc-add | düştü → geçti | | |
-| youtube-add | düştü → geçti | | |
-| consent-minor | düştü → geçti | | |
-| report-minor | düştü → geçti | | |
+| onboarding-adult | geçti | geçti | |
+| onboarding-minor | geçti | geçti | |
+| support | geçti | geçti | |
+| library-add | düştü → geçti | geçti | |
+| today-plan | düştü → geçti | geçti | |
+| checkin | düştü → geçti | geçti | |
+| account-sync | düştü → geçti | geçti | |
+| account-delete | düştü → geçti | geçti | |
+| chat | düştü → geçti | geçti | |
+| toc-add | düştü → geçti | geçti (2. deneme) | |
+| youtube-add | düştü → geçti | geçti | |
+| consent-minor | düştü → geçti | geçti | |
+| report-minor | düştü → geçti | geçti | |
 
 ## Kullanıcıda kalanlar
 

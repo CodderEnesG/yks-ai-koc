@@ -1,0 +1,14 @@
+# Web formunda (veli onayı, rapor sayfası) klavyeyi kapatır. iOS Safari'de klavye çubuğundaki Done
+# (hideKeyboard Safari'de forma dokunuyor); Android Chrome'da hideKeyboard.
+appId: dev.placeholder.ykskoc
+---
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn: 'Done'
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - hideKeyboard

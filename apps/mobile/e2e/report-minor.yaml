@@ -38,6 +38,10 @@ appId: dev.placeholder.ykskoc
     timeout: 15000
 - copyTextFrom: { id: report-link }
 - openLink: ${maestro.copiedText}
+- runFlow:
+    when:
+      platform: Android
+    file: _chrome-first-run.yaml
 - extendedWaitUntil:
     visible: 'Haftalık rapor'
     timeout: 20000

@@ -15,13 +15,17 @@ appId: dev.placeholder.ykskoc
 # 4. Veli onayı geri çeker: öğrencinin sunucu hesabı silinir, uygulama yerel moda döner.
 - runScript: scripts/clear-mail.js
 - openLink: ${output.link}
+- runFlow:
+    when:
+      platform: Android
+    file: _chrome-first-run.yaml
 - extendedWaitUntil:
     visible: 'Onay verildi.*'
     timeout: 20000
 - tapOn: 'Onayı geri çekmek istiyorum'
 - tapOn: 'E-posta adresiniz.*'
 - inputText: ${output.parentEmail}
-- tapOn: 'Done'
+- runFlow: _web-keyboard-done.yaml
 - tapOn: 'Doğrulama kodu gönder'
 - retry:
     maxRetries: 5

@@ -17,8 +17,15 @@ appId: dev.placeholder.ykskoc
 - runFlow:
     when:
       visible: 'Toggle element inspector'
+      platform: iOS
     commands:
       - tapOn: 'Close'
+- runFlow:
+    when:
+      visible: 'Toggle element inspector|Reload'
+      platform: Android
+    commands:
+      - pressKey: back
 - extendedWaitUntil:
     visible: { id: settings-open }
     timeout: 15000

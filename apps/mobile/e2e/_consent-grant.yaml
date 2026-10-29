@@ -18,6 +18,10 @@ appId: dev.placeholder.ykskoc
 # 2. Veli sayfayı açar ve onay verir.
 - runScript: scripts/clear-mail.js
 - openLink: ${output.link}
+- runFlow:
+    when:
+      platform: Android
+    file: _chrome-first-run.yaml
 - extendedWaitUntil:
     visible: 'Aydınlatma metni.*'
     timeout: 20000
@@ -48,16 +52,15 @@ appId: dev.placeholder.ykskoc
     centerElement: true
 - tapOn: 'Adınız ve soyadınız'
 - inputText: 'Ayşe Yılmaz'
-# Klavye açıkken alttaki alana dokunma tutmayabiliyor: Safari klavye çubuğundaki Done ile kapat
-# (hideKeyboard Safari'de forma dokunuyor), alanı ortaya getir.
-- tapOn: 'Done'
+# Klavye açıkken alttaki alana dokunma tutmayabiliyor: klavyeyi kapat, alanı ortaya getir.
+- runFlow: _web-keyboard-done.yaml
 - scrollUntilVisible:
     element: 'E-posta adresiniz.*'
     visibilityPercentage: 100
     centerElement: true
 - tapOn: 'E-posta adresiniz.*'
 - inputText: ${output.parentEmail}
-- tapOn: 'Done'
+- runFlow: _web-keyboard-done.yaml
 - scrollUntilVisible:
     element: 'Doğrulama kodu gönder'
     visibilityPercentage: 100
