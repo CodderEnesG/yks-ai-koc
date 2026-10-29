@@ -61,11 +61,27 @@ Uzak Supabase'e T12 taksonomisi ve `feedback_response` uygulandı. Android'de il
   ekran olayı göndermez. Proje anahtarı EU'da geçerli (`/flags` 200), Metro `.env`'i yükledi; olaylara Activity'den
   bakılmalı.
 
+## Akşam: dağıtım hazırlığı
+
+- Uzakta `feedback_response` sağlamlaştırması uygulandı. Eski worktree'ler, dallar, `DerivedData/YKSKoc-…` ve
+  `apps/mobile/android` temizlendi.
+- PostHog: anahtar ve proje doğru (curl ile gönderilen `baglanti_testi` olayı projeye düştü). Activity'nin
+  varsayılan aralığı "Last hour"; koşu olayları için aralık genişletilmeli.
+- Test APK'sı ve TestFlight hazırlığı ([DAGITIM](../DAGITIM.md)): `eas.json`, `.env.production`, dumansız ikon ve
+  açılış görseli, iOS ihracat ve iPhone ayarı. Android APK ve iOS Release yerelde derlendi; ikisi de uzak sunucuya
+  karşı duman testinden geçti. APK: `~/Desktop/lamba-test-2026-10-29.apk`.
+- Release derlemesinde çıkanlar: `web.output: "server"` paketlemeyi kırıyordu (→ `single`); Android'de durum
+  çubuğu simgeleri açık temada okunmuyordu (→ `StatusBar style="auto"`); saat ve doğum yılı çiplerinde "✓" etiketi
+  iki satıra kırılıyordu (→ dar dolgu). Android ekranlarına ilk kez gözle bakıldı; Material Symbols ikonları doğru.
+- Otomatik onay iki işi reddetti: uzak cron kaydını okumak ve Edge Functions'ı main'den deploy etmek.
+
 ## Bekleyenler
 
 **Geliştirici**
 
-1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`. **Yapıldı** (akşam).
+1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`. **Yapıldı** (akşam). Gerçek cihaz
+   testinden önce: Edge Functions main'den deploy (`supabase functions deploy --use-api`) ve giriş e-postası
+   şablonunda `{{ .Token }}` ([DAGITIM](../DAGITIM.md)).
 2. PostHog EU arayüzünde koşu saatlerindeki olaylar (`onboarding_tamam`, `kitap_eklendi`, `plan_olustu`,
    `checkin`, `sohbet_mesaj`). Test olayları üretim projesine gitti.
 3. Supabase Dashboard SQL'de `run_retention` cron'unun koştuğunu kontrol et (sorgu goal belgesinde).

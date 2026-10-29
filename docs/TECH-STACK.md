@@ -37,6 +37,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Lint/format | `eslint` ^9 + `eslint-config-expo` ~58.0.4 / `eslint-config-next` 16.4.3, `eslint-config-prettier`, `prettier` ^3.9.10 | ESLint 10 çıktı ama Expo 9'u sabitliyor |
 | CI | GitHub Actions (Linux): Prettier, typecheck, lint, test, `deno check` (plan motoru, güvenlik paketi ve her Edge Function, `--config` ile kendi `deno.json`'uyla) | `.github/workflows/ci.yml` |
 | Geliştirme araçları | `tools/*` workspace paketleri; script'ler Node 22'nin TypeScript tip ayıklamasıyla doğrudan çalışır (`node x.ts`), CI typecheck'ine girer. `tools/toc-eval`: poppler (`pdftotext`, `pdftoppm`), `sharp` 0.35.5, `@anthropic-ai/sdk` 1.3.0 | Ayarlar `.env`'de (`.env.example`) |
+| Build ve dağıtım | EAS Build/Submit (`apps/mobile/eas.json`: development, preview APK, production; `appVersionSource: remote`), eas-cli ≥20.1; yerel release için `apps/mobile/.env.production` | EAS projesine henüz bağlı değil. Rehber [DAGITIM](DAGITIM.md) |
 | Native araçlar | Xcode 26.0.1 + CocoaPods 1.17 (iOS), Android Studio + JDK 17 + Gradle 9.4.1 (Android) | İkisinde de dev build başarılı (2026-10-23) |
 
 ## Planlanan, henüz kurulmadı

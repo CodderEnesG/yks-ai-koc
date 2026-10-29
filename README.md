@@ -22,6 +22,7 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
 - [TECH-STACK](docs/TECH-STACK.md): kullanılan ve planlanan kütüphaneler, sabit sürümler, kodlama kuralları ve elenen seçenekler. Yaşayan belge.
 - [PLAN-2026-10-22-teknoloji-secimi-ve-t02](docs/PLAN-2026-10-22-teknoloji-secimi-ve-t02.md): teknoloji seçiminin araştırması ve T02 planı (tarihli kayıt, uygulandı).
 - [GOAL-2026-10-29-lamba-ekranlari-ve-test-turu](docs/GOAL-2026-10-29-lamba-ekranlari-ve-test-turu.md): lamba ekranlarının entegrasyonu, test turu ve uzak proje için gözetimsiz `/goal` koşusunun çalışma belgesi ve sonuç tabloları (tarihli kayıt).
+- [DAGITIM](docs/DAGITIM.md): test APK'sı ve TestFlight rehberi; ortamlar, uzak taraf hazırlığı, gerçek cihaz test listesi. Yaşayan belge.
 - [magaza-paketi](docs/magaza-paketi/README.md): App Store ve Google Play yükleme paketi taslağı (isim, açıklama, ikonlar, ekran görüntüsü planı).
 - Gün raporları (tarihli kayıt, kanonik değil) — `docs/reports/`: [2026-10-23](docs/reports/2026-10-23-gun-raporu.md), [2026-10-25](docs/reports/2026-10-25-gun-raporu.md), [2026-10-28](docs/reports/2026-10-28-gun-raporu.md), [2026-10-29](docs/reports/2026-10-29-gun-raporu.md).
 - Tarihli kaynak belgeler (o güne ait kayıt, kanonik değil) — `docs/sources/`:
