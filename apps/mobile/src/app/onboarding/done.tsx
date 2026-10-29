@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { useCSSVariable } from 'uniwind';
 
 import { Alaaddin } from '@/components/alaaddin';
+import { ICONS, Icon } from '@/components/icon';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -45,31 +46,40 @@ export default function DoneScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <View className="flex-1 justify-center gap-4 p-6">
-        {/* Kurulumun bitişi tek seferlik dönüm noktası: Alaaddin "mutlu" (DECISIONS.md, 3. sürüm). */}
-        <Alaaddin scene="mutlu" height={180} />
+      <View className="flex-1 justify-center gap-4 px-5">
         <Text variant="h2">{tr.onboarding.done.title}</Text>
-        <SummaryRow
-          icon="calendar"
-          androidIcon="calendar_month"
-          testID="done-days-left"
-          text={tr.onboarding.done.daysLeft(daysLeft)}
-        />
-        <SummaryRow
-          icon="clock"
-          androidIcon="schedule"
-          text={tr.onboarding.done.weeklyHours(weeklyHours)}
-        />
+        {/* Kurulumun bitişi tek seferlik dönüm noktası: Alaaddin "mutlu", özetin yanında (lamba-design 1.8). */}
+        <View className="bg-card flex-row items-stretch gap-4 rounded-xl p-3 pr-5">
+          <Alaaddin scene="mutlu" height={128} className="w-24 rounded-md py-2" />
+          <View className="flex-1 justify-center gap-3">
+            <SummaryRow
+              icon="calendar"
+              androidIcon="calendar_month"
+              testID="done-days-left"
+              text={tr.onboarding.done.daysLeft(daysLeft)}
+            />
+            <SummaryRow
+              icon="clock"
+              androidIcon="schedule"
+              text={tr.onboarding.done.weeklyHours(weeklyHours)}
+            />
+          </View>
+        </View>
         {minor ? (
           <View
             testID="minor-notice"
-            className="border-border bg-muted gap-2 rounded-xl border p-4">
-            <Text className="font-sans-semibold">{tr.onboarding.done.minorTitle}</Text>
-            <Text variant="muted">{tr.onboarding.done.minorBody}</Text>
+            className="border-border bg-card flex-row gap-3 rounded-lg border p-4">
+            <View className="bg-background size-9 items-center justify-center rounded-full">
+              <Icon name={ICONS.pending} size={18} />
+            </View>
+            <View className="flex-1 gap-1">
+              <Text className="text-callout font-sans-bold">{tr.onboarding.done.minorTitle}</Text>
+              <Text variant="muted">{tr.onboarding.done.minorBody}</Text>
+            </View>
           </View>
         ) : null}
       </View>
-      <View className="p-6">
+      <View className="px-5 pt-2 pb-6">
         <Button
           testID="finish"
           size="lg"
@@ -110,7 +120,7 @@ function SummaryRow({
         tintColor={typeof color === 'string' ? color : undefined}
         fallback={null}
       />
-      <Text testID={testID} className="flex-1">
+      <Text testID={testID} className="text-callout font-sans-semibold flex-1">
         {text}
       </Text>
     </View>

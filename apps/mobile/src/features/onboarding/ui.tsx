@@ -66,7 +66,7 @@ export function StepScreen({
       <KeyboardStickyView offset={{ closed: 0, opened: insets.bottom }}>
         <View className="bg-background gap-2 p-6 pt-2">
           {footer}
-          <Button testID="continue" disabled={!canContinue} onPress={onContinue}>
+          <Button testID="continue" size="lg" disabled={!canContinue} onPress={onContinue}>
             <Text>{continueLabel}</Text>
           </Button>
         </View>
@@ -75,7 +75,7 @@ export function StepScreen({
   );
 }
 
-/** Üst çubukta, geri okunun yanında kurulum ilerlemesi: biten ve şu anki adım dolu bölüt. */
+/** Üst çubukta, geri okunun yanında kurulum ilerlemesi: biten adımlar dolu, şu anki adım vurgulu bölüt. */
 function StepProgress({ step }: { step: number }) {
   return (
     <View
@@ -87,7 +87,10 @@ function StepProgress({ step }: { step: number }) {
       {Array.from({ length: STEP_COUNT }, (_, i) => (
         <View
           key={i}
-          className={cn('h-1.5 flex-1 rounded-full', i < step ? 'bg-foreground' : 'bg-border')}
+          className={cn(
+            'h-1.5 flex-1 rounded-full',
+            i < step - 1 ? 'bg-foreground' : i === step - 1 ? 'bg-emphasis' : 'bg-border',
+          )}
         />
       ))}
     </View>
