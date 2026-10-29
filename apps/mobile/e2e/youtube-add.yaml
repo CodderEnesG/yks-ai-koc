@@ -6,6 +6,7 @@ appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
 - runFlow: _connect-account.yaml
+- runFlow: _relaunch.yaml
 - tapOn: 'Kütüphane'
 - tapOn: { id: library-add }
 - tapOn: { id: add-youtube }
@@ -15,6 +16,8 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: { id: youtube-preview }
     timeout: 30000
+# Hız seçenekleri klavyenin altında kalır; Maestro örtülen öğeyi görünür sayıp klavyeye dokunur.
+- tapOn: 'YouTube listesi ekle'
 - tapOn: { id: youtube-speed-1.5 }
 - tapOn: { id: continue }
 - tapOn: 'Bugün'

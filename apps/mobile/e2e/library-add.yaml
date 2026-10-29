@@ -3,7 +3,7 @@ appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
 - tapOn: 'Kütüphane'
-- assertVisible: 'Henüz kitap eklemedin. Planın eklediğin kitaplara göre kurulur.'
+- assertVisible: 'Henüz kaynak eklemedin. Planın eklediğin kitap ve listelere göre kurulur.'
 # 1. Katalogdan: 3 Adım TYT sözel takım ISBN'i dört derste ortak; ders seçilir.
 - tapOn: { id: library-add }
 - tapOn: { id: add-search }
@@ -35,13 +35,12 @@ appId: dev.placeholder.ykskoc
 - tapOn: { id: quick-title }
 - inputText: 'X Yayınları TYT Fizik'
 - tapOn: { id: quick-kind-tests }
-# Klavye açıkken alan yapışkan düğmenin arkasında kalır; öğrenci gibi yukarı kaydır.
+# Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
 # (Maestro örtülen öğeyi görünür sayar, scrollUntilVisible kaydırmaz.)
-- swipe:
-    start: 50%, 40%
-    end: 50%, 15%
+- tapOn: 'Hızlı ekle'
 - tapOn: { id: quick-count }
 - inputText: '40'
+- tapOn: 'Hızlı ekle'
 - tapOn: { id: minutes-20 }
 - tapOn: { id: continue }
 - assertVisible: 'X Yayınları TYT Fizik'

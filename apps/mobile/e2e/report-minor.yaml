@@ -9,9 +9,8 @@ appId: dev.placeholder.ykskoc
 - tapOn: { id: add-quick }
 - tapOn: { id: quick-title }
 - inputText: 'Rapor Deneme Kitabı'
-- swipe:
-    start: 50%, 40%
-    end: 50%, 15%
+# Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
+- tapOn: 'Hızlı ekle'
 - tapOn: { id: quick-count }
 - inputText: '120'
 - tapOn: { id: continue }

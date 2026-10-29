@@ -17,11 +17,7 @@ appId: dev.placeholder.ykskoc
 - assertVisible: { id: support-lightened }
 # Geri yerine yeniden başlat: native geri düğmesinin erişilebilir adı yok, kenardan kaydırma tutmuyor.
 # Böylece güvenli modun kalıcı olduğu da sınanır.
-- launchApp
-- extendedWaitUntil:
-    visible: 'Bugün'
-    timeout: 15000
-- tapOn: 'Bugün'
+- runFlow: _relaunch.yaml
 - assertVisible: { id: safe-mode }
 - tapOn: { id: safe-mode-support }
 - assertVisible: { id: support-lightened }

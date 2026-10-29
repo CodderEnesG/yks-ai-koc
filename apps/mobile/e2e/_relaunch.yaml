@@ -1,0 +1,24 @@
+# Uygulamayı durumu silmeden yeniden başlatır ve Bugün'e döner. Ayarlar sekme değil, itilen ekran
+# (lamba kararı 28 Ekim) ve native geri düğmesinin erişilebilir adı yok; Ayarlar'dan çıkmak, Safari'den
+# dönmek ve kalıcılığı sınamak için kullanılır. Düz `launchApp` dev client'ın yüzen menü düğmesini
+# (dişli) açar ve uygulamanın dişlisini örter; bu yüzden _open-dev-build gibi dev linkiyle açılır.
+appId: dev.placeholder.ykskoc
+---
+- stopApp
+- openLink: exp+yks-koc://?__expo_url=http%3A%2F%2F127.0.0.1%3A8081&__expo_disable_fab=1&__expo_disable_onboarding=1
+- runFlow:
+    when:
+      visible: 'Open'
+    commands:
+      - tapOn: 'Open'
+- extendedWaitUntil:
+    visible: 'Reload|Bugün'
+    timeout: 60000
+- runFlow:
+    when:
+      visible: 'Toggle element inspector'
+    commands:
+      - tapOn: 'Close'
+- extendedWaitUntil:
+    visible: { id: settings-open }
+    timeout: 15000

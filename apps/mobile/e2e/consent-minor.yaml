@@ -34,7 +34,7 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: 'Onay geri çekildi.*'
     timeout: 15000
-- launchApp
+- runFlow: _relaunch.yaml
 - tapOn: { id: settings-open }
 - extendedWaitUntil:
     visible: 'Velin onayını geri çekti.*'

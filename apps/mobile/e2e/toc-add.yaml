@@ -6,6 +6,7 @@ appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
 - runFlow: _connect-account.yaml
+- runFlow: _relaunch.yaml
 - tapOn: 'Kütüphane'
 - tapOn: { id: library-add }
 - tapOn: { id: add-toc }

@@ -2,7 +2,7 @@
 appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
-- assertVisible: 'Planın kitaplarına göre kurulur. İlk kitabını ekle.'
+- assertVisible: 'Planın eklediğin kaynaklara göre kurulur. İlk kaynağını ekle.'
 - tapOn: { id: today-add-book }
 - tapOn: { id: add-search }
 - tapOn: { id: search-input }

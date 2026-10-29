@@ -5,6 +5,7 @@ appId: dev.placeholder.ykskoc
 ---
 - runFlow: _onboard-adult.yaml
 - runFlow: _connect-account.yaml
+- runFlow: _relaunch.yaml
 - tapOn: 'Alaaddin'
 - assertVisible: { id: coach-input }
 
@@ -15,6 +16,12 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: { id: 'coach-reply-(reply|support|check)' }
     timeout: 30000
+# Klavye "Bildir"i örter (Maestro örtülen öğeyi görünür sayıp klavyeye dokunur): listeye dokunup kapat.
+- tapOn: 'Ben bir yapay zekâ koçuyum.*'
+- scrollUntilVisible:
+    element: { id: coach-report }
+    visibilityPercentage: 100
+    centerElement: true
 - tapOn: { id: coach-report }
 - assertVisible: 'Bildirildi, teşekkürler'
 
