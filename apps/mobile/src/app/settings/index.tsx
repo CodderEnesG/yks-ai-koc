@@ -84,7 +84,7 @@ export default function SettingsScreen() {
                 label={t}
                 selected={morning === t}
                 onPress={() => setMorningTime(t)}
-                className="w-[23%] items-center"
+                className="w-[23%] items-center px-1"
               />
             ))}
           </View>

@@ -4,6 +4,7 @@ import { PortalHost } from '@rn-primitives/portal';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme, View } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -71,6 +72,8 @@ export default function RootLayout() {
           <Stack.Screen name="support" />
         </Stack>
         <PortalHost />
+        {/* Android edge-to-edge'de durum çubuğu simgeleri varsayılan açık kalıyor; temaya uysun. */}
+        <StatusBar style="auto" />
       </ThemeProvider>
     </KeyboardProvider>
   );

@@ -34,7 +34,7 @@ export default function BirthScreen() {
               label={name}
               selected={draft.birthMonth === i + 1}
               onPress={() => draft.set({ birthMonth: i + 1 })}
-              className="w-[31%] items-center"
+              className="w-[31%] items-center px-2"
             />
           ))}
         </View>
@@ -49,7 +49,7 @@ export default function BirthScreen() {
               label={String(year)}
               selected={draft.birthYear === year}
               onPress={() => draft.set({ birthYear: year })}
-              className="w-[23%] items-center"
+              className="w-[23%] items-center px-1"
             />
           ))}
         </View>
