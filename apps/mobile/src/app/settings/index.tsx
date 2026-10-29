@@ -34,6 +34,8 @@ export default function SettingsScreen() {
   const [deleteError, setDeleteError] = useState(false);
   const s = tr.settings;
   const foreground = useCSSVariable('--color-foreground');
+  const muted = useCSSVariable('--color-muted-foreground');
+  const trashColor = deleting ? muted : foreground;
   if (!profile || session === undefined || morning === undefined) return null;
 
   const last = lastPushedAt();
@@ -50,6 +52,9 @@ export default function SettingsScreen() {
     setDeleteError(false);
     try {
       await deleteAccountAndData();
+      // Ayarlar sekmelerin üstüne itilmiş ekran: önce yığın köke indirilir, yoksa eski sekmeler
+      // kurulumun altında kalır (Android geri, iOS kenardan kaydırma onlara döner).
+      router.dismissAll();
       router.replace('/onboarding');
     } catch {
       setDeleteError(true);
@@ -139,11 +144,15 @@ export default function SettingsScreen() {
             variant="destructive"
             disabled={deleting}
             onPress={confirmDelete}>
+            {/* Süs: düğmenin adı metinden gelir; ikonun kendi adı ("trash") etikete karışmaz. */}
             <SymbolView
               name={{ ios: 'trash', android: 'delete' }}
               size={18}
-              tintColor={typeof foreground === 'string' ? foreground : undefined}
+              tintColor={typeof trashColor === 'string' ? trashColor : undefined}
               fallback={null}
+              accessible={false}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
             />
             <Text>{s.deleteButton(!!session)}</Text>
           </Button>

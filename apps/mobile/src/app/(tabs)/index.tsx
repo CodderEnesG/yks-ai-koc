@@ -185,7 +185,8 @@ export default function TodayScreen() {
         ) : null}
 
         {groups.map((g) => (
-          <TaskCard key={g.libraryItemId + g.kind} group={g} />
+          // Aynı listenin videoları aynı kaynak ve türü paylaşır; anahtar görev kimliklerinden.
+          <TaskCard key={g.taskIds.join(',')} group={g} />
         ))}
 
         {groups.length > 0 && groups.every((g) => g.status !== 'planned') ? (

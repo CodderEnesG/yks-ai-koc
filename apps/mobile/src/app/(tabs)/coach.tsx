@@ -69,7 +69,9 @@ export default function CoachScreen() {
   };
 
   return (
-    <SafeAreaView className="bg-background flex-1" edges={['top']}>
+    // Alt kenar da: iOS native sekmelerde giriş çubuğu düz View, sekme çubuğunun altında kalıyordu (yalnız
+    // kaydırma görünümü otomatik iç boşluk alır).
+    <SafeAreaView className="bg-background flex-1" edges={['top', 'bottom']}>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <FlatList
           ref={list}
