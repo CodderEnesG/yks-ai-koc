@@ -139,9 +139,11 @@ tablolar güncellenir; commit, push, CI yeşil.
 
 Goal koşulunun parçası değil; koşu sonunda güncellenir.
 
-- `supabase db push`: `20261029120000_feedback_response_hardening.sql` (otomatik onay üretim dağıtımı olarak reddetti; dry-run'da yalnız bu dosya).
+- `supabase db push`: `20261029120000_feedback_response_hardening.sql` (otomatik onay üretim dağıtımı olarak
+  reddetti). **Yapıldı** (29 Ekim akşamı, geliştirici izniyle); `supabase migration list` uzakta üçünü de gösteriyor.
 - PostHog EU arayüzünde koşu saatlerinde `onboarding_tamam`, `kitap_eklendi`, `plan_olustu`, `checkin`,
-  `sohbet_mesaj` olayları görünüyor mu.
+  `sohbet_mesaj` olayları görünüyor mu. Product analytics özetindeki "Active users" yalnız `$screen`/`$pageview`
+  sayar ve uygulama ekran olayı göndermez; olaylara Activity'den bakılır.
 - Supabase Dashboard SQL: `select * from cron.job where jobname = 'retention-daily';` ve
   `select status, return_message, start_time from cron.job_run_details where jobid = <id> order by start_time desc limit 5;`
 - Gerçek cihaz: barkod okuma ve 5-10 gerçek içindekiler fotoğrafı (Apple hesabı, T01).

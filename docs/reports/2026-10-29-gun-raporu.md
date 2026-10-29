@@ -16,7 +16,7 @@ Uzak Supabase'e T12 taksonomisi ve `feedback_response` uygulandı. Android'de il
 | Goal belgesi, `lamba/` ignore | Tamam | `e96db47` |
 | Test turunda çıkan uygulama hataları | Tamam | `a5c3751` |
 | Ayarlar sekmeden çıkınca kırılan akışlar | Tamam, iOS 13/13 | `aa872df` |
-| `feedback_response` sağlamlaştırma | Yerelde ve CI'da; **uzak projede değil** | `4e9ea1f` |
+| `feedback_response` sağlamlaştırma | Tamam; uzak projeye geliştirici izniyle gönderildi | `4e9ea1f` |
 | Tasarım sistemi temeli | Tamam | `ab4a54e` |
 | Bugün ve görev kartı | Tamam | `b8d50cc`, `0db2ea1` |
 | Kütüphane ve ekleme ekranları | Tamam (hızlı ekle ve içindekiler kontrolü düzeni aynı) | `43269f1` |
@@ -55,13 +55,17 @@ Uzak Supabase'e T12 taksonomisi ve `feedback_response` uygulandı. Android'de il
   Akışlarda Android'e özgü uygulama hatası çıkmadı; kurulum ekranında yazı tipleri doğru görünüyor. Diğer
   ekranlara ve Material Symbols ikonlarına Android'de gözle bakılmadı.
 - **Otomatik onay sınırı:** `feedback_response` sağlamlaştırma migration'ı üretim dağıtımı sayılıp
-  reddedildi. Uzak projeye elle `supabase db push` gerekiyor; dry-run'da yalnız bu dosya görünüyor.
+  reddedildi; geliştirici izin verince akşam gönderildi (uzakta 3 migration da var). Uzak cron kaydını okumak
+  (`supabase db dump -s cron`) üretim okuması sayılıp reddedildi.
+- **PostHog:** Product analytics özetinde "Active users" 0. Bu pano yalnız `$screen`/`$pageview` sayar; uygulama
+  ekran olayı göndermez. Proje anahtarı EU'da geçerli (`/flags` 200), Metro `.env`'i yükledi; olaylara Activity'den
+  bakılmalı.
 
 ## Bekleyenler
 
 **Geliştirici**
 
-1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`.
+1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`. **Yapıldı** (akşam).
 2. PostHog EU arayüzünde koşu saatlerindeki olaylar (`onboarding_tamam`, `kitap_eklendi`, `plan_olustu`,
    `checkin`, `sohbet_mesaj`). Test olayları üretim projesine gitti.
 3. Supabase Dashboard SQL'de `run_retention` cron'unun koştuğunu kontrol et (sorgu goal belgesinde).
