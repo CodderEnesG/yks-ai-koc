@@ -115,7 +115,7 @@ tablolar güncellenir; commit, push, CI yeşil.
 | G4.6 YouTube logosu | TAMAM | Prototipteki resmi logo dosyaları (açık/koyu zemin), değiştirilmeden. Kaynağın teyidi kullanıcıda. |
 | G5 iOS tam regresyon | TAMAM | 13/13 (toc-add ilk denemede dev link açılışında takıldı, tek başına geçti). Açık ve koyu temada ekran görüntüleri kontrol edildi. İki ayrı QA ajanı (arkadaşın commit'leri, G4 diff'i) bulguları düzeltildi. |
 | G6 Android | TAMAM | İlk Android Maestro koşusu (Pixel 6 Pro API 34, `prebuild` + derleme 5 dk 45 sn). `toc-add` hariç 12/12 geçti; ilk turda 5/12. Sebepler: Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported") → platforma göre değişken; temiz açılışta launcher hazır olmadan gönderilen dev linki yok sayılıyor → bekleme; Android'de odaktaki alana dokununca imleç ortaya düşüyor → tarih alanı `selectTextOnFocus`. İki akışta bir kez açılış ekranında takılma (geçici). `toc-add` iOS'a özgü (`ios-only`). Disk en düşük 35 GB (emülatör açıkken), sonra 40 GB. |
-| G7 Kapanış | YAPILACAK | |
+| G7 Kapanış | TAMAM | Son inceleme (taze QA ajanı, `d5bec92..HEAD`): kod ve SQL'de ciddi bulgu yok; gün raporundaki rebase öncesi hash'ler, PROJECT-STATE'teki eski YouTube etiketi ifadesi, sohbet akışında klavye kapatma noktası, `dismissAll` koruması, sekme ikonunun 2:1 oranı ve TECH-STACK'e Android Maestro kuralları düzeltildi; `chat` ve `account-delete` iOS'ta yeniden geçti. Metro, functions serve, web sunucusu, yerel Supabase (`supabase stop`, veri volume'da) ve Docker kapatıldı; simülatör ve emülatör kapalı, Gradle/Kotlin daemon'ları durduruldu. Boş disk 45 GB (en düşük 35 GB, Android emülatörü açıkken). |
 
 ## Maestro sonuçları
 

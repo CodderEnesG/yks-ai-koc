@@ -17,14 +17,14 @@ Uzak Supabase'e T12 taksonomisi ve `feedback_response` uygulandı. Android'de il
 | Test turunda çıkan uygulama hataları | Tamam | `a5c3751` |
 | Ayarlar sekmeden çıkınca kırılan akışlar | Tamam, iOS 13/13 | `aa872df` |
 | `feedback_response` sağlamlaştırma | Yerelde ve CI'da; **uzak projede değil** | `4e9ea1f` |
-| Tasarım sistemi temeli | Tamam | `094f45b` |
-| Bugün ve görev kartı | Tamam | `4245e06`, `1deb97d` |
-| Kütüphane ve ekleme ekranları | Tamam (hızlı ekle ve içindekiler kontrolü düzeni aynı) | `266be3b` |
-| Alaaddin sohbeti ve Destek | Tamam, metinler değişmedi | `950d818` |
-| Kurulum farkları | Tamam | `ebc0c30` |
-| Resmi YouTube logosu | Tamam, kaynak teyidi bekliyor | `8eec049` |
-| Kalite kontrol düzeltmeleri | Tamam | `6de8894`, `b884e6a` |
-| Yazı tipleri (iOS) | Tamam | `37c256b` |
+| Tasarım sistemi temeli | Tamam | `ab4a54e` |
+| Bugün ve görev kartı | Tamam | `b8d50cc`, `0db2ea1` |
+| Kütüphane ve ekleme ekranları | Tamam (hızlı ekle ve içindekiler kontrolü düzeni aynı) | `43269f1` |
+| Alaaddin sohbeti ve Destek | Tamam, metinler değişmedi | `d5c43bf` |
+| Kurulum farkları | Tamam | `bf9cd7c` |
+| Resmi YouTube logosu | Tamam, kaynak teyidi bekliyor | `1d53817` |
+| Kalite kontrol düzeltmeleri | Tamam | `558d218`, `754fada` |
+| Yazı tipleri (iOS) | Tamam | `c856b84` |
 | Android platform dalları | Tamam | `836333b` |
 | Android koşusu | 12/12 (`toc-add` iOS'a özgü) | `99e6e08`, `2c38a2a` |
 
