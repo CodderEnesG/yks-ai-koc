@@ -21,6 +21,7 @@ Repo projenin ortak hafızası. Kararlar ya da yürütme durumu anlamlı biçimd
 - [REPORT-2026-10-21-final-teknik-ve-is-modeli](docs/REPORT-2026-10-21-final-teknik-ve-is-modeli.md): başlangıç kararı. İçinde stack, veri modeli, plan motoru, YouTube oynatma listeleri, AI ve güvenlik katmanı, KVKK ve veli onayı, ödeme, 39 görevlik inşa planı, birim ekonomisi, senaryolar ve bütçe var.
 - [TECH-STACK](docs/TECH-STACK.md): kullanılan ve planlanan kütüphaneler, sabit sürümler, kodlama kuralları ve elenen seçenekler. Yaşayan belge.
 - [PLAN-2026-10-22-teknoloji-secimi-ve-t02](docs/PLAN-2026-10-22-teknoloji-secimi-ve-t02.md): teknoloji seçiminin araştırması ve T02 planı (tarihli kayıt, uygulandı).
+- [GOAL-2026-10-29-lamba-ekranlari-ve-test-turu](docs/GOAL-2026-10-29-lamba-ekranlari-ve-test-turu.md): lamba ekranlarının entegrasyonu, test turu ve uzak proje için gözetimsiz `/goal` koşusunun çalışma belgesi ve sonuç tabloları (tarihli kayıt).
 - Gün raporları (tarihli kayıt, kanonik değil) — `docs/reports/`: [2026-10-23](docs/reports/2026-10-23-gun-raporu.md), [2026-10-25](docs/reports/2026-10-25-gun-raporu.md), [2026-10-28](docs/reports/2026-10-28-gun-raporu.md).
 - Tarihli kaynak belgeler (o güne ait kayıt, kanonik değil) — `docs/sources/`:
   - [2026-10-15-urun-ve-is-modeli-v1.pdf](docs/sources/2026-10-15-urun-ve-is-modeli-v1.pdf): ürün döngüleri, MVP kapsamı, mimari taslağı, paketler.

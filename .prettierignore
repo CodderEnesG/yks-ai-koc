@@ -9,3 +9,4 @@ brand/
 apps/mobile/ios/
 apps/mobile/android/
 **/expo-env.d.ts
+lamba/

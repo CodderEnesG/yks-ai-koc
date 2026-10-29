@@ -33,3 +33,6 @@ supabase/.branches/
 # Telifli ve kişisel test verisi — asla commit edilmez
 data-private/
 .gstack/
+
+# Tasarım çalışma alanının yerel kopyası (lamba-design + Figma Make prototipi); commit edilmez
+/lamba/
