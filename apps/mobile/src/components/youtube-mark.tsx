@@ -1,20 +1,28 @@
 import { Image } from 'expo-image';
-import { View } from 'react-native';
+import { useColorScheme } from 'react-native';
 
-import { Text } from '@/components/ui/text';
-
-const YOUTUBE_ICON = require('../../assets/images/youtube-icon.svg');
+const LOGO = {
+  light: require('../../assets/images/youtube-logo-acik-zemin.svg'),
+  dark: require('../../assets/images/youtube-logo-koyu-zemin.svg'),
+} as const;
 
 /**
  * YouTube kaynak etiketi (politika III.F.2: içeriğin YouTube'dan geldiği açıkça görünür). Resmi YouTube
- * simgesi kendi renkleriyle (kırmızı), marka paletinin bilinçli istisnası. Simge yeniden renklendirilmez
- * (YouTube marka kuralı); yayından önce gerçek marka kaynaklarından piksel doğrulaması yapılacak.
+ * logosu kendi renkleriyle, marka paletinin bilinçli istisnası (lamba kararı 27 Ekim). Dosyalar lamba-design
+ * prototipinden, değiştirilmeden (açık zeminde koyu, koyu zeminde beyaz yazılı sürüm); yeniden
+ * renklendirilmez, oranı korunur. Kaynağın YouTube marka sayfası olduğu yayından önce teyit edilecek.
  */
 export function YouTubeMark() {
+  const scheme = useColorScheme();
   return (
-    <View testID="youtube-mark" className="flex-row items-center gap-1">
-      <Image source={YOUTUBE_ICON} style={{ width: 20, height: 14 }} contentFit="contain" />
-      <Text className="text-xs font-sans-semibold">YouTube</Text>
-    </View>
+    <Image
+      testID="youtube-mark"
+      accessible
+      accessibilityRole="image"
+      accessibilityLabel="YouTube"
+      source={scheme === 'dark' ? LOGO.dark : LOGO.light}
+      style={{ height: 18, aspectRatio: 493 / 110 }}
+      contentFit="contain"
+    />
   );
 }
