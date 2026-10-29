@@ -110,6 +110,16 @@ export const tr = {
   today: {
     title: 'Bugün',
     examCountdown: (days: number) => `Sınava ${days} gün`,
+    // Geri sayımda sayı büyük ve vurgulu yazılır; parçalar ayrı (lamba-design 2.1).
+    examBefore: 'Sınava ',
+    examAfter: ' gün',
+    dayDoneTitle: 'Bugünlük bu kadar.',
+    dayDoneBody: (streak: number) =>
+      streak > 0
+        ? `Planın tamam, serin ${streak} gün oldu. Yarın kaldığın yerden.`
+        : 'Planın tamam. Yarın kaldığın yerden.',
+    dayClosed: 'Bugünlük bu kadar, yarın kaldığın yerden.',
+    doneHeading: 'Bugün yaptıkların',
     streak: (days: number) => `Seri: ${days} gün`,
     noBooks: 'Planın eklediğin kaynaklara göre kurulur. İlk kaynağını ekle.',
     addBook: 'Kaynak ekle',

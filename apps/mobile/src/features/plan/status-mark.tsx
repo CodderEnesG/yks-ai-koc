@@ -16,8 +16,8 @@ export function StatusMark({ status }: { status: TaskGroup['status'] }) {
       <View
         testID="status-done"
         accessibilityLabel={label}
-        className="bg-foreground h-5 w-5 items-center justify-center rounded-full">
-        <Text className="text-background font-sans-bold text-xs leading-none">✓</Text>
+        className="bg-foreground mt-px size-6 items-center justify-center rounded-full">
+        <Text className="text-background font-sans-bold text-footnote">✓</Text>
       </View>
     );
   }
@@ -26,7 +26,7 @@ export function StatusMark({ status }: { status: TaskGroup['status'] }) {
       <View
         testID="status-partial"
         accessibilityLabel={label}
-        className="border-foreground h-5 w-5 flex-row overflow-hidden rounded-full border-2">
+        className="border-foreground mt-px size-6 flex-row overflow-hidden rounded-full border-2">
         <View className="bg-foreground h-full w-1/2" />
       </View>
     );
@@ -35,8 +35,8 @@ export function StatusMark({ status }: { status: TaskGroup['status'] }) {
     <View
       testID={status === 'skipped' ? 'status-skipped' : 'status-planned'}
       accessibilityLabel={label}
-      className={`border-control h-5 w-5 rounded-full border-2 ${
-        status === 'skipped' ? 'border-dashed' : ''
+      className={`mt-px size-6 rounded-full border-2 ${
+        status === 'skipped' ? 'border-foreground border-dashed' : 'border-control'
       }`}
     />
   );
