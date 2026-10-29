@@ -72,16 +72,18 @@
 }
 
 /*
- * Yazı tipleri (app.json expo-font ile gömülü; adlar dosya adıyla birebir). React Native ağırlığı kendisi
- * üretmez: her ağırlık ayrı aile. Metin ve butonlar Source Sans 3, başlıklar Bricolage Grotesque.
+ * Yazı tipleri (app.json expo-font ile gömülü). iOS aileyi PostScript adıyla, Android dosya adıyla tanır;
+ * dosyalar `assets/fonts`'ta PostScript adıyla durur ki iki platformda aynı ad çalışsın (önceki dosya adları
+ * iOS'ta sistem fontuna düşüyordu). React Native ağırlığı kendisi üretmez: her ağırlık ayrı aile. Metin ve
+ * butonlar Source Sans 3, başlıklar Bricolage Grotesque.
  * `font-medium/semibold/bold` yerine `font-sans-semibold`, `font-sans-bold`, `font-display` kullanılır.
  */
 @theme {
-  --font-sans: 'SourceSans3_400Regular';
-  --font-sans-semibold: 'SourceSans3_600SemiBold';
-  --font-sans-bold: 'SourceSans3_700Bold';
-  --font-display: 'BricolageGrotesque_700Bold';
-  --font-display-heavy: 'BricolageGrotesque_800ExtraBold';
+  --font-sans: 'SourceSans3-Regular';
+  --font-sans-semibold: 'SourceSans3-SemiBold';
+  --font-sans-bold: 'SourceSans3-Bold';
+  --font-display: 'BricolageGrotesque-Bold';
+  --font-display-heavy: 'BricolageGrotesque-ExtraBold';
 
   /*
    * Yazı ölçeği, köşe yarıçapı ve dokunma alanı (lamba-design prototipi `src/styles.css`, iOS ölçeğine

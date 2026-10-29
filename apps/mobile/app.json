@@ -61,11 +61,11 @@
         "expo-font",
         {
           "fonts": [
-            "./node_modules/@expo-google-fonts/source-sans-3/400Regular/SourceSans3_400Regular.ttf",
-            "./node_modules/@expo-google-fonts/source-sans-3/600SemiBold/SourceSans3_600SemiBold.ttf",
-            "./node_modules/@expo-google-fonts/source-sans-3/700Bold/SourceSans3_700Bold.ttf",
-            "./node_modules/@expo-google-fonts/bricolage-grotesque/700Bold/BricolageGrotesque_700Bold.ttf",
-            "./node_modules/@expo-google-fonts/bricolage-grotesque/800ExtraBold/BricolageGrotesque_800ExtraBold.ttf"
+            "./assets/fonts/SourceSans3-Regular.ttf",
+            "./assets/fonts/SourceSans3-SemiBold.ttf",
+            "./assets/fonts/SourceSans3-Bold.ttf",
+            "./assets/fonts/BricolageGrotesque-Bold.ttf",
+            "./assets/fonts/BricolageGrotesque-ExtraBold.ttf"
           ]
         }
       ]
