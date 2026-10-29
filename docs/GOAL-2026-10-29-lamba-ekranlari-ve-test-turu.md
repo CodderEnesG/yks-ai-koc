@@ -114,31 +114,32 @@ tablolar güncellenir; commit, push, CI yeşil.
 | G4.5 Kurulum farkları | TAMAM | İlerleme çubuğunda aktif adım vurgulu, büyük Devam, Hazırsın kartı. |
 | G4.6 YouTube logosu | TAMAM | Prototipteki resmi logo dosyaları (açık/koyu zemin), değiştirilmeden. Kaynağın teyidi kullanıcıda. |
 | G5 iOS tam regresyon | TAMAM | 13/13 (toc-add ilk denemede dev link açılışında takıldı, tek başına geçti). Açık ve koyu temada ekran görüntüleri kontrol edildi. İki ayrı QA ajanı (arkadaşın commit'leri, G4 diff'i) bulguları düzeltildi. |
-| G6 Android | YAPILACAK | |
+| G6 Android | TAMAM | İlk Android Maestro koşusu (Pixel 6 Pro API 34, `prebuild` + derleme 5 dk 45 sn). `toc-add` hariç 12/12 geçti; ilk turda 5/12. Sebepler: Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported") → platforma göre değişken; temiz açılışta launcher hazır olmadan gönderilen dev linki yok sayılıyor → bekleme; Android'de odaktaki alana dokununca imleç ortaya düşüyor → tarih alanı `selectTextOnFocus`. İki akışta bir kez açılış ekranında takılma (geçici). `toc-add` iOS'a özgü (`ios-only`). Disk en düşük 35 GB (emülatör açıkken), sonra 40 GB. |
 | G7 Kapanış | YAPILACAK | |
 
 ## Maestro sonuçları
 
 | Akış | iOS taban (G3) | iOS regresyon (G5) | Android (G6) |
 |---|---|---|---|
-| onboarding-adult | geçti | geçti | |
-| onboarding-minor | geçti | geçti | |
-| support | geçti | geçti | |
-| library-add | düştü → geçti | geçti | |
-| today-plan | düştü → geçti | geçti | |
-| checkin | düştü → geçti | geçti | |
-| account-sync | düştü → geçti | geçti | |
-| account-delete | düştü → geçti | geçti | |
-| chat | düştü → geçti | geçti | |
-| toc-add | düştü → geçti | geçti (2. deneme) | |
-| youtube-add | düştü → geçti | geçti | |
-| consent-minor | düştü → geçti | geçti | |
-| report-minor | düştü → geçti | geçti | |
+| onboarding-adult | geçti | geçti | geçti |
+| onboarding-minor | geçti | geçti | geçti (3. deneme) |
+| support | geçti | geçti | geçti |
+| library-add | düştü → geçti | geçti | geçti (2. deneme) |
+| today-plan | düştü → geçti | geçti | geçti |
+| checkin | düştü → geçti | geçti | geçti (2. deneme) |
+| account-sync | düştü → geçti | geçti | geçti (2. deneme) |
+| account-delete | düştü → geçti | geçti | geçti |
+| chat | düştü → geçti | geçti | geçti (2. deneme) |
+| toc-add | düştü → geçti | geçti (2. deneme) | koşulmadı (iOS'a özgü) |
+| youtube-add | düştü → geçti | geçti | geçti |
+| consent-minor | düştü → geçti | geçti | geçti (2. deneme) |
+| report-minor | düştü → geçti | geçti | geçti (3. deneme) |
 
 ## Kullanıcıda kalanlar
 
 Goal koşulunun parçası değil; koşu sonunda güncellenir.
 
+- `supabase db push`: `20261029120000_feedback_response_hardening.sql` (otomatik onay üretim dağıtımı olarak reddetti; dry-run'da yalnız bu dosya).
 - PostHog EU arayüzünde koşu saatlerinde `onboarding_tamam`, `kitap_eklendi`, `plan_olustu`, `checkin`,
   `sohbet_mesaj` olayları görünüyor mu.
 - Supabase Dashboard SQL: `select * from cron.job where jobname = 'retention-daily';` ve
