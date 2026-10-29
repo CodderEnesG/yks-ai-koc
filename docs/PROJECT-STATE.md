@@ -120,6 +120,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
 2. **Uzak proje:** CI'daki db işi yeşilse T12 migration'ı (`supabase db push`). PostHog'a olay düştüğünü doğrula.
 3. **Tasarım (2026-10-28 tamamlandı):** Bugün ekranında Alaaddin sahneleri (boş kütüphane `bos-plan`, gün tamam `gun-tamam`, dinlenme günü `mola`; `brand/cizimler/renkli`'den kırpılıp 600px'e indirildi), güvenli mod göstergesi (`LampGlow`: duman yerine gri-turuncu parlaklık geçişi), resmi YouTube ikonu (elle çizilmiş, piksel doğrulaması bekliyor) ve çöp kutusu ikonu (`SymbolView`, yeni kütüphane yok) eklendi. **Simülatörde görülmedi.** Figma Make sürümleri geldikçe kalan ekranlara işlenir; kararlar `lamba-design/DECISIONS.md`'de (bu makineden erişilemiyor).
 4. **Yayını engelleyenler (kurucularda):** PDR (T06), rıza metinleri (T07), e-posta sağlayıcı (karar 13), Apple hesabı (T01), Sentry DSN. Ayrıntı aşağıdaki görev paragraflarında ve açık kararlarda.
+5. **Mağaza yükleme paketi taslağı (2026-10-29):** `docs/magaza-paketi/` — isim, açıklama, anahtar kelime, kategori, ikon (1024/512), Feature Graphic, ekran görüntüsü planı, inceleme notları taslağı, bloke eden kararlar. Canlı/düzenlenebilir sürüm Claude Docs'ta, bu klasör periyodik senkronize kopya. Uygulama ikonu marka kılavuzundan bilerek saptı (dumansız + turuncu olmayan, kılavuz "dumanlı + turuncu" diyor) — kurucu kararıyla. **Henüz T numarası almadı.** Çelişki: canlı belgede IAP tarihi "Kasım 2027" olarak düzenlenmiş, yol haritasındaki "1 Şubat 2027" ile tutarsız — kontrol edilmeli.
 
 ## Repo durumu
 
@@ -145,6 +146,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
   safety-eval/                                       güvenlik eval seti ve ölçüm betiği (T19)
 /docs
   PROJECT-STATE.md                                   bu dosya
+  magaza-paketi/                                     App Store/Play yükleme paketi taslağı + üretilmiş ikon/feature graphic görselleri
   REPORT-2026-10-21-final-teknik-ve-is-modeli.md     başlangıç kararı (PRODUCT yazılana kadar kanonik referans)
   REPORT-2026-10-21-final-teknik-ve-is-modeli.pdf    raporun paylaşılabilir PDF'i
   TECH-STACK.md                                      kütüphaneler, sürümler, kodlama kuralları (yaşayan belge)
