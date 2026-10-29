@@ -2,6 +2,8 @@
 # uygulamada hesap bağlanır ve yedeklenir. Önce output.parentEmail tanımlanmalı. output.link kalır.
 appId: dev.placeholder.ykskoc
 ---
+# Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported"): Android'de ASCII karşılığı.
+- evalScript: "${output.parentName = maestro.platform == 'android' ? 'Ayse Yilmaz' : 'Ayşe Yılmaz'}"
 # 1. Öğrenci linki oluşturur.
 - tapOn: { id: today-consent }
 - tapOn: { id: consent-email }
@@ -51,7 +53,7 @@ appId: dev.placeholder.ykskoc
     visibilityPercentage: 100
     centerElement: true
 - tapOn: 'Adınız ve soyadınız'
-- inputText: 'Ayşe Yılmaz'
+- inputText: ${output.parentName}
 # Klavye açıkken alttaki alana dokunma tutmayabiliyor: klavyeyi kapat, alanı ortaya getir.
 - runFlow: _web-keyboard-done.yaml
 - scrollUntilVisible:

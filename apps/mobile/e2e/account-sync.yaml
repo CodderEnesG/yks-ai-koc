@@ -2,12 +2,14 @@
 # Yerel Supabase (sahte posta kutusu Mailpit, 127.0.0.1:54324) açık olmalı.
 appId: dev.placeholder.ykskoc
 ---
+# Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported"): Android'de ASCII karşılığı.
+- evalScript: "${output.book = maestro.platform == 'android' ? 'Yedek Deneme Kitabi' : 'Yedek Deneme Kitabı'}"
 - runScript: scripts/clear-mail.js
 - runFlow: _onboard-adult.yaml
 - tapOn: { id: today-add-book }
 - tapOn: { id: add-quick }
 - tapOn: { id: quick-title }
-- inputText: 'Yedek Deneme Kitabı'
+- inputText: ${output.book}
 # Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
 - tapOn: 'Hızlı ekle'
 - tapOn: { id: quick-count }
@@ -62,5 +64,5 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: { id: today-countdown }
     timeout: 20000
-- assertVisible: 'Yedek Deneme Kitabı'
+- assertVisible: ${output.book}
 - assertVisible: '✓ Tamamlandı'

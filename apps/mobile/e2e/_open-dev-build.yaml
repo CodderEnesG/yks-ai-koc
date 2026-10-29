@@ -6,6 +6,14 @@ appId: dev.placeholder.ykskoc
     stopApp: true
     permissions:
       notifications: allow
+# Android: temiz açılışta launcher hazır olmadan gönderilen link yok sayılıyor; önce launcher beklenir.
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - extendedWaitUntil:
+          visible: '(?i)development servers|Reload|Başla'
+          timeout: 90000
 - openLink: exp+yks-koc://?__expo_url=http%3A%2F%2F127.0.0.1%3A8081&__expo_disable_fab=1&__expo_disable_onboarding=1
 - runFlow:
     when:

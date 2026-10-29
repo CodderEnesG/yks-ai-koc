@@ -40,6 +40,10 @@ appId: dev.placeholder.ykskoc
     id: exam-year
 - inputText: '2020'
 - assertVisible: 'Geçerli ve ileride bir tarih gir'
+# Odak başka alana geçip dönünce yıl alanının içeriği seçilir (selectTextOnFocus); odaktaki alana yeniden
+# dokunmak Android'de imleci ortaya koyuyor.
+- tapOn:
+    id: exam-month
 - tapOn:
     id: exam-year
 - eraseText: 4

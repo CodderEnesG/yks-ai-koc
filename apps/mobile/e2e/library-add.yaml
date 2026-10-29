@@ -1,6 +1,8 @@
 # Kütüphane: takım ISBN'iyle katalogdan ekleme ve hızlı ekle. Yerel Supabase (katalog tohumu) açık olmalı.
 appId: dev.placeholder.ykskoc
 ---
+# Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported"): Android'de ASCII karşılığı.
+- evalScript: "${output.book = maestro.platform == 'android' ? 'X Yayinlari TYT Fizik' : 'X Yayınları TYT Fizik'}"
 - runFlow: _onboard-adult.yaml
 - tapOn: 'Kütüphane'
 - assertVisible: 'Henüz kaynak eklemedin. Planın eklediğin kitap ve listelere göre kurulur.'
@@ -33,7 +35,7 @@ appId: dev.placeholder.ykskoc
 - tapOn: { id: library-add }
 - tapOn: { id: add-quick }
 - tapOn: { id: quick-title }
-- inputText: 'X Yayınları TYT Fizik'
+- inputText: ${output.book}
 - tapOn: { id: quick-kind-tests }
 # Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
 # (Maestro örtülen öğeyi görünür sayar, scrollUntilVisible kaydırmaz.)
@@ -43,5 +45,5 @@ appId: dev.placeholder.ykskoc
 - tapOn: 'Hızlı ekle'
 - tapOn: { id: minutes-20 }
 - tapOn: { id: continue }
-- assertVisible: 'X Yayınları TYT Fizik'
+- assertVisible: ${output.book}
 - assertVisible: '40 test · 1 bölüm · test başı 20 dk'

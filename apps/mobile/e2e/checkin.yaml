@@ -1,6 +1,8 @@
 # Check-in (T14): yarım kaldı + neden, yapamadım + neden, isteğe bağlı doğru/yanlış.
 appId: dev.placeholder.ykskoc
 ---
+# Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported"): Android'de ASCII karşılığı.
+- evalScript: "${output.book = maestro.platform == 'android' ? 'X Yayinlari TYT Fizik' : 'X Yayınları TYT Fizik'}"
 - runFlow: _onboard-adult.yaml
 # İki kaynak: katalogdan TYT Tarih (sayfa), hızlı ekle ile test kitabı. Check-in başlayınca bugün
 # donduğu için ikisi de check-in'den önce eklenir.
@@ -17,7 +19,7 @@ appId: dev.placeholder.ykskoc
 - tapOn: { id: library-add }
 - tapOn: { id: add-quick }
 - tapOn: { id: quick-title }
-- inputText: 'X Yayınları TYT Fizik'
+- inputText: ${output.book}
 - tapOn: { id: quick-kind-tests }
 # Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
 - tapOn: 'Hızlı ekle'

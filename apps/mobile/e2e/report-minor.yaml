@@ -3,12 +3,14 @@
 # Yerel Supabase, `supabase functions serve` ve apps/web açık olmalı.
 appId: dev.placeholder.ykskoc
 ---
+# Maestro Android'de Türkçe karakter yazamıyor ("Unicode not supported"): Android'de ASCII karşılığı.
+- evalScript: "${output.book = maestro.platform == 'android' ? 'Rapor Deneme Kitabi' : 'Rapor Deneme Kitabı'}"
 - evalScript: ${output.parentEmail = 'veli-' + Date.now() + '@test.local'}
 - runFlow: _onboard-minor.yaml
 - tapOn: { id: today-add-book }
 - tapOn: { id: add-quick }
 - tapOn: { id: quick-title }
-- inputText: 'Rapor Deneme Kitabı'
+- inputText: ${output.book}
 # Klavye açıkken sayı alanı yapışkan düğmenin arkasında kalır: başlığa dokunup klavyeyi kapat.
 - tapOn: 'Hızlı ekle'
 - tapOn: { id: quick-count }
@@ -47,6 +49,6 @@ appId: dev.placeholder.ykskoc
     timeout: 20000
 - assertVisible: '1/1'
 - assertVisible: 'Planlanan her günü tamamladı.'
-- assertVisible: 'Rapor Deneme Kitabı'
+- assertVisible: ${output.book}
 - assertVisible: '1 gün'
 - assertVisible: 'Bu hafta 40 sayfa'
