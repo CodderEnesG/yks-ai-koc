@@ -20,7 +20,7 @@ T11: Kütüphanede "İçindekilerden ekle": fotoğraf çekilir ya da galeriden s
 - Günlük 20 sınırı tahmin (**DECISION TO TEST**). Okunamayan görüntüde öğrenciye "tekrar çek" denir; elle bölüm girme yolu "hızlı ekle".
 
 T24 (kısmen): PostHog AB bulutu. Olaylar (rapor 2.14): `onboarding_tamam` (sınıf, alan), `kitap_eklendi` (barkod / katalog / hızlı / içindekiler), `plan_olustu` (bir kez), `checkin` (günün son kartında; yapılan oran ve ilk neden), `sohbet_mesaj` (koç aksiyonu), `guvenli_mod_acildi` (sohbet / destek / check-in), `veli_onayladi`, ayrıca uygulama açılışları (D7/D30 elde tutma). Olay adları ve özellikleri tiplerle sınırlı: kişisel veri, mesaj, kitap adı yok; kişi profili ve IP'den konum yok; oturum kaydı ve otomatik dokunma yakalama yok. 18 yaş altında veli onayından önce başlamaz; onay geri çekilince ya da hesap silinince durur ve cihazdaki anonim kimlik sıfırlanır. **Uygulamada denenmedi** (native modül eklendi, dev build yeniden derlenmeli; PostHog'a olay düştüğü görülmedi). Açık kalanlar:
-- `veli_onay_istendi` uygulamadan gönderilemez: o anda öğrenci 18 yaş altı ve onaysız. Sunucudaki `consent_request` sayısından ölçülür. `veli_rapor_acildi` web'de (PostHog web'de yok, **ERTELENDİ**). `paywall_goruldu` ve `satin_alma` Şubat'ta.
+- `veli_onay_istendi` uygulamadan gönderilemez: o anda öğrenci 18 yaş altı ve onaysız. Sunucudaki `consent_request` sayısından ölçülür. `veli_rapor_acildi` web'de (PostHog web'de yok, **ERTELENDİ**). `paywall_goruldu` ve `satin_alma` Kasım 2026'da.
 - Kişi profili olmadan elde tutma raporunun anonim kimlikle çalıştığı PostHog'da doğrulanmadı (**DECISION TO TEST**).
 - Sentry (hata izleme) DSN bekliyor.
 
@@ -120,7 +120,7 @@ Hedef: **MVP ≤20 Aralık 2026'da App Store'da (ücretsiz)**. App Store gönder
 2. **Uzak proje:** CI'daki db işi yeşilse T12 migration'ı (`supabase db push`). PostHog'a olay düştüğünü doğrula.
 3. **Tasarım (2026-10-28 tamamlandı):** Bugün ekranında Alaaddin sahneleri (boş kütüphane `bos-plan`, gün tamam `gun-tamam`, dinlenme günü `mola`; `brand/cizimler/renkli`'den kırpılıp 600px'e indirildi), güvenli mod göstergesi (`LampGlow`: duman yerine gri-turuncu parlaklık geçişi), resmi YouTube ikonu (elle çizilmiş, piksel doğrulaması bekliyor) ve çöp kutusu ikonu (`SymbolView`, yeni kütüphane yok) eklendi. **Simülatörde görülmedi.** Figma Make sürümleri geldikçe kalan ekranlara işlenir; kararlar `lamba-design/DECISIONS.md`'de (bu makineden erişilemiyor).
 4. **Yayını engelleyenler (kurucularda):** PDR (T06), rıza metinleri (T07), e-posta sağlayıcı (karar 13), Apple hesabı (T01), Sentry DSN. Ayrıntı aşağıdaki görev paragraflarında ve açık kararlarda.
-5. **Mağaza yükleme paketi taslağı (2026-10-29):** `docs/magaza-paketi/` — isim, açıklama, anahtar kelime, kategori, ikon (1024/512), Feature Graphic, ekran görüntüsü planı, inceleme notları taslağı, bloke eden kararlar. Canlı/düzenlenebilir sürüm Claude Docs'ta, bu klasör periyodik senkronize kopya. Uygulama ikonu marka kılavuzundan bilerek saptı (dumansız + turuncu olmayan, kılavuz "dumanlı + turuncu" diyor) — kurucu kararıyla. **Henüz T numarası almadı.** Çelişki: canlı belgede IAP tarihi "Kasım 2027" olarak düzenlenmiş, yol haritasındaki "1 Şubat 2027" ile tutarsız — kontrol edilmeli.
+5. **Mağaza yükleme paketi taslağı (2026-10-29):** `docs/magaza-paketi/` — isim, açıklama, anahtar kelime, kategori, ikon (1024/512), Feature Graphic, ekran görüntüsü planı, inceleme notları taslağı, bloke eden kararlar. Canlı/düzenlenebilir sürüm Claude Docs'ta, bu klasör periyodik senkronize kopya. Uygulama ikonu dumansız, turuncu olmayan (`brand/logo/lamba-simge-dumansiz-koyu`) — standart bu; marka kılavuzundaki "simge dumanlı + turuncu" örneği güncel değil. Brand klasöründeki kullanılmayan dumanlı dosyalar ve `duman-durumlari/` kaldırıldı (2026-10-29). **Henüz T numarası almadı.**
 
 ## Repo durumu
 
@@ -192,7 +192,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 | Kitle | Herkes (11., 12. sınıf, mezun); veli onayı MVP'de |
 | Platform | **React Native / Expo SDK 58, iOS + Android** (2026-10-22). Yayın sırası: önce App Store, sonra Play Store. |
 | AI koç | Serbest sohbet MVP'de |
-| Ödeme | Veli web'den öder + uygulama içi seçenek de var. **Öneri:** Şubat'ta önce uygulama içi (şirketsiz, GVK 20/B), web ödeme şirket kurulunca (rapor 2.13) |
+| Ödeme | Veli web'den öder + uygulama içi seçenek de var. **Öneri:** Kasım 2026'da önce uygulama içi (şirketsiz, GVK 20/B), web ödeme şirket kurulunca (rapor 2.13). Tarih 1 Şubat 2027'den Kasım 2026'ya çekildi (2026-10-29, owner kararı). |
 | İlk kullanıcılar | Kendi çevremiz + koç, dershane, öğretmen tanıdıklar |
 | GitHub | `CodderEnesG/yks-ai-koc` private, `mhmmcoding` collaborator |
 | YouTube oynatma listesi (Muhammed) | MVP'de hafif sürüm: link yapıştırılır, videolar süreleriyle göreve dönüşür, "YouTube'da aç" ile izlenir. Tam özellik (oynatıcı, izleme takibi, liste↔kitap eşlemesi) Ocak planında. Video ile kitabın sırasını öğrenci seçer. |
@@ -200,7 +200,7 @@ Repo düzeni Reciapp ve WholeThing'deki yapı örnek alınarak kuruldu: tek kano
 
 ## Güncel teknik kararlar (öneri, kod başlarken teyit edilecek)
 
-Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-image-picker, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Şubat). Kütüphane listesi, sürümler ve elenen seçenekler [TECH-STACK](TECH-STACK.md)'te. Mimari rapor 2.2-2.15'te.
+Expo SDK 58 + TypeScript 6 + Expo Router · pnpm workspaces monorepo · Uniwind + RN Reusables (UI) · expo-sqlite + Drizzle (yerel veri) + elle sync · Zustand + TanStack Query · Zod 4 · Supabase AB/Frankfurt (eu-central-1) · Next.js 16 · Claude Haiku 5.5 + Sonnet 5.5 (yalnız Edge Function'dan) · expo-camera, expo-image-picker, expo-notifications · PostHog EU + Sentry EU · Vitest + fast-check · RevenueCat (Kasım 2026). Kütüphane listesi, sürümler ve elenen seçenekler [TECH-STACK](TECH-STACK.md)'te. Mimari rapor 2.2-2.15'te.
 
 `ARCHITECTURE.md` henüz yok. Kod başlamadan önce gerekmiyor; rapor bölüm 2 bu işi görüyor. Rapor ile kod ayrışmaya başlayınca yazılacak.
 
@@ -228,10 +228,10 @@ Tam tablo ve önerilerimiz rapor bölüm 7'de. Son tarihi yakın olanlar:
 | 2 - 15 Kasım | Sprint 1: T09-T16, T31-T33 (kurulum, kütüphane, günlük döngü, bildirimler, auth, YouTube liste ekleme) |
 | 16 - 29 Kasım | Sprint 2: T17-T24, T34 (sohbet, güvenlik katmanı, veli onayı ve raporu, YouTube önbellek yenileme) |
 | 30 Kasım - 13 Aralık | Sprint 3: T25-T30 (TestFlight kapalı beta, düzeltmeler, App Store hazırlığı) |
+| Kasım 2026 | Ödeme açılır (Sezon 1: sınava kadar paketi 799 TL + aylık 299 TL; öneri). **Güncellendi (2026-10-29, owner kararı):** önceki tarih 1 Şubat 2027'ydi. Ödeme altyapısı MVP'den (≤20 Aralık) önce açılıyor demek — Ocak 2027'deki "ödeme altyapısı" satırıyla sıralama çelişkisi var, kontrol edilmeli. |
 | 14 Aralık | App Store gönderimi + Google kapalı testinin başlaması (12 testçi × 14 gün) |
 | ≤20 Aralık | **MVP App Store'da** |
 | Ocak 2027 | Android, tam video özelliği (T35-T39), FSRS, deneme analizi, katalog terfisi, ödeme altyapısı, ücretli avukat görüşü, 20/B teyidi |
-| 1 Şubat 2027 | Ödeme açılır (Sezon 1: sınava kadar paketi 799 TL + aylık 299 TL; öneri) |
 | Eylül 2027 | Sezon 2 (asıl gelir sezonu) |
 
 Takvim kayarsa kesme sırası: T29 → T23 → T11 → T22 (e-posta kısmı) → T12. Kesilmeyenler: plan motoru, check-in, güvenlik katmanı, veli onayı, sohbet, YouTube hafif sürümü (T31-T34).

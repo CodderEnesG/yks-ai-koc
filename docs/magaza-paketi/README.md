@@ -50,7 +50,7 @@ Google Play'de ayrı bir anahtar kelime alanı yok; başlık ve açıklama metni
 
 - **Ana kategori:** Eğitim
 - **İkincil kategori (Apple):** Üretkenlik
-- **Fiyat:** Ücretsiz (MVP, owner kararı). Uygulama içi satın alma Kasım 2027'de planlanıyor, MVP'de yok. **⚠ Not: PROJECT-STATE yol haritası ödemenin 1 Şubat 2027'de açılacağını söylüyor — bu satır canlı belgede "Kasım" olarak düzenlendi, çelişki kontrol edilmeli.**
+- **Fiyat:** Ücretsiz (MVP, owner kararı). Uygulama içi satın alma Kasım 2026'da planlanıyor, MVP'de yok. Tarih 1 Şubat 2027'den Kasım 2026'ya çekildi (2026-10-29, owner kararı) — MVP'nin App Store'a çıkışından (≤20 Aralık 2026) önce, Ocak 2027'deki "ödeme altyapısı" işiyle sıralama çelişkisi var, kontrol edilmeli.
 - **Ülke/bölge:** Türkiye öncelikli — içerik ve müfredat (henüz MEB, YKS) henüz Türkiye'ye özel. *(canlı belgede düzenleniyor, cümle tam bitmemiş olabilir)*
 
 **Ülke/bölge önerisi (teyit bekliyor):** Başlangıçta yalnız Türkiye — içerik MEB/YKS müfredatına özel, veli onayı akışı Türkiye hukukuna göre kuruldu, fiyatlandırma TL. Yurt dışındaki Türk öğrencilere açılma sonraki bir karar. Bu öneridir; owner kararı olarak PROJECT-STATE'e henüz işlenmedi.
@@ -61,12 +61,12 @@ Google Play'de ayrı bir anahtar kelime alanı yok; başlık ve açıklama metni
 - Kullanıcılar birbiriyle iletişim kurmuyor, kullanıcı üretimi içerik (UGC) yok → ilgili sorularda "Hayır".
 - Konum paylaşımı yok → "Hayır".
 - Uygulamanın kendi ürettiği içerikte şiddet, cinsel içerik, kumar, küfür yok → "Hayır".
-- Dijital satın alma: MVP'de yok (Şubat'ta IAP eklenince güncellenmeli).
+- Dijital satın alma: MVP'de yok (Kasım 2026'da IAP eklenince güncellenmeli).
 - **Hassas nokta:** Sohbet özelliği, kullanıcıdan gelen metinde kriz/kendine zarar/madde kullanımı sinyali tespit edip destek kaynaklarına yönlendiriyor; uygulama bu içeriği üretmiyor ya da teşvik etmiyor, ama anketin "hassas sosyal konular" benzeri sorularına nasıl cevap verileceği burada tek taraflı kararlaştırılmadı — T06 PDR onayının parçası olmalı (**OPEN QUESTION**).
 
 ## 5. Uygulama ikonu
 
-Marka kılavuzu (`brand/kilavuz/lamba-marka-kilavuzu.html`, v2.0) resmi kuralı: uygulama ikonu = **simge dumanlı + turuncu**. Kurucu bu görüşmede (2026-10-29) bunun tersini istedi: **dumansız + turuncu olmayan**. Gerekçe açıkça verilmedi; olası neden turuncu rengin güvenli mod göstergesiyle (LampGlow) karışması olabilir — bu doğrulanmadı, varsayımdır.
+Uygulama ikonu: **dumansız, turuncu olmayan** (2026-10-29, owner kararı). Marka kılavuzundaki (`brand/kilavuz/lamba-marka-kilavuzu.html`, v2.0) "simge dumanlı + turuncu" örneği güncel değil — dumansız artık standart, projedeki dumanlı dosyalar kaldırıldı.
 
 **Seçilen kaynak:** `brand/logo/lamba-simge-dumansiz-koyu.png` / `.svg` (gece moru zemin, krem renkli lamba siluet, duman yok).
 
