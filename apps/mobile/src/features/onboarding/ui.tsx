@@ -58,7 +58,7 @@ export function StepScreen({
           {step !== undefined ? (
             <Text variant="muted">{tr.onboarding.step(step, STEP_COUNT)}</Text>
           ) : null}
-          <Text variant="h3">{title}</Text>
+          <Text variant="h2">{title}</Text>
           {subtitle ? <Text variant="muted">{subtitle}</Text> : null}
         </View>
         {children}

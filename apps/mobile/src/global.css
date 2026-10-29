@@ -24,7 +24,8 @@
       --color-secondary-foreground: #1c1330;
       --color-muted: #fbf6ec;
       --color-muted-foreground: #5c5170;
-      --color-accent: #efe4d0;
+      /* Basılı durum zemini; kılavuzdaki çizgi tonu (önceki #efe4d0 paletin dışındaydı). */
+      --color-accent: #d9ccb4;
       --color-accent-foreground: #1c1330;
       /* Kırmızı yok (karar 27 Ekim): hata ve tehlikeli eylem ana metin renginde, ikon ve çerçeveyle ayrılır. */
       --color-destructive: #1c1330;
@@ -35,6 +36,10 @@
       --color-control: #5c5170;
       --color-emphasis: #1c1330;
       --color-stage: #1c1330;
+      --color-stage-foreground: #f6eee0;
+      /* Güvenli mod lambası (LampGlow): sahne her temada gece moru olduğu için iki temada aynı. */
+      --color-lamp-lit: #ff9f43;
+      --color-lamp-dim: #bdb2cf;
     }
 
     @variant dark {
@@ -50,7 +55,7 @@
       --color-secondary-foreground: #f6eee0;
       --color-muted: #2a1f45;
       --color-muted-foreground: #bdb2cf;
-      --color-accent: #251a3d;
+      --color-accent: #3a2d57;
       --color-accent-foreground: #f6eee0;
       --color-destructive: #f6eee0;
       --color-border: #3a2d57;
@@ -59,6 +64,9 @@
       --color-control: #bdb2cf;
       --color-emphasis: #ff9f43;
       --color-stage: #1c1330;
+      --color-stage-foreground: #f6eee0;
+      --color-lamp-lit: #ff9f43;
+      --color-lamp-dim: #bdb2cf;
     }
   }
 }
@@ -74,4 +82,40 @@
   --font-sans-bold: 'SourceSans3_700Bold';
   --font-display: 'BricolageGrotesque_700Bold';
   --font-display-heavy: 'BricolageGrotesque_800ExtraBold';
+
+  /*
+   * Yazı ölçeği, köşe yarıçapı ve dokunma alanı (lamba-design prototipi `src/styles.css`, iOS ölçeğine
+   * yakın). React Native satır yüksekliğini oranla değil, pt ile ister.
+   */
+  --text-display: 40px;
+  --text-display--line-height: 42px;
+  --text-title-1: 34px;
+  --text-title-1--line-height: 38px;
+  --text-title-2: 26px;
+  --text-title-2--line-height: 30px;
+  --text-title-3: 20px;
+  --text-title-3--line-height: 25px;
+  --text-body-lg: 19px;
+  --text-body-lg--line-height: 27px;
+  --text-body: 17px;
+  --text-body--line-height: 24px;
+  --text-callout: 16px;
+  --text-callout--line-height: 22px;
+  --text-subhead: 15px;
+  --text-subhead--line-height: 20px;
+  --text-footnote: 13px;
+  --text-footnote--line-height: 18px;
+  --text-caption: 11px;
+  --text-caption--line-height: 13px;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* En küçük dokunma alanı 44 pt (UI-RULES); ana eylem 52-56 pt. */
+  --spacing-touch: 44px;
+  --spacing-touch-lg: 52px;
+  --spacing-touch-xl: 56px;
 }

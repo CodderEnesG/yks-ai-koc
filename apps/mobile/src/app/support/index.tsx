@@ -34,7 +34,7 @@ export default function SupportScreen() {
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
       <ScrollView contentContainerClassName="gap-6 p-6">
         <View className="gap-2">
-          <Text variant="h3">{s.title}</Text>
+          <Text variant="h1">{s.title}</Text>
           <Text testID="support-intro">{SUPPORT_INTRO}</Text>
           {!PDR_APPROVED ? (
             <Text variant="muted" className="text-xs">

@@ -17,6 +17,8 @@ export const tr = {
     skip: 'Şimdilik geç',
     estimated: 'tahmini',
     back: 'Geri',
+    retry: 'Tekrar dene',
+    clearSearch: 'Aramayı temizle',
   },
   months: [
     'Ocak',

@@ -4,9 +4,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { Platform, Text as RNText, type Role } from 'react-native';
 
+// Yazı ölçeği global.css'te (lamba-design prototipi): ekran başlığı `h1` (title-1), bölüm başlığı `h2`/`h3`,
+// gövde `body`, ikincil metin `muted` (subhead).
 const textVariants = cva(
   cn(
-    'text-foreground font-sans text-base',
+    'text-foreground font-sans text-body',
     Platform.select({
       web: 'select-text',
     }),
@@ -15,23 +17,17 @@ const textVariants = cva(
     variants: {
       variant: {
         default: '',
-        h1: cn(
-          'text-center text-4xl font-display-heavy tracking-tight',
-          Platform.select({ web: 'scroll-m-20 text-balance' }),
-        ),
-        h2: cn(
-          'border-border border-b pb-2 font-display text-3xl tracking-tight',
-          Platform.select({ web: 'scroll-m-20 first:mt-0' }),
-        ),
-        h3: cn('font-display text-2xl tracking-tight', Platform.select({ web: 'scroll-m-20' })),
-        h4: cn('font-display text-xl tracking-tight', Platform.select({ web: 'scroll-m-20' })),
-        p: 'mt-3 leading-7 sm:mt-6',
+        h1: cn('font-display text-title-1 tracking-tight', Platform.select({ web: 'scroll-m-20' })),
+        h2: cn('font-display text-title-2 tracking-tight', Platform.select({ web: 'scroll-m-20' })),
+        h3: cn('font-display text-title-3 tracking-tight', Platform.select({ web: 'scroll-m-20' })),
+        h4: cn('font-display text-callout tracking-tight', Platform.select({ web: 'scroll-m-20' })),
+        p: 'mt-3',
         blockquote: 'mt-4 border-l-2 pl-3 italic sm:mt-6 sm:pl-6',
-        code: cn('bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm'),
-        lead: 'text-muted-foreground text-xl',
-        large: 'text-lg font-sans-semibold',
-        small: 'text-sm font-sans-semibold leading-none',
-        muted: 'text-muted-foreground text-sm',
+        code: cn('bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-footnote'),
+        lead: 'text-muted-foreground text-body-lg',
+        large: 'text-body-lg font-sans-semibold',
+        small: 'text-footnote font-sans-semibold',
+        muted: 'text-muted-foreground text-subhead',
       },
     },
     defaultVariants: {

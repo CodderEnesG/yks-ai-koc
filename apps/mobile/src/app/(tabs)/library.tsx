@@ -25,7 +25,7 @@ export default function LibraryScreen() {
   return (
     <SafeAreaView className="bg-background flex-1">
       <ScrollView contentContainerClassName="gap-4 p-6">
-        <Text variant="h3">{tr.library.title}</Text>
+        <Text variant="h1">{tr.library.title}</Text>
         {items.length === 0 ? <Text variant="muted">{tr.library.empty}</Text> : null}
         {items.map((item) => (
           <View

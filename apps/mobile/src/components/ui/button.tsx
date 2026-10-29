@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Platform, Pressable } from 'react-native';
 
+// lamba düğmeleri (prototip `ds/primitives.tsx`): turuncu (`default`) ekranda tek ana eylem içindir; tekrar
+// eden olumlu eylem (ör. "Yaptım") `tonal`, ikincil eylem `outline`. Yükseklik en az 44 pt (UI-RULES).
 const buttonVariants = cva(
   cn(
     'group shrink-0 flex-row items-center justify-center gap-2 rounded-md shadow-none',
@@ -14,8 +16,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: cn(
-          'bg-primary active:bg-primary/90 shadow-sm shadow-black/5',
+          'border-primary bg-primary active:bg-primary/90 border',
           Platform.select({ web: 'hover:bg-primary/90' }),
+        ),
+        // Ön plan dolgusu: turuncuyu ana eyleme bırakır.
+        tonal: cn(
+          'border-foreground bg-foreground active:bg-foreground/90 border',
+          Platform.select({ web: 'hover:bg-foreground/90' }),
         ),
         // Kırmızı yok (lamba kararı 27 Ekim): kalın çerçeve; ekran ikon ve "Geri alınamaz" metniyle tamamlar.
         destructive: cn(
@@ -28,7 +35,7 @@ const buttonVariants = cva(
           Platform.select({ web: 'hover:bg-accent' }),
         ),
         secondary: cn(
-          'bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5',
+          'bg-secondary active:bg-secondary/80',
           Platform.select({ web: 'hover:bg-secondary/80' }),
         ),
         ghost: cn(
@@ -38,10 +45,10 @@ const buttonVariants = cva(
         link: '',
       },
       size: {
-        default: cn('h-10 px-4 py-2 sm:h-9', Platform.select({ web: 'has-[>svg]:px-3' })),
-        sm: cn('h-9 gap-1.5 rounded-md px-3 sm:h-8', Platform.select({ web: 'has-[>svg]:px-2.5' })),
-        lg: cn('h-11 rounded-md px-6 sm:h-10', Platform.select({ web: 'has-[>svg]:px-4' })),
-        icon: 'h-10 w-10 sm:h-9 sm:w-9',
+        default: cn('min-h-touch-lg px-5', Platform.select({ web: 'has-[>svg]:px-4' })),
+        sm: cn('min-h-touch gap-1.5 px-3.5', Platform.select({ web: 'has-[>svg]:px-3' })),
+        lg: cn('min-h-touch-xl px-6', Platform.select({ web: 'has-[>svg]:px-5' })),
+        icon: 'size-touch rounded-full',
       },
     },
     defaultVariants: {
@@ -53,13 +60,14 @@ const buttonVariants = cva(
 
 const buttonTextVariants = cva(
   cn(
-    'text-foreground text-sm font-sans-semibold',
+    'text-foreground font-sans-semibold text-center',
     Platform.select({ web: 'pointer-events-none transition-colors' }),
   ),
   {
     variants: {
       variant: {
         default: 'text-primary-foreground',
+        tonal: 'text-background',
         destructive: 'text-foreground',
         outline: cn(
           'group-active:text-accent-foreground',
@@ -68,14 +76,14 @@ const buttonTextVariants = cva(
         secondary: 'text-secondary-foreground',
         ghost: 'group-active:text-accent-foreground',
         link: cn(
-          'text-primary group-active:underline',
+          'text-foreground underline group-active:opacity-70',
           Platform.select({ web: 'underline-offset-4 hover:underline group-hover:underline' }),
         ),
       },
       size: {
-        default: '',
-        sm: '',
-        lg: '',
+        default: 'text-callout',
+        sm: 'text-subhead',
+        lg: 'text-body',
         icon: '',
       },
     },
@@ -103,8 +111,7 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
         className={cn(
           buttonVariants({ variant, size }),
           className,
-          disabled && 'shadow-none',
-          disabled && framed(variant) && 'border-control border border-dashed bg-transparent',
+          disabled && framed(variant) && 'border-control bg-muted border border-dashed',
         )}
         role="button"
         {...props}

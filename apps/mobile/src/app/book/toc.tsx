@@ -42,7 +42,7 @@ export default function TocScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
       <View className="flex-1 gap-4 p-6">
-        <Text variant="h3">{t.title}</Text>
+        <Text variant="h2">{t.title}</Text>
         <Text variant="muted">{t.body}</Text>
         {blocked ? (
           <>

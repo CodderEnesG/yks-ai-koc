@@ -92,7 +92,7 @@ export default function TodayScreen() {
         keyboardShouldPersistTaps="handled">
         <View className="flex-row items-start justify-between gap-3">
           <View className="flex-1 gap-1">
-            <Text variant="h3">{tr.today.title}</Text>
+            <Text variant="h1">{tr.today.title}</Text>
             <Text variant="muted">
               {formatCivilDate(today)} · {tr.weekdays[weekdayIndex(today)]}
             </Text>

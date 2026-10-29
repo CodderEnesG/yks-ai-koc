@@ -41,7 +41,7 @@ export default function CoachScreen() {
     return (
       <SafeAreaView className="bg-background flex-1">
         <View className="gap-4 p-6">
-          <Text variant="h3">{c.title}</Text>
+          <Text variant="h1">{c.title}</Text>
           <Text testID="coach-locked">{consent ? c.needConsent : c.needAccount}</Text>
           <Button
             testID={consent ? 'coach-consent' : 'coach-connect'}
@@ -81,7 +81,7 @@ export default function CoachScreen() {
           onContentSizeChange={() => list.current?.scrollToEnd({ animated: true })}
           ListHeaderComponent={
             <View className="gap-2 pb-2">
-              <Text variant="h3">{c.title}</Text>
+              <Text variant="h1">{c.title}</Text>
               <Text variant="muted">{c.intro}</Text>
             </View>
           }

@@ -33,7 +33,7 @@ export default function SearchScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
       <ScrollView contentContainerClassName="gap-3 p-6" keyboardShouldPersistTaps="handled">
-        <Text variant="h3">{tr.library.search.title}</Text>
+        <Text variant="h2">{tr.library.search.title}</Text>
         <TextInput
           testID="search-input"
           value={query}

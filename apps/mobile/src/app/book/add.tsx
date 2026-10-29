@@ -11,7 +11,7 @@ export default function AddBookScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
       <View className="gap-3 p-6">
-        <Text variant="h3">{o.title}</Text>
+        <Text variant="h2">{o.title}</Text>
         <Choice
           testID="add-scan"
           label={o.scan.label}

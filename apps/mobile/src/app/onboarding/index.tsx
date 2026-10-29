@@ -16,9 +16,7 @@ export default function WelcomeScreen() {
       {/* Logo yok: marka açılış ekranında; yazı logosu ve lamba aynı ekranda olmaz (DECISIONS.md). */}
       <View className="flex-1 justify-center gap-4 p-6">
         <Alaaddin scene="karsilama" height={240} />
-        <Text variant="h2" className="border-b-0">
-          {tr.onboarding.welcome.title}
-        </Text>
+        <Text variant="h1">{tr.onboarding.welcome.title}</Text>
         <Text variant="lead">{tr.onboarding.welcome.body}</Text>
       </View>
       <View className="gap-2 p-6">

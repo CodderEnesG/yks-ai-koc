@@ -3,14 +3,17 @@ import { View } from 'react-native';
 
 import { cn } from '@/lib/utils';
 
-// brand/cizimler/renkli'den kırpılıp 600 px yüksekliğe indirildi (3x ekranda 200 pt).
+// Sahneler lamba-design prototipinden (`src/assets/cizimler`, 720 px yükseklikte webp); `mola` brand/cizimler/
+// renkli'den kırpıldı (600 px). 3x ekranda 200-240 pt'ye kadar keskin.
 const SCENES = {
-  karsilama: require('../../assets/images/alaaddin/karsilama.png'),
-  mutlu: require('../../assets/images/alaaddin/mutlu.png'),
-  hata: require('../../assets/images/alaaddin/hata.png'),
-  'bos-plan': require('../../assets/images/alaaddin/bos-plan.png'),
-  'gun-tamam': require('../../assets/images/alaaddin/gun-tamam.png'),
-  mola: require('../../assets/images/alaaddin/mola.png'),
+  karsilama: require('../../assets/images/alaaddin/karsilama.webp'),
+  mutlu: require('../../assets/images/alaaddin/mutlu.webp'),
+  hata: require('../../assets/images/alaaddin/hata.webp'),
+  dusunuyor: require('../../assets/images/alaaddin/dusunuyor.webp'),
+  sakin: require('../../assets/images/alaaddin/sakin.webp'),
+  'bos-plan': require('../../assets/images/alaaddin/bos-plan.webp'),
+  'gun-tamam': require('../../assets/images/alaaddin/gun-tamam.webp'),
+  mola: require('../../assets/images/alaaddin/mola.webp'),
 } as const;
 
 export type AlaaddinScene = keyof typeof SCENES;

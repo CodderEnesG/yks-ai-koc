@@ -55,7 +55,7 @@ export default function ConsentScreen() {
     return (
       <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
         <View className="gap-4 p-6">
-          <Text testID="consent-granted" variant="h3">
+          <Text testID="consent-granted" variant="h2">
             {c.grantedTitle}
           </Text>
           <Text>{c.grantedBody}</Text>
@@ -120,7 +120,7 @@ export default function ConsentScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
       <ScrollView contentContainerClassName="gap-4 p-6">
-        <Text variant="h3">{c.pendingTitle}</Text>
+        <Text variant="h2">{c.pendingTitle}</Text>
         <Text>{c.pendingBody(request.parentEmail)}</Text>
         <Text testID="consent-link" selectable variant="muted" className="text-sm">
           {link}

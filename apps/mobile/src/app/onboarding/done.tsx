@@ -48,7 +48,7 @@ export default function DoneScreen() {
       <View className="flex-1 justify-center gap-4 p-6">
         {/* Kurulumun bitişi tek seferlik dönüm noktası: Alaaddin "mutlu" (DECISIONS.md, 3. sürüm). */}
         <Alaaddin scene="mutlu" height={180} />
-        <Text variant="h3">{tr.onboarding.done.title}</Text>
+        <Text variant="h2">{tr.onboarding.done.title}</Text>
         <SummaryRow
           icon="calendar"
           androidIcon="calendar_month"

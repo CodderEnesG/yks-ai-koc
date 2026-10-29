@@ -71,7 +71,7 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView className="bg-background flex-1">
       <ScrollView contentContainerClassName="gap-6 p-6">
-        <Text variant="h3">{s.title}</Text>
+        <Text variant="h1">{s.title}</Text>
 
         <View className="gap-2">
           <Text className="font-sans-semibold">{s.morning}</Text>
