@@ -49,7 +49,7 @@ export function StepScreen({
         <Stack.Screen options={{ headerTitle: () => <StepProgress step={step} /> }} />
       ) : null}
       <KeyboardAwareScrollView
-        contentContainerStyle={{ gap: 24, padding: 24 }}
+        contentContainerStyle={{ gap: 24, paddingHorizontal: 20, paddingVertical: 24 }}
         bottomOffset={FOOTER_OFFSET}
         extraKeyboardSpace={FOOTER_OFFSET}
         keyboardShouldPersistTaps="handled"
@@ -64,7 +64,7 @@ export function StepScreen({
         {children}
       </KeyboardAwareScrollView>
       <KeyboardStickyView offset={{ closed: 0, opened: insets.bottom }}>
-        <View className="bg-background gap-2 p-6 pt-2">
+        <View className="bg-background gap-2 px-5 pt-2 pb-6">
           {footer}
           <Button testID="continue" size="lg" disabled={!canContinue} onPress={onContinue}>
             <Text>{continueLabel}</Text>

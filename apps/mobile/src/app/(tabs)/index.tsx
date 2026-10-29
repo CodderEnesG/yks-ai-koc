@@ -99,7 +99,13 @@ export default function TodayScreen() {
   return (
     <SafeAreaView className="bg-background flex-1" edges={['top']}>
       <KeyboardAwareScrollView
-        contentContainerClassName="gap-5 px-5 pt-3 pb-8"
+        // Üçüncü taraf kaydırma görünümü className almaz; boşluklar stil olarak.
+        contentContainerStyle={{
+          gap: 20,
+          paddingHorizontal: 20,
+          paddingTop: 12,
+          paddingBottom: 32,
+        }}
         bottomOffset={24}
         keyboardShouldPersistTaps="handled">
         {/* Başlık bloğu (lamba-design 2.1). Sağ üstte dişli: Ayarlar sekme değil (lamba kararı, 28 Ekim). */}
