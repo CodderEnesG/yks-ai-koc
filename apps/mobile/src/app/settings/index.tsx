@@ -54,7 +54,7 @@ export default function SettingsScreen() {
       await deleteAccountAndData();
       // Ayarlar sekmelerin üstüne itilmiş ekran: önce yığın köke indirilir, yoksa eski sekmeler
       // kurulumun altında kalır (Android geri, iOS kenardan kaydırma onlara döner).
-      router.dismissAll();
+      if (router.canDismiss()) router.dismissAll();
       router.replace('/onboarding');
     } catch {
       setDeleteError(true);

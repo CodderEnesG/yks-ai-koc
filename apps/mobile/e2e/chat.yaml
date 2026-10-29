@@ -19,8 +19,9 @@ appId: dev.placeholder.ykskoc
 - extendedWaitUntil:
     visible: { id: 'coach-reply-(reply|support|check)' }
     timeout: 30000
-# Klavye "Bildir"i örter (Maestro örtülen öğeyi görünür sayıp klavyeye dokunur): listeye dokunup kapat.
-- tapOn: 'Ben bir yapay zekâ koçuyum.*'
+# Klavye "Bildir"i örter (Maestro örtülen öğeyi görünür sayıp klavyeye dokunur): yanıt balonuna dokunup kapat
+# (liste yanıta kaydığı için balon hep görünür; ilk dokunuş yalnız klavyeyi kapatır).
+- tapOn: { id: 'coach-reply-(reply|support|check)' }
 - scrollUntilVisible:
     element: { id: coach-report }
     visibilityPercentage: 100
