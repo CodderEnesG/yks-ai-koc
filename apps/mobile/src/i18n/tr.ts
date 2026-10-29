@@ -426,6 +426,7 @@ export const tr = {
   support: {
     title: 'Destek',
     settingsTitle: 'Zor bir an mı yaşıyorsun?',
+    callLabel: (name: string) => `${name}, ara`,
     settingsHint: 'Konuşabileceğin yerler ve planını birkaç gün hafifletme.',
     open: 'Destek',
     lines: 'Ücretsiz hatlar',

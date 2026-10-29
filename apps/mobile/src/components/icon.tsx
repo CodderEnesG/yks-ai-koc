@@ -12,7 +12,7 @@ export function Icon({
 }: {
   name: SymbolViewProps['name'];
   size?: number;
-  tone?: 'foreground' | 'muted-foreground' | 'background' | 'primary-foreground';
+  tone?: 'foreground' | 'muted-foreground' | 'background' | 'primary' | 'primary-foreground';
 }) {
   const color = useCSSVariable(`--color-${tone}`);
   return (
@@ -54,4 +54,5 @@ export const ICONS = {
   send: { ios: 'arrow.up', android: 'arrow_upward' },
   refresh: { ios: 'arrow.clockwise', android: 'refresh' },
   flag: { ios: 'flag', android: 'flag' },
+  message: { ios: 'message', android: 'chat' },
 } as const satisfies Record<string, SymbolViewProps['name']>;

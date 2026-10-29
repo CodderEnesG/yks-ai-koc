@@ -1,10 +1,12 @@
 import { CHAT_MAX_LENGTH } from '@yks/ai/limits';
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, TextInput, View } from 'react-native';
+import { FlatList, Pressable, TextInput, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
+import { ICONS, Icon } from '@/components/icon';
 import { SafeAreaView } from '@/components/screen';
+import { LockedState } from '@/components/states';
 import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
@@ -20,6 +22,7 @@ import { useProfile } from '@/features/profile/repo';
 import { useSession } from '@/features/sync/auth';
 import { canSync } from '@/features/sync/mapping';
 import { tr } from '@/i18n/tr';
+import { cn } from '@/lib/utils';
 import { useToday } from '@/lib/use-today';
 
 // Koç sohbeti (T20). Yalnız metin (değişmez kural: görsel ve ek yok). Hesap ve onay gerekir; sohbet
@@ -39,15 +42,19 @@ export default function CoachScreen() {
   if (!canSync(profile.consentStatus) || !session) {
     const consent = !canSync(profile.consentStatus);
     return (
-      <SafeAreaView className="bg-background flex-1">
-        <View className="gap-4 p-6">
+      <SafeAreaView className="bg-background flex-1" edges={['top']}>
+        <View className="gap-5 px-5 pt-3">
           <Text variant="h1">{c.title}</Text>
-          <Text testID="coach-locked">{consent ? c.needConsent : c.needAccount}</Text>
-          <Button
-            testID={consent ? 'coach-consent' : 'coach-connect'}
-            onPress={() => router.push(consent ? '/account/consent' : '/account/sign-in')}>
-            <Text>{consent ? tr.consent.open : tr.settings.connect}</Text>
-          </Button>
+          <LockedState
+            testID="coach-locked"
+            text={consent ? c.needConsent : c.needAccount}
+            primary
+            action={{
+              label: consent ? tr.consent.open : tr.settings.connect,
+              onPress: () => router.push(consent ? '/account/consent' : '/account/sign-in'),
+              testID: consent ? 'coach-consent' : 'coach-connect',
+            }}
+          />
         </View>
       </SafeAreaView>
     );
@@ -77,7 +84,7 @@ export default function CoachScreen() {
           ref={list}
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerClassName="gap-3 p-4"
+          contentContainerClassName="gap-3 px-4 pt-3 pb-4"
           onContentSizeChange={() => list.current?.scrollToEnd({ animated: true })}
           ListHeaderComponent={
             <View className="gap-2 pb-2">
@@ -93,8 +100,9 @@ export default function CoachScreen() {
             busy ? (
               <View
                 testID="coach-thinking"
-                className="bg-muted mt-3 flex-row items-center gap-2 self-start rounded-2xl rounded-bl-sm px-4 py-3">
-                <ActivityIndicator size="small" />
+                accessibilityRole="progressbar"
+                accessibilityLabel={c.thinking}
+                className="border-border bg-card mt-3 self-start rounded-lg rounded-bl-xs border px-4 py-2.5">
                 <Text variant="muted">{c.thinking}</Text>
               </View>
             ) : undefined
@@ -108,18 +116,30 @@ export default function CoachScreen() {
         {'issue' in checked && checked.issue === 'too_long' ? (
           <ErrorText className="px-4">{c.tooLong(CHAT_MAX_LENGTH)}</ErrorText>
         ) : null}
-        <View className="border-border flex-row items-end gap-2 border-t p-3">
+        {/* Yalnız metin: ek, fotoğraf ya da ses düğmesi yok (değişmez kural). */}
+        <View className="border-border bg-background flex-row items-end gap-2 border-t px-4 pt-2.5 pb-2">
           <TextInput
             testID="coach-input"
+            accessibilityLabel={c.placeholder}
             value={draft}
             onChangeText={setDraft}
             placeholder={c.placeholder}
             multiline
             maxLength={CHAT_MAX_LENGTH + 100}
-            className="border-input text-foreground max-h-32 flex-1 rounded-xl border px-3 py-2 text-base"
+            className={cn(
+              'bg-card text-foreground font-sans text-body min-h-touch max-h-32 flex-1 rounded-md px-3.5 py-2.5',
+              'issue' in checked && checked.issue === 'too_long'
+                ? 'border-foreground border-2'
+                : 'border-control border',
+            )}
             placeholderTextColorClassName="accent-muted-foreground"
           />
-          <Button testID="coach-send" disabled={busy || !('text' in checked)} onPress={send}>
+          <Button
+            testID="coach-send"
+            variant="tonal"
+            size="sm"
+            disabled={busy || !('text' in checked)}
+            onPress={send}>
             <Text>{busy ? c.sending : c.send}</Text>
           </Button>
         </View>
@@ -132,50 +152,65 @@ function Bubble({ message, onRetry }: { message: ChatMessage; onRetry: () => voi
   const c = tr.chat;
   const [reported, setReported] = useState(message.reportedAt !== null);
   if (message.role === 'user') {
+    // Öğrenci balonu: sağda, ön plan dolgusu; turuncu kullanmaz.
     return (
-      <View className="max-w-[85%] gap-1 self-end">
+      <View className="max-w-[85%] items-end gap-1 self-end">
         <View
-          className={`bg-primary rounded-2xl rounded-br-sm px-4 py-2 ${
-            message.status === 'sending' ? 'opacity-60' : ''
-          }`}>
-          <Text className="text-primary-foreground">{message.content}</Text>
+          className={cn(
+            'bg-foreground rounded-lg rounded-br-xs px-4 py-2.5',
+            message.status === 'sending' && 'opacity-60',
+          )}>
+          <Text className="text-background">{message.content}</Text>
         </View>
-        {message.status === 'sending' ? (
-          <Text variant="muted" className="self-end text-xs">
-            {c.sending}
-          </Text>
-        ) : null}
+        {message.status === 'sending' ? <Text variant="muted">{c.sending}</Text> : null}
         {message.status === 'failed' ? (
-          <Button testID="coach-retry" size="sm" variant="ghost" onPress={onRetry}>
+          <Pressable
+            testID="coach-retry"
+            accessibilityRole="button"
+            onPress={onRetry}
+            className="min-h-touch justify-center px-1">
             <ErrorText>{`${c.failed} · ${c.retry}`}</ErrorText>
-          </Button>
+          </Pressable>
         ) : null}
       </View>
     );
   }
-  return (
-    <View testID={`coach-reply-${message.action}`} className="max-w-[85%] gap-1 self-start">
-      <View className="bg-muted rounded-2xl rounded-bl-sm px-4 py-2">
+  // Akut risk: koç yanıt üretmedi; içerik güvenlik katmanının sabit metni (packages/safety, sunucu).
+  if (message.action === 'fixed') {
+    return (
+      <View
+        testID="coach-reply-fixed"
+        className="border-control bg-card items-start gap-3 rounded-lg border-2 p-4">
+        <View className="flex-row items-center gap-2">
+          <Icon name={ICONS.support} size={20} />
+          <Text className="text-subhead font-sans-bold">{tr.support.title}</Text>
+        </View>
         <Text>{message.content}</Text>
-      </View>
-      {message.action === 'fixed' ? (
         <Button testID="coach-support" size="sm" onPress={() => router.push('/support')}>
+          <Icon name={ICONS.support} size={16} tone="primary-foreground" />
           <Text>{c.support}</Text>
         </Button>
-      ) : null}
+      </View>
+    );
+  }
+  return (
+    <View testID={`coach-reply-${message.action}`} className="max-w-[85%] items-start self-start">
+      <View className="border-border bg-card rounded-lg rounded-bl-xs border px-4 py-2.5">
+        <Text>{message.content}</Text>
+      </View>
       {reported ? (
-        <Text variant="muted" className="text-xs">
+        <Text variant="muted" className="text-footnote min-h-touch px-1 py-3">
           {c.reported}
         </Text>
       ) : (
-        <Button
+        <Pressable
           testID="coach-report"
-          size="sm"
-          variant="ghost"
-          className="self-start"
-          onPress={() => void reportChatMessage(message.id).then(setReported)}>
-          <Text className="text-xs">{c.report}</Text>
-        </Button>
+          accessibilityRole="button"
+          onPress={() => void reportChatMessage(message.id).then(setReported)}
+          className="min-h-touch flex-row items-center gap-1.5 px-1">
+          <Icon name={ICONS.flag} size={13} tone="muted-foreground" />
+          <Text className="text-footnote text-muted-foreground font-sans-semibold">{c.report}</Text>
+        </Pressable>
       )}
     </View>
   );
