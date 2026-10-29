@@ -2,9 +2,11 @@ import { DEFAULT_NOTE_RATIO, DEFAULT_WATCH_SPEED, WATCH_SPEEDS } from '@yks/plan
 import { parsePlaylistId } from '@yks/youtube';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { ActivityIndicator, TextInput, View } from 'react-native';
+import { View } from 'react-native';
 
 import { ErrorText } from '@/components/error-text';
+import { TextField } from '@/components/fields';
+import { Loading, LockedState } from '@/components/states';
 import { Text } from '@/components/ui/text';
 import { YouTubeMark } from '@/components/youtube-mark';
 import { track } from '@/features/analytics/analytics';
@@ -43,7 +45,7 @@ export default function YouTubeScreen() {
         continueLabel={consent ? tr.consent.open : tr.settings.connect}
         canContinue
         onContinue={() => router.push(consent ? '/account/consent' : '/account/sign-in')}>
-        <Text testID="youtube-locked">{consent ? y.needConsent : y.needAccount}</Text>
+        <LockedState testID="youtube-locked" text={consent ? y.needConsent : y.needAccount} />
       </StepScreen>
     );
   }
@@ -76,38 +78,33 @@ export default function YouTubeScreen() {
         track('kitap_eklendi', { yontem: 'youtube' });
         router.dismissTo('/library');
       }}>
-      <View className="gap-2">
-        <Text className="font-sans-semibold">{y.linkLabel}</Text>
-        <TextInput
-          testID="youtube-link"
-          value={link}
-          onChangeText={(v) => {
-            setLink(v);
-            setResult(null);
-          }}
-          placeholder={y.placeholder}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="url"
-          className="border-input text-foreground rounded-xl border px-4 py-3 text-base"
-          placeholderTextColorClassName="accent-muted-foreground"
-        />
-      </View>
-      {busy ? (
-        <View className="flex-row items-center gap-2">
-          <ActivityIndicator />
-          <Text variant="muted">{y.fetching}</Text>
-        </View>
-      ) : null}
+      <TextField
+        testID="youtube-link"
+        label={y.linkLabel}
+        value={link}
+        onChangeText={(v) => {
+          setLink(v);
+          setResult(null);
+        }}
+        placeholder={y.placeholder}
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="url"
+      />
+      {busy ? <Loading text={y.fetching} /> : null}
       {error ? <ErrorText testID="youtube-error">{error}</ErrorText> : null}
 
       {result ? (
         <>
-          <View testID="youtube-preview" className="border-border gap-1 rounded-xl border p-4">
-            <Text className="font-sans-semibold">{result.playlist.title}</Text>
+          <View
+            testID="youtube-preview"
+            className="border-border bg-card gap-1 rounded-lg border p-4">
+            <View className="flex-row items-start justify-between gap-3">
+              <Text className="font-sans-bold flex-1">{result.playlist.title}</Text>
+              <YouTubeMark />
+            </View>
             <Text variant="muted">{result.playlist.channelTitle}</Text>
             <Text>{y.preview(result.videos.length, tr.today.duration(totalSeconds))}</Text>
-            <YouTubeMark />
             {result.videos.some((v) => v.madeForKids) ? (
               <Text variant="muted">{y.kidsNote}</Text>
             ) : null}

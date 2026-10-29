@@ -321,6 +321,7 @@ export const tr = {
     add: 'Kaynak ekle',
     remove: 'Kaldır',
     percentDone: (p: number) => `%${p} tamamlandı`,
+    progressLabel: (title: string) => `${title} ilerlemesi`,
     removeConfirm: (title: string) => `"${title}" kütüphanenden kaldırılsın mı?`,
     cancel: 'Vazgeç',
     summary: (total: number, kind: 'pages' | 'tests', units: number, minutes: number) =>

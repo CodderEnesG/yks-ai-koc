@@ -1,53 +1,39 @@
 import { router } from 'expo-router';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
+import { NavCard } from '@/components/fields';
+import { ICONS } from '@/components/icon';
 import { SafeAreaView } from '@/components/screen';
 import { Text } from '@/components/ui/text';
-import { Choice } from '@/features/onboarding/ui';
 import { tr } from '@/i18n/tr';
 
+// Kaynak ekleme yolu seçimi (lamba-design 3.1): seçim kartı değil gezinme kartı; dokununca açar.
 export default function AddBookScreen() {
   const o = tr.library.addOptions;
+  const options = [
+    { id: 'add-scan', icon: ICONS.barcode, item: o.scan, path: '/book/scan' },
+    { id: 'add-search', icon: ICONS.search, item: o.search, path: '/book/search' },
+    { id: 'add-toc', icon: ICONS.camera, item: o.toc, path: '/book/toc' },
+    { id: 'add-quick', icon: ICONS.edit, item: o.quick, path: '/book/quick' },
+    { id: 'add-youtube', icon: ICONS.play, item: o.youtube, path: '/book/youtube' },
+  ] as const;
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <View className="gap-3 p-6">
-        <Text variant="h2">{o.title}</Text>
-        <Choice
-          testID="add-scan"
-          label={o.scan.label}
-          description={o.scan.description}
-          selected={false}
-          onPress={() => router.push('/book/scan')}
-        />
-        <Choice
-          testID="add-search"
-          label={o.search.label}
-          description={o.search.description}
-          selected={false}
-          onPress={() => router.push('/book/search')}
-        />
-        <Choice
-          testID="add-toc"
-          label={o.toc.label}
-          description={o.toc.description}
-          selected={false}
-          onPress={() => router.push('/book/toc')}
-        />
-        <Choice
-          testID="add-quick"
-          label={o.quick.label}
-          description={o.quick.description}
-          selected={false}
-          onPress={() => router.push('/book/quick')}
-        />
-        <Choice
-          testID="add-youtube"
-          label={o.youtube.label}
-          description={o.youtube.description}
-          selected={false}
-          onPress={() => router.push('/book/youtube')}
-        />
-      </View>
+      <ScrollView contentContainerClassName="gap-3 px-5 pt-3 pb-8">
+        <Text variant="h2" className="mb-2">
+          {o.title}
+        </Text>
+        {options.map((x) => (
+          <NavCard
+            key={x.id}
+            testID={x.id}
+            icon={x.icon}
+            title={x.item.label}
+            description={x.item.description}
+            onPress={() => router.push(x.path)}
+          />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }

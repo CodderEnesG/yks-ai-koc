@@ -1,8 +1,10 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
+import { ICONS, Icon } from '@/components/icon';
 import { SafeAreaView } from '@/components/screen';
+import { Loading, LockedState } from '@/components/states';
 import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
 import { Text } from '@/components/ui/text';
@@ -41,26 +43,25 @@ export default function TocScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <View className="flex-1 gap-4 p-6">
+      <View className="flex-1 gap-4 px-5 pt-3">
         <Text variant="h2">{t.title}</Text>
         <Text variant="muted">{t.body}</Text>
         {blocked ? (
-          <>
-            <Text testID="toc-blocked">{blocked}</Text>
-            {!session && canSync(profile.consentStatus) ? (
-              <Button variant="outline" onPress={() => router.push('/account/sign-in')}>
-                <Text>{tr.settings.connect}</Text>
-              </Button>
-            ) : null}
-          </>
+          <LockedState
+            testID="toc-blocked"
+            text={blocked}
+            action={
+              !session && canSync(profile.consentStatus)
+                ? { label: tr.settings.connect, onPress: () => router.push('/account/sign-in') }
+                : undefined
+            }
+          />
         ) : busy ? (
-          <View className="items-center gap-3 py-8">
-            <ActivityIndicator />
-            <Text testID="toc-reading">{t.reading}</Text>
-          </View>
+          <Loading testID="toc-reading" text={t.reading} />
         ) : (
           <View className="gap-3">
-            <Button testID="toc-camera" onPress={() => void run('camera')}>
+            <Button testID="toc-camera" size="lg" onPress={() => void run('camera')}>
+              <Icon name={ICONS.camera} size={18} tone="primary-foreground" />
               <Text>{t.camera}</Text>
             </Button>
             <Button testID="toc-library" variant="outline" onPress={() => void run('library')}>

@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import { useRef } from 'react';
 import { View } from 'react-native';
 
+import { ICONS, Icon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { normalizeIsbn } from '@/features/library/rules';
@@ -16,20 +17,25 @@ export default function ScanScreen() {
   if (!permission) return null;
   if (!permission.granted) {
     return (
-      <View className="bg-background flex-1 justify-center gap-4 p-6">
-        <Text>{tr.library.scan.permission}</Text>
-        <Button onPress={requestPermission}>
-          <Text>{tr.library.scan.allow}</Text>
-        </Button>
-        <Button variant="ghost" onPress={() => router.replace('/book/search')}>
-          <Text>{tr.library.scan.manual}</Text>
-        </Button>
+      <View className="bg-background flex-1 justify-center gap-6 px-5">
+        <View className="bg-card size-14 items-center justify-center rounded-full">
+          <Icon name={ICONS.barcode} size={26} />
+        </View>
+        <Text className="text-body-lg">{tr.library.scan.permission}</Text>
+        <View className="gap-2">
+          <Button size="lg" onPress={requestPermission}>
+            <Text>{tr.library.scan.allow}</Text>
+          </Button>
+          <Button variant="ghost" onPress={() => router.replace('/book/search')}>
+            <Text>{tr.library.scan.manual}</Text>
+          </Button>
+        </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-black">
+    <View className="bg-stage flex-1">
       <CameraView
         style={{ flex: 1 }}
         facing="back"
@@ -46,10 +52,13 @@ export default function ScanScreen() {
         pointerEvents="none"
         className="absolute inset-0 items-center justify-center"
         accessibilityElementsHidden>
-        <View testID="scan-frame" className="h-40 w-72 rounded-2xl border-2 border-white" />
+        <View
+          testID="scan-frame"
+          className="border-stage-foreground h-40 w-72 rounded-lg border-2"
+        />
       </View>
       <View className="absolute inset-x-0 bottom-0 gap-3 p-6 pb-12">
-        <Text className="text-center text-white">{tr.library.scan.title}</Text>
+        <Text className="text-stage-foreground text-center">{tr.library.scan.title}</Text>
         <Button variant="secondary" onPress={() => router.replace('/book/search')}>
           <Text>{tr.library.scan.manual}</Text>
         </Button>

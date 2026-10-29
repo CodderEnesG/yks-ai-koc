@@ -1,7 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, TextInput, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
+import { SearchField } from '@/components/fields';
 import { SafeAreaView } from '@/components/screen';
 import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
@@ -32,17 +33,17 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView className="bg-background flex-1" edges={['bottom']}>
-      <ScrollView contentContainerClassName="gap-3 p-6" keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerClassName="gap-3 px-5 pt-3 pb-8"
+        keyboardShouldPersistTaps="handled">
         <Text variant="h2">{tr.library.search.title}</Text>
-        <TextInput
+        <SearchField
           testID="search-input"
+          label={tr.library.search.title}
           value={query}
           onChangeText={setQuery}
           placeholder={tr.library.search.placeholder}
           autoFocus={!params.q}
-          autoCorrect={false}
-          className="border-input text-foreground rounded-xl border px-4 py-3 text-lg"
-          placeholderTextColorClassName="accent-muted-foreground"
         />
         {failed ? <ErrorText>{tr.library.search.error}</ErrorText> : null}
         {sharedIsbn ? <Text variant="muted">{tr.library.search.sharedIsbn}</Text> : null}

@@ -52,4 +52,6 @@ export const ICONS = {
   play: { ios: 'play.rectangle', android: 'smart_display' },
   trash: { ios: 'trash', android: 'delete' },
   send: { ios: 'arrow.up', android: 'arrow_upward' },
+  refresh: { ios: 'arrow.clockwise', android: 'refresh' },
+  flag: { ios: 'flag', android: 'flag' },
 } as const satisfies Record<string, SymbolViewProps['name']>;
