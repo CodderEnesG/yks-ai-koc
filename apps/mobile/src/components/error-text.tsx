@@ -22,10 +22,10 @@ export function ErrorText({
       testID={testID}
       accessibilityRole="alert"
       className={cn('flex-row items-start gap-1.5', className)}>
-      <Text className="font-sans-bold text-sm" accessibilityElementsHidden>
+      <Text className="font-sans-bold text-subhead" accessibilityElementsHidden>
         ✕
       </Text>
-      <Text className="flex-1 text-sm">{children}</Text>
+      <Text className="text-subhead font-sans-semibold flex-1">{children}</Text>
     </View>
   );
 }

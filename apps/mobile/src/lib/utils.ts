@@ -5,6 +5,7 @@ import { extendTailwindMerge } from 'tailwind-merge';
 // sanıp `text-foreground`'ı, `font-sans-semibold`'u ağırlık sanıp başka sınıfı siler.
 const twMerge = extendTailwindMerge({
   extend: {
+    theme: { spacing: ['touch', 'touch-lg', 'touch-xl'] },
     classGroups: {
       'font-size': [
         {

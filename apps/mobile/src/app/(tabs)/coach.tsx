@@ -61,6 +61,8 @@ export default function CoachScreen() {
   }
 
   const checked = checkChatText(draft);
+  // Ekranda tek turuncu eylem: yalnız en son akut yanıtın "Destek" düğmesi ana eylem.
+  const lastFixedId = messages.findLast((m) => m.role !== 'user' && m.action === 'fixed')?.id;
   const run = async (send: () => ReturnType<typeof sendChatMessage>) => {
     setBusy(true);
     setError(null);
@@ -93,13 +95,18 @@ export default function CoachScreen() {
             </View>
           }
           renderItem={({ item }) => (
-            <Bubble message={item} onRetry={() => void run(() => retryChatMessage(item, today))} />
+            <Bubble
+              message={item}
+              latestFixed={item.id === lastFixedId}
+              onRetry={() => void run(() => retryChatMessage(item, today))}
+            />
           )}
           // Yanıt güvenlik taraması ve üretimle birkaç saniye sürer (akışsız; T17).
           ListFooterComponent={
             busy ? (
               <View
                 testID="coach-thinking"
+                accessible
                 accessibilityRole="progressbar"
                 accessibilityLabel={c.thinking}
                 className="border-border bg-card mt-3 self-start rounded-lg rounded-bl-xs border px-4 py-2.5">
@@ -148,7 +155,15 @@ export default function CoachScreen() {
   );
 }
 
-function Bubble({ message, onRetry }: { message: ChatMessage; onRetry: () => void }) {
+function Bubble({
+  message,
+  latestFixed,
+  onRetry,
+}: {
+  message: ChatMessage;
+  latestFixed: boolean;
+  onRetry: () => void;
+}) {
   const c = tr.chat;
   const [reported, setReported] = useState(message.reportedAt !== null);
   if (message.role === 'user') {
@@ -186,8 +201,16 @@ function Bubble({ message, onRetry }: { message: ChatMessage; onRetry: () => voi
           <Text className="text-subhead font-sans-bold">{tr.support.title}</Text>
         </View>
         <Text>{message.content}</Text>
-        <Button testID="coach-support" size="sm" onPress={() => router.push('/support')}>
-          <Icon name={ICONS.support} size={16} tone="primary-foreground" />
+        <Button
+          testID="coach-support"
+          size="sm"
+          variant={latestFixed ? 'default' : 'outline'}
+          onPress={() => router.push('/support')}>
+          <Icon
+            name={ICONS.support}
+            size={16}
+            tone={latestFixed ? 'primary-foreground' : 'foreground'}
+          />
           <Text>{c.support}</Text>
         </Button>
       </View>

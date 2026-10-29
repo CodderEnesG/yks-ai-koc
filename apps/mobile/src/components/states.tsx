@@ -90,6 +90,7 @@ export function Loading({ text, testID }: { text: string; testID?: string }) {
   return (
     <View
       testID={testID}
+      accessible
       accessibilityRole="progressbar"
       accessibilityLabel={text}
       accessibilityState={{ busy: true }}

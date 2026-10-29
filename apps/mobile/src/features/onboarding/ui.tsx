@@ -118,7 +118,7 @@ export function Choice({ label, description, selected, onPress, testID, classNam
       accessibilityState={{ selected }}
       onPress={onPress}
       className={cn(
-        'border-control min-h-11 justify-center rounded-xl border px-4 py-3 active:opacity-70',
+        'border-control min-h-11 justify-center rounded-md border px-4 py-3 active:opacity-70',
         selected && 'bg-foreground border-foreground',
         className,
       )}>

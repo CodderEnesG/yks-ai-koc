@@ -105,7 +105,7 @@ export default function ConsentScreen() {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            className="border-input text-foreground rounded-xl border px-4 py-3 text-lg"
+            className="border-input text-foreground rounded-md border px-4 py-3 text-lg"
             placeholderTextColorClassName="accent-muted-foreground"
           />
           <Text variant="muted">{c.emailHint}</Text>

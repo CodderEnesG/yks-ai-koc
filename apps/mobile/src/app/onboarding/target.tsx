@@ -59,7 +59,7 @@ export default function TargetScreen() {
           onChangeText={setText}
           placeholder={tr.onboarding.target.placeholder[kind]}
           keyboardType={kind === 'puan' ? 'decimal-pad' : 'number-pad'}
-          className="border-input text-foreground rounded-xl border px-4 py-3 text-lg"
+          className="border-input text-foreground rounded-md border px-4 py-3 text-lg"
           placeholderTextColorClassName="accent-muted-foreground"
         />
         {showError ? <ErrorText>{tr.onboarding.target.invalid[kind]}</ErrorText> : null}

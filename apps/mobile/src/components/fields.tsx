@@ -33,7 +33,11 @@ export function TextField({
 }) {
   return (
     <View className={cn('gap-1.5', className)}>
-      <View className="flex-row items-center gap-1.5">
+      {/* Görünür etiket; ekran okuyucu adı girişin kendisinden okur (iki kez okunmasın). */}
+      <View
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+        className="flex-row items-center gap-1.5">
         {icon}
         <Text className="text-subhead font-sans-semibold">{label}</Text>
       </View>
@@ -66,7 +70,7 @@ export function SearchField({
 }: InputProps & { label: string; value: string; onChangeText: (v: string) => void }) {
   return (
     <View className="justify-center">
-      <View className="absolute left-4 z-10">
+      <View pointerEvents="none" className="absolute left-4 z-10">
         <Icon name={ICONS.search} size={20} tone="muted-foreground" />
       </View>
       <TextInput
@@ -188,6 +192,7 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
   const pct = Math.max(0, Math.min(100, Math.round(value)));
   return (
     <View
+      accessible
       accessibilityRole="progressbar"
       accessibilityLabel={label}
       accessibilityValue={{ min: 0, max: 100, now: pct }}

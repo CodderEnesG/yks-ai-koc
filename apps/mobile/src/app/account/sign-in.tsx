@@ -35,7 +35,7 @@ export default function SignInScreen() {
     const timer = setTimeout(() => setResendIn((s) => s - 1), 1000);
     return () => clearTimeout(timer);
   }, [resendIn]);
-  const input = 'border-input text-foreground rounded-xl border px-4 py-3 text-lg';
+  const input = 'border-input text-foreground rounded-md border px-4 py-3 text-lg';
 
   const run = async (fn: () => Promise<void>, failure: string = a.failed) => {
     setBusy(true);

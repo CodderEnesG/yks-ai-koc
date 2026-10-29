@@ -22,7 +22,7 @@ export default function TocReviewScreen() {
   const [minutes, setMinutes] = useState(DEFAULT_MINUTES.pages);
   const result = editionFromToc(title, rows, Number(lastPage));
   const issueAt = (i: number) => result.issues.find((x) => x.index === i)?.issue;
-  const input = 'border-input text-foreground rounded-xl border px-3 py-2';
+  const input = 'border-input text-foreground rounded-md border px-3 py-2';
 
   return (
     <StepScreen

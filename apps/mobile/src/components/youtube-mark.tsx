@@ -21,7 +21,7 @@ export function YouTubeMark() {
       accessibilityRole="image"
       accessibilityLabel="YouTube"
       source={scheme === 'dark' ? LOGO.dark : LOGO.light}
-      style={{ height: 18, aspectRatio: 493 / 110 }}
+      style={{ height: 20, aspectRatio: 492 / 110 }}
       contentFit="contain"
     />
   );

@@ -83,6 +83,7 @@ export default function LibraryScreen() {
                       variant="ghost"
                       size="sm"
                       className="-mr-2"
+                      accessibilityLabel={`${item.title}, ${tr.library.remove}`}
                       onPress={() => confirmRemove(item.id, item.title)}>
                       <Icon name={ICONS.close} size={14} />
                       <Text className="underline">{tr.library.remove}</Text>

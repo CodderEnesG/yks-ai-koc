@@ -27,7 +27,7 @@ export default function QuickAddScreen() {
     minutesPerItem: minutes,
   });
 
-  const input = 'border-input text-foreground rounded-xl border px-4 py-3 text-lg';
+  const input = 'border-input text-foreground rounded-md border px-4 py-3 text-lg';
   return (
     <StepScreen
       title={q.title}

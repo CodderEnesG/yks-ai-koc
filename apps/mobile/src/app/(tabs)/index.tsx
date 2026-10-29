@@ -133,7 +133,7 @@ export default function TodayScreen() {
               accessibilityLabel={tr.today.examCountdown(daysLeft)}
               className={cn(
                 'font-display tracking-tight',
-                safeMode ? 'text-title-3' : 'text-title-2',
+                safeMode ? 'text-title-3' : 'text-title-2 leading-[46px]',
               )}>
               {tr.today.examBefore}
               <Text
@@ -228,7 +228,7 @@ export default function TodayScreen() {
         {/* Gün tamam (seri kuralı, plan motoru): sahneli kart; ekranda tek Alaaddin. */}
         {dayDone ? (
           <View testID="today-day-done" className="bg-stage overflow-hidden rounded-xl">
-            <Alaaddin scene="gun-tamam" height={200} className="rounded-none pt-5" />
+            <Alaaddin scene="gun-tamam" height={224} className="rounded-none pt-5" />
             <View className="gap-1 px-5 pt-1 pb-5">
               <Text role="heading" className="text-stage-foreground font-display text-title-3">
                 {tr.today.dayDoneTitle}
