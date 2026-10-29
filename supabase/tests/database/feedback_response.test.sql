@@ -1,7 +1,7 @@
 -- Geri bildirim toplama testleri. Çalıştırma: supabase test db
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(9);
+select plan(13);
 
 insert into auth.users (id, email) values
   ('99999999-9999-9999-9999-999999999991', 'f1@test.local'),
@@ -61,6 +61,23 @@ select throws_ok(
   '42501', null, 'başkası adına yazılamaz'
 );
 select throws_ok($$select * from public.feedback_response$$, '42501', null, 'kendi yanıtını bile geri okuyamaz');
+select throws_ok(
+  $$update public.feedback_response set value = '1'$$,
+  '42501', null, 'yanıt güncellenemez'
+);
+select throws_ok($$delete from public.feedback_response$$, '42501', null, 'yanıt silinemez');
+
+-- 6. Zaman ve kimlik sunucudan: created_at istemciden yazılamaz (geriye tarihli satır yok).
+select throws_ok(
+  $$insert into public.feedback_response (scope, kind, question, value, created_at)
+    values ('kutuphane', 'rating', 'Deneme?', '5', '2020-01-01')$$,
+  '42501', null, 'created_at istemciden yazılamaz'
+);
+select throws_ok(
+  $$insert into public.feedback_response (scope, kind, question, value, app_version)
+    values ('kutuphane', 'rating', 'Deneme?', '5', repeat('x', 41))$$,
+  '23514', null, 'app_version en fazla 40 karakter'
+);
 
 select * from finish();
 rollback;
