@@ -42,6 +42,8 @@ export default function ExamScreen() {
       <Text variant="muted">{label}</Text>
       <TextInput
         testID={`exam-${key}`}
+        // Dokununca içerik seçilir: tarihi düzeltirken yazılan değer eskisinin yerine geçer.
+        selectTextOnFocus
         value={parts[key]}
         onChangeText={(value) => setParts({ ...parts, [key]: value.replace(/\D/g, '') })}
         keyboardType="number-pad"
