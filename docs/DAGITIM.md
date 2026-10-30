@@ -15,7 +15,7 @@ test grubu içindir.
 | Android test APK'sı (yerel, arm64) | Derlendi (47,7 MB). Emülatörde uzak sunucuya karşı duman testi geçti: kurulum, uzak katalogdan ISBN ile kitap, plan, Alaaddin kilidi, Ayarlar. Paket uzak adresi içeriyor, localhost yok |
 | iOS Release (simülatör, yerel) | Derlendi; aynı duman testi uzak sunucuya karşı geçti. İmzalı arşiv ve TestFlight Apple hesabını bekliyor. Simülatördeki dev build Release ile değişti: sonraki Maestro koşusundan önce `expo run:ios` gerekir |
 | İlk release derlemesinin bulguları | `web.output: "server"` paketlemeyi kırıyordu (API rotası yok) → `single`. Android'de durum çubuğu simgeleri açık temada açık kalıyordu → `StatusBar style="auto"`. Saat ve doğum yılı çiplerinde "✓" etiketi iki satıra kırıyordu → dar dolgu |
-| Edge Functions | Uzakta 6 fonksiyon var ama `toc-extract` 26 Ekim, diğerleri 27 Ekim sürümü; main'den yeniden deploy **kullanıcıda** (otomatik onay üretim dağıtımını reddetti) |
+| Edge Functions | 6 fonksiyon main'den (`20c784e`) deploy edildi (2026-10-30); hepsi açılıyor, girişsiz çağrı 401 |
 | Bundle ID ve paket adı | **Yer tutucu** (`dev.placeholder.ykskoc`). App Store Connect kaydından önce kalıcı ad seçilmeli |
 
 ## Ortamlar
@@ -69,9 +69,8 @@ Yerel yol (EAS yetmezse, rapor 2.3): Xcode'a Apple hesabı eklenir, `expo prebui
 
 ## Uzak tarafta test öncesi
 
-- **Edge Functions** main'den deploy edilir: `supabase functions deploy --use-api` (repo kökünde). Bugün yerelde
-  13/13 test edilen kod bu; uzaktaki `toc-extract` import map düzeltmesini ve T18 değişikliklerini içermiyor.
-  Sırlar (`ANTHROPIC_API_KEY`, `YOUTUBE_API_KEY`) uzakta tanımlı.
+- **Edge Functions** fonksiyon kodu değişince main'den deploy edilir: `supabase functions deploy --use-api` (repo
+  kökünde). Sırlar (`ANTHROPIC_API_KEY`, `YOUTUBE_API_KEY`) uzakta tanımlı.
 - **Giriş e-postası:** uygulama 6 haneli kodla girer (`verifyOtp`). Dashboard → Authentication → Emails →
   Templates'te "Magic Link" ve "Confirm signup" gövdesi `{{ .Token }}` içermeli (`supabase/templates/otp.html`).
   Kod uzunluğu 6 olmalı (Authentication → Providers → Email). Kendi SMTP'miz yokken (açık karar 13) Supabase

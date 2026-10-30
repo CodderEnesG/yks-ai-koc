@@ -79,9 +79,9 @@ Uzak Supabase'e T12 taksonomisi ve `feedback_response` uygulandı. Android'de il
 
 **Geliştirici**
 
-1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`. **Yapıldı** (akşam). Gerçek cihaz
-   testinden önce: Edge Functions main'den deploy (`supabase functions deploy --use-api`) ve giriş e-postası
-   şablonunda `{{ .Token }}` ([DAGITIM](../DAGITIM.md)).
+1. `supabase db push`: `20261029120000_feedback_response_hardening.sql`. **Yapıldı** (akşam). Edge Functions
+   30 Ekim'de main'den deploy edildi. Gerçek cihaz testinden önce giriş e-postası şablonunda `{{ .Token }}`
+   ([DAGITIM](../DAGITIM.md)).
 2. PostHog EU arayüzünde koşu saatlerindeki olaylar (`onboarding_tamam`, `kitap_eklendi`, `plan_olustu`,
    `checkin`, `sohbet_mesaj`). Test olayları üretim projesine gitti.
 3. Supabase Dashboard SQL'de `run_retention` cron'unun koştuğunu kontrol et (sorgu goal belgesinde).
