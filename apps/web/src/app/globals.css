@@ -136,7 +136,10 @@ body {
  * `background-size` genişliğini 0'dan %100'e taşır.
  */
 .strike {
-  background-image: linear-gradient(var(--strike-color, currentColor), var(--strike-color, currentColor));
+  background-image: linear-gradient(
+    var(--strike-color, currentColor),
+    var(--strike-color, currentColor)
+  );
   background-repeat: no-repeat;
   background-position: 0 56%;
   background-size: 0% 0.085em;

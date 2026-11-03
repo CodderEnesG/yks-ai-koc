@@ -40,8 +40,9 @@ test grubu içindir.
 1. Root Directory: `apps/web`. Framework: Next.js (kendiliğinden). "Include files outside the root directory" açık
    kalsın (`packages/plan-engine` gerekiyor).
 2. Kurulum ve atlama komutları `apps/web/vercel.json`'da: `pnpm install --frozen-lockfile --filter @yks/web...`
-   (yalnız web ve plan-engine; Expo bağımlılıkları kurulmaz) ve `ignoreCommand` (web, plan-engine ya da lockfile
-   değişmediyse derleme atlanır; yalnız mobil commit'lerde Vercel derlemez).
+   (yalnız web ve plan-engine; Expo bağımlılıkları kurulmaz) ve `ignoreCommand` (son başarılı dağıtımdan bu yana
+   web, plan-engine ya da lockfile değişmediyse derleme atlanır; yalnız mobil commit'lerde Vercel derlemez). Son
+   commit'e (`HEAD^`) bakmak yanlıştı: çok commit'li push'ta son commit belge olunca web derlenmiyordu (2026-11-03).
 3. Node.js: 22.x (kök `package.json` `engines`). pnpm sürümü için ortam değişkeni
    `ENABLE_EXPERIMENTAL_COREPACK=1` (kök `packageManager: pnpm@10.34.7`; yoksa Vercel lockfile'dan sürüm tahmin eder).
 4. Ortam değişkenleri (Production ve Preview):
