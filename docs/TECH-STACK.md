@@ -18,6 +18,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Animasyon/jest | `react-native-reanimated` 4.7.1, `react-native-worklets` 0.13.0, `react-native-gesture-handler` ~3.3.0 | Expo pin'leri. Uniwind ücretsizde `className` animasyonu yok; animasyon doğrudan Reanimated ile |
 | Yerel veri | `expo-sqlite` ~58.0.13, `drizzle-orm` **~0.45.4** (1.0 RC değil), `drizzle-kit` (migration üretimi), `babel-plugin-inline-import` (`.sql` gömme) | Migration'lar `apps/mobile/drizzle/`, şema `src/db/schema.ts` |
 | Web | `next` **16.4.3**, React 19.3, Tailwind 4, React Compiler, `cacheComponents`; `@supabase/supabase-js` 2.118.0 | Veli onay sayfası `/onay/[token]` (T21; istemci bileşeni, veli oturumu tarayıcıda, erişim yalnız RPC'lerle). `params` gibi istek verisi `Suspense` içinde okunur (cacheComponents kuralı). Ayarlar `apps/web/.env.local` (`.env.example`). Rapor sayfası `/rapor/[token]` (T22; sunucu bileşeni, `weekly-report`'u istek anında çağırır) |
+| Web animasyon (T40) | `gsap` 3.15.0 + `@gsap/react` 2.1.2 (ScrollTrigger, SplitText, Flip, DrawSVG; tüm eklentiler ücretsiz), `lenis` 1.3.27, `motion` 14.9.0, `three` 0.187.0 + `@react-three/fiber` 9.8.2 (`@types/three` 0.187.0) | Yalnız tanıtım sitesinde. Eklentiler tek yerde kaydedilir (`src/lib/gsap.ts`); her animasyon `useGSAP` + `scope`, `gsap.matchMedia` ile masaüstü/mobil/hareket azaltılmış. Lenis GSAP ticker'ında döner (`autoRaf: false`). hover.dev ücretsiz bileşenleri `src/components/motion/`'a kopyalanır (lisans ticari kullanıma açık, tek başına yeniden dağıtılmaz); `motion.*` yerine `m.*` + LazyMotion. three yalnız `next/dynamic` `ssr:false` ile, ilk boyamadan sonra. R3F'nin React sınırı `<19.4`: React güncellemesi R3F'yi bekler. Hareket azaltılmışsa farklı HTML çizilmez (hidrasyon); iki hal CSS `motion-reduce:` ile seçilir |
 | Plan motoru | `packages/plan-engine`: bağımlılık yok | `vitest` ^5.0.5 + `fast-check` ^4.10.2 ile property testleri |
 | Güvenlik | `packages/safety`: bağımlılık yok; uygulama, `packages/ai` ve Edge Function'lar kullanır | Kriz listesi, karar kuralı, çıktı denetimi, sabit metinler (T18). Liste, istem ya da model değişince eval seti (T19) yeniden koşulur |
 | Şema/doğrulama | `zod` ^4.6.7 | Kurulum profili doğrulaması (T09). Hedef: aynı şemalar Edge Function ve LLM JSON şeması (`z.toJSONSchema`) için de kaynak olsun. Formlar küçükken düz state + `safeParse` |
@@ -53,7 +54,7 @@ Sürümler araştırma tarihindeki değerlerdir. Fiyat ve limitler sağlayıcı 
 | Test (uygulama) | Bileşen testleri için `jest-expo` + React Native Testing Library (gerekirse); Maestro akışları release öncesi 3-5'e tamamlanır | T25 |
 | Hata izleme | Sentry EU (org kurulurken EU seçilir, sonradan değişmez); PII temizleme açık. 18 yaş altında onaydan önce kapalı | T24 (DSN bekleniyor) |
 | E-posta | Açık karar #13 (Resend / Brevo / AWS SES Frankfurt). Yerelde Mailpit; sağlayıcı seçilince yalnız SMTP ayarı değişir | Yayın öncesi |
-| Web barındırma | Öneri: Cloudflare Workers + AB yerleşimi; olmazsa Vercel Pro fra1 (açık karar #15) | Sprint 2 |
+| Web barındırma | Vercel, `fra1` (2026-11-03). Ayarlar `apps/web/vercel.json` ve [DAGITIM](DAGITIM.md); plan (Hobby/Pro) açık karar #15 | Yayın öncesi |
 | Ödeme | RevenueCat (`react-native-purchases`) | Şubat 2027 |
 
 ## Kurallar

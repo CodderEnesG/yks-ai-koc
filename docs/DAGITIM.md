@@ -16,6 +16,7 @@ test grubu içindir.
 | iOS Release (simülatör, yerel) | Derlendi; aynı duman testi uzak sunucuya karşı geçti. İmzalı arşiv ve TestFlight Apple hesabını bekliyor. Simülatördeki dev build Release ile değişti: sonraki Maestro koşusundan önce `expo run:ios` gerekir |
 | İlk release derlemesinin bulguları | `web.output: "server"` paketlemeyi kırıyordu (API rotası yok) → `single`. Android'de durum çubuğu simgeleri açık temada açık kalıyordu → `StatusBar style="auto"`. Saat ve doğum yılı çiplerinde "✓" etiketi iki satıra kırıyordu → dar dolgu |
 | Edge Functions | 6 fonksiyon main'den (`20c784e`) deploy edildi (2026-10-30); hepsi açılıyor, girişsiz çağrı 401 |
+| Web (`apps/web`, Vercel) | Yapılandırma hazır (2026-11-03): `apps/web/vercel.json`, güvenlik başlıkları, indeksleme varsayılan kapalı. Vercel projesi açılmadı, deploy edilmedi. Aşağıda "Web (Vercel)" |
 | Bundle ID ve paket adı | **Yer tutucu** (`dev.placeholder.ykskoc`). App Store Connect kaydından önce kalıcı ad seçilmeli |
 
 ## Ortamlar
@@ -23,11 +24,50 @@ test grubu içindir.
 - `apps/mobile/.env`: yerel yığın (Metro, simülatör, Maestro). Değişmez.
 - `apps/mobile/.env.production`: release derlemeleri. Expo `NODE_ENV=production`'da bu dosyayı `.env`'in önüne koyar
   (Gradle `assembleRelease` ve Xcode Release bunu kullanır). İçinde uzak Supabase adresi, publishable anahtar,
-  PostHog. `EXPO_PUBLIC_WEB_URL` boş: veli onay sayfası henüz yayında değil (açık karar 15), 18 yaş altı onay linki
-  üretilemez. Testte yetişkin profil kullanılır.
+  PostHog. `EXPO_PUBLIC_WEB_URL` boş: veli onay sayfası henüz yayında değil, 18 yaş altı onay linki üretilemez.
+  Testte yetişkin profil kullanılır. Web Vercel'e çıkınca üretim adresi (alan adı ya da `*.vercel.app`) buraya yazılır.
 - EAS bulutu `.env` dosyalarını yüklemez (gitignore). Aynı değerler EAS ortam değişkeni olarak girilir:
   `cd apps/mobile && eas env:push --environment preview --path .env.production` ve aynısı `--environment production`
   ile. Girilmezse build uzak sunucuyu bilmez.
+
+## Web (Vercel)
+
+`apps/web` (tanıtım sitesi, `/onay`, `/rapor`, `/destek`, `/gizlilik`) Vercel'de, `fra1` (Frankfurt) bölgesinde.
+`/rapor` sunucuda Supabase'e (eu-central-1) istek atar; bölge bu yüzden AB'de ve sabit (`vercel.json`).
+
+**Bir kez, Vercel panelinde (Add New → Project → GitHub `CodderEnesG/yks-ai-koc`):**
+
+1. Root Directory: `apps/web`. Framework: Next.js (kendiliğinden). "Include files outside the root directory" açık
+   kalsın (`packages/plan-engine` gerekiyor).
+2. Kurulum ve atlama komutları `apps/web/vercel.json`'da: `pnpm install --frozen-lockfile --filter @yks/web...`
+   (yalnız web ve plan-engine; Expo bağımlılıkları kurulmaz) ve `ignoreCommand` (web, plan-engine ya da lockfile
+   değişmediyse derleme atlanır; yalnız mobil commit'lerde Vercel derlemez).
+3. Node.js: 22.x (kök `package.json` `engines`). pnpm sürümü için ortam değişkeni
+   `ENABLE_EXPERIMENTAL_COREPACK=1` (kök `packageManager: pnpm@10.34.7`; yoksa Vercel lockfile'dan sürüm tahmin eder).
+4. Ortam değişkenleri (Production ve Preview):
+
+| Değişken | Değer | Not |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Uzak proje adresi (`apps/mobile/.env.production`'daki) | Zorunlu: yoksa derleme geçer ama `/onay` açılırken hata verir |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Uzak publishable anahtar | Zorunlu. Gizli değil; veriyi RLS ve fonksiyonlar korur |
+| `ENABLE_EXPERIMENTAL_COREPACK` | `1` | pnpm 10 |
+| `NEXT_PUBLIC_SITE_URL` | Alan adı seçilince (karar 8) | Boşken üretimde Vercel'in kalıcı adresi, önizlemede dağıtım adresi kullanılır |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | `info@<alan adı>` | Boşken iletişim bağlantısı gizli |
+| `NEXT_PUBLIC_WAITLIST_OPEN` | `1` yalnız T07 aydınlatma metni gelince | Ondan önce form "çok yakında" der. Açmadan önce `20261103120000_waitlist.sql` uzak projede olmalı |
+| `SITE_INDEXABLE` | `1` yalnız yayın kapıları açılınca (alan adı, PDR, T07) | Yalnız Production. Boşken her sayfa `noindex`, `robots.txt` arama motorlarını kapatır; WhatsApp/Telegram önizleme botları açık (paylaşım kartı çalışır). Önizleme dağıtımları hiç indekslenmez |
+
+`NEXT_PUBLIC_*` değerleri derlemede sayfaya gömülür: değiştirince yeniden deploy gerekir.
+
+**Plan:** Vercel Hobby yalnız kişisel, ticari olmayan kullanım içindir; ticari bir ürünün sitesi için Pro gerekir
+(**OPEN QUESTION**, PROJECT-STATE açık karar 15). Önizleme için Hobby ile denemek kurucuların kararı.
+
+**Yerelde Vercel benzeri derleme (2026-11-03'te denendi):** temiz kopyada (`git ls-files -co --exclude-standard`)
+filtreli kurulum 7 sn, `VERCEL_ENV=production` ile `next build` geçti; başlıklar, `robots.txt`, `noindex` ve mutlak
+paylaşım kartı adresi doğrulandı. Vercel CLI ile deploy edilirse kök `.vercelignore` `data-private/`, `.env*` ve
+derleme çıktılarını dışarıda tutar (Git entegrasyonunda zaten yalnız commit'li dosyalar gider).
+
+**Deploy sonrası:** `EXPO_PUBLIC_WEB_URL`'i (`apps/mobile/.env.production` ve EAS ortamları) üretim adresine yaz;
+veli onay linki ancak böyle üretilir. Supabase Auth'ta ek yönlendirme adresi gerekmez (web veli girişi 6 haneli kod).
 
 ## Android test APK'sı (yerel)
 
