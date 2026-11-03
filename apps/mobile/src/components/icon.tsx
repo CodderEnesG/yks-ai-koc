@@ -55,4 +55,11 @@ export const ICONS = {
   refresh: { ios: 'arrow.clockwise', android: 'refresh' },
   flag: { ios: 'flag', android: 'flag' },
   message: { ios: 'message', android: 'chat' },
+  share: { ios: 'square.and.arrow.up', android: 'share' },
+  bell: { ios: 'bell', android: 'notifications' },
+  backup: { ios: 'icloud.and.arrow.up', android: 'cloud_upload' },
+  person: { ios: 'person.crop.circle', android: 'account_circle' },
+  mail: { ios: 'envelope', android: 'mail' },
+  signOut: { ios: 'rectangle.portrait.and.arrow.right', android: 'logout' },
+  shield: { ios: 'checkmark.shield', android: 'verified_user' },
 } as const satisfies Record<string, SymbolViewProps['name']>;

@@ -187,6 +187,80 @@ export function Chip({
   );
 }
 
+/**
+ * Onay kutusu satırı (rıza, SCREENS 8 "aç/kapa onay"): kare kutu, işaretliyken ön plan dolgusu ve tik.
+ * Önceden işaretli gelmez; işaretli hali renkle değil dolgu ve tikle ayrılır.
+ */
+export function CheckRow({
+  label,
+  description,
+  checked,
+  onPress,
+  testID,
+}: {
+  label: string;
+  description?: string;
+  checked: boolean;
+  onPress: () => void;
+  testID?: string;
+}) {
+  return (
+    <Pressable
+      testID={testID}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked }}
+      accessibilityLabel={description ? `${label} ${description}` : label}
+      onPress={onPress}
+      className="border-border bg-card min-h-touch flex-row items-start gap-3 rounded-lg border p-4 active:opacity-80">
+      <View
+        className={cn(
+          'mt-0.5 size-6 items-center justify-center rounded-xs border-2',
+          checked ? 'border-foreground bg-foreground' : 'border-control',
+        )}>
+        {checked ? <Icon name={ICONS.check} size={14} tone="background" /> : null}
+      </View>
+      <View className="flex-1 gap-1">
+        <Text className="text-callout">{label}</Text>
+        {description ? (
+          <Text className="text-footnote text-muted-foreground">{description}</Text>
+        ) : null}
+      </View>
+    </Pressable>
+  );
+}
+
+/** Ayarlar bölümü: bölüm başlığı ve altında kart. */
+export function Section({
+  title,
+  icon,
+  children,
+  plain,
+  testID,
+}: {
+  title: string;
+  icon?: ComponentProps<typeof Icon>['name'];
+  children: ReactNode;
+  /** İçerik zaten kart (ör. NavCard): ikinci çerçeve çizilmez. */
+  plain?: boolean;
+  testID?: string;
+}) {
+  return (
+    <View testID={testID} className="gap-2.5">
+      <View className="flex-row items-center gap-2 px-1">
+        {icon ? <Icon name={icon} size={16} tone="muted-foreground" /> : null}
+        <Text role="heading" className="text-footnote font-sans-bold text-muted-foreground">
+          {title}
+        </Text>
+      </View>
+      {plain ? (
+        children
+      ) : (
+        <View className="border-border bg-card gap-4 rounded-lg border p-4">{children}</View>
+      )}
+    </View>
+  );
+}
+
 /** İnce ilerleme çubuğu: iz yalnız ayırıcı, bilgi dolgu ve yanındaki yüzde metninde. */
 export function ProgressBar({ value, label }: { value: number; label: string }) {
   const pct = Math.max(0, Math.min(100, Math.round(value)));

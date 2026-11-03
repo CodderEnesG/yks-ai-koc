@@ -188,10 +188,16 @@ export const tr = {
     deleteConfirm: 'Sil',
     cancel: 'Vazgeç',
     deleteFailed: 'Silinemedi; internet bağlantını kontrol edip tekrar dene.',
+    irreversible: 'Geri alınamaz.',
+    support: 'Destek',
   },
   account: {
     title: 'Hesap bağla',
     restoreTitle: 'Hesabına giriş yap',
+    subtitle: 'Planın ve ilerlemen yedeklenir; telefon değiştirince geri gelir.',
+    restoreSubtitle:
+      'Yedeğini geri getirmek için hesabındaki e-posta adresine bir kod göndereceğiz.',
+    codeSubtitle: 'Kod birkaç dakika içinde gelir; gelmezse gereksiz klasörüne de bak.',
     emailLabel: 'E-posta adresin',
     emailPlaceholder: 'ornek@eposta.com',
     // Yer tutucu: aydınlatma ve açık rıza metinleri T07'de (avukat ön görüşmesi). Herkese açık yayından önce
@@ -222,6 +228,7 @@ export const tr = {
     create: 'Onay linki oluştur',
     failed: 'Link oluşturulamadı; internet bağlantını kontrol et.',
     pendingTitle: 'Link hazır',
+    linkLabel: 'Onay linki',
     pendingBody: (email: string) =>
       `Linki veline gönder. Velin sayfayı açıp ${email} adresiyle onay verince burada görünür. Link 7 gün geçerli.`,
     whatsapp: "WhatsApp'tan gönder",

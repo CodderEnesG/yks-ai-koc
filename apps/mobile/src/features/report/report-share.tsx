@@ -3,6 +3,7 @@ import { Linking, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
+import { ICONS, Icon } from '@/components/icon';
 import { Text } from '@/components/ui/text';
 import { useReportConsent } from '@/features/consent/consent';
 import { useSession } from '@/features/sync/auth';
@@ -44,10 +45,11 @@ export function ReportShare() {
   return (
     <View className="gap-2">
       <Button testID="report-share" variant="outline" disabled={busy} onPress={share}>
+        <Icon name={ICONS.share} size={18} tone={busy ? 'muted-foreground' : 'foreground'} />
         <Text>{r.share}</Text>
       </Button>
       {link ? (
-        <Text testID="report-link" selectable variant="muted" className="text-sm">
+        <Text testID="report-link" selectable variant="muted" className="text-footnote px-1">
           {link}
         </Text>
       ) : null}

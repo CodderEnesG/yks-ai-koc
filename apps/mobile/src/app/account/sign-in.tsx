@@ -1,11 +1,13 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Button } from '@/components/ui/button';
 import { ErrorText } from '@/components/error-text';
+import { CheckRow, TextField } from '@/components/fields';
+import { ICONS, Icon } from '@/components/icon';
+import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { Choice, StepScreen } from '@/features/onboarding/ui';
+import { StepScreen } from '@/features/onboarding/ui';
 import { claimConsent } from '@/features/consent/consent';
 import { useProfile } from '@/features/profile/repo';
 import { sendCode, signOut, verifyCode } from '@/features/sync/auth';
@@ -35,7 +37,6 @@ export default function SignInScreen() {
     const timer = setTimeout(() => setResendIn((s) => s - 1), 1000);
     return () => clearTimeout(timer);
   }, [resendIn]);
-  const input = 'border-input text-foreground rounded-md border px-4 py-3 text-lg';
 
   const run = async (fn: () => Promise<void>, failure: string = a.failed) => {
     setBusy(true);
@@ -88,49 +89,47 @@ export default function SignInScreen() {
   return (
     <StepScreen
       title={isRestore ? a.restoreTitle : a.title}
+      subtitle={sent ? a.codeSubtitle : isRestore ? a.restoreSubtitle : a.subtitle}
       continueLabel={sent ? a.verify : a.sendCode}
       canContinue={!busy && (sent ? /^\d{6}$/.test(code) : EMAIL_RE.test(email.trim()) && consent)}
       onContinue={sent ? onVerify : onSend}>
       {!sent ? (
         <>
-          <View className="gap-2">
-            <Text className="font-sans-semibold">{a.emailLabel}</Text>
-            <TextInput
-              testID="account-email"
-              value={email}
-              onChangeText={setEmail}
-              placeholder={a.emailPlaceholder}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              className={input}
-              placeholderTextColorClassName="accent-muted-foreground"
-            />
-            {showInvalid ? (
-              <Text testID="account-email-invalid" variant="muted" className="text-sm">
-                {a.invalidEmail}
-              </Text>
-            ) : null}
-          </View>
-          <Choice
+          <TextField
+            testID="account-email"
+            label={a.emailLabel}
+            icon={<Icon name={ICONS.mail} size={16} />}
+            value={email}
+            onChangeText={setEmail}
+            placeholder={a.emailPlaceholder}
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            autoComplete="email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            error={showInvalid ? a.invalidEmail : undefined}
+          />
+          <CheckRow
             testID="account-consent"
             label={a.consent}
             description={a.consentDraft}
-            selected={consent}
+            checked={consent}
             onPress={() => setConsent(!consent)}
           />
         </>
       ) : (
-        <View className="gap-2">
-          <Text className="font-sans-semibold">{a.codeLabel(email.trim())}</Text>
-          <TextInput
+        <View className="gap-3">
+          <TextField
             testID="account-code"
+            label={a.codeLabel(email.trim())}
             value={code}
             onChangeText={(v) => setCode(v.replace(/\D/g, '').slice(0, 6))}
-            keyboardType="number-pad"
+            numeric
+            center
             textContentType="oneTimeCode"
             autoComplete="one-time-code"
-            className={`${input} text-center tracking-widest`}
+            placeholder="••••••"
+            style={{ letterSpacing: 12 }}
           />
           <View className="flex-row flex-wrap gap-2">
             <Button
@@ -139,6 +138,11 @@ export default function SignInScreen() {
               variant="ghost"
               disabled={busy || resendIn > 0}
               onPress={() => void onSend()}>
+              <Icon
+                name={ICONS.refresh}
+                size={16}
+                tone={busy || resendIn > 0 ? 'muted-foreground' : 'foreground'}
+              />
               <Text>{resendIn > 0 ? a.resendIn(resendIn) : a.resend}</Text>
             </Button>
             <Button
@@ -150,6 +154,7 @@ export default function SignInScreen() {
                 setSent(false);
                 setError(null);
               }}>
+              <Icon name={ICONS.edit} size={16} tone={busy ? 'muted-foreground' : 'foreground'} />
               <Text>{a.changeEmail}</Text>
             </Button>
           </View>
