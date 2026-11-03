@@ -1,7 +1,7 @@
 -- Saklama süreleri (rapor 2.11). Çalıştırma: supabase test db
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(15);
+select plan(17);
 
 insert into auth.users (id, email) values
   ('dddddddd-1111-1111-1111-111111111111', 'saklama@test.local');
@@ -32,6 +32,10 @@ insert into public.yt_video (playlist_id, position, video_id, title, channel_tit
   ('PLeskiListe0000000001', 0, 'vid0000001', 'v', 'kanal', 600, true, false),
   ('PLyeniListe0000000001', 0, 'vid0000002', 'v', 'kanal', 600, true, false);
 
+insert into public.waitlist_entry (email, role, notice_version, ip_hash, created_at) values
+  ('eski-liste@test.local', 'veli', 't', 'eskihash', now() - interval '3 days'),
+  ('yeni-liste@test.local', 'veli', 't', 'yenihash', now() - interval '1 day');
+
 insert into public.ai_usage (user_id, day, kind, count) values
   ('dddddddd-1111-1111-1111-111111111111', current_date - 40, 'chat', 3),
   ('dddddddd-1111-1111-1111-111111111111', current_date, 'chat', 1);
@@ -47,7 +51,7 @@ reset role;
 
 select is(
   public.run_retention(),
-  '{"chat_message": 1, "safety_event": 1, "report_link": 1, "consent_request": 1, "ai_usage": 1, "yt_playlist": 1}'::jsonb,
+  '{"chat_message": 1, "safety_event": 1, "report_link": 1, "consent_request": 1, "ai_usage": 1, "yt_playlist": 1, "waitlist_ip": 1}'::jsonb,
   'her tablodan yalnız süresi geçen satır silinir'
 );
 
@@ -76,9 +80,13 @@ select is_empty($$select 1 from public.yt_video where playlist_id = 'PLeskiListe
   '30 günü geçen YouTube listesi videolarıyla gitti (politika III.E.4)');
 select isnt_empty($$select 1 from public.yt_playlist where id = 'PLyeniListe0000000001'$$,
   '29 günlük liste kaldı');
+select is((select ip_hash from public.waitlist_entry where email = 'eski-liste@test.local'), null::text,
+  '2 günden eski bekleme listesi IP hash''i silindi');
+select is((select ip_hash from public.waitlist_entry where email = 'yeni-liste@test.local'), 'yenihash',
+  '1 günlük hash kaldı');
 select is(
   public.run_retention(),
-  '{"chat_message": 0, "safety_event": 0, "report_link": 0, "consent_request": 0, "ai_usage": 0, "yt_playlist": 0}'::jsonb,
+  '{"chat_message": 0, "safety_event": 0, "report_link": 0, "consent_request": 0, "ai_usage": 0, "yt_playlist": 0, "waitlist_ip": 0}'::jsonb,
   'ikinci koşu bir şey silmez'
 );
 
