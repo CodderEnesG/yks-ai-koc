@@ -1,17 +1,38 @@
-import { parseCivilDate, weekdayIndex } from '@yks/plan-engine';
+import { AlaaddinSection } from '@/components/landing/alaaddin-section';
+import { Faq } from '@/components/landing/faq';
+import { Hero } from '@/components/landing/hero';
+import { Manifesto } from '@/components/landing/manifesto';
+import { OneDay } from '@/components/landing/one-day';
+import { Parents } from '@/components/landing/parents';
+import { ScreensCarousel } from '@/components/landing/screens-carousel';
+import { SiteFooter } from '@/components/landing/site-footer';
+import { SiteHeader } from '@/components/landing/site-header';
+import { SmoothScroll } from '@/components/landing/smooth-scroll';
+import { Trust } from '@/components/landing/trust';
+import { WaitlistSection } from '@/components/landing/waitlist-section';
+import { availableScreens } from '@/content/screens';
 
-const WEEKDAYS = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
-
-// T02 yer tutucu sayfa: plan-engine'in Next.js'te çalıştığını gösterir.
-// Veli onayı sayfası T21'de, haftalık rapor T22'de.
+// Tanıtım sitesi (T40, docs/PLAN-2026-11-03-tanitim-sitesi-t40.md). Statik; gerçek ekran görüntüleri derlemede
+// `public/ekran/`'dan okunur. Veli sayfaları (/onay, /rapor) bu sayfadan bağımsız, öğrencinin linkiyle açılır.
 export default function Home() {
-  const submission = parseCivilDate('2026-12-14');
+  const screens = availableScreens();
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-semibold">lamba</h1>
-      <p className="mt-2 text-neutral-600">
-        App Store gönderimi: {submission} {WEEKDAYS[weekdayIndex(submission)]}
-      </p>
-    </main>
+    <SmoothScroll>
+      <div data-landing className="scene-night">
+        <SiteHeader />
+        <main>
+          <Hero />
+          <Manifesto />
+          <OneDay screens={screens} />
+          <ScreensCarousel screens={screens} />
+          <AlaaddinSection />
+          <Parents />
+          <Trust />
+          <WaitlistSection />
+          <Faq />
+        </main>
+        <SiteFooter contactEmail={process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined} />
+      </div>
+    </SmoothScroll>
   );
 }

@@ -9,6 +9,15 @@ import {
   REPORT_CONSENT,
 } from '@/lib/consent-text';
 import { supabase } from '@/lib/supabase';
+import {
+  Card,
+  ErrorLine,
+  Loading,
+  Notice,
+  buttonClass,
+  inputClass,
+  labelClass,
+} from '@/components/ui';
 
 type Status = 'pending' | 'granted' | 'withdrawn' | 'expired';
 interface View {
@@ -18,9 +27,10 @@ interface View {
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const input = 'w-full rounded-lg border border-neutral-300 px-3 py-2 text-base';
-const button =
-  'w-full rounded-lg bg-neutral-900 px-4 py-3 font-medium text-white disabled:opacity-40';
+// Rıza satırı: önceden işaretli gelmez; işaretli hali tarayıcının kendi tikiyle (renk değil şekil).
+const checkRow =
+  'border-border bg-card flex cursor-pointer gap-3 rounded-lg border p-4 has-[:checked]:border-foreground has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-emphasis';
+const checkbox = 'accent-foreground mt-0.5 size-5 shrink-0';
 
 function errorMessage(message: string): string {
   if (message.includes('email_mismatch'))
@@ -115,32 +125,35 @@ export function ConsentForm({ token }: { token: string }) {
   const withdraw = () =>
     verifyAnd(async () => supabase.rpc('withdraw_consent', { p_token: token }));
 
-  if (view === undefined) return <p className="mt-4 text-neutral-500">Yükleniyor…</p>;
+  if (view === undefined) return <Loading />;
   if (view === null)
     return (
-      <p className="mt-4" data-testid="consent-invalid">
-        Bu link geçersiz. Öğrenciden uygulamadan yeni bir link isteyin.
-      </p>
+      <Notice mark="✕" testId="consent-invalid">
+        <p>Bu link geçersiz. Öğrenciden uygulamadan yeni bir link isteyin.</p>
+      </Notice>
     );
 
   const emailForm = (onSubmit: () => void, submitLabel: string, canSubmit: boolean) => (
-    <div className="mt-4 space-y-3">
+    <div className="space-y-4">
       <label className="block">
-        <span className="text-sm font-medium">E-posta adresiniz ({view.parent_email_hint})</span>
+        <span className={labelClass}>E-posta adresiniz ({view.parent_email_hint})</span>
         <input
-          className={input}
+          className={inputClass}
           type="email"
           autoComplete="email"
           value={email}
           disabled={sent}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <span className="text-muted-foreground mt-1.5 block text-[15px]">
+          Öğrencinin onay isteğinde yazdığı adres. Bu adrese bir doğrulama kodu göndereceğiz.
+        </span>
       </label>
       {sent ? (
         <label className="block">
-          <span className="text-sm font-medium">E-postanıza gelen 6 haneli kod</span>
+          <span className={labelClass}>E-postanıza gelen 6 haneli kod</span>
           <input
-            className={input}
+            className={`${inputClass} font-display text-center text-2xl tracking-[0.5em]`}
             inputMode="numeric"
             autoComplete="one-time-code"
             value={code}
@@ -150,45 +163,61 @@ export function ConsentForm({ token }: { token: string }) {
       ) : null}
       {sent ? (
         <button
-          className={button}
+          className={buttonClass}
           disabled={busy || code.length !== 6 || !canSubmit}
           onClick={onSubmit}>
-          {submitLabel}
+          {busy ? 'Doğrulanıyor…' : submitLabel}
         </button>
       ) : (
         <button
-          className={button}
+          className={buttonClass}
           disabled={busy || !EMAIL_RE.test(email.trim()) || !canSubmit}
           onClick={sendCode}>
-          Doğrulama kodu gönder
+          {busy ? 'Gönderiliyor…' : 'Doğrulama kodu gönder'}
         </button>
       )}
-      {error ? <p className="text-sm text-red-700">{error}</p> : null}
+      {error ? <ErrorLine>{error}</ErrorLine> : null}
     </div>
   );
 
   if (view.status === 'expired')
     return (
-      <p className="mt-4" data-testid="consent-expired">
-        Bu linkin süresi dolmuş. Öğrenciden uygulamadan yeni bir link isteyin.
-      </p>
+      <Notice mark="↻" testId="consent-expired">
+        <p>Bu linkin süresi dolmuş. Öğrenciden uygulamadan yeni bir link isteyin.</p>
+      </Notice>
     );
   if (view.status === 'withdrawn')
     return (
-      <p className="mt-4" data-testid="consent-withdrawn">
-        Onay geri çekildi. Öğrencinin sunucudaki verisi silindi.
-      </p>
+      <Notice mark="✓" testId="consent-withdrawn">
+        <p>Onay geri çekildi. Öğrencinin sunucudaki verisi silindi.</p>
+      </Notice>
     );
   if (view.status === 'granted')
     return (
-      <div className="mt-4 space-y-3">
-        <p data-testid="consent-granted">
-          Onay verildi. Haftalık rapor: {view.report_consent ? 'açık' : 'kapalı'}.
-        </p>
+      <div className="space-y-6">
+        <Notice mark="✓">
+          <p className="font-display text-xl font-bold" data-testid="consent-granted">
+            Onay verildi.
+          </p>
+          <p>Haftalık rapor: {view.report_consent ? 'açık' : 'kapalı'}.</p>
+          <p className="text-muted-foreground text-[15px]">
+            Öğrenci uygulamada hesabını bağlayınca sohbet, fotoğrafla kitap ekleme ve yedekleme
+            açılır.
+          </p>
+        </Notice>
         {withdrawing ? (
-          emailForm(withdraw, 'Onayı geri çek', true)
+          <Card className="space-y-4">
+            <h2 className="font-display text-xl font-bold">Onayı geri çek</h2>
+            <p className="text-muted-foreground text-[15px]">
+              Geri çekince öğrencinin sunucudaki hesabı ve verisi silinir. Plan öğrencinin
+              telefonunda çalışmaya devam eder.
+            </p>
+            {emailForm(withdraw, 'Onayı geri çek', true)}
+          </Card>
         ) : (
-          <button className="text-sm underline" onClick={() => setWithdrawing(true)}>
+          <button
+            className="min-h-11 text-[15px] font-semibold underline underline-offset-4"
+            onClick={() => setWithdrawing(true)}>
             Onayı geri çekmek istiyorum
           </button>
         )}
@@ -196,47 +225,65 @@ export function ConsentForm({ token }: { token: string }) {
     );
 
   return (
-    <div className="mt-4 space-y-4">
-      <p className="text-neutral-600">
+    <div className="space-y-6">
+      <p className="text-[19px] leading-[27px]">
         Çocuğunuz lamba uygulamasını kullanmak için onayınızı istiyor. Lütfen aşağıdaki açıklamayı
         okuyun.
       </p>
-      <section className="space-y-2 rounded-lg bg-neutral-100 p-4 text-sm">
-        <p className="font-semibold">Aydınlatma metni (taslak)</p>
+      <Card className="space-y-3 text-[16px] leading-[24px]">
+        <h2 className="font-display text-xl font-bold">Aydınlatma metni (taslak)</h2>
         {NOTICE_PARAGRAPHS.map((p) => (
           <p key={p}>{p}</p>
         ))}
-      </section>
-      <label className="flex gap-3">
-        <input
-          type="checkbox"
-          data-testid="consent-ai"
-          aria-label="AI ve yurt dışı aktarım rızası"
-          checked={ai}
-          onChange={(e) => setAi(e.target.checked)}
-        />
-        <span>{AI_CONSENT}</span>
-      </label>
-      <label className="flex gap-3">
-        <input
-          type="checkbox"
-          data-testid="consent-report"
-          aria-label="Haftalık rapor rızası"
-          checked={report}
-          onChange={(e) => setReport(e.target.checked)}
-        />
-        <span>{REPORT_CONSENT}</span>
-      </label>
-      <label className="block">
-        <span className="text-sm font-medium">Adınız ve soyadınız</span>
-        <input
-          className={input}
-          autoComplete="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      {emailForm(grant, 'Onay veriyorum', ai && name.trim().length >= 2)}
+      </Card>
+
+      <fieldset className="space-y-3">
+        <legend className="font-display mb-3 text-xl font-bold">Rızalarınız</legend>
+        <label className={checkRow}>
+          <input
+            type="checkbox"
+            className={checkbox}
+            data-testid="consent-ai"
+            aria-label="AI ve yurt dışı aktarım rızası"
+            checked={ai}
+            onChange={(e) => setAi(e.target.checked)}
+          />
+          <span>
+            <span className="text-muted-foreground mb-1 block text-[13px] font-bold">Zorunlu</span>
+            {AI_CONSENT}
+          </span>
+        </label>
+        <label className={checkRow}>
+          <input
+            type="checkbox"
+            className={checkbox}
+            data-testid="consent-report"
+            aria-label="Haftalık rapor rızası"
+            checked={report}
+            onChange={(e) => setReport(e.target.checked)}
+          />
+          <span>
+            <span className="text-muted-foreground mb-1 block text-[13px] font-bold">
+              İsteğe bağlı
+            </span>
+            {REPORT_CONSENT}
+          </span>
+        </label>
+      </fieldset>
+
+      <Card className="space-y-4">
+        <h2 className="font-display text-xl font-bold">Doğrulama</h2>
+        <label className="block">
+          <span className={labelClass}>Adınız ve soyadınız</span>
+          <input
+            className={inputClass}
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        {emailForm(grant, 'Onay veriyorum', ai && name.trim().length >= 2)}
+      </Card>
     </div>
   );
 }

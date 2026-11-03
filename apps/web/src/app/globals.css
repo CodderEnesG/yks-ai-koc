@@ -1,1 +1,158 @@
 @import 'tailwindcss';
+
+/*
+ * lamba marka teması (brand/kilavuz, lamba-design TOKENS.md; mobildeki apps/mobile/src/global.css ile aynı
+ * anlamsal adlar). Palet: gece moru #1C1330, krem #F6EEE0, turuncu #FF9F43 ve kılavuzdaki destek tonları.
+ * Doğru/yanlış/uyarı için renk yok (şekil, işaret, metin). Turuncu yalnız gece moru zeminde: açık temada
+ * vurgu ve ana düğme gece moru.
+ */
+:root {
+  --background: #f6eee0;
+  --foreground: #1c1330;
+  --card: #fbf6ec;
+  --primary: #1c1330;
+  --primary-foreground: #f6eee0;
+  --muted-foreground: #5c5170;
+  --border: #d9ccb4;
+  --control: #5c5170;
+  --emphasis: #1c1330;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1c1330;
+    --foreground: #f6eee0;
+    --card: #2a1f45;
+    --primary: #ff9f43;
+    --primary-foreground: #1c1330;
+    --muted-foreground: #bdb2cf;
+    --border: #3a2d57;
+    --control: #bdb2cf;
+    --emphasis: #ff9f43;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-control: var(--control);
+  --color-emphasis: var(--emphasis);
+
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/*
+ * Tanıtım sitesi (T40) sanat yönetimli: bölümler sistem temasını izlemez, gece moru ya da krem sahnesini kendi
+ * kurar. Aynı anlamsal adlar yeniden tanımlanır; böylece `bg-card`, `text-muted-foreground`, `buttonClass` gibi
+ * mevcut sınıflar sahneye göre doğru rengi alır. Turuncu yalnız gece sahnesinde.
+ */
+:root {
+  --night: #1c1330;
+  --cream: #f6eee0;
+  --orange: #ff9f43;
+  --lamp-dim: #bdb2cf;
+}
+
+.scene-night {
+  --background: #1c1330;
+  --foreground: #f6eee0;
+  --card: #2a1f45;
+  --primary: #ff9f43;
+  --primary-foreground: #1c1330;
+  --muted-foreground: #bdb2cf;
+  --border: #3a2d57;
+  --control: #bdb2cf;
+  --emphasis: #ff9f43;
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: dark;
+}
+
+.scene-cream {
+  --background: #f6eee0;
+  --foreground: #1c1330;
+  --card: #fbf6ec;
+  --primary: #1c1330;
+  --primary-foreground: #f6eee0;
+  --muted-foreground: #5c5170;
+  --border: #d9ccb4;
+  --control: #5c5170;
+  --emphasis: #1c1330;
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-night: var(--night);
+  --color-cream: var(--cream);
+  --color-orange: var(--orange);
+  --color-lamp-dim: var(--lamp-dim);
+}
+
+/*
+ * Giriş animasyonu olan öğeler yalnız JavaScript çalışıyorsa gizli başlar (layout'taki `js` sınıfı); GSAP görünür
+ * yapar. Bir şey ters giderse 3 sn sonra kendiliğinden görünür; hareket azaltılmışsa hiç gizlenmez.
+ */
+.js [data-reveal] {
+  visibility: hidden;
+  animation: reveal-fallback 0s 3s forwards;
+}
+@keyframes reveal-fallback {
+  to {
+    visibility: visible;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    visibility: visible;
+  }
+}
+
+/* Sabit üst çubuğun altında kalmasın (Lenis 1.3.20+ çapa kaydırmada scroll-margin'e uyar). */
+[data-landing] section[id] {
+  scroll-margin-top: 72px;
+}
+
+/*
+ * Üstü çizme motifi: satır kırılsa da her satırda çizilir (box-decoration-break). Tek renkli düz çizgi; GSAP
+ * `background-size` genişliğini 0'dan %100'e taşır.
+ */
+.strike {
+  background-image: linear-gradient(var(--strike-color, currentColor), var(--strike-color, currentColor));
+  background-repeat: no-repeat;
+  background-position: 0 56%;
+  background-size: 0% 0.085em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* SVG maskesiyle renk alan marka şekilleri (logo, lamba): rengi `background-color` verir, animasyonla değişir. */
+.mask-shape {
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* hover.dev Fuzzy Overlay'in kumlu dokusu; PNG yerine SVG gürültü (indirme yok). */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 1.1 -0.35'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}

@@ -3,9 +3,11 @@ import { addDays, weekdayIndex } from '@yks/plan-engine';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
+import { Card, Loading, Notice, PageShell } from '@/components/ui';
+
 // Link bir sır taşır: arama motoruna girmez, başka siteye referer olarak gitmez.
 export const metadata: Metadata = {
-  title: 'Haftalık rapor · lamba',
+  title: 'Haftalık rapor',
   robots: { index: false, follow: false },
   referrer: 'no-referrer',
 };
@@ -47,6 +49,16 @@ function weekNote(s: WeeklySummary): string {
   return `Planlanan ${s.plannedDays} günün ${s.completeDays} tanesini tamamladı.`;
 }
 
+// Sunucuya ulaşılamazsa veli Next'in İngilizce hata sayfasını değil sakin bir yenileme notunu görür.
+async function fetchReportSafe(token: string): Promise<WeeklySummary | null | 'error'> {
+  try {
+    return await fetchReport(token);
+  } catch (e) {
+    console.error(e);
+    return 'error';
+  }
+}
+
 async function fetchReport(token: string): Promise<WeeklySummary | null> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -64,23 +76,69 @@ async function fetchReport(token: string): Promise<WeeklySummary | null> {
 
 export default function ReportPage({ params }: PageProps<'/rapor/[token]'>) {
   return (
-    <main className="mx-auto max-w-xl p-6">
-      <h1 className="text-2xl font-semibold">Haftalık rapor</h1>
-      <Suspense fallback={<p className="mt-4 text-neutral-500">Yükleniyor…</p>}>
+    <PageShell title="Haftalık rapor">
+      <Suspense fallback={<Loading />}>
         <Report params={params} />
       </Suspense>
-    </main>
+    </PageShell>
+  );
+}
+
+// Gün durumu renkle değil şekille (lamba kararı 27 Ekim; görev kartındaki işaretlerle aynı dil):
+// tamamlanan dolu ve tikli, planlı ama tamamlanmamış çerçeveli, planlı olmayan kesik çerçeveli.
+function DayMark({ complete, planned }: { complete: boolean; planned: boolean }) {
+  const label = complete ? 'tamamlandı' : planned ? 'planlıydı, tamamlanmadı' : 'plan yok';
+  return (
+    <div
+      aria-label={label}
+      className={`mt-1.5 flex h-11 items-center justify-center rounded-md text-lg font-bold ${
+        complete
+          ? 'bg-foreground text-background'
+          : planned
+            ? 'border-control border-2'
+            : 'border-border text-muted-foreground border border-dashed'
+      }`}>
+      <span aria-hidden>{complete ? '✓' : planned ? '–' : '·'}</span>
+    </div>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  sub,
+  testId,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  testId?: string;
+}) {
+  return (
+    <div className="border-border bg-card rounded-md border p-3 text-center">
+      <dt className="text-muted-foreground text-[13px] leading-[18px] font-semibold">{label}</dt>
+      <dd className="font-display mt-1 text-[22px] leading-7 font-bold" data-testid={testId}>
+        {value}
+      </dd>
+      {sub ? <dd className="text-muted-foreground text-[13px]">{sub}</dd> : null}
+    </div>
   );
 }
 
 async function Report({ params }: Pick<PageProps<'/rapor/[token]'>, 'params'>) {
   const { token } = await params;
-  const s = await fetchReport(token);
+  const s = await fetchReportSafe(token);
+  if (s === 'error')
+    return (
+      <Notice mark="↻" testId="report-error">
+        <p>Rapor şu an açılamadı. Birkaç dakika sonra sayfayı yenileyin.</p>
+      </Notice>
+    );
   if (!s)
     return (
-      <p className="mt-4" data-testid="report-invalid">
-        Bu link geçersiz ya da süresi dolmuş. Öğrenciden uygulamadan yeni bir link isteyin.
-      </p>
+      <Notice mark="✕" testId="report-invalid">
+        <p>Bu link geçersiz ya da süresi dolmuş. Öğrenciden uygulamadan yeni bir link isteyin.</p>
+      </Notice>
     );
 
   const weekEnd = addDays(s.weekStart, 6);
@@ -89,68 +147,67 @@ async function Report({ params }: Pick<PageProps<'/rapor/[token]'>, 'params'>) {
     s.through !== weekEnd ? ` (${formatDate(s.through)} itibarıyla)` : ''
   }`;
   return (
-    <div className="mt-2 space-y-6">
-      <p className="text-neutral-600">{range}</p>
+    <div className="-mt-3 space-y-6">
+      <p className="text-muted-foreground">{range}</p>
 
-      <section className="flex gap-2">
-        {s.days.map((d) => (
-          <div key={d.date} className="flex-1 text-center">
-            <div className="text-xs text-neutral-500">{DAY_SHORT[weekdayIndex(d.date)]}</div>
-            <div
-              className={`mt-1 rounded-md py-2 text-sm ${
-                d.complete
-                  ? 'bg-emerald-600 text-white'
-                  : d.planned
-                    ? 'bg-neutral-200'
-                    : 'bg-neutral-50 text-neutral-400'
-              }`}>
-              {d.complete ? '✓' : d.planned ? '–' : '·'}
-            </div>
-          </div>
-        ))}
-      </section>
+      <Card>
+        <ol className="flex gap-1.5" aria-label="Haftanın günleri">
+          {s.days.map((d) => (
+            <li key={d.date} className="flex-1 text-center">
+              <div className="text-muted-foreground text-[13px] font-semibold">
+                {DAY_SHORT[weekdayIndex(d.date)]}
+              </div>
+              <DayMark complete={d.complete} planned={d.planned} />
+            </li>
+          ))}
+        </ol>
+        <p className="font-display mt-5 text-xl leading-snug font-bold">{weekNote(s)}</p>
+      </Card>
 
-      <p className="text-lg">{weekNote(s)}</p>
-
-      <dl className="grid grid-cols-3 gap-3 text-center">
-        <div className="rounded-lg bg-neutral-100 p-3">
-          <dt className="text-xs text-neutral-500">Tamamlanan gün</dt>
-          <dd className="text-xl font-semibold" data-testid="report-days">
-            {`${s.completeDays}/${s.plannedDays}`}
-          </dd>
-        </div>
-        <div className="rounded-lg bg-neutral-100 p-3">
-          <dt className="text-xs text-neutral-500">Çalışma</dt>
-          <dd className="text-xl font-semibold">{formatMinutes(s.doneMinutes)}</dd>
-          <dd className="text-xs text-neutral-500">{`plan: ${formatMinutes(s.plannedMinutes)}`}</dd>
-        </div>
-        <div className="rounded-lg bg-neutral-100 p-3">
-          <dt className="text-xs text-neutral-500">Seri</dt>
-          <dd className="text-xl font-semibold">{`${s.streak} gün`}</dd>
-        </div>
+      <dl className="grid grid-cols-3 gap-2.5">
+        <Stat
+          label="Tamamlanan gün"
+          value={`${s.completeDays}/${s.plannedDays}`}
+          testId="report-days"
+        />
+        <Stat
+          label="Çalışma"
+          value={formatMinutes(s.doneMinutes)}
+          sub={`plan: ${formatMinutes(s.plannedMinutes)}`}
+        />
+        <Stat label="Seri" value={`${s.streak} gün`} />
       </dl>
 
       {s.books.length > 0 ? (
-        <section className="space-y-3">
-          <h2 className="font-semibold">Kitaplar</h2>
+        <Card className="space-y-5">
+          <h2 className="font-display text-xl font-bold">Kitaplar</h2>
           {s.books.map((b) => (
             <div key={b.id}>
-              <div className="flex justify-between text-sm">
-                <span>{b.title}</span>
-                <span className="text-neutral-500">{`%${b.percent}`}</span>
+              <div className="flex justify-between gap-3">
+                <span className="font-semibold">{b.title}</span>
+                <span className="text-muted-foreground shrink-0">{`%${b.percent}`}</span>
               </div>
-              <div className="mt-1 h-2 rounded bg-neutral-200">
-                <div className="h-2 rounded bg-emerald-600" style={{ width: `${b.percent}%` }} />
+              <div
+                role="progressbar"
+                aria-label={b.title}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={b.percent}
+                className="bg-border mt-2 h-2 overflow-hidden rounded-full">
+                <div
+                  className="bg-foreground h-full rounded-full"
+                  style={{ width: `${Math.max(2, b.percent)}%` }}
+                />
               </div>
-              <p className="mt-1 text-xs text-neutral-500">
+              <p className="text-muted-foreground mt-1.5 text-[15px]">
                 {`Bu hafta ${b.doneThisWeek} ${UNIT_NAME[b.kind]}`}
               </p>
             </div>
           ))}
-        </section>
+        </Card>
       ) : null}
 
-      <p className="text-xs text-neutral-500">
+      <p className="text-muted-foreground text-[13px] leading-[18px]">
         Rapor uygulamadaki plan ve check-in kayıtlarından hesaplanır. Öğrencinin AI koçla
         konuşmaları raporda hiçbir zaman yer almaz.
       </p>

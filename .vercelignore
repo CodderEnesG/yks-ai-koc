@@ -1,0 +1,32 @@
+# Vercel CLI ile yükleme yapılırsa gitmeyecekler (Git entegrasyonunda zaten yalnız commit'li dosyalar gider).
+# Telifli ve kişisel test verisi hiçbir yere yüklenmez (AGENTS.md).
+data-private/
+.gstack/
+/lamba/
+
+# Sırlar
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.p8
+*.p12
+*.mobileprovision
+*.jks
+*.keystore
+
+# Derleme çıktıları ve büyük dosyalar
+**/node_modules/
+**/.next/
+**/.expo/
+**/.turbo/
+apps/mobile/ios/build/
+apps/mobile/android/app/build/
+*.apk
+*.aab
+*.ipa
+supabase/.temp/
+supabase/.branches/
