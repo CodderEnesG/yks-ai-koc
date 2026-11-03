@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   reactCompiler: true,
   poweredByHeader: false,
+  experimental: {
+    // Vercel `.next/cache`'i önceki dağıtımdan geri yüklüyor; Turbopack'in derleme önbelleği globals.css'in eski
+    // halinin (yalnız `@import 'tailwindcss'`) çıktısını kullandı ve tema token'ları canlıda kayboldu (2026-11-03).
+    // Site küçük: önbelleksiz derleme doğruluk için.
+    turbopackFileSystemCacheForBuild: false,
+  },
   turbopack: {
     rules: {
       '*.css': {
