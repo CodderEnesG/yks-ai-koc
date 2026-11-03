@@ -59,6 +59,11 @@ test grubu içindir.
 
 `NEXT_PUBLIC_*` değerleri derlemede sayfaya gömülür: değiştirince yeniden deploy gerekir.
 
+**Derleme önbelleği kapalı (`next.config.ts`, `turbopackFileSystemCacheForBuild: false`):** Vercel `.next/cache`'i
+önceki dağıtımdan geri yüklüyor; ilk dağıtımda Turbopack önbelleği `globals.css`'in eski halinin çıktısını kullandı
+ve canlıda tema renkleri, yazı tipleri yoktu (2026-11-03). Derleme biraz uzar; doğruluk için. Benzer bir bayatlıkta
+Vercel'de "Redeploy" → "Use existing Build Cache" işaretsiz.
+
 **Plan:** Vercel Hobby yalnız kişisel, ticari olmayan kullanım içindir; ticari bir ürünün sitesi için Pro gerekir
 (**OPEN QUESTION**, PROJECT-STATE açık karar 15). Önizleme için Hobby ile denemek kurucuların kararı.
 
