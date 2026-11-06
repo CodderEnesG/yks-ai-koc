@@ -1,0 +1,81 @@
+<!-- Klasör seçilir (pano.json + ekran görüntüleri); görüntüler 780 px genişliğe küçültülüp ana koda gönderilir. -->
+<style>
+  body {
+    font:
+      13px/1.4 Inter,
+      system-ui,
+      sans-serif;
+    margin: 16px;
+    color: #1c1c1f;
+  }
+  p {
+    margin: 0 0 12px;
+    color: #6b6b73;
+  }
+  label {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #1c1c1f;
+    color: #fff;
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
+  #durum {
+    margin-top: 12px;
+    white-space: pre-wrap;
+  }
+</style>
+<p>
+  Uygulamanın klasörünü seç (içinde <b>pano.json</b> ve ekranlar olan klasör, ör.
+  <code>data-private/rakip/tiimo</code>). Her çalıştırma yeni bir sayfa açar; eski sayfalar ve
+  notlar silinmez.
+</p>
+<label>Klasör seç<input id="klasor" type="file" webkitdirectory multiple /></label>
+<div id="durum"></div>
+<script>
+  const durum = document.getElementById('durum');
+  const yaz = (m) => (durum.textContent = m);
+
+  async function kucult(file) {
+    const bmp = await createImageBitmap(file);
+    const w = Math.min(780, bmp.width);
+    const h = Math.round((bmp.height * w) / bmp.width);
+    const c = new OffscreenCanvas(w, h);
+    c.getContext('2d').drawImage(bmp, 0, 0, w, h);
+    const blob = await c.convertToBlob({ type: 'image/png' });
+    return new Uint8Array(await blob.arrayBuffer());
+  }
+
+  document.getElementById('klasor').addEventListener('change', async (e) => {
+    const files = [...e.target.files];
+    const kok = files[0]?.webkitRelativePath.split('/')[0];
+    const bul = (yol) => files.find((f) => f.webkitRelativePath === `${kok}/${yol}`);
+    const json = bul('pano.json');
+    if (!json) return yaz('Bu klasörde pano.json yok.');
+    let pano;
+    try {
+      pano = JSON.parse(await json.text());
+    } catch (err) {
+      return yaz(`pano.json okunamadı: ${err.message}`);
+    }
+    const yollar = pano.sections.flatMap((s) => s.screens.map((x) => x.image));
+    const images = {};
+    for (const [i, yol] of yollar.entries()) {
+      const f = bul(yol);
+      if (!f) return yaz(`Ekran bulunamadı: ${yol}`);
+      yaz(`Ekranlar hazırlanıyor: ${i + 1}/${yollar.length}`);
+      images[yol] = await kucult(f);
+    }
+    yaz("Figma'ya kuruluyor…");
+    parent.postMessage({ pluginMessage: { type: 'kur', pano, images } }, '*');
+  });
+
+  onmessage = (e) => {
+    const m = e.data.pluginMessage;
+    if (m?.type === 'bitti') yaz(`Bitti: "${m.page}" sayfası, ${m.count} ekran.`);
+    if (m?.type === 'hata') yaz(`Hata: ${m.message}`);
+  };
+</script>
